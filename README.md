@@ -18,20 +18,66 @@ Animated Shorts factory for the **[@Pourkoipa](https://www.youtube.com/@Pourkoip
 
 **Tweaks**: in an issue, write `@claude shot 3 is too dark, and zoom in closer on the chef` → Claude fixes it and reruns the render.
 
-## Channel Voice (Gemini Voice Design)
-An **original** voice generated from a prompt (`brand/voice_prompt.txt`: a 30-year-old Frenchman, warm, conspiratorial, fast-paced delivery).
-1. Add the `GEMINI_API_KEY` secret (Google AI Studio key).
-2. Actions → **Voix de la chaîne** → `Run workflow`. It creates the voice, then commits `brand/voice.json` and two previews (`brand/voice_sample.wav`, `brand/voice_test.wav`) that you can listen to on GitHub.
-3. Not convinced? Edit `brand/voice_prompt.txt` and run it again. After that, `voix_auto` (Idée + script workflow) and `tools/tts.py` use this voice.
+## Channel Voice
+By default the channel voice is **Riko** (Gemini prebuilt voice, `gemini-3.8-flash-tts`), set in `brand/voice.json`, with the delivery prompt in `brand/style.txt`.
+When a script has no `voice.wav`, the **Vidéo** workflow generates it automatically (needs the `GEMINI_API_KEY` secret).
+
+Optional, an **original** designed voice instead (Gemini Voice Design, prompt in `brand/voice_prompt.txt`):
+Actions → **Voix de la chaîne** → `Run workflow`. It replaces `brand/voice.json` with the new `voice_...` id and commits two previews
+(`brand/voice_sample.wav`, `brand/voice_test.wav`) you can listen to on GitHub. Not convinced? Edit the prompt and run it again.
 
 ## Setup (one time only)
-1. Install the Claude GitHub App on the organization: <https://github.com/apps/claude> → `Install` → `Auracontent` → this repository.
-2. Create the token: on your machine, run `claude setup-token` (Claude Code), then go to Settings → Secrets and variables → Actions → `New repository secret`: **`CLAUDE_CODE_OAUTH_TOKEN`**.
-3. Optional (automatic voice): secret **`GEMINI_API_KEY`** (Google AI Studio key).
-3 ter. Trends: secret **`YOUTUBE_API_KEY`** (Google Cloud Console → enable *YouTube Data API v3* → Credentials → API Key).
-   Before each idea, `tools/trends.py` ranks the most-viewed videos from channels listed in `tendances.json`; Claude uses this to pick a **topic** that performs well, then writes its own story based on web research.
-3 bis. Hugging Face repository: secret **`HF_TOKEN`** (*Write* token from huggingface.co/settings/tokens). Every finished video is uploaded to the private dataset **`soradata/studio-anime`** (created on first upload), one folder per video: `<slug>/` containing the mp4, `meta.json`, `cover.jpg`, and `qa_sheet.jpg`. To use another dataset, set the repository variable `HF_DATASET`.
-4. Settings → Actions → General → Workflow permissions: **Read and write**.
+1. **Claude GitHub App**: <https://github.com/apps/claude> → `Install` → `Auracontent` → this repository.
+2. **Claude token** → secret **`CLAUDE_CODE_OAUTH_TOKEN`** (see [Getting the Claude token](#getting-the-claude-token) below).
+3. **Gemini** (automatic voice) → secret **`GEMINI_API_KEY`**: <https://aistudio.google.com/apikey> → `Create API key`.
+4. **YouTube trends** → secret **`YOUTUBE_API_KEY`**: enable *YouTube Data API v3* at
+   <https://console.cloud.google.com/apis/library/youtube.googleapis.com>, then create a key at <https://console.cloud.google.com/apis/credentials>.
+   Before each idea, `tools/trends.py` ranks the most-viewed videos of the channels in `tendances.json`; Claude uses it to pick a **theme**
+   that performs, then writes its own story from web research.
+5. **Hugging Face** → secret **`HF_TOKEN`** (*Write* token from <https://huggingface.co/settings/tokens>). Every finished video is uploaded to the
+   private dataset **`soradata/studio-anime`** (created on first upload), one folder per video: `<slug>/` with the mp4, `meta.json`,
+   `cover.jpg`, `qa_sheet.jpg`. Another dataset: repository variable `HF_DATASET`.
+6. Settings → Actions → General → Workflow permissions: **Read and write** (if greyed out, change it first in the organization settings:
+   <https://github.com/organizations/Auracontent/settings/actions>, and set *Policies* to **Allow all actions and reusable workflows**).
+
+Secrets go in Settings → Secrets and variables → Actions → **New repository secret**. Never paste a key in a file, an issue or a commit.
+
+## Getting the Claude token
+`CLAUDE_CODE_OAUTH_TOKEN` is a long-lived token (**valid 1 year**) tied to your Claude **Pro or Max** subscription: the videos use your
+subscription, no pay-per-use API bill. It cannot be created from the claude.ai settings; it comes from the `claude setup-token` command.
+
+**A. On your computer** (Windows: PowerShell, macOS/Linux: Terminal)
+```bash
+# Windows (needs Node.js LTS from nodejs.org):
+npm install -g @anthropic-ai/claude-code
+#   if PowerShell says scripts are disabled: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+# macOS / Linux (no Node needed):
+curl -fsSL https://claude.ai/install.sh | bash
+
+claude setup-token
+```
+Your browser opens → log in → **Authorize** → the terminal prints `sk-ant-oat01-…`. Copy it whole.
+
+**B. Without installing anything on your computer** (no disk space, Claude only used on the web)
+Use a cloud terminal: a GitHub Codespace (<https://github.com/codespaces/templates> → *Blank* → *Use this template*) or any cloud VS Code.
+```bash
+curl -fsSL https://claude.ai/install.sh | bash          # or: npx -y @anthropic-ai/claude-code setup-token
+BROWSER=false ~/.local/bin/claude setup-token
+```
+`BROWSER=false` stops the editor from opening a tab by itself (that tab redirects to `localhost` and its code is rejected).
+Copy the link **printed in the terminal** (press `c`), open it in a new tab, **Authorize**: the page stays on `platform.claude.com`
+and shows a code with a **Copy** button. Paste it in the terminal (right-click → Paste) → Enter → `sk-ant-oat01-…` is printed.
+Then delete the Codespace (<https://github.com/codespaces> → `…` → *Delete*).
+
+**Then**: <https://github.com/Auracontent/studio-anime/settings/secrets/actions/new> → Name `CLAUDE_CODE_OAUTH_TOKEN` → paste → **Add secret**.
+Run `clear` in the terminal afterwards.
+
+**Troubleshooting**
+- *"That code wasn't accepted"*: the code is single-use and only valid for a few minutes, and each retry creates a new link (new `state`).
+  Press Enter, use the **new** link, and paste the code within a minute.
+- *Page "localhost refused to connect"*: you used the auto-opened tab. Restart with `BROWSER=false` as above.
+- **Renewal**: after one year the workflows fail with an authentication error. Run `claude setup-token` again and replace the secret.
+- **Leak**: revoke access from the claude.ai settings, generate a new token, replace the secret.
 
 ## How It's Built
 | Step | Where | Who |
