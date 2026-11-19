@@ -72,7 +72,7 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
 
 ## Idées et scripts (workflow `idees.yml`)
 - Formule du script : accroche paradoxale dès la 1re phrase, 2-3 détails qui montent, pivot « Sauf que… » / « En fait… », chute ironique au dernier mot.
-  ~3,8 mots/s (55 s ≈ 200 mots), phrases de 8-15 mots, nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
+  **150 à 170 mots maximum** (la voix Riko lit ~2,6 mots/s : 190 mots ≈ 74 s, trop long ; vise 50-60 s), phrases de 8-15 mots, nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
 - Sujets qui marchent : un fait vrai qui a l'air faux, avec une cause physique qu'on peut montrer, un lieu français reconnaissable si possible.
 - Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (sources, plan visuel, conseils d'enregistrement : voix Riko de Google AI Studio).
 

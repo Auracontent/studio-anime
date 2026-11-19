@@ -48,5 +48,5 @@ jobs:
             echo "Pas de voix automatique (secret GEMINI_API_KEY ou brand/voice.json manquant) : le script t'attend dans l'issue."; exit 0; fi
           python3 tools/tts.py inbox/$S/script.txt inbox/$S/voice.wav
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add inbox/$S/voice.wav && git commit -m "Add TTS voice for $S" && git push
+          git add inbox/$S/voice.wav && git commit -m "Add TTS voice for $S" && { for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; echo "push retry $i"; sleep $((i*5)); done; }
           gh workflow run video.yml -f slug=$S      # un push fait par le bot ne déclenche pas les workflows : on lance la vidéo à la main

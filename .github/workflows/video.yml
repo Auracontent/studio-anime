@@ -19,7 +19,7 @@ jobs:
     outputs: { slug: "${{ steps.slug.outputs.slug }}", direct: "${{ steps.slug.outputs.direct }}" }
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 2 }
+        with: { fetch-depth: 0 }
       - name: Voix automatique si le script n'en a pas (Gemini TTS, voix de la chaîne)
         if: ${{ github.event.inputs.slug != '' }}
         env: { GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}" }
@@ -29,7 +29,7 @@ jobs:
             [ -n "$GEMINI_API_KEY" ] || { echo "Pas de voix et pas de GEMINI_API_KEY"; exit 1; }
             python3 tools/tts.py inbox/$S/script.txt inbox/$S/voice.wav
             git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add inbox/$S/voice.wav && git commit -m "Add TTS voice for $S" && git push
+            git add inbox/$S/voice.wav && git commit -m "Add TTS voice for $S" && { for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; echo "push retry $i"; sleep $((i*5)); done; }
           else echo "Voix déjà présente (ou pas de script) : rien à générer."; fi
       - id: slug
         name: Trouver l'épisode
@@ -68,7 +68,7 @@ jobs:
             Si quelque chose bloque (voix illisible, script absent), écris le problème dans episodes/${{ steps.slug.outputs.slug }}/PROBLEME.md, commite et arrête-toi.
       - name: Vérifier
         run: |
-          git pull -q
+          git pull -q --rebase || git pull -q
           E=episodes/${{ steps.slug.outputs.slug }}
           [ -f $E/PROBLEME.md ] && { cat $E/PROBLEME.md; exit 1; } || true
           for f in voice.wav words.json web/story.js web/world.js audio.py meta.json; do [ -f $E/$f ] || { echo "manque $E/$f"; exit 1; }; done
