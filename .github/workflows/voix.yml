@@ -1,0 +1,21 @@
+# Crée la voix de la chaîne (Voice design Gemini) à partir de brand/voice_prompt.txt, puis commite brand/voice.json + un aperçu.
+# À lancer une fois ; relance-le après avoir modifié la description si l'aperçu ne te plaît pas.
+name: Voix de la chaîne
+on: { workflow_dispatch: {} }
+permissions: { contents: write }
+jobs:
+  design:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Créer la voix
+        env: { GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}" }
+        run: python3 tools/voice_design.py
+      - name: Tester sur une phrase
+        env: { GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}" }
+        run: |
+          echo "En plein hiver, la SNCF chauffe ses rails… avant de les poser. Pourkoipa ?" > /tmp/t.txt
+          python3 tools/tts.py /tmp/t.txt brand/voice_test.wav
+      - run: |
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add brand/voice.json brand/voice_sample.wav brand/voice_test.wav 2>/dev/null; git commit -m "Voix de la chaîne (Voice design)" && git push

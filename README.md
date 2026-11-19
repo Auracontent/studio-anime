@@ -20,6 +20,13 @@ en français, avec des personnages 2D à tête de haricot dans un monde 3D peint
 
 **Retouches** : dans une issue, écris `@claude le plan 3 est trop sombre, et zoome plus sur le chef` → Claude corrige et relance le rendu.
 
+## La voix de la chaîne (Gemini Voice design)
+Une voix **originale** créée à partir d'une description (`brand/voice_prompt.txt` : un Français de 30 ans, chaleureux, complice, débit rapide).
+1. Ajoute le secret `GEMINI_API_KEY` (clé Google AI Studio).
+2. Actions → **Voix de la chaîne** → `Run workflow`. Il crée la voix, puis commite `brand/voice.json` et deux aperçus
+   (`brand/voice_sample.wav`, `brand/voice_test.wav`) que tu peux écouter sur GitHub.
+3. Pas convaincu ? Modifie `brand/voice_prompt.txt` et relance. Ensuite `voix_auto` (workflow Idée + script) et `tools/tts.py` utilisent cette voix.
+
 ## Mise en place (une seule fois)
 1. Installer l'app GitHub de Claude sur l'organisation : <https://github.com/apps/claude> → `Install` → `Auracontent` → ce dépôt.
 2. Créer le jeton : sur ton ordinateur, `claude setup-token` (Claude Code), puis Settings → Secrets and variables → Actions →
