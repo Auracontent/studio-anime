@@ -51,6 +51,7 @@ fails, the next run retries only that one). Videos published by hand are marked 
 1. Zernio: connect the YouTube channel and the TikTok account, create an API key → secret **`ZERNIO_API_KEY`**.
 2. Actions → **Publication** → `Run workflow` → mode **comptes**: the log lists the account ids.
    Add them as secrets **`ZERNIO_YOUTUBE_ACCOUNT_ID`** and **`ZERNIO_TIKTOK_ACCOUNT_ID`** (leave one out to skip that platform).
+   Also accepted: `ZERNIO_API_KEY_P`, `YOUTUBE_ID_COUNT_P`, `TIKTOK_ID_COUNT_P`.
 3. Mode **test**: shows exactly what would be sent, publishes nothing.
 4. Mode **publier**: publishes one video now.
 5. Automatic: add the repository **variable** `PUBLISH_ENABLED` = `true` (Settings → Secrets and variables → Actions → *Variables*).

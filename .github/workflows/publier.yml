@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
-      ZERNIO_YOUTUBE_ACCOUNT_ID: ${{ secrets.ZERNIO_YOUTUBE_ACCOUNT_ID || vars.ZERNIO_YOUTUBE_ACCOUNT_ID }}
-      ZERNIO_TIKTOK_ACCOUNT_ID: ${{ secrets.ZERNIO_TIKTOK_ACCOUNT_ID || vars.ZERNIO_TIKTOK_ACCOUNT_ID }}
+      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY || secrets.ZERNIO_API_KEY_P }}
+      ZERNIO_YOUTUBE_ACCOUNT_ID: ${{ secrets.ZERNIO_YOUTUBE_ACCOUNT_ID || secrets.YOUTUBE_ID_COUNT_P || vars.ZERNIO_YOUTUBE_ACCOUNT_ID }}
+      ZERNIO_TIKTOK_ACCOUNT_ID: ${{ secrets.ZERNIO_TIKTOK_ACCOUNT_ID || secrets.TIKTOK_ID_COUNT_P || vars.ZERNIO_TIKTOK_ACCOUNT_ID }}
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       HF_DATASET: ${{ vars.HF_DATASET || 'soradata/studio-anime' }}
       TIKTOK_PRIVACY: ${{ vars.TIKTOK_PRIVACY || 'PUBLIC_TO_EVERYONE' }}
