@@ -81,6 +81,19 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
   puis relance le rendu sans refaire la réalisation : `gh workflow run video.yml -f slug=<slug>` (l'épisode existe déjà : le workflow refait seulement le rendu).
 - Réponds dans l'issue avec ce que tu as changé et le lien vers les Actions.
 
+## Diversité des sujets (à vérifier avant de choisir)
+- Regarde les 5 derniers épisodes (`episodes/` et `inbox/`, par date) et leur `NOTES.md`/`meta.json` avant de choisir.
+- **Mélange 7/3** : environ 7 vidéos sur 10 = une histoire **française** (lieu, invention, personnage, événement) dans une famille de thèmes
+  qui marche ; environ 3 sur 10 = un **phénomène universel** qui marche chez la référence (psychologie, cerveau, physique, probabilités,
+  nature), raconté à notre façon avec nos sources, si possible avec un exemple ou un chercheur français.
+  Si les 3 derniers épisodes sont tous « français », fais un universel, et inversement.
+- **Jamais deux fois de suite** la même **époque** (ex. la Première Guerre mondiale : faux Paris 1918, taxis 1914 -> pas de 14-18 au prochain),
+  la même **catégorie** (guerre, ingénierie, science, psychologie, métier insolite, crime/arnaque, nature, sport, nourriture, transport, argent),
+  ni le même **décor** de bibliothèque.
+- Varie aussi le **ton** : certaines histoires sont drôles (arnaque, astuce absurde), d'autres impressionnantes (ingénierie, record),
+  d'autres surprenantes (psychologie). Et varie l'**ambiance** : jour d'été, intérieur, montagne, mer, nuit seulement si l'histoire l'exige.
+- Écris dans `NOTES.md` une ligne « Diversité : » qui dit la catégorie, l'époque, français/universel, et en quoi c'est différent des 3 derniers.
+
 ## Tendances (trends.md, généré par tools/trends.py depuis l'API YouTube)
 - `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` (titres et chiffres publics uniquement).
   Il sert à savoir **quels thèmes** marchent, pas quoi copier.
