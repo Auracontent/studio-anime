@@ -6,7 +6,10 @@ on:
 permissions: { contents: write, issues: write, pull-requests: write, id-token: write, actions: write }
 jobs:
   claude:
-    if: contains(github.event.comment.body || github.event.issue.body, '@claude')
+    # Seuls le propriétaire, les membres de l'organisation et les collaborateurs peuvent piloter Claude (protège ton jeton).
+    if: >-
+      contains(github.event.comment.body || github.event.issue.body, '@claude') &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association || github.event.issue.author_association)
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
