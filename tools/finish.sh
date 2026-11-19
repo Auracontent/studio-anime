@@ -4,7 +4,13 @@
 # Sortie : episodes/<slug>/out/<Titre>.mp4 + out/qa_sheet.jpg
 set -e
 TOOLS="$(cd "$(dirname "$0")" && pwd)"; EP="$(cd "${1:?episodes/<slug>}" && pwd)"; FR="$(cd "${2:?dossier des images}" && pwd)"
-T="${3:-$(basename "$EP")}"; mkdir -p "$EP/out"; F="$EP/out/${T// /-}.mp4"
+T="${3:-$(basename "$EP")}"; mkdir -p "$EP/out"
+# ASCII file name (no accents/spaces): safer for URLs, Hugging Face and publishing scripts
+SAFE=$(python3 -c "import sys,unicodedata,re;t=unicodedata.normalize('NFKD',sys.argv[1]).encode('ascii','ignore').decode();print(re.sub(r'[^A-Za-z0-9]+','-',t).strip('-') or 'video')" "$T")
+F="$EP/out/$SAFE.mp4"
+# cover without subtitles: middle raw frame
+N=$(ls "$FR" | grep -c '^f[0-9]*\.jpg$'); MID=$(printf "f%04d.jpg" $((N / 2)))
+[ -f "$FR/$MID" ] && ffmpeg -v error -y -i "$FR/$MID" -q:v 2 "$EP/out/cover.jpg" || true
 python3 "$TOOLS/run_audio.py" "$EP"                                     # audio.py -> music.wav + sfx.wav
 ( cd "$EP" && python3 "$TOOLS/mix.py" voice.wav music.wav sfx.wav )     # -> mix_raw.wav (musique -6 dB, bruitages <= -6 dB)
 # un seul gain linéaire jusqu'à -14 LUFS, puis un limiteur de crête (pas de compression)

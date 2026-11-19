@@ -25,7 +25,8 @@ video = mp4s[0]; vpath = os.path.join(out, video)
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", vpath],
                            capture_output=True, text=True).stdout.strip() or 0)
 cover = os.path.join(out, "cover.jpg")
-subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{dur / 2:.2f}", "-i", vpath, "-frames:v", "1", "-q:v", "2", cover], check=False)
+if not os.path.exists(cover):  # finish.sh writes a subtitle-free cover; fall back to the video's middle frame
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-ss", f"{dur / 2:.2f}", "-i", vpath, "-frames:v", "1", "-q:v", "2", cover], check=False)
 
 meta = json.load(open(os.path.join(ep, "meta.json"), encoding="utf-8")) if os.path.exists(os.path.join(ep, "meta.json")) else {}
 meta.update({
