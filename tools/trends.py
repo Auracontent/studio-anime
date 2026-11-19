@@ -62,7 +62,9 @@ json.dump({"generated": now.isoformat(timespec="seconds"), "videos": rows}, open
 fresh = sorted([r for r in rows if r["days"] <= 60], key=lambda r: r["views_per_day"], reverse=True)
 def table(rs):
     L = ["| # | Vues | Vues/jour | Publié | Titre | Chaîne |", "|---|---:|---:|---|---|---|"]
-    L += [f"| {i + 1} | {r['views']:,} | {r['views_per_day']:,} | {r['published']} | {r['title']} | {r['channel']} |".replace(",", " ") for i, r in enumerate(rs)]
+    esc = lambda t: t.replace("|", "/").replace("[", "(").replace("]", ")")
+    L += [f"| {i + 1} | {r['views']:,} | {r['views_per_day']:,} | {r['published']} | ".replace(",", " ")
+          + f"[{esc(r['title'])}]({r['url']}) | {r['channel']} |" for i, r in enumerate(rs)]
     return "\n".join(L)
 md = [f"# Tendances (généré le {now:%Y-%m-%d})", "",
       "Données publiques (titres et chiffres) des chaînes de `tendances.json`. Sert à repérer les **thèmes** qui marchent ;",
