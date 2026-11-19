@@ -1,0 +1,6 @@
+{
+ "id": "Riko",
+ "model": "gemini-3.8-flash-tts",
+ "language_code": "fr-FR",
+ "note": "Voix de la chaîne : Riko (voix prédéfinie Gemini, celle des premières vidéos). Le workflow « Voix de la chaîne » peut la remplacer par une voix créée (voice_...)."
+}

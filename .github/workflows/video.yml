@@ -20,6 +20,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 2 }
+      - name: Voix automatique si le script n'en a pas (Gemini TTS, voix de la chaîne)
+        if: ${{ github.event.inputs.slug != '' }}
+        env: { GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}" }
+        run: |
+          S="${{ github.event.inputs.slug }}"
+          if [ -f "inbox/$S/script.txt" ] && ! ls inbox/$S/voice.* >/dev/null 2>&1 && [ ! -f "episodes/$S/voice.wav" ]; then
+            [ -n "$GEMINI_API_KEY" ] || { echo "Pas de voix et pas de GEMINI_API_KEY"; exit 1; }
+            python3 tools/tts.py inbox/$S/script.txt inbox/$S/voice.wav
+            git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add inbox/$S/voice.wav && git commit -m "Add TTS voice for $S" && git push
+          else echo "Voix déjà présente (ou pas de script) : rien à générer."; fi
       - id: slug
         name: Trouver l'épisode
         run: |

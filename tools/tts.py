@@ -10,12 +10,14 @@ if len(args) < 2: sys.exit(__doc__)
 src, dst = args[0], args[1]
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 brand = os.path.join(ROOT, "brand", "voice.json")
-default_voice = json.load(open(brand))["id"] if os.path.exists(brand) else "Charon"
+BV = json.load(open(brand)) if os.path.exists(brand) else {}
+default_voice = BV.get("id", "Charon")
 voice = args[args.index("--voice") + 1] if "--voice" in args else os.environ.get("TTS_VOICE", default_voice)
-model = args[args.index("--model") + 1] if "--model" in args else os.environ.get("TTS_MODEL", "gemini-3.8-flash-tts")
+model = args[args.index("--model") + 1] if "--model" in args else os.environ.get("TTS_MODEL", BV.get("model", "gemini-3.8-flash-tts"))
 key = os.environ.get("GEMINI_API_KEY") or sys.exit("GEMINI_API_KEY manquant")
 text = open(src, encoding="utf-8").read().strip()
 style_p = os.path.join(os.path.dirname(src), "style.txt")
+if not os.path.exists(style_p): style_p = os.path.join(ROOT, "brand", "style.txt")   # consigne de jeu de la chaîne
 style = open(style_p, encoding="utf-8").read().strip() if os.path.exists(style_p) else (
     "Narrateur français dynamique et complice, comme un ami qui raconte une anecdote incroyable. "
     "Rythme vif, sourire dans la voix, petites pauses avant les révélations. Lis exactement ce texte :")
