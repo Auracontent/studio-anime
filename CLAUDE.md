@@ -21,6 +21,15 @@ ce fichier dit comment l'appliquer **dans ce dépôt** et ce qui prime en cas de
   - plan à deux : `frameTwo(a, b)` (tête ~21 %) ;
   - plan large (≤ 0.10) seulement pour établir un lieu ou montrer une action d'ensemble, jamais plus de 20 % de la durée.
   Au moins 60 % des images de la vidéo doivent montrer un personnage à l'échelle gros plan ou plan à deux.
+- **Nouveau casting à chaque épisode.** Le style est fixe, les personnages changent : chaque histoire a ses propres personnages,
+  habillés pour leur époque et leur lieu (chevalier, mousquetaire, poilu de 1914, savant du XIXe, roi, pêcheur breton, astronaute...).
+  Ne réutilise pas les tenues d'un épisode précédent (`poseur`, `chef`, `ouvA`... sont propres aux rails).
+  Si une coiffe, un costume ou un accessoire manque (casque à pointe, tricorne, haut-de-forme, couronne, blouse de labo, armure...),
+  ajoute-le dans `engine/roman.js` dans le même style (traits épais prune, aplats + léger dégradé), relance
+  `cat engine/toonbase.js engine/roman.js > engine/toon.js`, et rends une planche de test du casting avant de l'utiliser.
+  Varie aussi les visages : couleur de peau, moustache, barbe, cheveux, corpulence (`stout`), expressions.
+- **Nouveau décor quand l'histoire change de lieu.** Réutilise une bibliothèque seulement si l'histoire s'y passe vraiment ;
+  sinon écris `engine/library/<lieu>.js` (château, port, désert, laboratoire, mine, village de montagne...). Chaque nouveau décor enrichit le studio.
 - **Lumière** : plein jour chaud par défaut (soleil haut, ocres, saturation ~1.15, luminosité moyenne ~110/255). Nuit bleue seulement si l'histoire l'exige.
 - **Caméra** : toujours en mouvement, glissements continus et assez rapides, peu de coupes (une coupe = changement de lieu ou d'époque, avec un flash de 6 images).
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien.
