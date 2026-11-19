@@ -49,13 +49,13 @@ export const walk = (f, f0, speed = 1.1, stride = 0.8) => { const t = Math.max(0
 export const q = (x, n = 2) => Math.round(x * 10 ** n) / 10 ** n;
 /** Character framing (the RicksClips scale): returns a camera key {pos, look, fov} so a card at `at` (feet position)
  *  has its head `headW` wide as a fraction of the 1080-px frame width.  0.28-0.34 = house close-up (default 0.30, RicksClips scale: head ~30 % of the width, feet near the bottom edge),
- *  0.19-0.23 = medium (two characters, frameTwo), <= 0.10 = wide / establishing only.
+ *  0.24-0.28 = two characters side by side (frameTwo, stand them 0.8-1 m apart), <= 0.10 = wide / establishing only.
  *  yaw: degrees around the character (0 = camera on +z looking -z, 90 = camera on +x). frameY: head height in the frame (0 top, 1 bottom).
- *  s: card scale (1 = 2.25 m tall card, head ~0.57 m wide, head centre ~1.6 m). Use as a key: { f: 120, ...frameOn([2,0,-36], { headW: 0.26 }) } */
+ *  s: card scale (1 = 2.25 m tall card; cast v2 head ~0.63 m wide, centre ~1.48 m). Use as a key: { f: 120, ...frameOn([2,0,-36], { headW: 0.26 }) } */
 export const frameOn = (at, { headW = 0.30, yaw = 0, fov = 40, frameY = 0.38, s = 1, aspect = 9 / 16, lift = -0.08 } = {}) => {
-  const HW = 0.57 * s, HC = 1.6 * s + (at[1] || 0), t = Math.tan((fov * Math.PI) / 360);
+  const HW = 0.63 * s, HC = 1.48 * s + (at[1] || 0), t = Math.tan((fov * Math.PI) / 360);   // cast v2 head: 0.63 m wide, centre 1.48 m
   const d = HW / (headW * 2 * t * aspect), Hv = 2 * d * t, a = (yaw * Math.PI) / 180;
   return { pos: [at[0] + d * Math.sin(a), HC + lift, at[2] + d * Math.cos(a)], look: [at[0], HC - (0.5 - frameY) * Hv, at[2]], fov };
 };
 /** Two characters in one medium shot: frames their midpoint with each head ~headW wide. */
-export const frameTwo = (a, b, o = {}) => frameOn([(a[0] + b[0]) / 2, Math.min(a[1] || 0, b[1] || 0), (a[2] + b[2]) / 2], { headW: 0.21, ...o });
+export const frameTwo = (a, b, o = {}) => frameOn([(a[0] + b[0]) / 2, Math.min(a[1] || 0, b[1] || 0), (a[2] + b[2]) / 2], { headW: 0.26, frameY: 0.4, ...o });

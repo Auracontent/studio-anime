@@ -90,14 +90,67 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
   }
 };
 
+// ---------------- Cast v2 (Pourkoipa): bigger head, real eyes, thick brows, bigger mouth, props in hand ----------------
+// Episodes can switch back to the original look with T.CAST.v2 = false (in setupCast).
+export const CAST = { v2: true };
+const BLUSH = "#ff8f8f";
+const faceV2 = (p, cx, cy, W, expr, facing, look, lid, brim, skin, moustache, stout = false) => {
+  const u = W / 100, F = FACE[expr] || FACE.neutral, fx = cx + 6 * u * facing, ey = cy - 2 * u;
+  for (const side of [-1, 1]) {
+    const ex = (F.eye[0] === "shock" ? 18 : 17) * u, x = fx + side * ex;
+    const kind = eyeKind(F.eye[(facing ? side === facing : side > 0) ? 1 : 0], lid);
+    const open = kind === "dot" || kind === "small" || kind === "lid" || kind === "slit" || kind === "shock" || kind === "shockHalf";
+    if (open) {
+      const rx = (kind === "shock" ? 13.5 : 11.5) * u, ry = (kind === "shock" ? 16 : 14) * u;
+      const sc = ellPts(x, ey, rx, ry, 0, 360, 0, 40);
+      p.poly(sc, WHITE, 0);
+      const pr = (kind === "shock" ? 4.4 : kind === "small" ? 5.6 : 7) * u, px = x + look * 4.5 * u + side * 0.6 * u, py = ey + 2.2 * u;
+      p.clip(sc, () => {
+        p.dot(px, py, pr, INK); p.dot(px - 1.9 * u, py - 2.2 * u, 1.7 * u, WHITE);
+        const cover = kind === "lid" || kind === "shockHalf" ? 0.42 : kind === "slit" ? 0.66 : 0;   // eyelid, skin colour
+        if (cover) { const yL = ey - ry + 2 * ry * cover; p.poly([[x - rx - 2, ey - ry - 2], [x + rx + 2, ey - ry - 2], [x + rx + 2, yL], [x - rx - 2, yL]], skin, 0); p.stroke([[x - rx, yL], [x + rx, yL]], 2.6 * u); }
+      });
+      p.poly(sc, null, 2.6 * u);
+    } else eye(p, kind, x, ey, u * 1.35, side, look, skin);   // happy arcs, squeeze, dash (blink), spiral
+    const [dI, dO] = F.brow, by = ey - (brim ? 19 : 23) * u;
+    if (kind === "shock" || kind === "shockHalf") p.arc(x, by - 6 * u, 10 * u, 3.5 * u, 200, 340, 4.6 * u);
+    else taper(p, [x - side * 10 * u, by + dI * 1.4 * u], [x + side * 10 * u, by + dO * 1.4 * u], 6.4 * u, 3 * u);
+  }
+  const mx = cx + 7 * u * facing, my = cy + 25 * u;
+  if (["smile", "grin", "laugh", "smile_closed", "relief", "lick"].includes(expr)) for (const s of [-1, 1]) {
+    const g = p.g; g.save(); g.globalAlpha = 0.35; p.ell(fx + s * 27 * u, cy + 12 * u, 7.5 * u, 4.5 * u, BLUSH, 0); g.restore();
+  }
+  mouth(p, F.mouth, mx, my, u * 1.3);
+  if (moustache) for (const s of [-1, 1]) taper(p, [mx + s * 2 * u, cy + 15 * u], [mx + s * (stout ? 23 : 18) * u, cy + (stout ? 12.5 : 18) * u], stout ? 6.5 * u : 5.5 * u, 2 * u, moustache);
+  if (expr === "nervous" || expr === "pained") { p.ell(cx + 44 * u * (facing || 1), cy - 26 * u, 4 * u, 6.5 * u, "#9fd4ff", 2.2 * u); p.dot(cx + 43 * u * (facing || 1), cy - 28 * u, 1.3 * u, WHITE); }
+};
+/** small props held in a hand: bill, paper, ticket, mug, flag, coin, letter, tool */
+const heldProp = (p, kind, hx, hy, side, u, light) => {
+  const g = p.g;
+  switch (kind) {
+    case "bill": { const r = rrect(hx - 22 * u, hy - 14 * u, hx + 22 * u, hy + 10 * u, 3 * u); p.poly(r, "#b9d9a0", 2.2 * u); p.ell(hx, hy - 2 * u, 7 * u, 7 * u, "#8fbf72", 1.6 * u); p.stroke([[hx - 17 * u, hy - 9 * u], [hx - 11 * u, hy - 9 * u]], 1.6 * u); break; }
+    case "paper": case "letter": { const r = [[hx - 20 * u, hy - 34 * u], [hx + 18 * u, hy - 36 * u], [hx + 20 * u, hy + 8 * u], [hx - 18 * u, hy + 10 * u]]; p.poly(r, kind === "letter" ? "#f3e6c8" : "#fbfbf6", 2.4 * u);
+      for (let i = 0; i < 5; i++) p.stroke([[hx - 12 * u, hy - 24 * u + i * 7 * u], [hx + 12 * u, hy - 25 * u + i * 7 * u]], 1.4 * u, "#9a8f86"); break; }
+    case "ticket": { const r = rrect(hx - 18 * u, hy - 12 * u, hx + 18 * u, hy + 6 * u, 2 * u); p.poly(r, "#ffd75e", 2.2 * u); p.stroke([[hx + 8 * u, hy - 12 * u], [hx + 8 * u, hy + 6 * u]], 1.4 * u, "#b8902a"); break; }
+    case "mug": { const r = rrect(hx - 12 * u, hy - 22 * u, hx + 12 * u, hy + 6 * u, 3 * u); p.poly(r, "#e8e2d6", 2.4 * u); p.arc(hx + side * 13 * u, hy - 8 * u, 6 * u, 7 * u, side > 0 ? 270 : 90, side > 0 ? 450 : 270, 2.4 * u);
+      g.save(); g.globalAlpha = 0.6; p.stroke([[hx - 4 * u, hy - 28 * u], [hx - 1 * u, hy - 38 * u], [hx - 5 * u, hy - 46 * u]], 2 * u, "#ffffff"); g.restore(); break; }
+    case "flag": { p.stroke([[hx, hy + 10 * u], [hx, hy - 70 * u]], 3 * u, "#6b4a2a"); const f = [[hx, hy - 70 * u], [hx + side * 42 * u, hy - 62 * u], [hx, hy - 44 * u]];
+      p.poly([[hx, hy - 70 * u], [hx + side * 14 * u, hy - 67 * u], [hx + side * 14 * u, hy - 47 * u], [hx, hy - 44 * u]], "#2f56a8", 0); p.poly([[hx + side * 14 * u, hy - 67 * u], [hx + side * 28 * u, hy - 64 * u], [hx + side * 28 * u, hy - 50 * u], [hx + side * 14 * u, hy - 47 * u]], "#ffffff", 0);
+      p.poly([[hx + side * 28 * u, hy - 64 * u], [hx + side * 42 * u, hy - 62 * u], [hx + side * 42 * u, hy - 52 * u], [hx + side * 28 * u, hy - 50 * u]], "#d23a32", 0); p.poly([[hx, hy - 70 * u], [hx + side * 42 * u, hy - 62 * u], [hx + side * 42 * u, hy - 52 * u], [hx, hy - 44 * u]], null, 2 * u); break; }
+    case "coin": p.ell(hx, hy - 6 * u, 9 * u, 9 * u, "#e9be4a", 2.2 * u); p.ell(hx, hy - 6 * u, 5 * u, 5 * u, null, 1.2 * u); break;
+    case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
+  }
+};
+
 /** front-facing Roman-era character. opts: expr, blink, look, facing, seed, L/R arm poses, tilt, headTilt, bob, nohelmet, light */
 export const romanFront = (p, key, opts = {}) => {
   const O = typeof key === "string" ? OUTFITS[key] : key;
   const { expr = "neutral", blink = 0, look = 0, facing = 0, seed = 3, L = "hang", R = O.spear ? "spear" : "hang", tilt = 0, headTilt = 0,
     bob = 0, nohelmet = false, light = rad(-120), web = false, step = 0 } = opts;
   const lid = lidOf(blink), skin = O.skin ?? SKIN;
-  const H = headBlob(seed, 118, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100;
-  const torsoL = O.stout ? 1.12 : 1.08, legsL = 1.38, sole = 975;
+  const V2 = CAST.v2 && opts.v2 !== false;
+  const H = headBlob(seed, V2 ? 140 : 118, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100;
+  const torsoL = V2 ? (O.stout ? 0.9 : 0.82) : (O.stout ? 1.12 : 1.08), legsL = V2 ? 1.08 : 1.38, sole = 975;
   const torsoBot = sole - legsL * HH - bob * HH, chin = torsoBot - torsoL * HH, hc = chin - H.b, hipY = torsoBot - 0.12 * HH;
   const thick = thickAngle(light), ow = 5 * u, cx = 300;
   const legCol = mix(O.tunic, INK, 0.62), armCol = mix(O.tunic, INK, 0.5);
@@ -113,7 +166,7 @@ export const romanFront = (p, key, opts = {}) => {
   for (const side of [-1, 1]) {
     const up = Math.max(0, Math.sin(Math.PI * 2 * (step + (side > 0 ? 0.5 : 0)))) * 30 * (step ? 1 : 0);
     const hx = cx + side * 16 * u, fx = cx + side * 22 * u, fy = sole - 4 * u - up;
-    p.stroke(curve([hx, hipY], [(hx + fx) / 2 + side * 2 * u, (hipY + fy) / 2], [fx, fy]), 5.8 * u, legCol);
+    p.stroke(curve([hx, hipY], [(hx + fx) / 2 + side * 2 * u, (hipY + fy) / 2], [fx, fy]), (V2 ? 4.2 : 5.8) * u, legCol);
     const sandal = O.helmet ? LEATHER : "#5a3b2a";
     p.stroke([[fx - side * 3 * u, fy], [fx + side * 13 * u, fy + 0.5 * u]], 7.5 * u + 3, INK);
     p.stroke([[fx - side * 3 * u, fy], [fx + side * 13 * u, fy + 0.5 * u]], 7.5 * u, sandal);
@@ -121,7 +174,7 @@ export const romanFront = (p, key, opts = {}) => {
   }
   // ---- upper body ----
   p.rot = tilt ? [rad(tilt), cx, hipY] : null;
-  const T = { a: (0.4 * W) / 1.06 * (O.stout ? 1.12 : 1), b: 0.5 * (torsoBot - (chin - 0.25 * HH)), nTop: 2.2, nBot: 2.6, egg: O.stout ? 0.17 : 0.12, asym: 0.04 * facing, rot: 0, noise: 0.006, seed: seed + 7 };
+  const T = { a: ((V2 ? 0.34 : 0.4) * W) / 1.06 * (O.stout ? (V2 ? 1.22 : 1.12) : 1), b: 0.5 * (torsoBot - (chin - 0.25 * HH)), nTop: 2.2, nBot: 2.6, egg: O.stout ? 0.17 : 0.12, asym: 0.04 * facing, rot: 0, noise: 0.006, seed: seed + 7 };
   const tcx = cx + 3 * u * facing, tcy = torsoBot - T.b, tp = blobPts(tcx, tcy, T);
   const S = (side) => [tcx + side * 0.85 * T.a, chin + 0.12 * HH];
   const arm = (side, pose) => {
@@ -143,11 +196,12 @@ export const romanFront = (p, key, opts = {}) => {
       default: return { pts: [s, [X(4), s[1] + 0.48 * HH], [X(3), chin + 1.04 * HH]], front: false };
     }
   };
-  const arms = [arm(-1, L), arm(1, R)];
+  const arms = [{ ...arm(-1, L), side: -1, hold: opts.holdL }, { ...arm(1, R), side: 1, hold: opts.holdR }];
   const drawArm = (a) => {
-    p.stroke(curve(a.pts[0], a.pts[1], a.pts[2]), 5.2 * u, armCol);
+    p.stroke(curve(a.pts[0], a.pts[1], a.pts[2]), (V2 ? 3.9 : 5.2) * u, armCol);
     const [hx, hy] = a.pts[2];
-    p.dot(hx, hy, 5.5 * u);
+    if (a.hold) heldProp(p, a.hold, hx, hy, a.side, u * 1.7, light);
+    p.dot(hx, hy, (V2 ? 5 : 5.5) * u, V2 ? skin : INK); if (V2) p.ell(hx, hy, 5 * u, 5 * u, null, 1.8 * u);
     if (a.finger) { const dx = a.pts[2][0] - a.pts[1][0], dy = a.pts[2][1] - a.pts[1][1], l = Math.hypot(dx, dy); p.stroke([[hx, hy], [hx + dx / l * 14 * u, hy + dy / l * 14 * u]], 2.6 * u); }
     if (a.thumb) p.stroke([[hx, hy], [hx + Math.sign(hx - cx) * 6 * u, hy - 12 * u]], 2.6 * u);
   };
@@ -248,7 +302,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.clip(bd, () => { for (let i = -3; i <= 3; i++) p.stroke([[cx + i * 9 * u, hc + 0.45 * H.b], [cx + i * 7 * u, hc + 1.35 * H.b]], 1.2 * u, "#c9c4bb"); });
     p.inkRing(bd, ow * 0.8, thick);
   }
-  faceFront(p, cx, hc, W, expr, facing, look, lid, helmet, skin, O.beard ? O.beard : O.moustache, !!O.stout);
+  (V2 ? faceV2 : faceFront)(p, cx, hc, W, expr, facing, look, lid, helmet || !!O.hat || !!O.cap, skin, O.beard ? O.beard : O.moustache, !!O.stout);
   if (O.brows) for (const s of [-1, 1]) p.ell(cx + 7 * u * facing + s * 14 * u, hc - 20 * u, 11 * u, 5 * u, O.brows, 2 * u);
   if (O.beard) { // re-draw the mouth over the beard for open mouths
     if (expr === "shock" || expr === "snore") p.ell(cx + 8 * u * facing, hc + 22 * u, 6 * u, 7 * u, "#5a1e28", 2 * u);
@@ -297,4 +351,4 @@ export const fxDust = (p, k, col = "#e8dcc4") => {
 export const fxDrip = (p) => p.ell(300, 500, 40, 64, "#9fd4ff", 10);
 export const fxWood = (p, seed) => { p.poly([[200, 420], [400, 400], [420, 560], [230, 600]], "#5b3d22", 14); p.stroke([[240, 450], [380, 440]], 6, "#3a2614"); p.ell(330, 520, 26, 18, "#4d7a32", 0); };
 
-export const headCenter = (seed = 3) => { const H = headBlob(seed, 118, 0), HH = 2 * H.b; return 975 - 1.38 * HH - 1.08 * HH - H.b; };
+export const headCenter = (seed = 3) => { const v = CAST.v2, H = headBlob(seed, v ? 140 : 118, 0), HH = 2 * H.b; return 975 - (v ? 1.08 : 1.38) * HH - (v ? 0.82 : 1.08) * HH - H.b; };

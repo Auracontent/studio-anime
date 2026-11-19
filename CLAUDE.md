@@ -19,7 +19,7 @@ ce fichier dit comment l'appliquer **dans ce dépôt** et ce qui prime en cas de
 ## Le style Pourkoipa (mesuré sur la référence, à respecter)
 - **Personnages GRANDS dans le cadre.** C'est la règle la plus visible. Cadre tes plans avec `frameOn()` / `frameTwo()` de `engine/motion.js` :
   - gros plan maison : `headW` 0.28-0.34 (défaut 0.30) : la tête fait ~30 % de la largeur, les pieds touchent presque le bas ;
-  - plan à deux : `frameTwo(a, b)` (tête ~21 %) ;
+  - plan à deux : `frameTwo(a, b)` (tête ~26 %, personnages à 0,8-1 m l'un de l'autre) ;
   - plan large (≤ 0.10) seulement pour établir un lieu ou montrer une action d'ensemble, jamais plus de 20 % de la durée.
   Au moins 60 % des images de la vidéo doivent montrer un personnage à l'échelle gros plan ou plan à deux.
 - **Nouveau casting à chaque épisode.** Le style est fixe, les personnages changent : chaque histoire a ses propres personnages,
@@ -31,6 +31,17 @@ ce fichier dit comment l'appliquer **dans ce dépôt** et ce qui prime en cas de
   Varie aussi les visages : couleur de peau, moustache, barbe, cheveux, corpulence (`stout`), expressions.
 - **Nouveau décor quand l'histoire change de lieu.** Réutilise une bibliothèque seulement si l'histoire s'y passe vraiment ;
   sinon écris `engine/library/<lieu>.js` (château, port, désert, laboratoire, mine, village de montagne...). Chaque nouveau décor enrichit le studio.
+- **Casting v2 (par défaut).** Grosse tête, vrais yeux (blanc + pupille + reflet), sourcils épais, joues roses sur les sourires :
+  le moteur le fait seul (`T.CAST.v2`). Visages couleur de peau (identité Pourkoipa, jamais de visages blancs).
+  Joue les **expressions** franchement et change-les sur les mots forts (`shock`, `laugh`, `grin`, `nervous`, `pained`, `squint`, `stubborn`...),
+  et oriente le regard (`look` -1..1) vers l'autre personnage ou l'objet important.
+- **Les personnages agissent ensemble.** Dans la plupart des plans : 2 à 4 personnages, debout à 0,8-1 m les uns des autres
+  (ils peuvent se chevaucher en profondeur), qui se regardent et réagissent. Les objets de l'histoire sont **tenus en main**
+  (`holdL` / `holdR` : `bill`, `paper`, `letter`, `ticket`, `mug`, `flag`, `coin`, `tool`) au lieu de flotter à côté ;
+  une carte flottante (compteur, carte, thermomètre) reste possible pour un chiffre clé, pas pour un objet qu'un personnage manipule.
+- **Costumes colorés et contrastés.** Chaque personnage a une couleur principale vive et différente de ses voisins
+  (rouge, jaune moutarde, turquoise, violet, orange, vert pomme...) ; garde les couleurs ternes pour les uniformes imposés par l'histoire,
+  et même là varie les accessoires (écharpe, brassard, casquette).
 - **Lumière** : plein jour chaud par défaut (soleil haut, ocres, saturation ~1.15, luminosité moyenne ~110/255). Nuit bleue seulement si l'histoire l'exige.
 - **Caméra** : toujours en mouvement, glissements continus et assez rapides, peu de coupes (une coupe = changement de lieu ou d'époque, avec un flash de 6 images).
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien.
