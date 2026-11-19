@@ -1,61 +1,53 @@
 # Studio Pourkoipa 🎬
 
-Usine à Shorts animés pour la chaîne **[@Pourkoipa](https://www.youtube.com/@Pourkoipa)** : histoires vraies et surprenantes,
-en français, avec des personnages 2D à tête de haricot dans un monde 3D peint. Tu déposes une voix, **Claude réalise la vidéo**
-(plan de tournage, décor, caméra, son, sous-titres) et GitHub Actions la rend. Tu récupères le MP4 dans **Releases**.
+Animated Shorts factory for the **[@Pourkoipa](https://www.youtube.com/@Pourkoipa)** channel: true, surprising stories in French, featuring 2D bean-headed characters inside a painted 3D world. Drop in a voice track, **Claude directs the video** (shot list, set, camera, sound, subtitles), and GitHub Actions renders it. Grab the MP4 from **Releases**.
 
-## Utilisation (depuis le téléphone ou l'ordinateur)
+## Usage (from phone or computer)
 
-**Option A : tu as déjà ta voix**
-1. Sur GitHub : `Add file` → `Upload files`, dans un dossier `inbox/<date>-<sujet>/` (ex. `inbox/2026-11-20-tour-eiffel/`).
-2. Dépose `voice.wav` (ou `.mp3`) **et** `script.txt` (le texte exact lu).
-3. Commit → le workflow **Vidéo** démarre seul (onglet Actions, ~30-45 min).
-4. La vidéo arrive dans **Releases**, avec le titre, la description, les hashtags et la légende TikTok prêts à copier.
+**Option A: you already have your voice track**
+1. On GitHub: `Add file` → `Upload files`, inside an `inbox/<date>-<topic>/` folder (e.g., `inbox/2026-11-20-tour-eiffel/`).
+2. Upload `voice.wav` (or `.mp3`) **and** `script.txt` (the exact spoken text).
+3. Commit → the **Vidéo** workflow starts automatically (Actions tab, ~30–45 min).
+4. The video lands in **Releases**, complete with title, description, hashtags, and TikTok caption ready to copy.
 
-**Option B : tu veux une idée + un script** (tes sujets à l'avance : liste `sujets.md`, utilisée par le cron)
-1. Actions → **Idée + script** → `Run workflow`. Laisse le sujet vide (Claude choisit le plus viral) ou écris-en un.
-2. Claude vérifie les faits et ouvre une **issue** avec le script.
-3. Enregistre-le avec la voix Riko (Google AI Studio), dépose `voice.wav` dans le dossier `inbox/` indiqué → option A, étape 3.
-   (Ou coche `voix_auto` pour une voix Gemini TTS automatique : la vidéo se lance directement.)
+**Option B: you want an idea + a script** (your upcoming topics: `sujets.md` list, used by the cron job)
+1. Actions → **Idée + script** → `Run workflow`. Leave the topic blank (Claude picks the most viral one) or enter one.
+2. Claude fact-checks the story and opens an **issue** with the script.
+3. Record it with the Riko voice (Google AI Studio), drop `voice.wav` into the indicated `inbox/` folder → Option A, step 3.
+   (Or check `voix_auto` for an automatic Gemini TTS voice: the video pipeline starts right away.)
 
-**Retouches** : dans une issue, écris `@claude le plan 3 est trop sombre, et zoome plus sur le chef` → Claude corrige et relance le rendu.
+**Tweaks**: in an issue, write `@claude shot 3 is too dark, and zoom in closer on the chef` → Claude fixes it and reruns the render.
 
-## La voix de la chaîne (Gemini Voice design)
-Une voix **originale** créée à partir d'une description (`brand/voice_prompt.txt` : un Français de 30 ans, chaleureux, complice, débit rapide).
-1. Ajoute le secret `GEMINI_API_KEY` (clé Google AI Studio).
-2. Actions → **Voix de la chaîne** → `Run workflow`. Il crée la voix, puis commite `brand/voice.json` et deux aperçus
-   (`brand/voice_sample.wav`, `brand/voice_test.wav`) que tu peux écouter sur GitHub.
-3. Pas convaincu ? Modifie `brand/voice_prompt.txt` et relance. Ensuite `voix_auto` (workflow Idée + script) et `tools/tts.py` utilisent cette voix.
+## Channel Voice (Gemini Voice Design)
+An **original** voice generated from a prompt (`brand/voice_prompt.txt`: a 30-year-old Frenchman, warm, conspiratorial, fast-paced delivery).
+1. Add the `GEMINI_API_KEY` secret (Google AI Studio key).
+2. Actions → **Voix de la chaîne** → `Run workflow`. It creates the voice, then commits `brand/voice.json` and two previews (`brand/voice_sample.wav`, `brand/voice_test.wav`) that you can listen to on GitHub.
+3. Not convinced? Edit `brand/voice_prompt.txt` and run it again. After that, `voix_auto` (Idée + script workflow) and `tools/tts.py` use this voice.
 
-## Mise en place (une seule fois)
-1. Installer l'app GitHub de Claude sur l'organisation : <https://github.com/apps/claude> → `Install` → `Auracontent` → ce dépôt.
-2. Créer le jeton : sur ton ordinateur, `claude setup-token` (Claude Code), puis Settings → Secrets and variables → Actions →
-   `New repository secret` : **`CLAUDE_CODE_OAUTH_TOKEN`**.
-3. Facultatif (voix automatique) : secret **`GEMINI_API_KEY`** (clé de Google AI Studio).
-3 ter. Tendances : secret **`YOUTUBE_API_KEY`** (Google Cloud Console → activer *YouTube Data API v3* → Identifiants → Clé API).
-   Avant chaque idée, `tools/trends.py` classe les vidéos les plus vues des chaînes listées dans `tendances.json` ; Claude s'en sert
-   pour choisir un **thème** qui marche, puis écrit sa propre histoire à partir de recherches web.
-3 bis. Dépôt Hugging Face : secret **`HF_TOKEN`** (jeton *Write* de huggingface.co/settings/tokens). Chaque vidéo finie est déposée
-   dans le dataset privé **`soradata/studio-anime`** (créé au premier dépôt), un dossier par vidéo : `<slug>/` avec le mp4, `meta.json`,
-   `cover.jpg`, `qa_sheet.jpg`. Autre dataset : variable de dépôt `HF_DATASET`.
-4. Settings → Actions → General → Workflow permissions : **Read and write**.
+## Setup (one time only)
+1. Install the Claude GitHub App on the organization: <https://github.com/apps/claude> → `Install` → `Auracontent` → this repository.
+2. Create the token: on your machine, run `claude setup-token` (Claude Code), then go to Settings → Secrets and variables → Actions → `New repository secret`: **`CLAUDE_CODE_OAUTH_TOKEN`**.
+3. Optional (automatic voice): secret **`GEMINI_API_KEY`** (Google AI Studio key).
+3 ter. Trends: secret **`YOUTUBE_API_KEY`** (Google Cloud Console → enable *YouTube Data API v3* → Credentials → API Key).
+   Before each idea, `tools/trends.py` ranks the most-viewed videos from channels listed in `tendances.json`; Claude uses this to pick a **topic** that performs well, then writes its own story based on web research.
+3 bis. Hugging Face repository: secret **`HF_TOKEN`** (*Write* token from huggingface.co/settings/tokens). Every finished video is uploaded to the private dataset **`soradata/studio-anime`** (created on first upload), one folder per video: `<slug>/` containing the mp4, `meta.json`, `cover.jpg`, and `qa_sheet.jpg`. To use another dataset, set the repository variable `HF_DATASET`.
+4. Settings → Actions → General → Workflow permissions: **Read and write**.
 
-## Comment c'est fait
-| Étape | Où | Qui |
+## How It's Built
+| Step | Where | Who |
 |---|---|---|
-| Timing des mots (faster-whisper en français, recalé sur le script) | `tools/timing.py` | Actions |
-| Plan de tournage, décor, cadrages, casting, bruitages, contrôle images fixes | `episodes/<slug>/` | **Claude** (`CLAUDE.md` = guide du réalisateur) |
-| Rendu three.js headless, 8 tranches en parallèle | `tools/render.mjs` | Actions (matrice) |
-| Musique + bruitages synthétisés, mixage verrouillé (−6 dB sous la voix), sous-titres, −14 LUFS, contrôle qualité | `tools/finish.sh` | Actions |
+| Word timing (faster-whisper in French, aligned to the script) | `tools/timing.py` | Actions |
+| Shot list, set, framing, casting, sound effects, still-frame review | `episodes/<slug>/` | **Claude** (`CLAUDE.md` = director's guide) |
+| Headless Three.js rendering, 8 slices in parallel | `tools/render.mjs` | Actions (matrix) |
+| Synthesized music + sound effects, locked mix (−6 dB below voice), subtitles, −14 LUFS, QA check | `tools/finish.sh` | Actions |
 
-- `engine/` : moteur (cartes 2D encrées dans un monde 3D, passe d'encre, flou de profondeur, étalonnage), `motion.js` (caméras, `frameOn` = cadrage gros plan à l'échelle de la référence).
-- `engine/library/` : décors réutilisables (`paris.js`, `rails.js`).
-- `episodes/` : les épisodes déjà réalisés (`2026-11-19-faux-paris`, `2026-11-19-rails-chauffes`).
-- `brand/` : logo, bannière, filigrane de la chaîne.
-- `SKILL.md` + `example/soldier/` : la méthode et l'exemple du kit d'origine.
+- `engine/`: rendering engine (inked 2D cards inside a 3D world, ink pass, depth of field, color grading), `motion.js` (cameras, `frameOn` = close-up framing scaled to the reference).
+- `engine/library/`: reusable sets (`paris.js`, `rails.js`).
+- `episodes/`: already produced episodes (`2026-11-19-faux-paris`, `2026-11-19-rails-chauffes`).
+- `brand/`: channel logo, banner, and watermark.
+- `SKILL.md` + `example/soldier/`: methodology and example from the original kit.
 
-En local : `bash tools/setup.sh`, puis `CHROME=/usr/bin/google-chrome node tools/render.mjs episodes/<slug> frames 0-<N-1>`
-et `bash tools/finish.sh episodes/<slug> frames "Titre"`.
+Locally: `bash tools/setup.sh`, then `CHROME=/usr/bin/google-chrome node tools/render.mjs episodes/<slug> frames 0-<N-1>` and `bash tools/finish.sh episodes/<slug> frames "Title"`.
 
-Basé sur le kit cartoon-short-kit et sur [mromidev/claude-animated-shorts](https://github.com/mromidev/claude-animated-shorts) (MIT : bibliothèque Pen / têtes / visages, récupérée par `setup.sh`).
-Polices : Montserrat et Luckiest Guy (SIL OFL / Apache 2.0).
+Based on the cartoon-short-kit and [mromidev/claude-animated-shorts](https://github.com/mromidev/claude-animated-shorts) (MIT: Pen / heads / faces library, fetched by `setup.sh`).
+Fonts: Montserrat and Luckiest Guy (SIL OFL / Apache 2.0).
