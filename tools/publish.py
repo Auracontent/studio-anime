@@ -40,9 +40,15 @@ def z(method, path, body=None, raw=None, url=None, ctype="application/json"):
     try:
         with urllib.request.urlopen(req, timeout=600) as r:
             txt = r.read().decode() or "{}"
-            return json.loads(txt) if txt.strip().startswith(("{", "[")) else {}
+            out = json.loads(txt) if txt.strip().startswith(("{", "[")) else {}
+            if getattr(r, "status", 200) == 207:   # partial / queued: treated as a failure (as in Auracontent/auracontent)
+                raise ZernioError(f"Zernio {method} {path} -> 207 (partial or queued): {txt[:800]}")
+            return out
     except urllib.error.HTTPError as e:
-        raise ZernioError(f"Zernio {method} {path or 'upload'} -> {e.code}: {e.read().decode()[:800]}")
+        body = e.read().decode()[:800]
+        if e.code == 409 and path == "/v1/posts":   # duplicate: already published, counted as done
+            print(f"Zernio 409: duplicate, treated as already published. {body}"); return {"post": {"status": "duplicate"}}
+        raise ZernioError(f"Zernio {method} {path or 'upload'} -> {e.code}: {body}")
 
 if flag("--list-accounts"):
     try: res = z("GET", "/v1/accounts")
@@ -95,6 +101,7 @@ if YT_ID:
         "platforms": [{"platform": "youtube", "accountId": YT_ID, "platformSpecificData": {
             "title": yt_title, "visibility": os.environ.get("YOUTUBE_VISIBILITY", "public"),
             "madeForKids": False, "categoryId": "27", "containsSyntheticMedia": AI}}],
+        "youtubeSettings": {"title": yt_title, "privacy_status": os.environ.get("YOUTUBE_VISIBILITY", "public").upper()},
         "publishNow": True}))
 if TT_ID:
     posts.append(("tiktok", {
@@ -104,6 +111,7 @@ if TT_ID:
             "allow_duet": True, "allow_stitch": True, "content_preview_confirmed": True,
             "express_consent_given": True, "video_made_with_ai": AI}}}],
         "publishNow": True}))
+    posts[-1][1]["tiktokSettings"] = posts[-1][1]["platforms"][0]["platformSpecificData"]["tiktokSettings"]   # top level too (proven in production)
 if not posts: sys.exit("No account id set (ZERNIO_YOUTUBE_ACCOUNT_ID / ZERNIO_TIKTOK_ACCOUNT_ID): nothing to do.")
 
 if DRY:
@@ -136,15 +144,28 @@ def save(m, note):
                    commit_message=f"{slug}: {note}")
 
 done = dict(pick.get("published", {})); failed = []
+import time
+DELAY = int(os.environ.get("DELAY_BETWEEN_PLATFORMS", "15"))
+first = True
 for name, body in posts:
     if name in done and not flag("--force"): print(f"{name}: already published, skipped"); continue
+    if not first: print(f"pause {DELAY}s between platforms"); time.sleep(DELAY)
+    first = False
     body["mediaItems"] = [media] if name == "youtube" else [{"type": "video", "url": video_url}]
     try:
         res = z("POST", "/v1/posts", body)
     except ZernioError as e:
-        print(f"{name}: FAILED {e}"); failed.append(name); continue
+        print(f"{name}: FAILED {e}")
+        if name != "tiktok": failed.append(name); continue
+        try:   # TikTok servers busy: send it as a draft to the TikTok inbox instead (as in Auracontent/auracontent)
+            time.sleep(10)
+            for k in (body["tiktokSettings"], body["platforms"][0]["platformSpecificData"]["tiktokSettings"]): k["draft"] = True
+            res = z("POST", "/v1/posts", body); print("tiktok: sent as a DRAFT (finish it in the TikTok app inbox)")
+        except ZernioError as e2:
+            print(f"tiktok draft: FAILED {e2}"); failed.append(name); continue
     post = res.get("post", res)
-    done[name] = {"post_id": post.get("_id") or post.get("id"), "status": (post.get("platforms") or [{}])[0].get("status", post.get("status")),
+    done[name] = {"post_id": post.get("_id") or post.get("id"), "status": (post.get("platforms") or [{}])[0].get("status", post.get("status")) if isinstance(post.get("platforms"), list) else post.get("status"),
+                  "draft": bool(body.get("tiktokSettings", {}).get("draft")),
                   "at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")}
     print(f"{name}: {done[name]}")
     pick["published"] = done; save(pick, f"published on {name}")   # saved after each platform: a retry never re-posts it
