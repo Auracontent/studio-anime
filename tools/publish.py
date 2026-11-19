@@ -123,7 +123,9 @@ if DRY:
 
 def upload(path_in_repo, ctype):
     local = hf_hub_download(REPO, path_in_repo, repo_type="dataset", token=hf.token)
-    name = os.path.basename(path_in_repo)
+    import re, unicodedata   # ASCII file name for the upload (older videos may have accents in their name)
+    base, ext = os.path.splitext(os.path.basename(path_in_repo))
+    name = (re.sub(r"[^A-Za-z0-9]+", "-", unicodedata.normalize("NFKD", base).encode("ascii", "ignore").decode()).strip("-") or "video") + ext
     pre = z("POST", "/v1/media/presign", {"filename": name, "contentType": ctype})
     z("PUT", "", raw=open(local, "rb").read(), url=pre["uploadUrl"], ctype=ctype)
     print(f"uploaded {name} -> {pre['publicUrl']}")
