@@ -127,9 +127,20 @@ const rtInk = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType });
 const fsCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1), fsGeo = new THREE.PlaneGeometry(2, 2);
 const fs = (mat) => { const s = new THREE.Scene(); s.add(new THREE.Mesh(fsGeo, mat)); return s; };
 const inkU = { col: { value: rtColor.texture }, nd: { value: rtNd.texture }, res: { value: new THREE.Vector2(W, H) }, px: { value: 1.6 }, fogCol: { value: new THREE.Color() },
-  sat: { value: 1.08 }, lift: { value: new THREE.Color(0, 0, 0) }, gain: { value: new THREE.Color(1, 1, 1) }, vig: { value: 0.22 }, flash: { value: 0 } };
+  sat: { value: 1.08 }, lift: { value: new THREE.Color(0, 0, 0) }, gain: { value: new THREE.Color(1, 1, 1) }, vig: { value: 0.22 }, flash: { value: 0 },
+  ao: { value: 0.5 }, aoR: { value: 1 }, shTint: { value: new THREE.Color('#5d4a7a') }, shAmt: { value: 0.22 } };
 const inkScene = fs(new THREE.ShaderMaterial({ uniforms: inkU, vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
-  fragmentShader: `uniform sampler2D col, nd; uniform vec2 res; uniform float px, sat, vig, flash; uniform vec3 fogCol, lift, gain; varying vec2 vUv;
+  fragmentShader: `uniform sampler2D col, nd; uniform vec2 res; uniform float px, sat, vig, flash, ao, aoR, shAmt; uniform vec3 fogCol, lift, gain, shTint; varying vec2 vUv;
+  // screen-space ambient occlusion from the depth buffer: soft darkening in corners, under props, around feet (world only, not the 2D cards)
+  float aoAt(vec2 uv){
+    vec4 c = texture2D(nd, uv); if (dot(c.rgb,c.rgb) < .01) return 0.; float d = c.a; if (d <= 0.) return 0.;
+    float R = clamp(70./d, 5., 46.) * aoR * res.y / 1920.; float o = 0.;
+    for (int i=0;i<12;i++){ float fi = float(i); float a = fi*2.39996 + fract(sin(dot(uv, vec2(12.9898,78.233)))*43758.5)*6.283;
+      float r = R*(.25 + .75*fract(fi*.618034)); vec4 s = texture2D(nd, uv + vec2(cos(a), sin(a))*r/res);
+      float ds = s.a; if (ds <= 0.) continue; float dz = d - ds;
+      o += smoothstep(.015*d, .06*d, dz) * (1. - smoothstep(.22*d, .5*d, dz)); }
+    return o / 12. * (1. - smoothstep(60., 260., d));
+  }
   float edgeAt(vec2 uv, float r){
     vec4 c = texture2D(nd, uv); if (dot(c.rgb,c.rgb) < .01) return 0.; float d = c.a; vec3 n = c.rgb*2.-1.;
     float e = 0.; float rr = r * clamp(7./d, .62, 1.25);
@@ -146,6 +157,9 @@ const inkScene = fs(new THREE.ShaderMaterial({ uniforms: inkU, vertexShader: `va
   }
   void main(){
     vec3 c = texture2D(col, vUv).rgb;
+    c *= 1. - ao * aoAt(vUv);
+    float l0 = dot(c, vec3(.299,.587,.114));
+    c = mix(c, c * shTint * 1.9, (1. - smoothstep(.12, .55, l0)) * shAmt);   // shadows tinted (violet by default), never grey
     float e = edgeAt(vUv, px);
     c = mix(c, vec3(.012,.01,.014), e);
     if (flash < -0.5) c = vec3(e);
@@ -178,6 +192,7 @@ function applyLight(L, f) {
   scene.fog.color.set(L.fog); scene.fog.near = L.fogNear; scene.fog.far = L.fogFar;
   skyU.top.value.set(L.skyTop); skyU.hor.value.set(L.skyHor); skyU.sunCol.value.set(L.sunDisc || '#000'); skyU.sunSize.value = L.sunSize || 0;
   inkU.sat.value = L.sat; inkU.gain.value.set(L.gain || '#ffffff'); inkU.lift.value.set(L.lift || '#000000');
+  inkU.ao.value = L.ao ?? 0.7; inkU.aoR.value = L.aoR ?? 1.35; inkU.shTint.value.set(L.shadowTint || '#5d4a7a'); inkU.shAmt.value = L.shadowAmt ?? 0.22;
   if (WORLD.onLight) WORLD.onLight(L, f);
 }
 function placeSun(L, focus) {

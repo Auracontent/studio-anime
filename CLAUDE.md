@@ -42,6 +42,8 @@ ce fichier dit comment l'appliquer **dans ce dépôt** et ce qui prime en cas de
 - **Costumes colorés et contrastés.** Chaque personnage a une couleur principale vive et différente de ses voisins
   (rouge, jaune moutarde, turquoise, violet, orange, vert pomme...) ; garde les couleurs ternes pour les uniformes imposés par l'histoire,
   et même là varie les accessoires (écharpe, brassard, casquette).
+- **Rendu** : le moteur ajoute une occlusion ambiante douce (coins, pied des murs, contact au sol) et teinte les ombres (violet par défaut).
+  Réglables par ambiance dans `LIGHTS` : `ao` (0.7), `aoR` (1.35), `shadowTint` ('#5d4a7a', ou brun chaud '#6a4a3a' pour un coucher de soleil), `shadowAmt` (0.22).
 - **Lumière** : plein jour chaud par défaut (soleil haut, ocres, saturation ~1.15, luminosité moyenne ~110/255). Nuit bleue seulement si l'histoire l'exige.
 - **Caméra** : toujours en mouvement, glissements continus et assez rapides, peu de coupes (une coupe = changement de lieu ou d'époque, avec un flash de 6 images).
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien.
@@ -68,6 +70,11 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
    (faster-whisper s'il est installé, sinon alignement sur les silences). Vérifier `phrases.json`. TOTAL = round(durée × 30).
 4. Décor : réutiliser une bibliothèque de `engine/library/` si elle convient, sinon en écrire une nouvelle dans le même style
    (`export function buildXxx(ctx)` qui retourne `{ DECK, clouds, state(S, f), onLight }`). `web/world.js` l'importe depuis `'../library/xxx.js'`.
+   **Habillage obligatoire** avec le kit d'objets `engine/library/props.js` (`const K = propKit(ctx, { seed })` dans `web/world.js`) :
+   pour CHAQUE plan avec des personnages, place 8 à 15 objets **dans le champ, derrière eux** avec `K.backdrop(position, yaw du plan, { kinds, n })`
+   ou à la main (`tree`, `poplar`, `bush`, `rock`, `bench`, `lamp`, `crate`, `barrel`, `sack`, `fence`, `stall`, `sign`, `pot`, `cafe`),
+   et couvre les sols nus avec `K.verge(...)` (herbes, fleurs, cailloux). Jamais de sol vide ni de fond vide derrière un personnage.
+   Choisis des objets qui racontent le lieu et l'époque (étal de marché, panneau avec un nom de ville, tonneaux, café...).
 5. `web/story.js` : exporte `TOTAL, DECK, SHOTS, shotAt, lightFor, camAt, dofAt, worldAt, setupCast, actorsAt, fxAt`
    (modèle : `episodes/2026-11-19-rails-chauffes/web/story.js`). Imports depuis `'../motion.js'`. Un plan par phrase, cadres avec `frameOn`.
    Les tenues se déclarent dans `setupCast(T)` (`T.OUTFITS.<id> = { tunic, skin, cap, hair, moustache, apron, stout... }`).
