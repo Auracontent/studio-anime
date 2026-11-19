@@ -1,10 +1,11 @@
 # Claude cherche un sujet (ou prend le tien), vérifie les faits et écrit le script à enregistrer.
 name: Idée + script
 on:
-  # Lundi, mercredi, vendredi à 7 h 17 (heure de Paris en hiver ; le cron est en UTC). Change la ligne pour un autre rythme.
-  # Par cron : Claude choisit le sujet, et si GEMINI_API_KEY + brand/voice.json existent, la voix et la vidéo suivent seules.
+  # Every day at 7:17 Paris time in winter (8:17 in summer; cron is UTC): the video is ready long before the
+  # 18:07 publication. For 3 videos a week instead: '17 6 * * 1,3,5'.
+  # Cron runs: Claude picks the topic; with GEMINI_API_KEY + brand/voice.json the voice and the video follow on their own.
   schedule:
-    - cron: '17 6 * * 1,3,5'
+    - cron: '17 6 * * *'
   workflow_dispatch:
     inputs:
       sujet: { description: "Sujet (laisser vide : Claude choisit le plus viral)", required: false }

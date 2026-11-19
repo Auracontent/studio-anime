@@ -55,7 +55,7 @@ fails, the next run retries only that one). Videos published by hand are marked 
 3. Mode **test**: shows exactly what would be sent, publishes nothing.
 4. Mode **publier**: publishes one video now.
 5. Automatic: add the repository **variable** `PUBLISH_ENABLED` = `true` (Settings → Secrets and variables → Actions → *Variables*).
-   The cron then publishes one ready video every day at 18:07 Paris time. Remove the variable to pause.
+   The cron then publishes one ready video every day at 18:07 Paris time (production runs daily at 7:17). Remove the variable to pause.
 Options (variables): `TIKTOK_PRIVACY` (default `PUBLIC_TO_EVERYONE`), `YOUTUBE_VISIBILITY` (default `public`), `PUBLISH_AI_LABEL` (`0` to disable).
 
 ## Getting the Claude token
