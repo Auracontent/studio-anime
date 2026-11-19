@@ -1,0 +1,366 @@
+{
+ "duration": 68.880583,
+ "frames30": 2066,
+ "source": "silence-align (cost 4.20)",
+ "segments": [
+  [
+   0.296375,
+   2.594583
+  ],
+  [
+   2.748208,
+   4.109458
+  ],
+  [
+   4.23775,
+   4.60175
+  ],
+  [
+   5.198125,
+   7.336875
+  ],
+  [
+   8.176792,
+   8.913167
+  ],
+  [
+   9.275583,
+   11.712125
+  ],
+  [
+   12.33425,
+   15.377542
+  ],
+  [
+   15.620833,
+   16.043667
+  ],
+  [
+   16.607167,
+   18.542667
+  ],
+  [
+   19.402833,
+   20.131
+  ],
+  [
+   20.834167,
+   21.285208
+  ],
+  [
+   21.421125,
+   22.06725
+  ],
+  [
+   22.858125,
+   25.191875
+  ],
+  [
+   25.318708,
+   26.299458
+  ],
+  [
+   26.546542,
+   27.987583
+  ],
+  [
+   28.136792,
+   29.286042
+  ],
+  [
+   29.946958,
+   31.101792
+  ],
+  [
+   31.335667,
+   32.036167
+  ],
+  [
+   32.163708,
+   33.005292
+  ],
+  [
+   33.220833,
+   33.902083
+  ],
+  [
+   34.305542,
+   35.633125
+  ],
+  [
+   36.323208,
+   37.068792
+  ],
+  [
+   37.378583,
+   38.312833
+  ],
+  [
+   38.760083,
+   39.556042
+  ],
+  [
+   40.032292,
+   41.63525
+  ],
+  [
+   41.97025,
+   43.175458
+  ],
+  [
+   43.331667,
+   44.265833
+  ],
+  [
+   45.003167,
+   45.34875
+  ],
+  [
+   45.612042,
+   46.681625
+  ],
+  [
+   47.069667,
+   48.312167
+  ],
+  [
+   48.515125,
+   50.0735
+  ],
+  [
+   50.693875,
+   52.48625
+  ],
+  [
+   53.231708,
+   54.949292
+  ],
+  [
+   55.554542,
+   58.583125
+  ],
+  [
+   59.14975,
+   59.635792
+  ],
+  [
+   59.780333,
+   59.873875
+  ],
+  [
+   60.055958,
+   61.30125
+  ],
+  [
+   61.468042,
+   62.506125
+  ],
+  [
+   62.855333,
+   63.836083
+  ],
+  [
+   64.635625,
+   65.9755
+  ],
+  [
+   66.681,
+   67.44225
+  ],
+  [
+   67.76625,
+   68.386667
+  ],
+  [
+   68.720917,
+   68.880583
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "En mille neuf cent quatorze, pour sauver la France,",
+   "s": 0.296,
+   "e": 2.595
+  },
+  {
+   "text": "l'arm\u00e9e a r\u00e9quisitionn\u00e9 des taxis.",
+   "s": 2.748,
+   "e": 4.602
+  },
+  {
+   "text": "Et ils ont gard\u00e9 le compteur allum\u00e9.",
+   "s": 5.198,
+   "e": 7.337
+  },
+  {
+   "text": "D\u00e9but septembre,",
+   "s": 8.177,
+   "e": 8.913
+  },
+  {
+   "text": "les Allemands sont \u00e0 quelques dizaines de kilom\u00e8tres de Paris.",
+   "s": 9.276,
+   "e": 11.712
+  },
+  {
+   "text": "Le g\u00e9n\u00e9ral Gallieni a besoin de soldats sur le front de la Marne,",
+   "s": 12.334,
+   "e": 15.378
+  },
+  {
+   "text": "tout de suite.",
+   "s": 15.621,
+   "e": 16.044
+  },
+  {
+   "text": "Mais les trains sont trop lents et trop peu nombreux.",
+   "s": 16.607,
+   "e": 18.543
+  },
+  {
+   "text": "Alors il a une id\u00e9e :",
+   "s": 19.403,
+   "e": 20.131
+  },
+  {
+   "text": "prendre les taxis de Paris.",
+   "s": 20.834,
+   "e": 22.067
+  },
+  {
+   "text": "La nuit du six au sept septembre, les policiers arr\u00eatent les voitures dans la rue,",
+   "s": 22.858,
+   "e": 25.192
+  },
+  {
+   "text": "font descendre les clients,",
+   "s": 25.319,
+   "e": 26.299
+  },
+  {
+   "text": "et envoient les chauffeurs aux Invalides.",
+   "s": 26.547,
+   "e": 29.286
+  },
+  {
+   "text": "Environ six cents taxis,",
+   "s": 29.947,
+   "e": 31.102
+  },
+  {
+   "text": "des Renault rouges,",
+   "s": 31.336,
+   "e": 32.036
+  },
+  {
+   "text": "partent dans la nuit,",
+   "s": 32.164,
+   "e": 33.005
+  },
+  {
+   "text": "les phares \u00e9teints.",
+   "s": 33.221,
+   "e": 33.902
+  },
+  {
+   "text": "Cinq soldats entass\u00e9s dans chacun.",
+   "s": 34.306,
+   "e": 35.633
+  },
+  {
+   "text": "Direction le front,",
+   "s": 36.323,
+   "e": 37.069
+  },
+  {
+   "text": "\u00e0 cinquante kilom\u00e8tres.",
+   "s": 37.379,
+   "e": 38.313
+  },
+  {
+   "text": "Et le plus dr\u00f4le ?",
+   "s": 38.76,
+   "e": 39.556
+  },
+  {
+   "text": "Les chauffeurs \u00e9taient pay\u00e9s au compteur.",
+   "s": 40.032,
+   "e": 41.635
+  },
+  {
+   "text": "L'arm\u00e9e a pay\u00e9 la course,",
+   "s": 41.97,
+   "e": 43.175
+  },
+  {
+   "text": "comme un client ordinaire.",
+   "s": 43.332,
+   "e": 44.266
+  },
+  {
+   "text": "Sauf que\u2026 les historiens sont formels :",
+   "s": 45.003,
+   "e": 46.682
+  },
+  {
+   "text": "six mille hommes, c'est tr\u00e8s peu,",
+   "s": 47.07,
+   "e": 48.312
+  },
+  {
+   "text": "face \u00e0 des arm\u00e9es d'un million de soldats.",
+   "s": 48.515,
+   "e": 50.074
+  },
+  {
+   "text": "Les taxis n'ont pas gagn\u00e9 la bataille.",
+   "s": 50.694,
+   "e": 52.486
+  },
+  {
+   "text": "En fait, leur vrai pouvoir \u00e9tait ailleurs.",
+   "s": 53.232,
+   "e": 54.949
+  },
+  {
+   "text": "Toute la France a vu des soldats partir \u00e0 la guerre dans des voitures de ville.",
+   "s": 55.555,
+   "e": 58.583
+  },
+  {
+   "text": "Et ce jour-l\u00e0,",
+   "s": 59.15,
+   "e": 59.636
+  },
+  {
+   "text": "le pays a compris que tout le monde,",
+   "s": 59.78,
+   "e": 61.301
+  },
+  {
+   "text": "m\u00eame un chauffeur de taxi,",
+   "s": 61.468,
+   "e": 62.506
+  },
+  {
+   "text": "pouvait sauver la patrie.",
+   "s": 62.855,
+   "e": 63.836
+  },
+  {
+   "text": "Les Allemands n'ont jamais pass\u00e9 la Marne.",
+   "s": 64.636,
+   "e": 65.975
+  },
+  {
+   "text": "Et la course, elle,",
+   "s": 66.681,
+   "e": 67.442
+  },
+  {
+   "text": "a \u00e9t\u00e9 factur\u00e9e.",
+   "s": 67.766,
+   "e": 68.881
+  }
+ ]
+}

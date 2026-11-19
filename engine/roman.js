@@ -57,6 +57,39 @@ const cobweb = (p, cx, cy, r, u) => {
   g.restore();
 };
 
+/** WWI / 1900s headgear (Pourkoipa originals): adrian = poilu helmet, kepi, chauff = driver's peaked cap */
+const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
+  const W = 2 * H.a;
+  if (kind === "adrian") {
+    const col = O.hatCol || "#6f86a8", dk = mul(col, [0.6, 0.64, 0.74]);
+    const dome = ellPts(cx, hc - 0.3 * H.b, 1.1 * H.a, 0.82 * H.b, 180, 360, 0, 48);
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.clip(dome, () => { p.stroke(ellPts(cx - 24 * u, hc - 0.85 * H.b, 0.3 * H.a, 0.2 * H.b, 200, 300, 0, 16), 4 * u, "#ffffff66"); });
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
+    p.band([[cx, hc - 1.12 * H.b], [cx, hc - 0.4 * H.b]], mul(col, [0.82, 0.86, 0.95]), 7 * u, 1.6 * u, "round"); // central crest
+    p.arc(cx, hc - 0.28 * H.b, 1.14 * H.a, 0.12 * H.b, 0, 180, 6 * u, mul(col, [0.72, 0.76, 0.86])); // front visor
+    p.arc(cx, hc - 0.28 * H.b, 1.14 * H.a + 3 * u, 0.12 * H.b + 3 * u, 0, 180, 1.4 * u);
+    p.ell(cx, hc - 0.62 * H.b, 7.5 * u, 7.5 * u, "#d9a845", 2 * u); // grenade badge
+  } else if (kind === "kepi") {
+    const col = O.hatCol || "#2b4a8c", band = O.hatBand || "#c8312c";
+    const body = rrect(cx - 0.98 * H.a, hc - 1.5 * H.b, cx + 0.98 * H.a, hc - 0.45 * H.b, 7 * u);
+    p.shadedFill(body, col, mul(col, [0.6, 0.64, 0.78]), light, H.a, 0.4);
+    p.clip(body, () => { p.band([[cx - 1.1 * H.a, hc - 0.62 * H.b], [cx + 1.1 * H.a, hc - 0.62 * H.b]], band, 0.2 * H.b, 0.6 * u); p.band([[cx - 1.1 * H.a, hc - 1.4 * H.b], [cx + 1.1 * H.a, hc - 1.4 * H.b]], "#e8c45a", 4 * u, 0.6 * u); });
+    p.poly(body, null, ow);
+    p.ell(cx, hc - 0.46 * H.b, 0.95 * H.a, 0.1 * H.b, mul(col, [0.5, 0.52, 0.6]), ow, 0, 180);
+    p.ell(cx, hc - 0.94 * H.b, 6 * u, 6 * u, "#e8c45a", 2 * u);
+  } else if (kind === "chauff") {
+    const col = O.hatCol || "#26303f";
+    const crown = rrect(cx - 0.86 * H.a, hc - 1.38 * H.b, cx + 0.86 * H.a, hc - 0.5 * H.b, 10 * u);
+    p.shadedFill(crown, col, mul(col, [0.6, 0.62, 0.72]), light, H.a, 0.4);
+    p.clip(crown, () => p.band([[cx - H.a, hc - 0.64 * H.b], [cx + H.a, hc - 0.64 * H.b]], "#14171e", 0.18 * H.b, 0.6 * u));
+    p.poly(crown, null, ow);
+    p.ell(cx, hc - 1.38 * H.b, 1.12 * H.a, 0.2 * H.b, mul(col, [1.15, 1.15, 1.2]), ow); // flared top
+    p.ell(cx, hc - 0.5 * H.b, 0.9 * H.a, 0.12 * H.b, "#0e1016", ow, 0, 180); // visor
+    p.ell(cx, hc - 0.9 * H.b, 6 * u, 6 * u, "#d9a845", 2 * u); // badge
+  }
+};
+
 /** front-facing Roman-era character. opts: expr, blink, look, facing, seed, L/R arm poses, tilt, headTilt, bob, nohelmet, light */
 export const romanFront = (p, key, opts = {}) => {
   const O = typeof key === "string" ? OUTFITS[key] : key;
@@ -156,6 +189,11 @@ export const romanFront = (p, key, opts = {}) => {
       if (O.toga) p.band([[tcx - 1.0 * T.a, chin - 0.1 * HH], [tcx + 1.1 * T.a, torsoBot - 0.1 * HH]], O.toga, 0.16 * HH, 1.6 * u);
       if (O.apron) p.poly([[tcx - 0.55 * T.a, torsoBot - 0.2 * HH], [tcx + 0.55 * T.a, torsoBot - 0.2 * HH], [tcx + 0.6 * T.a, torsoBot + 0.2 * HH], [tcx - 0.6 * T.a, torsoBot + 0.2 * HH]], O.apron, 1.6 * u);
       p.stroke([[tcx - 0.2 * T.a, chin + 0.02 * HH], [tcx, chin + 0.16 * HH], [tcx + 0.2 * T.a, chin + 0.02 * HH]], 2 * u);
+      if (O.coat) { // capote: two rows of buttons, belt, collar
+        for (const s of [-1, 1]) for (let i = 0; i < 4; i++) p.dot(tcx + s * 0.2 * T.a, chin + (0.2 + i * 0.17) * HH, 2.6 * u, "#d9a845");
+        p.band([[tcx - 1.4 * T.a, torsoBot - 0.34 * HH], [tcx + 1.4 * T.a, torsoBot - 0.34 * HH]], "#3a2a22", 0.07 * HH, 1.2 * u);
+        p.dot(tcx, torsoBot - 0.34 * HH, 4 * u, "#d9a845");
+      }
     }
   });
   p.inkRing(tp, ow, thick);
@@ -185,7 +223,7 @@ export const romanFront = (p, key, opts = {}) => {
   p.rot = Ah ? [rad(Ah), cx, chin, cpx - cx, cpy - chin] : null;
   if (helmet) galea(p, H, cx, hc, light, thick, ow, old, u);
   const hp = blobPts(cx, hc, H);
-  if (O.hair && !helmet) { const hb = blobPts(cx, hc - 0.03 * HH, { ...H, a: H.a * 1.04, b: H.b * 1.05 }); p.poly(hb, O.hair, 0); }
+  if (O.hair && !helmet && !O.hat) { const hb = blobPts(cx, hc - 0.03 * HH, { ...H, a: H.a * 1.04, b: H.b * 1.05 }); p.poly(hb, O.hair, 0); }
   p.shadedFill(hp, skin, mul(skin, SH_SKIN), light, H.a);
   p.inkRing(hp, ow, thick);
   if (helmet) {
@@ -197,7 +235,9 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
+  else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.helmet && nohelmet) { // bald old head with white side tufts
     for (const s of [-1, 1]) p.ell(cx + s * 0.9 * H.a, hc - 0.1 * H.b, 0.22 * H.a, 0.3 * H.b, "#f4f1ea", 3 * u);
