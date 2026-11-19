@@ -32,6 +32,9 @@ Une voix **originale** créée à partir d'une description (`brand/voice_prompt.
 2. Créer le jeton : sur ton ordinateur, `claude setup-token` (Claude Code), puis Settings → Secrets and variables → Actions →
    `New repository secret` : **`CLAUDE_CODE_OAUTH_TOKEN`**.
 3. Facultatif (voix automatique) : secret **`GEMINI_API_KEY`** (clé de Google AI Studio).
+3 bis. Dépôt Hugging Face : secret **`HF_TOKEN`** (jeton *Write* de huggingface.co/settings/tokens). Chaque vidéo finie est déposée
+   dans le dataset privé **`soradata/studio-anime`** (créé au premier dépôt), un dossier par vidéo : `<slug>/` avec le mp4, `meta.json`,
+   `cover.jpg`, `qa_sheet.jpg`. Autre dataset : variable de dépôt `HF_DATASET`.
 4. Settings → Actions → General → Workflow permissions : **Read and write**.
 
 ## Comment c'est fait

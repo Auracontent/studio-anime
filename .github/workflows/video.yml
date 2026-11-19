@@ -114,5 +114,11 @@ jobs:
           gh release delete "$S" -y 2>/dev/null || true
           F="$E/out/*.mp4 $E/out/qa_sheet.jpg"; [ -f $E/stills.jpg ] && F="$F $E/stills.jpg"
           gh release create "$S" $F --title "🎬 $S" --notes-file notes.md
+      - name: Déposer sur Hugging Face (dataset soradata/studio-anime, dossier <slug>/)
+        env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}", HF_DATASET: "${{ vars.HF_DATASET || 'soradata/studio-anime' }}" }
+        run: |
+          if [ -z "$HF_TOKEN" ]; then echo "Secret HF_TOKEN absent : dépôt Hugging Face ignoré."; exit 0; fi
+          pip install --quiet "huggingface_hub[hf_xet]"
+          python3 tools/hf_upload.py episodes/${{ needs.direct.outputs.slug }}
       - uses: actions/upload-artifact@v4
         with: { name: "video-${{ needs.direct.outputs.slug }}", path: "episodes/${{ needs.direct.outputs.slug }}/out/" }
