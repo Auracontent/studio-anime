@@ -77,5 +77,5 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
 
 ## Retouches (workflow `claude.yml`, quand on te mentionne avec @claude)
 - Modifie l'épisode concerné (story.js, audio.py, décor), refais le contrôle images fixes, commite et pousse,
-  puis relance le rendu sans refaire la réalisation : `gh workflow run video.yml -f slug=<slug> -f skip_direction=true`.
+  puis relance le rendu sans refaire la réalisation : `gh workflow run video.yml -f slug=<slug>` (l'épisode existe déjà : le workflow refait seulement le rendu).
 - Réponds dans l'issue avec ce que tu as changé et le lien vers les Actions.

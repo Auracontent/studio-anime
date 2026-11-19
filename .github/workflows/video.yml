@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       slug: { description: "Dossier dans inbox/ (ex. 2026-11-20-tour-eiffel)", required: true }
-      skip_direction: { description: "Épisode déjà écrit : rendre seulement", type: boolean, default: false }
+      redirect: { description: "Refaire aussi la réalisation d'un épisode existant (sinon : automatique)", type: boolean, default: false }
 permissions: { contents: write, issues: write, id-token: write, actions: read }
 concurrency: { group: "video-${{ github.event.inputs.slug || github.sha }}", cancel-in-progress: false }
 env: { CHROME: /usr/bin/google-chrome, CHUNKS: 8 }
@@ -16,7 +16,7 @@ jobs:
     name: Réalisation (Claude)
     runs-on: ubuntu-latest
     timeout-minutes: 150
-    outputs: { slug: "${{ steps.slug.outputs.slug }}" }
+    outputs: { slug: "${{ steps.slug.outputs.slug }}", direct: "${{ steps.slug.outputs.direct }}" }
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 2 }
@@ -26,7 +26,13 @@ jobs:
           S="${{ github.event.inputs.slug }}"
           if [ -z "$S" ]; then S=$(git diff --name-only HEAD~1 HEAD | grep -E '^inbox/[^/]+/voice\.' | head -1 | cut -d/ -f2); fi
           [ -n "$S" ] || { echo "aucune voix trouvée dans inbox/"; exit 1; }
-          echo "slug=$S" >> "$GITHUB_OUTPUT"; echo "Épisode : $S"
+          # Décision automatique : réaliser si l'épisode n'existe pas encore, ou si une nouvelle voix vient d'être déposée,
+          # ou si on le demande (redirect) ; sinon l'épisode est déjà écrit -> rendu seulement.
+          D=false
+          if [ ! -f "episodes/$S/meta.json" ] || [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event.inputs.redirect }}" = "true" ]; then D=true; fi
+          if [ "$D" = true ] && ! ls inbox/$S/voice.* >/dev/null 2>&1 && [ ! -f "episodes/$S/voice.wav" ]; then echo "pas de voix pour $S"; exit 1; fi
+          echo "slug=$S" >> "$GITHUB_OUTPUT"; echo "direct=$D" >> "$GITHUB_OUTPUT"
+          echo "Épisode : $S — $([ $D = true ] && echo 'réalisation par Claude + rendu' || echo 'déjà réalisé : rendu seulement')"
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - name: Outils
@@ -35,14 +41,15 @@ jobs:
           pip install --quiet numpy pillow faster-whisper
           bash tools/setup.sh
       - name: Claude réalise l'épisode
-        if: ${{ github.event.inputs.skip_direction != 'true' }}
+        if: ${{ steps.slug.outputs.direct == 'true' }}
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--max-turns 200 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
           prompt: |
             Tu es le réalisateur du studio. Lis CLAUDE.md puis SKILL.md, et fabrique l'épisode `${{ steps.slug.outputs.slug }}`
-            à partir de `inbox/${{ steps.slug.outputs.slug }}/` en suivant les étapes 2 à 9 de CLAUDE.md
+            à partir de `inbox/${{ steps.slug.outputs.slug }}/` (ou, s'il n'y a pas de dossier inbox, refais la réalisation de
+            `episodes/${{ steps.slug.outputs.slug }}/` existant en gardant sa voix) en suivant les étapes 2 à 9 de CLAUDE.md
             (setup déjà fait, CHROME=/usr/bin/google-chrome). Le contrôle images fixes est obligatoire : lis la planche et corrige
             jusqu'à ce qu'elle soit propre, surtout la taille des personnages (frameOn, tête ~30 % de la largeur).
             Ne lance PAS le rendu complet. Termine par : git add episodes/${{ steps.slug.outputs.slug }} ;
