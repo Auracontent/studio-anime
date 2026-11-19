@@ -1,4 +1,4 @@
-# Voix + script déposés dans inbox/<slug>/  ->  Claude réalise l'épisode  ->  rendu en parallèle  ->  MP4 dans une Release.
+# Voix + script déposés dans inbox/<slug>/  ->  Claude réalise l'épisode  ->  rendu en parallèle  ->  MP4 sur Hugging Face.
 name: Vidéo
 on:
   push:
@@ -97,7 +97,7 @@ jobs:
         with: { name: "frames-${{ matrix.part }}", path: frames/, retention-days: 1 }
 
   finish:
-    name: Finition + publication
+    name: Finition + Hugging Face
     needs: [direct, render]
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -117,26 +117,11 @@ jobs:
           E=episodes/${{ needs.direct.outputs.slug }}
           T=$(python3 -c "import json;print(json.load(open('$E/meta.json'))['title'])")
           echo "$(ls frames | wc -l) images"; bash tools/finish.sh $E frames "$T" | tee qa.txt
-      - name: Publier dans une Release
-        env: { GH_TOKEN: "${{ github.token }}" }
-        run: |
-          S=${{ needs.direct.outputs.slug }}; E=episodes/$S
-          python3 - "$E/meta.json" > notes.md <<'PY'
-          import json, sys
-          m = json.load(open(sys.argv[1]))
-          print(f"## {m.get('youtube_title', m['title'])}\n")
-          print("**Description YouTube**\n```\n" + m.get("description", "") + "\n\n" + " ".join(m.get("hashtags", [])) + "\n```\n")
-          print("**Légende TikTok**\n```\n" + m.get("tiktok", "") + "\n```")
-          PY
-          cat qa.txt | tail -6 | sed 's/^/    /' >> notes.md
-          gh release delete "$S" -y 2>/dev/null || true
-          F="$E/out/*.mp4 $E/out/qa_sheet.jpg"; [ -f $E/stills.jpg ] && F="$F $E/stills.jpg"
-          gh release create "$S" $F --title "🎬 $S" --notes-file notes.md
       - name: Déposer sur Hugging Face (dataset soradata/studio-anime, dossier <slug>/)
         env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}", HF_DATASET: "${{ vars.HF_DATASET || 'soradata/studio-anime' }}" }
         run: |
-          if [ -z "$HF_TOKEN" ]; then echo "Secret HF_TOKEN absent : dépôt Hugging Face ignoré."; exit 0; fi
+          if [ -z "$HF_TOKEN" ]; then echo "Secret HF_TOKEN missing: the video cannot be stored (no Release anymore)."; exit 1; fi
           pip install --quiet "huggingface_hub[hf_xet]"
           python3 tools/hf_upload.py episodes/${{ needs.direct.outputs.slug }}
       - uses: actions/upload-artifact@v4
-        with: { name: "video-${{ needs.direct.outputs.slug }}", path: "episodes/${{ needs.direct.outputs.slug }}/out/" }
+        with: { name: "video-${{ needs.direct.outputs.slug }}", path: "episodes/${{ needs.direct.outputs.slug }}/out/", retention-days: 3 }

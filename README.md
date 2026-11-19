@@ -1,6 +1,6 @@
 # Studio Pourkoipa 🎬
 
-Animated Shorts factory for the **[@Pourkoipa](https://www.youtube.com/@Pourkoipa)** channel: true, surprising stories in French, featuring 2D bean-headed characters inside a painted 3D world. Drop in a voice track, **Claude directs the video** (shot list, set, camera, sound, subtitles), and GitHub Actions renders it. Grab the MP4 from **Releases**.
+Animated Shorts factory for the **[@Pourkoipa](https://www.youtube.com/@Pourkoipa)** channel: true, surprising stories in French, featuring 2D bean-headed characters inside a painted 3D world. Drop in a voice track, **Claude directs the video** (shot list, set, camera, sound, subtitles), and GitHub Actions renders it. The MP4 lands on **Hugging Face** (`soradata/studio-anime`), then the **Publication** workflow posts it to YouTube and TikTok.
 
 ## Usage (from phone or computer)
 
@@ -8,7 +8,7 @@ Animated Shorts factory for the **[@Pourkoipa](https://www.youtube.com/@Pourkoip
 1. On GitHub: `Add file` → `Upload files`, inside an `inbox/<date>-<topic>/` folder (e.g., `inbox/2026-11-20-tour-eiffel/`).
 2. Upload `voice.wav` (or `.mp3`) **and** `script.txt` (the exact spoken text).
 3. Commit → the **Vidéo** workflow starts automatically (Actions tab, ~30–45 min).
-4. The video lands in **Releases**, complete with title, description, hashtags, and TikTok caption ready to copy.
+4. The video lands on **Hugging Face** (`soradata/studio-anime/<slug>/`) with its `meta.json` (title, description, hashtags, TikTok caption), ready for the Publication workflow.
 
 **Option B: you want an idea + a script** (your upcoming topics: `sujets.md` list, used by the cron job)
 1. Actions → **Idée + script** → `Run workflow`. Leave the topic blank (Claude picks the most viral one) or enter one.
