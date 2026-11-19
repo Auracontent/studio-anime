@@ -42,6 +42,21 @@ Actions → **Voix de la chaîne** → `Run workflow`. It replaces `brand/voice.
 
 Secrets go in Settings → Secrets and variables → Actions → **New repository secret**. Never paste a key in a file, an issue or a commit.
 
+## Publishing (YouTube + TikTok via Zernio)
+The **Publication** workflow takes the oldest video with `"status": "ready"` on Hugging Face, uploads it to Zernio and publishes it
+to YouTube (Short, Education category, AI disclosure on) and TikTok (public, AI label on), each with its own caption from `meta.json`.
+Then `meta.json` becomes `"status": "published"` with the Zernio post ids, so a video is never posted twice (if only one platform
+fails, the next run retries only that one). Videos published by hand are marked `published` in their `episodes/<slug>/meta.json`.
+
+1. Zernio: connect the YouTube channel and the TikTok account, create an API key → secret **`ZERNIO_API_KEY`**.
+2. Actions → **Publication** → `Run workflow` → mode **comptes**: the log lists the account ids.
+   Add them as secrets **`ZERNIO_YOUTUBE_ACCOUNT_ID`** and **`ZERNIO_TIKTOK_ACCOUNT_ID`** (leave one out to skip that platform).
+3. Mode **test**: shows exactly what would be sent, publishes nothing.
+4. Mode **publier**: publishes one video now.
+5. Automatic: add the repository **variable** `PUBLISH_ENABLED` = `true` (Settings → Secrets and variables → Actions → *Variables*).
+   The cron then publishes one ready video every day at 18:07 Paris time. Remove the variable to pause.
+Options (variables): `TIKTOK_PRIVACY` (default `PUBLIC_TO_EVERYONE`), `YOUTUBE_VISIBILITY` (default `public`), `PUBLISH_AI_LABEL` (`0` to disable).
+
 ## Getting the Claude token
 `CLAUDE_CODE_OAUTH_TOKEN` is a long-lived token (**valid 1 year**) tied to your Claude **Pro or Max** subscription: the videos use your
 subscription, no pay-per-use API bill. It cannot be created from the claude.ai settings; it comes from the `claude setup-token` command.

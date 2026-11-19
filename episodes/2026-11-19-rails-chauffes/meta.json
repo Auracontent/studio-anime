@@ -14,5 +14,12 @@
   "#anecdote",
   "#shorts"
  ],
- "tiktok": "Pourquoi la SNCF chauffe ses rails… en plein hiver ? 🔥🚆 #pourkoipa #sncf #train #lesaviezvous #pourtoi #fyp"
+ "tiktok": "Pourquoi la SNCF chauffe ses rails… en plein hiver ? 🔥🚆 #pourkoipa #sncf #train #lesaviezvous #pourtoi #fyp",
+ "status": "published",
+ "published": {
+  "youtube": {
+   "manual": true,
+   "at": "2026-11-19T10:33:00+00:00"
+  }
+ }
 }

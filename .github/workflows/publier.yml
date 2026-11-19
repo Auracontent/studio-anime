@@ -1,0 +1,51 @@
+# Publishes the oldest "ready" video from Hugging Face (soradata/studio-anime) to YouTube + TikTok through Zernio.
+# One video per run. The daily cron only publishes once the repository variable PUBLISH_ENABLED is "true"
+# (Settings -> Secrets and variables -> Actions -> Variables), so nothing goes out before you have tested it.
+name: Publication
+on:
+  schedule:
+    - cron: '7 17 * * *'   # every day 18:07 Paris time in winter (19:07 in summer): cron is UTC
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "test = show what would be sent | publier = publish for real | comptes = list Zernio account ids"
+        type: choice
+        options: [test, publier, comptes]
+        default: test
+      slug: { description: "Specific video (empty = oldest ready one)", required: false }
+permissions: { contents: read }
+concurrency: { group: publication, cancel-in-progress: false }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ZERNIO_API_KEY: ${{ secrets.ZERNIO_API_KEY }}
+      ZERNIO_YOUTUBE_ACCOUNT_ID: ${{ secrets.ZERNIO_YOUTUBE_ACCOUNT_ID || vars.ZERNIO_YOUTUBE_ACCOUNT_ID }}
+      ZERNIO_TIKTOK_ACCOUNT_ID: ${{ secrets.ZERNIO_TIKTOK_ACCOUNT_ID || vars.ZERNIO_TIKTOK_ACCOUNT_ID }}
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_DATASET: ${{ vars.HF_DATASET || 'soradata/studio-anime' }}
+      TIKTOK_PRIVACY: ${{ vars.TIKTOK_PRIVACY || 'PUBLIC_TO_EVERYONE' }}
+      YOUTUBE_VISIBILITY: ${{ vars.YOUTUBE_VISIBILITY || 'public' }}
+      PUBLISH_AI_LABEL: ${{ vars.PUBLISH_AI_LABEL || '1' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decide
+        id: mode
+        run: |
+          M="${{ github.event.inputs.mode }}"
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            if [ "${{ vars.PUBLISH_ENABLED }}" != "true" ]; then echo "PUBLISH_ENABLED is not 'true': automatic publishing is off."; M=off; else M=publier; fi
+          fi
+          if [ -z "$ZERNIO_API_KEY" ] && [ "$M" != off ] && [ "$M" != test ]; then echo "Secret ZERNIO_API_KEY missing."; exit 1; fi
+          echo "mode=$M" >> "$GITHUB_OUTPUT"; echo "Mode: $M"
+      - name: Publish
+        if: ${{ steps.mode.outputs.mode != 'off' }}
+        run: |
+          pip install --quiet "huggingface_hub[hf_xet]"
+          A=""; [ -n "${{ github.event.inputs.slug }}" ] && A="--slug ${{ github.event.inputs.slug }}"
+          case "${{ steps.mode.outputs.mode }}" in
+            comptes) python3 tools/publish.py --list-accounts ;;
+            test)    python3 tools/publish.py --dry-run $A ;;
+            publier) python3 tools/publish.py $A ;;
+          esac

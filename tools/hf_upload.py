@@ -34,7 +34,8 @@ meta.update({
     "duration_s": round(dur, 2), "width": 1080, "height": 1920, "language": "fr", "channel": "Pourkoipa",
     "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
     "source_repo": os.environ.get("GITHUB_REPOSITORY", ""), "source_commit": os.environ.get("GITHUB_SHA", ""),
-    "status": "ready",          # le futur script de publication pourra le passer à "published"
+    # "ready" = waiting for tools/publish.py; an episode marked "published" in its meta.json (published by hand) stays published
+    "status": "published" if meta.get("status") == "published" else "ready",
 })
 stage = os.path.join(out, "_hf"); os.makedirs(stage, exist_ok=True)
 for f in os.listdir(stage): os.remove(os.path.join(stage, f))
