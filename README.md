@@ -12,7 +12,7 @@ en français, avec des personnages 2D à tête de haricot dans un monde 3D peint
 3. Commit → le workflow **Vidéo** démarre seul (onglet Actions, ~30-45 min).
 4. La vidéo arrive dans **Releases**, avec le titre, la description, les hashtags et la légende TikTok prêts à copier.
 
-**Option B : tu veux une idée + un script**
+**Option B : tu veux une idée + un script** (tes sujets à l'avance : liste `sujets.md`, utilisée par le cron)
 1. Actions → **Idée + script** → `Run workflow`. Laisse le sujet vide (Claude choisit le plus viral) ou écris-en un.
 2. Claude vérifie les faits et ouvre une **issue** avec le script.
 3. Enregistre-le avec la voix Riko (Google AI Studio), dépose `voice.wav` dans le dossier `inbox/` indiqué → option A, étape 3.
