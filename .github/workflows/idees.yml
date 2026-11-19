@@ -16,6 +16,11 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
+      - name: Trends from reference channels (YouTube Data API, public metadata only)
+        env: { YOUTUBE_API_KEY: "${{ secrets.YOUTUBE_API_KEY }}" }
+        run: |
+          if [ -z "$YOUTUBE_API_KEY" ]; then echo "No YOUTUBE_API_KEY secret: skipping trends."; exit 0; fi
+          python3 tools/trends.py --out trends.md
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -23,11 +28,13 @@ jobs:
           prompt: |
             Lis CLAUDE.md (section « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
             S'il est vide, ouvre sujets.md : prends le PREMIER sujet non coché (`- [ ] ...`, ligne non vide), puis coche-le
-            (`- [x] ... -> inbox/<slug>`). Si la liste n'a aucun sujet non coché, regarde les épisodes déjà faits dans episodes/ et choisis
-            toi-même le sujet le plus viral qui n'a pas été traité (fait vrai, surprenant, visuel, idéalement un lieu ou une invention française).
+            (`- [x] ... -> inbox/<slug>`). Si la liste n'a aucun sujet non coché : si trends.md existe,
+            lis-le et applique la section « Tendances » de CLAUDE.md (repérer les familles de thèmes qui font le plus de vues, puis trouver
+            TA propre histoire dans la meilleure famille) ; sinon choisis toi-même le sujet le plus viral. Évite ce qui est déjà dans episodes/
+            (fait vrai, surprenant, visuel, idéalement un lieu ou une invention française).
             Vérifie les faits sur le web.
             Écris un script de 45 à 60 s en français : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (sources, plan visuel, titre proposé).
-            Commite et pousse (git add inbox sujets.md ; git commit ; git pull --rebase ; git push).
+            Commite et pousse (git add inbox sujets.md trends.md ; git commit -m "Add script <slug>" ; git pull --rebase ; git push).
             Puis ouvre une issue avec `gh issue create` : titre « Script : <titre> », corps = le script dans un bloc de code,
             puis « Enregistre-le avec la voix Riko (Google AI Studio) et dépose voice.wav dans inbox/<slug>/ ».
             Écris le slug choisi dans le fichier /tmp/slug.

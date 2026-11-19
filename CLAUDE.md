@@ -80,3 +80,14 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
 - Modifie l'épisode concerné (story.js, audio.py, décor), refais le contrôle images fixes, commite et pousse,
   puis relance le rendu sans refaire la réalisation : `gh workflow run video.yml -f slug=<slug>` (l'épisode existe déjà : le workflow refait seulement le rendu).
 - Réponds dans l'issue avec ce que tu as changé et le lien vers les Actions.
+
+## Tendances (trends.md, généré par tools/trends.py depuis l'API YouTube)
+- `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` (titres et chiffres publics uniquement).
+  Il sert à savoir **quels thèmes** marchent, pas quoi copier.
+- Méthode : regroupe les titres du haut du classement en **familles** (ex. « paradoxe d'ingénierie », « objet antique qui a changé l'histoire »,
+  « métier insolite », « astuce de marins / de soldats », « pourquoi les choses sont comme ça »), repère la famille la plus forte,
+  surtout dans « Ce qui monte en ce moment », puis trouve **une autre histoire vraie de cette famille**, de préférence avec un angle français.
+- Interdits : traduire ou adapter un titre de la référence, reprendre son déroulé, ses blagues, ses personnages ou ses décors.
+  Si le phénomène est le même que dans une vidéo de la référence (ex. la dilatation des rails), l'histoire doit être différente :
+  autre lieu, autre époque, autre angle, script écrit à partir de tes propres sources.
+- Dans `NOTES.md`, indique la famille de thèmes choisie et les vidéos de la référence qui l'ont inspirée, pour que l'humain vérifie l'originalité.
