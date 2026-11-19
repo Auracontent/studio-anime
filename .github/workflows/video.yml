@@ -1,0 +1,118 @@
+# Voix + script déposés dans inbox/<slug>/  ->  Claude réalise l'épisode  ->  rendu en parallèle  ->  MP4 dans une Release.
+name: Vidéo
+on:
+  push:
+    paths: ['inbox/**/voice.*']
+  workflow_dispatch:
+    inputs:
+      slug: { description: "Dossier dans inbox/ (ex. 2026-11-20-tour-eiffel)", required: true }
+      skip_direction: { description: "Épisode déjà écrit : rendre seulement", type: boolean, default: false }
+permissions: { contents: write, issues: write, id-token: write, actions: read }
+concurrency: { group: "video-${{ github.event.inputs.slug || github.sha }}", cancel-in-progress: false }
+env: { CHROME: /usr/bin/google-chrome, CHUNKS: 8 }
+
+jobs:
+  direct:
+    name: Réalisation (Claude)
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    outputs: { slug: "${{ steps.slug.outputs.slug }}" }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
+      - id: slug
+        name: Trouver l'épisode
+        run: |
+          S="${{ github.event.inputs.slug }}"
+          if [ -z "$S" ]; then S=$(git diff --name-only HEAD~1 HEAD | grep -E '^inbox/[^/]+/voice\.' | head -1 | cut -d/ -f2); fi
+          [ -n "$S" ] || { echo "aucune voix trouvée dans inbox/"; exit 1; }
+          echo "slug=$S" >> "$GITHUB_OUTPUT"; echo "Épisode : $S"
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Outils
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu >/dev/null
+          pip install --quiet numpy pillow faster-whisper
+          bash tools/setup.sh
+      - name: Claude réalise l'épisode
+        if: ${{ github.event.inputs.skip_direction != 'true' }}
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--max-turns 200 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
+          prompt: |
+            Tu es le réalisateur du studio. Lis CLAUDE.md puis SKILL.md, et fabrique l'épisode `${{ steps.slug.outputs.slug }}`
+            à partir de `inbox/${{ steps.slug.outputs.slug }}/` en suivant les étapes 2 à 9 de CLAUDE.md
+            (setup déjà fait, CHROME=/usr/bin/google-chrome). Le contrôle images fixes est obligatoire : lis la planche et corrige
+            jusqu'à ce qu'elle soit propre, surtout la taille des personnages (frameOn, tête ~30 % de la largeur).
+            Ne lance PAS le rendu complet. Termine par : git add episodes/${{ steps.slug.outputs.slug }} ;
+            git commit -m "Épisode ${{ steps.slug.outputs.slug }}" ; git pull --rebase ; git push.
+            Si quelque chose bloque (voix illisible, script absent), écris le problème dans episodes/${{ steps.slug.outputs.slug }}/PROBLEME.md, commite et arrête-toi.
+      - name: Vérifier
+        run: |
+          git pull -q
+          E=episodes/${{ steps.slug.outputs.slug }}
+          [ -f $E/PROBLEME.md ] && { cat $E/PROBLEME.md; exit 1; } || true
+          for f in voice.wav words.json web/story.js web/world.js audio.py meta.json; do [ -f $E/$f ] || { echo "manque $E/$f"; exit 1; }; done
+          echo "OK : $(python3 -c "import json;print(json.load(open('$E/meta.json'))['total'])") images"
+
+  render:
+    name: Rendu ${{ matrix.part }}/8
+    needs: direct
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy: { fail-fast: true, matrix: { part: [0, 1, 2, 3, 4, 5, 6, 7] } }
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - run: git pull -q
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: bash tools/setup.sh
+      - name: Rendre une tranche
+        run: |
+          E=episodes/${{ needs.direct.outputs.slug }}
+          N=$(python3 -c "import json;print(json.load(open('$E/meta.json'))['total'])")
+          A=$(( N * ${{ matrix.part }} / CHUNKS )); B=$(( N * (${{ matrix.part }} + 1) / CHUNKS - 1 ))
+          echo "images $A-$B sur $N"; node tools/render.mjs $E frames "$A-$B"
+      - uses: actions/upload-artifact@v4
+        with: { name: "frames-${{ matrix.part }}", path: frames/, retention-days: 1 }
+
+  finish:
+    name: Finition + publication
+    needs: [direct, render]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ github.ref_name }}" }
+      - run: git pull -q
+      - name: Outils
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null
+          pip install --quiet numpy pillow
+          mkdir -p ~/.fonts && cp assets/fonts/*.ttf ~/.fonts/ && fc-cache -f >/dev/null
+      - uses: actions/download-artifact@v4
+        with: { pattern: "frames-*", path: frames, merge-multiple: true }
+      - name: Son, sous-titres, encodage, contrôle
+        run: |
+          E=episodes/${{ needs.direct.outputs.slug }}
+          T=$(python3 -c "import json;print(json.load(open('$E/meta.json'))['title'])")
+          echo "$(ls frames | wc -l) images"; bash tools/finish.sh $E frames "$T" | tee qa.txt
+      - name: Publier dans une Release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          S=${{ needs.direct.outputs.slug }}; E=episodes/$S
+          python3 - "$E/meta.json" > notes.md <<'PY'
+          import json, sys
+          m = json.load(open(sys.argv[1]))
+          print(f"## {m.get('youtube_title', m['title'])}\n")
+          print("**Description YouTube**\n```\n" + m.get("description", "") + "\n\n" + " ".join(m.get("hashtags", [])) + "\n```\n")
+          print("**Légende TikTok**\n```\n" + m.get("tiktok", "") + "\n```")
+          PY
+          cat qa.txt | tail -6 | sed 's/^/    /' >> notes.md
+          gh release delete "$S" -y 2>/dev/null || true
+          F="$E/out/*.mp4 $E/out/qa_sheet.jpg"; [ -f $E/stills.jpg ] && F="$F $E/stills.jpg"
+          gh release create "$S" $F --title "🎬 $S" --notes-file notes.md
+      - uses: actions/upload-artifact@v4
+        with: { name: "video-${{ needs.direct.outputs.slug }}", path: "episodes/${{ needs.direct.outputs.slug }}/out/" }

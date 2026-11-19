@@ -1,0 +1,37 @@
+# Claude cherche un sujet (ou prend le tien), vérifie les faits et écrit le script à enregistrer.
+name: Idée + script
+on:
+  workflow_dispatch:
+    inputs:
+      sujet: { description: "Sujet (laisser vide : Claude choisit le plus viral)", required: false }
+      voix_auto: { description: "Générer la voix avec Gemini TTS et lancer la vidéo directement", type: boolean, default: false }
+permissions: { contents: write, issues: write, id-token: write, actions: write }
+jobs:
+  script:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--max-turns 60 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
+          prompt: |
+            Lis CLAUDE.md (section « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
+            S'il est vide, regarde les épisodes déjà faits dans episodes/ et choisis toi-même le sujet le plus viral qui n'a pas été traité
+            (fait vrai, surprenant, visuel, idéalement un lieu ou une invention française). Vérifie les faits sur le web.
+            Écris un script de 45 à 60 s en français : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (sources, plan visuel, titre proposé).
+            Commite et pousse (git add inbox ; git commit ; git pull --rebase ; git push).
+            Puis ouvre une issue avec `gh issue create` : titre « Script : <titre> », corps = le script dans un bloc de code,
+            puis « Enregistre-le avec la voix Riko (Google AI Studio) et dépose voice.wav dans inbox/<slug>/ ».
+            Écris le slug choisi dans le fichier /tmp/slug.
+        env: { GH_TOKEN: "${{ github.token }}" }
+      - name: Voix automatique (facultatif)
+        if: ${{ github.event.inputs.voix_auto == 'true' }}
+        env: { GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}", GH_TOKEN: "${{ github.token }}" }
+        run: |
+          git pull -q; S=$(cat /tmp/slug)
+          python3 tools/tts.py inbox/$S/script.txt inbox/$S/voice.wav
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add inbox/$S/voice.wav && git commit -m "Voix TTS $S" && git push
+          gh workflow run video.yml -f slug=$S      # un push fait par le bot ne déclenche pas les workflows : on lance la vidéo à la main

@@ -1,0 +1,13 @@
+node_modules/
+engine/lib/
+engine/toonbase.js
+engine/toon.js
+frames/
+episodes/*/out/
+episodes/*/music.wav
+episodes/*/sfx.wav
+episodes/*/mix.wav
+episodes/*/mix_raw.wav
+episodes/*/subs.ass
+__pycache__/
+*.pyc

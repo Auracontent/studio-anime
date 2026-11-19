@@ -1,9 +1,24 @@
 #!/usr/bin/env bash
-# Encode frames + mix -> mp4, then QA.   bash finish.sh "Title Of Short"
-set -e; T="${1:-short}"; F="out/${T// /-}.mp4"
-ffmpeg -v error -y -i mix_raw.wav -af "loudnorm=I=-14:TP=-1.5:LRA=7" -ar 48000 -ac 2 mix.wav
-ffmpeg -v error -y -framerate 30 -i frames/f%04d.jpg -i mix.wav -map 0:v:0 -map 1:a:0 -c:v libx264 -preset slow -crf 17 -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -movflags +faststart "$F"
-ffprobe -v error -show_entries format=duration -show_entries stream=width,height,r_frame_rate -of compact "$F"
-echo "--- QA (empty = no black/frozen spans)"; ffmpeg -i "$F" -vf "freezedetect=n=0.0005:d=0.4,blackdetect=d=0.05" -an -f null - 2>&1 | grep -E "freeze_start|black_start" || true
-ffmpeg -i "$F" -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1
-ffmpeg -v error -y -i "$F" -vf "fps=2,scale=180:-1,tile=10x4" -frames:v 1 out/qa_sheet.jpg; echo "$F"
+# Finition d'un épisode : musique + bruitages, mixage verrouillé, sous-titres, encodage, contrôle qualité.
+#   bash tools/finish.sh episodes/<slug> <dossier_images> ["Titre du fichier"]
+# Sortie : episodes/<slug>/out/<Titre>.mp4 + out/qa_sheet.jpg
+set -e
+TOOLS="$(cd "$(dirname "$0")" && pwd)"; EP="$(cd "${1:?episodes/<slug>}" && pwd)"; FR="$(cd "${2:?dossier des images}" && pwd)"
+T="${3:-$(basename "$EP")}"; mkdir -p "$EP/out"; F="$EP/out/${T// /-}.mp4"
+python3 "$TOOLS/run_audio.py" "$EP"                                     # audio.py -> music.wav + sfx.wav
+( cd "$EP" && python3 "$TOOLS/mix.py" voice.wav music.wav sfx.wav )     # -> mix_raw.wav (musique -6 dB, bruitages <= -6 dB)
+# un seul gain linéaire jusqu'à -14 LUFS, puis un limiteur de crête (pas de compression)
+L=$(ffmpeg -nostats -i "$EP/mix_raw.wav" -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1 | awk '{print $2}')
+G=$(python3 -c "print(round(-14-($L),2))")
+ffmpeg -v error -y -i "$EP/mix_raw.wav" -af "volume=${G}dB,alimiter=limit=0.89:level=disabled" -ar 48000 "$EP/mix.wav"
+# sous-titres mot par mot (désactiver avec NOSUBS=1)
+VF="format=yuv420p"
+if [ -z "$NOSUBS" ]; then python3 "$TOOLS/subs.py" "$EP/words.json" "$EP/subs.ass"; VF="ass=$EP/subs.ass,format=yuv420p"; fi
+ffmpeg -v error -y -framerate 30 -i "$FR/f%04d.jpg" -i "$EP/mix.wav" -map 0:v:0 -map 1:a:0 -vf "$VF" \
+  -c:v libx264 -preset slow -crf 17 -c:a aac -b:a 192k -shortest -movflags +faststart "$F"
+ffprobe -v error -show_entries format=duration -show_entries stream=width,height -of compact "$F"
+echo "--- QA (vide = aucune image noire ou figée)"
+ffmpeg -i "$F" -vf "freezedetect=n=0.001:d=1.5,blackdetect=d=0.3" -an -f null - 2>&1 | grep -E "freeze_start|black_start" || true
+ffmpeg -nostats -i "$F" -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1
+ffmpeg -v error -y -i "$F" -vf "fps=1/3,scale=180:-1,tile=10x2" -frames:v 1 "$EP/out/qa_sheet.jpg"
+echo "$F"

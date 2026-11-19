@@ -1,0 +1,346 @@
+{
+ "duration": 60.4,
+ "frames30": 1812,
+ "source": "silence-align (cost 6.88)",
+ "segments": [
+  [
+   0.296875,
+   1.57621
+  ],
+  [
+   1.8435,
+   2.98746
+  ],
+  [
+   3.12683,
+   4.27367
+  ],
+  [
+   4.93492,
+   5.84254
+  ],
+  [
+   6.57367,
+   7.45842
+  ],
+  [
+   7.61771,
+   9.22417
+  ],
+  [
+   9.83133,
+   10.4717
+  ],
+  [
+   10.811,
+   12.275
+  ],
+  [
+   12.9937,
+   13.2538
+  ],
+  [
+   13.6122,
+   14.044
+  ],
+  [
+   14.6477,
+   14.9606
+  ],
+  [
+   15.2884,
+   15.737
+  ],
+  [
+   15.9653,
+   16.2728
+  ],
+  [
+   16.7362,
+   17.6861
+  ],
+  [
+   18.4674,
+   19.1348
+  ],
+  [
+   19.8944,
+   21.6237
+  ],
+  [
+   22.0265,
+   23.565
+  ],
+  [
+   24.2557,
+   25.5436
+  ],
+  [
+   25.834,
+   26.4622
+  ],
+  [
+   27.0173,
+   28.1535
+  ],
+  [
+   28.5002,
+   29.6796
+  ],
+  [
+   29.8757,
+   31.1135
+  ],
+  [
+   31.3248,
+   33.0755
+  ],
+  [
+   33.9256,
+   34.62
+  ],
+  [
+   35.2061,
+   36.2515
+  ],
+  [
+   36.7044,
+   37.2486
+  ],
+  [
+   38.1517,
+   38.7516
+  ],
+  [
+   39.3627,
+   40.4919
+  ],
+  [
+   40.9362,
+   42.8866
+  ],
+  [
+   43.1874,
+   44.1141
+  ],
+  [
+   45.0053,
+   46.1934
+  ],
+  [
+   46.7363,
+   47.713
+  ],
+  [
+   48.1314,
+   48.7475
+  ],
+  [
+   48.8687,
+   49.3535
+  ],
+  [
+   50.2787,
+   50.7646
+  ],
+  [
+   51.3378,
+   51.4806
+  ],
+  [
+   51.6154,
+   52.5909
+  ],
+  [
+   52.7174,
+   54.2137
+  ],
+  [
+   54.3683,
+   55.0137
+  ],
+  [
+   55.7021,
+   56.2459
+  ],
+  [
+   56.5152,
+   57.0467
+  ],
+  [
+   57.2751,
+   58.2732
+  ],
+  [
+   58.8056,
+   60.0815
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Pendant la Premi\u00e8re Guerre mondiale,",
+   "s": 0.297,
+   "e": 1.576
+  },
+  {
+   "text": "la France a construit un deuxi\u00e8me Paris\u2026 pour qu'on le bombarde.",
+   "s": 1.843,
+   "e": 4.274
+  },
+  {
+   "text": "En mille neuf cent dix-huit,",
+   "s": 4.935,
+   "e": 5.843
+  },
+  {
+   "text": "des avions allemands attaquent Paris la nuit.",
+   "s": 6.574,
+   "e": 9.224
+  },
+  {
+   "text": "Pas de radar :",
+   "s": 9.831,
+   "e": 10.472
+  },
+  {
+   "text": "les pilotes visent les lumi\u00e8res de la ville.",
+   "s": 10.811,
+   "e": 12.275
+  },
+  {
+   "text": "Alors on \u00e9teint tout.",
+   "s": 12.994,
+   "e": 14.044
+  },
+  {
+   "text": "Les rues,",
+   "s": 14.648,
+   "e": 14.961
+  },
+  {
+   "text": "les vitrines,",
+   "s": 15.288,
+   "e": 15.737
+  },
+  {
+   "text": "les gares.",
+   "s": 15.965,
+   "e": 16.273
+  },
+  {
+   "text": "Paris plonge dans le noir.",
+   "s": 16.736,
+   "e": 17.686
+  },
+  {
+   "text": "Mais \u00e7a ne suffit pas.",
+   "s": 18.467,
+   "e": 19.135
+  },
+  {
+   "text": "Un ing\u00e9nieur a une id\u00e9e compl\u00e8tement folle :",
+   "s": 19.894,
+   "e": 21.624
+  },
+  {
+   "text": "construire un faux Paris,",
+   "s": 22.026,
+   "e": 23.565
+  },
+  {
+   "text": "\u00e0 une vingtaine de kilom\u00e8tres au nord,",
+   "s": 24.256,
+   "e": 25.544
+  },
+  {
+   "text": "au bord de la Seine.",
+   "s": 25.834,
+   "e": 26.462
+  },
+  {
+   "text": "De fausses rues \u00e9clair\u00e9es.",
+   "s": 27.017,
+   "e": 28.154
+  },
+  {
+   "text": "Une fausse gare du Nord.",
+   "s": 28.5,
+   "e": 29.68
+  },
+  {
+   "text": "Et m\u00eame de faux trains,",
+   "s": 29.876,
+   "e": 31.113
+  },
+  {
+   "text": "avec des lumi\u00e8res qui avancent dans la nuit.",
+   "s": 31.325,
+   "e": 33.075
+  },
+  {
+   "text": "Le plan est simple :",
+   "s": 33.926,
+   "e": 34.62
+  },
+  {
+   "text": "les bombes tombent sur le faux,",
+   "s": 35.206,
+   "e": 37.249
+  },
+  {
+   "text": "et le vrai survit.",
+   "s": 38.152,
+   "e": 38.752
+  },
+  {
+   "text": "Sauf que\u2026 le chantier prend du retard.",
+   "s": 39.363,
+   "e": 40.492
+  },
+  {
+   "text": "Le dernier raid allemand arrive en septembre,",
+   "s": 40.936,
+   "e": 42.887
+  },
+  {
+   "text": "et le faux Paris n'est pas fini.",
+   "s": 43.187,
+   "e": 44.114
+  },
+  {
+   "text": "Deux mois plus tard, la guerre s'arr\u00eate.",
+   "s": 45.005,
+   "e": 46.193
+  },
+  {
+   "text": "Le faux Paris est d\u00e9mont\u00e9,",
+   "s": 46.736,
+   "e": 47.713
+  },
+  {
+   "text": "sans avoir re\u00e7u une seule bombe.",
+   "s": 48.131,
+   "e": 49.353
+  },
+  {
+   "text": "Et l'ing\u00e9nieur ?",
+   "s": 50.279,
+   "e": 51.481
+  },
+  {
+   "text": "Fernand Jacopozzi avait pass\u00e9 la guerre \u00e0 cacher les lumi\u00e8res de Paris.",
+   "s": 51.615,
+   "e": 55.014
+  },
+  {
+   "text": "Sept ans plus tard,",
+   "s": 55.702,
+   "e": 56.246
+  },
+  {
+   "text": "c'est lui qui a illumin\u00e9 la tour Eiffel\u2026 avec deux cent cinquante mille ampoules.",
+   "s": 56.515,
+   "e": 60.081
+  }
+ ]
+}

@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
-# Creates a new short project:  bash tools/setup.sh <project_dir>
-# Needs: node >= 22.6 (type stripping), python3 + numpy, ffmpeg, git, Playwright Chromium (npx playwright install chromium if missing).
+# Prépare le studio (en local ou dans GitHub Actions) :  bash tools/setup.sh
+# Besoin : node >= 22.6, python3, ffmpeg, git, un Chrome/Chromium (CHROME=/usr/bin/google-chrome, ou Playwright).
 set -e
-KIT="$(cd "$(dirname "$0")/.." && pwd)"; P="${1:?project dir}"
-mkdir -p "$P/web/lib" "$P/work" "$P/stills" "$P/out"
-cp "$KIT"/engine/*.js "$KIT"/engine/index.html "$P/web/"
-cp "$KIT"/example/soldier/story.js "$P/web/story.js"        # starting point: rewrite for the new story
-cp "$KIT"/example/soldier/audio.py "$P/audio.py"            # starting point: rewrite the cue table
-cp "$KIT"/tools/*.mjs "$KIT"/tools/*.py "$P/" 2>/dev/null || true
-# three.js r160 (module build). npm first, then a sparse git clone (works where only GitHub is reachable).
-if [ ! -f "$P/web/lib/three.module.js" ]; then
-  ( cd /tmp && rm -rf _three && mkdir _three && cd _three && npm pack three@0.160.0 >/dev/null 2>&1 && tar xzf three-0.160.0.tgz && cp package/build/three.module.js "$P/web/lib/" ) \
-  || ( cd /tmp && rm -rf _t3 && git clone -q --depth 1 --filter=blob:none --sparse --branch r160 https://github.com/mrdoob/three.js _t3 && cd _t3 && git sparse-checkout set build && cp build/three.module.js "$P/web/lib/" )
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"; cd "$ROOT"
+# 1. three.js r160 (build module) -> engine/lib/three.module.js
+if [ ! -f engine/lib/three.module.js ]; then
+  mkdir -p engine/lib
+  ( cd /tmp && rm -rf _three && mkdir _three && cd _three && npm pack three@0.160.0 >/dev/null 2>&1 && tar xzf three-0.160.0.tgz && cp package/build/three.module.js "$ROOT/engine/lib/" ) \
+  || ( cd /tmp && rm -rf _t3 && git clone -q --depth 1 --filter=blob:none --sparse --branch r160 https://github.com/mrdoob/three.js _t3 && cd _t3 && git sparse-checkout set build && cp build/three.module.js "$ROOT/engine/lib/" )
 fi
-# toon base: the Pen / head / face library from mromidev/claude-animated-shorts, types stripped
-if [ ! -f "$KIT/vendor/toon.ts" ]; then mkdir -p "$KIT/vendor"; git clone -q --depth 1 https://github.com/mromidev/claude-animated-shorts /tmp/_cas && cp /tmp/_cas/templates/bridge/toon.ts "$KIT/vendor/toon.ts"; fi
-node -e "const m=require('node:module'),fs=require('fs');fs.writeFileSync('$P/web/toonbase.js',m.stripTypeScriptTypes(fs.readFileSync('$KIT/vendor/toon.ts','utf8'),{mode:'transform'}))" 2>/dev/null
-cat "$P/web/toonbase.js" "$P/web/roman.js" > "$P/web/toon.js"
-# playwright: use a global install if there is one
-mkdir -p "$P/node_modules"; [ -e "$P/node_modules/playwright" ] || ln -sf "$(npm root -g)/playwright" "$P/node_modules/playwright"
-echo "ready: $P   (after editing cast code run: cat web/toonbase.js web/roman.js > web/toon.js)"
+# 2. Bibliothèque Pen / têtes / visages de mromidev/claude-animated-shorts (MIT), types retirés -> engine/toonbase.js
+if [ ! -f engine/toonbase.js ]; then
+  rm -rf /tmp/_cas && git clone -q --depth 1 https://github.com/mromidev/claude-animated-shorts /tmp/_cas
+  node -e "const m=require('node:module'),fs=require('fs');fs.writeFileSync('engine/toonbase.js',m.stripTypeScriptTypes(fs.readFileSync('/tmp/_cas/templates/bridge/toon.ts','utf8'),{mode:'transform'}))" 2>/dev/null
+fi
+# 3. toon.js = toonbase + casting (à relancer après toute modification de engine/roman.js)
+cat engine/toonbase.js engine/roman.js > engine/toon.js
+# 4. Playwright (pilote du navigateur) + dépendances Python
+[ -d node_modules/playwright ] || npm install --no-audit --no-fund >/dev/null
+python3 -c "import numpy, PIL" 2>/dev/null || pip install --quiet numpy pillow 2>/dev/null || pip install --quiet --break-system-packages numpy pillow
+# 5. Polices des sous-titres et du branding
+mkdir -p "$HOME/.fonts" && cp assets/fonts/*.ttf "$HOME/.fonts/" && (fc-cache -f >/dev/null 2>&1 || true)
+echo "studio prêt"

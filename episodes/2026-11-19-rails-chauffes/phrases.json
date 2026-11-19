@@ -1,0 +1,284 @@
+{
+ "duration": 54.56,
+ "frames30": 1637,
+ "source": "silence-align (cost 4.64)",
+ "segments": [
+  [
+   0.22725,
+   0.408875
+  ],
+  [
+   0.534208,
+   1.35721
+  ],
+  [
+   1.48875,
+   3.016
+  ],
+  [
+   3.29471,
+   4.023
+  ],
+  [
+   4.7605,
+   5.80171
+  ],
+  [
+   5.94562,
+   7.08829
+  ],
+  [
+   7.491,
+   7.68892
+  ],
+  [
+   8.12792,
+   8.50208
+  ],
+  [
+   8.74371,
+   9.14842
+  ],
+  [
+   9.8,
+   12.8042
+  ],
+  [
+   13.5122,
+   14.1146
+  ],
+  [
+   14.2775,
+   15.4433
+  ],
+  [
+   16.0166,
+   18.3062
+  ],
+  [
+   19.0454,
+   20.3642
+  ],
+  [
+   20.4965,
+   22.399
+  ],
+  [
+   23.2245,
+   24.9424
+  ],
+  [
+   25.516,
+   26.1035
+  ],
+  [
+   26.4867,
+   27.0114
+  ],
+  [
+   27.1359,
+   27.7817
+  ],
+  [
+   28.4632,
+   29.2223
+  ],
+  [
+   29.3658,
+   29.8964
+  ],
+  [
+   30.6858,
+   32.5362
+  ],
+  [
+   33.0893,
+   34.7233
+  ],
+  [
+   35.3591,
+   35.8336
+  ],
+  [
+   36.4374,
+   37.2679
+  ],
+  [
+   38.0256,
+   38.4567
+  ],
+  [
+   39.0145,
+   39.5844
+  ],
+  [
+   39.9547,
+   43.6375
+  ],
+  [
+   43.9495,
+   44.1257
+  ],
+  [
+   44.2608,
+   44.8422
+  ],
+  [
+   45.6174,
+   46.9043
+  ],
+  [
+   47.7942,
+   48.1929
+  ],
+  [
+   48.9331,
+   50.636
+  ],
+  [
+   50.7614,
+   51.5532
+  ],
+  [
+   52.078,
+   54.305
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "En plein hiver,",
+   "s": 0.227,
+   "e": 1.357
+  },
+  {
+   "text": "la SNCF chauffe ses rails\u2026 avant de les poser.",
+   "s": 1.489,
+   "e": 4.023
+  },
+  {
+   "text": "Pendant plus d'un si\u00e8cle,",
+   "s": 4.761,
+   "e": 5.802
+  },
+  {
+   "text": "les trains fran\u00e7ais ont fait \u00ab tac-tac \u00bb.",
+   "s": 5.946,
+   "e": 7.689
+  },
+  {
+   "text": "Ce bruit\u2026 c'\u00e9tait un trou.",
+   "s": 8.128,
+   "e": 9.148
+  },
+  {
+   "text": "Tous les dix-huit m\u00e8tres, on laissait un petit espace entre deux rails.",
+   "s": 9.8,
+   "e": 12.804
+  },
+  {
+   "text": "Parce que l'acier,",
+   "s": 13.512,
+   "e": 14.115
+  },
+  {
+   "text": "en plein soleil, \u00e7a gonfle.",
+   "s": 14.277,
+   "e": 15.443
+  },
+  {
+   "text": "En \u00e9t\u00e9, un rail peut d\u00e9passer soixante degr\u00e9s.",
+   "s": 16.017,
+   "e": 18.306
+  },
+  {
+   "text": "En deux mille dix-neuf, pr\u00e8s de N\u00eemes,",
+   "s": 19.045,
+   "e": 20.364
+  },
+  {
+   "text": "on en a mesur\u00e9 un\u2026 \u00e0 soixante-cinq.",
+   "s": 20.497,
+   "e": 22.399
+  },
+  {
+   "text": "Sans espace, le rail n'a nulle part o\u00f9 aller.",
+   "s": 23.224,
+   "e": 24.942
+  },
+  {
+   "text": "Alors il pousse\u2026 et la voie se tord sur le c\u00f4t\u00e9.",
+   "s": 25.516,
+   "e": 27.782
+  },
+  {
+   "text": "Les cheminots appellent \u00e7a une flamb\u00e9e.",
+   "s": 28.463,
+   "e": 29.896
+  },
+  {
+   "text": "Sauf que\u2026 les rails modernes n'ont plus de trous.",
+   "s": 30.686,
+   "e": 32.536
+  },
+  {
+   "text": "Ils sont soud\u00e9s sur des kilom\u00e8tres.",
+   "s": 33.089,
+   "e": 34.723
+  },
+  {
+   "text": "Plus de tac-tac.",
+   "s": 35.359,
+   "e": 35.834
+  },
+  {
+   "text": "Plus de place pour gonfler.",
+   "s": 36.437,
+   "e": 37.268
+  },
+  {
+   "text": "Le secret ?",
+   "s": 38.026,
+   "e": 38.457
+  },
+  {
+   "text": "La temp\u00e9rature.",
+   "s": 39.014,
+   "e": 39.584
+  },
+  {
+   "text": "Une nuit de novembre, les ouvriers chauffent l'acier jusqu'\u00e0 vingt-cinq degr\u00e9s,",
+   "s": 39.955,
+   "e": 43.638
+  },
+  {
+   "text": "puis ils le fixent.",
+   "s": 43.95,
+   "e": 44.842
+  },
+  {
+   "text": "Le rail est persuad\u00e9 qu'il fait doux\u2026 pour toujours.",
+   "s": 45.617,
+   "e": 46.904
+  },
+  {
+   "text": "Voil\u00e0 pourquoi,",
+   "s": 47.794,
+   "e": 48.193
+  },
+  {
+   "text": "quand il fait quarante degr\u00e9s,",
+   "s": 48.933,
+   "e": 50.636
+  },
+  {
+   "text": "ton train ralentit :",
+   "s": 50.761,
+   "e": 51.553
+  },
+  {
+   "text": "il roule sur un rail qui ne demande qu'\u00e0 se tordre.",
+   "s": 52.078,
+   "e": 54.305
+  }
+ ]
+}

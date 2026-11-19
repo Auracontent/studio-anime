@@ -1,0 +1,21 @@
+# Mentionne @claude dans une issue ou un commentaire pour demander une retouche (« plan 3 plus serré », « refais la fin »...).
+name: Claude
+on:
+  issue_comment: { types: [created] }
+  issues: { types: [opened] }
+permissions: { contents: write, issues: write, pull-requests: write, id-token: write, actions: write }
+jobs:
+  claude:
+    if: contains(github.event.comment.body || github.event.issue.body, '@claude')
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null && bash tools/setup.sh
+      - uses: anthropics/claude-code-action@v1
+        env: { CHROME: /usr/bin/google-chrome }
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--max-turns 120 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"

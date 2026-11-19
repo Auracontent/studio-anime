@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Word timings for a voiceover -> words.json + phrases.json.
+"""Word timings for a voiceover -> words.json + phrases.json.\n(French by default: TIMING_LANG=fr, WHISPER_MODEL=small. With whisper AND a script, the script's spelling is kept on the ASR timings.)
 
 Usage:
   python3 tools/timing.py voice.mp3 [script.txt] [--out work/]
@@ -38,20 +38,47 @@ def speech_segments(path, db=-35, mind=0.12):
     # trim leading silence of first segment if file starts with silence
     return segs, D
 
+LANG = os.environ.get("TIMING_LANG", "fr")          # langue de la voix (défaut : français)
+WMODEL = os.environ.get("WHISPER_MODEL", "small")    # modèle multilingue (base / small / medium)
+
 def whisper_words(path):
     try:
         from faster_whisper import WhisperModel
-        m = WhisperModel("base.en", compute_type="int8")
-        segs, _ = m.transcribe(path, word_timestamps=True)
+        m = WhisperModel(WMODEL, compute_type="int8")
+        segs, _ = m.transcribe(path, word_timestamps=True, language=LANG)
         return [{"w": w.word.strip(), "s": round(w.start, 3), "e": round(w.end, 3)} for s in segs for w in s.words]
-    except Exception:
-        pass
+    except Exception as e:
+        print("faster-whisper indisponible :", e)
     try:
         import whisper
-        r = whisper.load_model("base.en").transcribe(path, word_timestamps=True)
+        r = whisper.load_model(WMODEL).transcribe(path, word_timestamps=True, language=LANG)
         return [{"w": w["word"].strip(), "s": round(w["start"], 3), "e": round(w["end"], 3)} for s in r["segments"] for w in s["words"]]
     except Exception:
         return None
+
+def norm(w):
+    import unicodedata
+    w = unicodedata.normalize("NFD", w.lower()); w = "".join(c for c in w if unicodedata.category(c) != "Mn")
+    return re.sub(r"[^a-z0-9]", "", w)
+
+def script_on_asr(script, asr):
+    """Garde l'orthographe et la ponctuation du script, prend les temps de l'ASR (alignement difflib, interpolation des trous)."""
+    import difflib
+    sw = script.replace("\n", " ").split(); a = [norm(x["w"]) for x in asr]; b = [norm(x) for x in sw]
+    times = [None] * len(sw)
+    for blk in difflib.SequenceMatcher(None, a, b, autojunk=False).get_matching_blocks():
+        for k in range(blk.size): times[blk.b + k] = (asr[blk.a + k]["s"], asr[blk.a + k]["e"])
+    out, i = [], 0
+    while i < len(sw):
+        if times[i]: out.append({"w": sw[i], "s": times[i][0], "e": times[i][1]}); i += 1; continue
+        j = i
+        while j < len(sw) and not times[j]: j += 1
+        t0 = out[-1]["e"] if out else (asr[0]["s"] if asr else 0.0)
+        t1 = times[j][0] if j < len(sw) else (asr[-1]["e"] if asr else t0 + 0.3 * (j - i))
+        n = j - i; d = max(0.05, (t1 - t0)) / n
+        for k in range(n): out.append({"w": sw[i + k], "s": round(t0 + k * d, 3), "e": round(t0 + (k + 1) * d, 3)})
+        i = j
+    return out
 
 def align(script, segs):
     # phrases: split after , . ; : ! ? and closing quotes
@@ -96,6 +123,8 @@ if __name__ == "__main__":
     audio = args[0]; script = open(args[1]).read() if len(args) > 1 and os.path.exists(args[1]) else (args[1] if len(args) > 1 else None)
     words = whisper_words(audio)
     segs, D = speech_segments(audio)
+    if words and script:
+        words = script_on_asr(script, words)
     if words:
         phr = []; cur = []
         for w in words:
