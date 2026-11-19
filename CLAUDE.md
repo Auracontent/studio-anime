@@ -13,6 +13,7 @@ ce fichier dit comment l'appliquer **dans ce dépôt** et ce qui prime en cas de
 - **Pas de personne réelle vivante** comme personnage, pas de logo de marque (le train à grande vitesse n'a pas de logo).
 - **Faits vérifiés.** Toute date, tout chiffre, tout nom est vérifié (recherche web) avant d'écrire. Une légende est dite « on raconte que ».
 - **Ne jamais modifier ni recaler la voix.** L'image se cale sur la voix ; chaque réaction arrive 0 à 3 images avant son mot.
+- **Messages de commit en anglais** (ex. `Add episode 2026-11-21-eiffel-tower`), même si le contenu de l'épisode est en français.
 - **Ne jamais prétendre avoir fait ce qui n'a pas tourné.** Si une étape échoue, dis-le dans le résumé.
 
 ## Le style Pourkoipa (mesuré sur la référence, à respecter)

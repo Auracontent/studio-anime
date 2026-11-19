@@ -18,4 +18,4 @@ jobs:
           python3 tools/tts.py /tmp/t.txt brand/voice_test.wav
       - run: |
           git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add brand/voice.json brand/voice_sample.wav brand/voice_test.wav 2>/dev/null; git commit -m "Voix de la chaîne (Voice design)" && git push
+          git add brand/voice.json brand/voice_sample.wav brand/voice_test.wav 2>/dev/null; git commit -m "Add channel voice (Gemini voice design)" && git push

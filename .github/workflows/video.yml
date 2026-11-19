@@ -53,7 +53,7 @@ jobs:
             (setup déjà fait, CHROME=/usr/bin/google-chrome). Le contrôle images fixes est obligatoire : lis la planche et corrige
             jusqu'à ce qu'elle soit propre, surtout la taille des personnages (frameOn, tête ~30 % de la largeur).
             Ne lance PAS le rendu complet. Termine par : git add episodes/${{ steps.slug.outputs.slug }} ;
-            git commit -m "Épisode ${{ steps.slug.outputs.slug }}" ; git pull --rebase ; git push.
+            git commit -m "Add episode ${{ steps.slug.outputs.slug }}" ; git pull --rebase ; git push.
             Si quelque chose bloque (voix illisible, script absent), écris le problème dans episodes/${{ steps.slug.outputs.slug }}/PROBLEME.md, commite et arrête-toi.
       - name: Vérifier
         run: |
