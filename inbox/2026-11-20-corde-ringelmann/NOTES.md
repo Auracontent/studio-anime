@@ -23,4 +23,4 @@ Diversité : psychologie, fin XIXe / 1913 puis années 1970, universel avec un c
 7. Chute : la corde tombe, l'équipe de huit perd contre un seul homme / une corde qui ne bouge pas. Décor : bibliothèque neuve `ferme.js` (cour, grange, bottes de paille, abreuvoir), jour d'été.
 
 ## Enregistrement
-Voix Riko (Google AI Studio), ton complice, pause avant « Sauf que non ». 13 phrases, ~165 mots.
+Voix Riko (Google AI Studio), ton complice, pause avant « Sauf que non ». 13 phrases, ~165 mots (compte wc ~170, apostrophes comprises).
