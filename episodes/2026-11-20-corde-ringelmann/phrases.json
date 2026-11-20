@@ -1,0 +1,339 @@
+{
+ "duration": 60.640583,
+ "frames30": 1819,
+ "source": "silence-align (cost 3.96)",
+ "segments": [
+  [
+   0.258083,
+   3.23
+  ],
+  [
+   3.594292,
+   4.464458
+  ],
+  [
+   4.963,
+   5.128208
+  ],
+  [
+   5.372792,
+   7.315958
+  ],
+  [
+   7.825375,
+   8.735208
+  ],
+  [
+   9.559542,
+   11.914375
+  ],
+  [
+   12.629833,
+   14.661333
+  ],
+  [
+   15.46575,
+   16.363792
+  ],
+  [
+   16.747375,
+   17.128083
+  ],
+  [
+   17.804708,
+   18.169875
+  ],
+  [
+   18.750917,
+   19.152583
+  ],
+  [
+   19.922833,
+   21.393875
+  ],
+  [
+   22.099375,
+   22.792583
+  ],
+  [
+   23.3765,
+   23.74275
+  ],
+  [
+   24.187292,
+   25.286875
+  ],
+  [
+   26.122625,
+   27.030958
+  ],
+  [
+   27.386333,
+   28.405083
+  ],
+  [
+   29.232375,
+   29.556083
+  ],
+  [
+   29.711333,
+   31.323375
+  ],
+  [
+   31.482333,
+   31.953875
+  ],
+  [
+   32.781625,
+   33.50925
+  ],
+  [
+   33.889125,
+   35.590042
+  ],
+  [
+   36.243458,
+   36.387458
+  ],
+  [
+   36.658375,
+   38.55325
+  ],
+  [
+   39.516958,
+   39.604542
+  ],
+  [
+   39.865417,
+   40.625708
+  ],
+  [
+   41.022667,
+   42.226
+  ],
+  [
+   42.624917,
+   43.194792
+  ],
+  [
+   44.183958,
+   45.774875
+  ],
+  [
+   46.277375,
+   46.575917
+  ],
+  [
+   46.949417,
+   47.430167
+  ],
+  [
+   48.244208,
+   49.096625
+  ],
+  [
+   49.366417,
+   51.600333
+  ],
+  [
+   52.620333,
+   53.408792
+  ],
+  [
+   53.896792,
+   54.7165
+  ],
+  [
+   55.305375,
+   56.354792
+  ],
+  [
+   57.242542,
+   57.655458
+  ],
+  [
+   58.107958,
+   58.795708
+  ],
+  [
+   59.000083,
+   60.10375
+  ],
+  [
+   60.480917,
+   60.640583
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Plus on tire \u00e0 plusieurs sur une corde, moins chacun tire fort.",
+   "s": 0.258,
+   "e": 3.23
+  },
+  {
+   "text": "Un Fran\u00e7ais l'a prouv\u00e9.",
+   "s": 3.594,
+   "e": 4.464
+  },
+  {
+   "text": "Il s'appelle Maximilien Ringelmann,",
+   "s": 4.963,
+   "e": 7.316
+  },
+  {
+   "text": "ing\u00e9nieur agronome.",
+   "s": 7.825,
+   "e": 8.735
+  },
+  {
+   "text": "Il \u00e9tudie la force des hommes et des machines de ferme.",
+   "s": 9.56,
+   "e": 11.914
+  },
+  {
+   "text": "Il attache une corde \u00e0 un appareil de mesure,",
+   "s": 12.63,
+   "e": 14.661
+  },
+  {
+   "text": "et fait tirer ses \u00e9l\u00e8ves,",
+   "s": 15.466,
+   "e": 16.364
+  },
+  {
+   "text": "un par un.",
+   "s": 16.747,
+   "e": 17.128
+  },
+  {
+   "text": "Puis par deux.",
+   "s": 17.805,
+   "e": 18.17
+  },
+  {
+   "text": "Puis par trois.",
+   "s": 18.751,
+   "e": 19.153
+  },
+  {
+   "text": "Il s'attend \u00e0 voir les forces s'additionner.",
+   "s": 19.923,
+   "e": 21.394
+  },
+  {
+   "text": "Sauf que non.",
+   "s": 22.099,
+   "e": 22.793
+  },
+  {
+   "text": "\u00c0 deux,",
+   "s": 23.377,
+   "e": 23.743
+  },
+  {
+   "text": "on ne tire pas le double.",
+   "s": 24.187,
+   "e": 25.287
+  },
+  {
+   "text": "Plus le groupe grandit,",
+   "s": 26.123,
+   "e": 27.031
+  },
+  {
+   "text": "plus chacun l\u00e2che du lest.",
+   "s": 27.386,
+   "e": 28.405
+  },
+  {
+   "text": "\u00c0 huit,",
+   "s": 29.232,
+   "e": 29.556
+  },
+  {
+   "text": "la corde re\u00e7oit la force d'environ quatre hommes.",
+   "s": 29.711,
+   "e": 31.954
+  },
+  {
+   "text": "Personne ne triche.",
+   "s": 32.782,
+   "e": 33.509
+  },
+  {
+   "text": "Chacun jure qu'il a tir\u00e9 de toutes ses forces.",
+   "s": 33.889,
+   "e": 35.59
+  },
+  {
+   "text": "Ringelmann croit \u00e0 un probl\u00e8me de coordination.",
+   "s": 36.243,
+   "e": 38.553
+  },
+  {
+   "text": "Mais soixante ans plus tard,",
+   "s": 39.517,
+   "e": 40.626
+  },
+  {
+   "text": "des chercheurs refont le test,",
+   "s": 41.023,
+   "e": 42.226
+  },
+  {
+   "text": "les yeux band\u00e9s.",
+   "s": 42.625,
+   "e": 43.195
+  },
+  {
+   "text": "On dit aux participants qu'ils tirent en \u00e9quipe.",
+   "s": 44.184,
+   "e": 45.775
+  },
+  {
+   "text": "En vrai,",
+   "s": 46.277,
+   "e": 46.576
+  },
+  {
+   "text": "ils sont seuls.",
+   "s": 46.949,
+   "e": 47.43
+  },
+  {
+   "text": "Et ils tirent moins fort,",
+   "s": 48.244,
+   "e": 49.097
+  },
+  {
+   "text": "juste parce qu'ils croient que d'autres tirent avec eux.",
+   "s": 49.366,
+   "e": 51.6
+  },
+  {
+   "text": "Le cerveau se dit :",
+   "s": 52.62,
+   "e": 53.409
+  },
+  {
+   "text": "les autres compenseront.",
+   "s": 53.897,
+   "e": 54.717
+  },
+  {
+   "text": "Et les autres pensent la m\u00eame chose.",
+   "s": 55.305,
+   "e": 56.355
+  },
+  {
+   "text": "R\u00e9sultat :",
+   "s": 57.243,
+   "e": 57.655
+  },
+  {
+   "text": "une \u00e9quipe de huit perd contre un seul homme d\u00e9cid\u00e9.",
+   "s": 58.108,
+   "e": 60.641
+  }
+ ]
+}

@@ -304,6 +304,17 @@ export const romanFront = (p, key, opts = {}) => {
   }
   (V2 ? faceV2 : faceFront)(p, cx, hc, W, expr, facing, look, lid, helmet || !!O.hat || !!O.cap, skin, O.beard ? O.beard : O.moustache, !!O.stout);
   if (O.brows) for (const s of [-1, 1]) p.ell(cx + 7 * u * facing + s * 14 * u, hc - 20 * u, 11 * u, 5 * u, O.brows, 2 * u);
+  if (O.glasses) { // lorgnons / round spectacles: two thin rings and a bridge
+    const gy = hc - 2 * u, gx = cx + 6 * u * facing;
+    for (const sd of [-1, 1]) p.stroke(ellPts(gx + sd * 17 * u, gy, 16 * u, 16.5 * u, 0, 360, 0, 32), 3 * u, O.glasses === true ? "#3a2a22" : O.glasses);
+    p.stroke([[gx - 1.5 * u, gy - 2 * u], [gx + 1.5 * u, gy - 2 * u]], 2.6 * u, O.glasses === true ? "#3a2a22" : O.glasses);
+  }
+  if (O.blind) { // blindfold: dark band across the eyes with a knot at the side
+    const by = hc - 2 * u, bd = rrect(cx - 0.97 * H.a, by - 13 * u, cx + 0.97 * H.a, by + 13 * u, 5 * u);
+    p.poly(bd, O.blind === true ? "#2b2b36" : O.blind, 3 * u);
+    p.stroke([[cx - 1.0 * H.a, by - 6 * u], [cx - 1.25 * H.a, by - 20 * u]], 5 * u, O.blind === true ? "#2b2b36" : O.blind);
+    p.stroke([[cx - 1.0 * H.a, by + 4 * u], [cx - 1.3 * H.a, by + 6 * u]], 5 * u, O.blind === true ? "#2b2b36" : O.blind);
+  }
   if (O.beard) { // re-draw the mouth over the beard for open mouths
     if (expr === "shock" || expr === "snore") p.ell(cx + 8 * u * facing, hc + 22 * u, 6 * u, 7 * u, "#5a1e28", 2 * u);
   }
