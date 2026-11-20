@@ -56,6 +56,9 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # "Idée + script" starts this workflow itself (gh workflow run), so the actor is the github-actions bot.
+          # Only that bot is allowed, not every bot.
+          allowed_bots: "github-actions,github-actions[bot]"
           claude_args: "--max-turns 200 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
           prompt: |
             Tu es le réalisateur du studio. Lis CLAUDE.md puis SKILL.md, et fabrique l'épisode `${{ steps.slug.outputs.slug }}`
