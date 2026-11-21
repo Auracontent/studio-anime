@@ -1,4 +1,4 @@
-# Les pigeons du siège de Paris : titre proposé « Ce pigeon portait 100 000 lettres » (≤45 car.)
+# Les pigeons du siège de Paris : titre proposé « Ces pigeons ont livré 100 000 lettres » (≤45 car.)
 
 Diversité : communication / invention (microfilm), hiver 1870-1871, français (siège de Paris, René Dagron) ; diffère des 3 derniers (canari = science/mine UK, phare 1823 = ingénierie/mer, corde de Ringelmann = psychologie) : ni optique, ni mine, ton impressionnant puis ironique ; ambiance hiver froid / ciel de Paris, ballons ; époque 1870 distincte de 1914. Décor neuf : `engine/library/paris1870.js` (toits de Paris enneigés, mansarde, bureau de dépouillement).
 Tendances : famille « ruse / astuce de guerre et objet minuscule qui change l'histoire » (inspirée par le haut du classement : « How One Cart Stopped an Entire Army », « How Mine Salting Worked ») ; histoire entièrement différente, sources propres.
@@ -9,11 +9,11 @@ Tendances : famille « ruse / astuce de guerre et objet minuscule qui change l'h
 - Dagron quitte Paris en ballon (le Niépce) le 12 novembre 1870 avec ses pigeons et son matériel ; 67 ballons ont quitté Paris : https://bonjourparis.com/history/siege-paris-part-two/ et https://www.paris.fr/pages/ces-anecdotes-surprenantes-sur-le-siege-de-paris-5-5-15392
 - Films sur collodion, recopiés à l'arrivée par des employés (Smithsonian) : https://www.smithsonianmag.com/air-space-magazine/youve-got-balloon-mail-145532947/
 - Pigeons du siège (Chemins de mémoire) : https://www.cheminsdememoire.gouv.fr/en/pigeongrams
-- À vérifier avant de renforcer : le nombre exact de lettres par pigeon et le poids du film (non confirmés, donc évités ; le « cent mille » du hook = total de messages sur le siège, réparti sur plusieurs oiseaux : à garder en version « ce pigeon » = hook visuel, ou reformuler « Ces pigeons ont porté cent mille lettres » si l'humain préfère la rigueur). Les ballons et la plume de queue (fixation du tube) : usage rapporté, pas chiffré ici.
+- Chiffres évités car non confirmés : lettres par pigeon, poids du film. « Cent mille » = total des messages du siège (~115 000, Hayhurst). « Une soixantaine » = 59 sur 302 (Horne). Tube fixé à une plume de la queue : usage rapporté, non chiffré.
 - « Faucons » : les Prussiens auraient lâché des rapaces dressés contre les pigeons (rapporté, anecdote) ; formulé comme menace (« guettaient »).
 
 ## Enregistrement
-Voix Riko (Google AI Studio), ton intrigué puis tendu, pause avant « Sauf que… », final doux. ~121 mots hors ponctuation : ≈ 46 s.
+Voix Riko (Google AI Studio), ton intrigué puis tendu, pause avant « Sauf que… », final doux. ≈ 120 mots : ≈ 46 s.
 
 ## Héros et casting
 Héros : **René, photographe moustachu** (blouse sombre, tablier, lunettes, écharpe orange). Secondaires : **une mère** (châle turquoise) qui écrit une longue lettre ; **un employé de dépouillement** (manchettes, lampe). Figurants : Parisiens grelottants, soldats prussiens (casque à pointe à ajouter dans roman.js). Le pigeon est un objet-vedette (carte dessinée) avec son petit tube/film.
