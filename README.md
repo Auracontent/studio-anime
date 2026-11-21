@@ -109,7 +109,7 @@ Run `clear` in the terminal afterwards.
 - `brand/`: channel logo, banner, and watermark.
 - `SKILL.md` + `example/soldier/`: methodology and example from the original kit.
 
-Locally: `bash tools/setup.sh`, then `CHROME=/usr/bin/google-chrome node tools/render.mjs episodes/<slug> frames 0-<N-1>` and `bash tools/finish.sh episodes/<slug> frames "Title"`.
+Locally (Linux, macOS, WSL, Onyxia or a container): `bash init.sh` installs everything (system packages, Node 22, a browser for rendering, Python deps, Claude Code; `SKIP_CLAUDE=1` to skip it) — or just `bash tools/setup.sh` if the tools are already there; then `CHROME=/usr/bin/google-chrome node tools/render.mjs episodes/<slug> frames 0-<N-1>` and `bash tools/finish.sh episodes/<slug> frames "Title"`.
 
 Based on the cartoon-short-kit and [mromidev/claude-animated-shorts](https://github.com/mromidev/claude-animated-shorts) (MIT: Pen / heads / faces library, fetched by `setup.sh`).
 Fonts: Montserrat and Luckiest Guy (SIL OFL / Apache 2.0).

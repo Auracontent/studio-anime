@@ -85,13 +85,13 @@ if [ "${SKIP_CLAUDE:-0}" != 1 ]; then
         say "🤖 Installation du CLI Claude Code..."
         npm install -g @anthropic-ai/claude-code 2> /dev/null || $SUDO npm install -g @anthropic-ai/claude-code || say "⚠️  Claude Code non installé (npm install -g @anthropic-ai/claude-code)"
     fi
-    command -v code-server &> /dev/null && code-server --install-extension anthropic.claude-code --force > /dev/null && say "🧩 Extension VS Code Claude Code installée"
+    if command -v code-server &> /dev/null; then code-server --install-extension anthropic.claude-code --force > /dev/null && say "🧩 Extension VS Code Claude Code installée"; fi
 fi
 
 # ---------- 7. Secrets (Vault, variables d'environnement ou fichier .env non versionné) ----------
 [ -f .env ] && { set -a; . ./.env; set +a; }
 for var in GEMINI_API_KEY HF_TOKEN YOUTUBE_API_KEY ZERNIO_API_KEY; do
-    [ -z "${!var:-}" ] && say "ℹ️  $var absent (facultatif pour le rendu local ; à mettre dans .env ou Vault)"
+    if [ -z "${!var:-}" ]; then say "ℹ️  $var absent (facultatif pour le rendu local ; à mettre dans .env ou Vault)"; fi
 done
 say "   GEMINI_API_KEY : voix automatique · HF_TOKEN : dépôt des vidéos · YOUTUBE_API_KEY : tendances · ZERNIO_API_KEY : publication"
 say "✅ Studio prêt dans $REPO_DIR — test : node tools/render.mjs episodes/<un épisode> /tmp/stills \"0,100\""
