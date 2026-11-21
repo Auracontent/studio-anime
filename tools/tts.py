@@ -33,11 +33,9 @@ except urllib.error.HTTPError as e:
     sys.exit(f"erreur {e.code} : {e.read().decode()[:800]}")
 pcm = base64.b64decode(res["candidates"][0]["content"]["parts"][0]["inlineData"]["data"])
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from voicefix import clean   # the API appends provenance metadata (C2PA/SynthID) after the audio: it would play as end noise
-import numpy as np
-pcm = pcm[: len(pcm) // 2 * 2]
-x, cut = clean(np.frombuffer(pcm, np.int16), 24000, pcm)
+from voicefix import clean_pcm   # the API appends provenance metadata (C2PA/SynthID) after the audio: it would play as end noise
+pcm, cut = clean_pcm(pcm, 24000)    # standard library only: this step runs on a bare runner (no numpy)
 if cut: print(f"{cut:.2f} s de métadonnées en fin de fichier remplacées par du silence")
 with wave.open(dst, "wb") as w:  # PCM 16 bits mono 24 kHz
-    w.setnchannels(1); w.setsampwidth(2); w.setframerate(24000); w.writeframes(x.tobytes())
+    w.setnchannels(1); w.setsampwidth(2); w.setframerate(24000); w.writeframes(pcm)
 print(f"{dst} : {len(pcm) / 48000:.2f} s, voix {voice}, modèle {model}")
