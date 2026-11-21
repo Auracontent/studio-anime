@@ -12,6 +12,9 @@ F="$EP/out/$SAFE.mp4"
 N=$(ls "$FR" | grep -c '^f[0-9]*\.jpg$'); MID=$(printf "f%04d.jpg" $((N / 2)))
 [ -f "$FR/$MID" ] && ffmpeg -v error -y -i "$FR/$MID" -q:v 2 "$EP/out/cover.jpg" || true
 python3 "$TOOLS/run_audio.py" "$EP"                                     # audio.py -> music.wav + sfx.wav
+if [ "${AUTOSFX:-1}" != "0" ]; then                                    # bruitages automatiques : un son pour chaque chose qui bouge
+  node "$TOOLS/events.mjs" "$EP" && python3 "$TOOLS/autosfx.py" "$EP" || echo "bruitages automatiques : échec, on garde ceux de audio.py"
+fi
 ( cd "$EP" && python3 "$TOOLS/mix.py" voice.wav music.wav sfx.wav )     # -> mix_raw.wav (musique -12 dB, bruitages <= -8 dB : MUSIC_DB / SFX_DB pour changer)
 # un seul gain linéaire jusqu'à -14 LUFS, puis un limiteur de crête (pas de compression)
 L=$(ffmpeg -nostats -i "$EP/mix_raw.wav" -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1 | awk '{print $2}')

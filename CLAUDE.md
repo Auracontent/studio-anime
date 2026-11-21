@@ -65,7 +65,9 @@ si on coupe le son, on comprend quand même de quoi on parle, ce qui pose probl�
   mais la lumière **raconte** : elle change quand l'histoire change (calme -> problème -> solution). Utilise `engine/moods.js` :
   `jour`, `matin`, `dore` (la récompense), `soir`, `nuit` (bleu lumineux, jamais noir), `tempete`, `lampe` (intérieur, feu), `froid`,
   et `blendMood(a, b, t)` pour passer de l'une à l'autre. Dès que l'histoire parle de danger, de nuit, de mer, de feu, d'hiver, montre-le.
-- **Caméra** : toujours en mouvement, glissements continus et assez rapides, peu de coupes (une coupe = changement de lieu ou d'époque, avec un flash de 6 images).
+- **Caméra** : toujours en mouvement, glissements continus et assez rapides, **pas de coupe sèche** : pour changer de lieu ou d'époque,
+  la caméra voyage avec `transition()` (panoramique éclair `whip`, montée au ciel `rise`, plongée `drop`, élan vers l'avant `push`) ;
+  le flash blanc de 6 images reste possible pour un choc ou un saut dans le temps, pas comme transition par défaut.
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien. Quand quelque chose bouge, **la caméra le suit**
   (`follow`, `track`), tourne autour d'un lieu pour le révéler (`orbit`) et tremble sur les chocs (`shake`). Varie l'échelle :
   au moins un plan large spectaculaire (le lieu, le danger) et au moins un gros plan sur l'objet clé.
@@ -76,7 +78,8 @@ si on coupe le son, on comprend quand même de quoi on parle, ce qui pose probl�
 - **Sous-titres** : 1-2 mots, Montserrat gras blanc contour prune, centrés à 70 % de la hauteur, chiffres et mots-clés en jaune (`tools/subs.py`).
 
 ## Effets, ambiances, caméra et actions (moteur)
-Démo de tout ce qui suit : `episodes/_demo-fx/web/story.js` (tempête au phare, course de nuit suivie par la caméra, forge, chute).
+Démo de tout ce qui suit : `episodes/_demo-fx/web/story.js` (tempête au phare, course de nuit suivie par la caméra, forge, chute,
+reliés par des transitions `whip`, `rise`, `push`, avec signes automatiques et bruitages automatiques).
 Planche : `node tools/render.mjs episodes/_demo-fx /tmp/demo "30,44,70,125,200,225,312,350"`.
 - **Effets 3D** (`engine/fx3d.js`) : exporte `envAt(f)` dans `story.js`, qui renvoie pour l'image `f` :
   `rain` (0-1), `snow`, `motes` (poussière dans la lumière), `wind: [x, z]`, `sea: { amp, col, deep, foam }` (vagues animées :
@@ -90,17 +93,26 @@ Planche : `node tools/render.mjs episodes/_demo-fx /tmp/demo "30,44,70,125,200,2
 - **Actions** (`engine/motion.js`, à fusionner dans l'objet acteur) : `hop` (saut avec écrasement et étirement : `dy`, `sx`, `sy`),
   `fallOver` (chute avec rebond : `roll`), `run` (course : `step` pour les jambes avec `run: true`, `bob`, `tilt`), `tremble`, `rock`
   (tangage d'un bateau), `popIn`. L'acteur accepte maintenant `dx`, `dy`, `sx`, `sy`, `roll` ; l'ombre au sol suit (rétrécit en l'air, s'allonge à terre).
+- **Transitions** (`engine/motion.js`) : `transition(type, camA, camB, f, f0, n)` avec `type` = `'whip'`, `'rise'`, `'drop'` ou `'push'`,
+  `camA` = la caméra de fin du plan qui part (figée à `f0`), `camB` = celle du début du plan qui arrive (à `f0 + n`), n = 10 à 14 images.
+  Place la limite entre les deux plans au milieu de la transition : le changement de lieu est caché par la vitesse et le flou de mouvement
+  (la caméra peut porter `mblur: [dx, dy]` en pixels ou `zoomBlur` 0-1 n'importe quand, pour tout mouvement très rapide).
+- **Signes de dessin animé automatiques** (`engine/marks.js`) : le moteur ajoute seul un « ! » sur `shock`, un « ? » sur `squint`,
+  des gouttes de sueur sur `nervous` / `pained`, une veine de colère sur `stern` / `stubborn`, des étoiles qui tournent sur `dazed`
+  ou un personnage tombé, et des lignes de vitesse derrière un personnage qui court. Forcer un signe : `mark: 'bang' | 'question' | 'sweat' |
+  'anger' | 'stars' | 'speed' | 'heart' | 'note'` dans l'acteur ; en retirer : `marks: false` ; tout couper pour un épisode : `export const MARKS = false`.
 - **Poses d'action** (`engine/roman.js`) : en plus de `point`, `up`, `reach`, `lift`, `wave`... : `carry` (porter devant soi),
   `push` (pousser), `head` (mains sur la tête, panique), `flail` (bras qui moulinent, avec `wv` qui avance), et `run: true` pour de grandes foulées.
 
 ## Structure du dépôt
 ```
 engine/            moteur three.js (main.js piloté par l'épisode, motion.js = caméra + actions, paint.js, roman.js = casting,
-                   fx3d.js = effets 3D, moods.js = ambiances)
+                   fx3d.js = effets 3D, moods.js = ambiances, marks.js = signes de dessin animé)
 engine/library/    décors réutilisables : paris.js (rue + faux Paris), rails.js (voie dans les ocres + chantier d'hiver)
 episodes/<slug>/   un épisode : voice.wav, script.txt, words.json, phrases.json, audio.py, web/world.js, web/story.js
 inbox/<slug>/      dépôt de l'utilisateur : voice.wav (ou .mp3) + script.txt (+ sujet.txt facultatif)
-tools/             setup.sh, timing.py, render.mjs, sheet.py, synth.py, mix.py, subs.py, finish.sh, tts.py, qa.py (contrôle qualité)
+tools/             setup.sh, timing.py, render.mjs, sheet.py, synth.py, mix.py, subs.py, finish.sh, tts.py, qa.py (contrôle qualité),
+                   events.mjs + autosfx.py (bruitages automatiques)
 episodes/_demo-fx/ démonstration des effets, ambiances, caméras et actions (pas un épisode publié)
 brand/             logo, bannière, filigrane (make_brand.py)
 example/soldier/   l'exemple d'origine du kit (ancien format, à lire pour la méthode)
@@ -131,8 +143,14 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
    caméra dans un décor, personnage coupé au bord, personnage trop petit, image sombre, train ou objet attendu invisible,
    et **le test sans le son** : en lisant seulement la planche, dans l'ordre, comprend-on l'histoire ? L'action de chaque phrase se voit-elle ?
    Recommencer jusqu'à ce que la planche soit propre. La planche `stills.jpg` est commitée.
-8. `audio.py` (liste d'événements sonores, modèle dans l'épisode des rails ; `from synth import *`, `music, sfx = init(DUR)`).
-   Tester : `python3 tools/run_audio.py episodes/<slug> && (cd episodes/<slug> && python3 ../../tools/mix.py voice.wav music.wav sfx.wav)`.
+8. `audio.py` (musique + bruitages qui comptent pour l'histoire : sting du pivot, son d'un objet précis ; modèle dans l'épisode des rails ;
+   `from synth import *`, `music, sfx = init(DUR)`). **Les bruitages de mouvement sont automatiques** : `tools/events.mjs` lit story.js
+   (changements de plan, transitions, mouvements de caméra rapides, chocs, apparitions, sauts, atterrissages, chutes, pas de course, « ! »,
+   éclairs, gerbes, étincelles, fumée, pluie, mer, vent, feu) et `tools/autosfx.py` pose le son correspondant (synth.py : `pop`, `boing`,
+   `thud`, `bonk`, `swish`, `gasp`, `step_tap`, `thunder`, `crackle`, `rain_loop`, `sea_loop`, `wind_loop`...), sauf là où audio.py en a déjà mis un.
+   Désactiver : `"autoSfx": false` dans meta.json.
+   Tester : `python3 tools/run_audio.py episodes/<slug> && node tools/events.mjs episodes/<slug> && python3 tools/autosfx.py episodes/<slug>
+   && (cd episodes/<slug> && python3 ../../tools/mix.py voice.wav music.wav sfx.wav)`.
 9. Écrire `episodes/<slug>/meta.json` : `{ "slug", "total": <images>, "title": "<titre court>", "youtube_title", "description", "hashtags", "tiktok" }`
    (titre ≤ 45 caractères, un seul mot en majuscules, description courte + « Pourkoipa ? 🤔 », hashtags #pourkoipa + 5-7 pertinents + #shorts).
 10. Commiter l'épisode. **Le rendu complet et la finition ne sont pas faits par toi** : les jobs `render` (en parallèle) et `finish` du workflow s'en chargent.

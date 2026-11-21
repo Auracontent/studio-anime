@@ -5,6 +5,7 @@ import * as STORY from './episode/story.js';
 import { buildWorld } from './episode/world.js';
 import { createFX3D } from './fx3d.js';
 import { mood } from './moods.js';
+import { marksFor } from './marks.js';
 const { TOTAL, shotAt, camAt, dofAt, lightFor, actorsAt, worldAt, fxAt } = STORY;
 const DECK = STORY.DECK ?? 0;
 const envAt = STORY.envAt || (() => null);   // optional: 3D effects per frame (see fx3d.js)
@@ -187,6 +188,15 @@ const dofScene = fs(new THREE.ShaderMaterial({ uniforms: dofU, vertexShader: `va
     gl_FragColor = linearToOutputTexel(vec4(acc/max(wsum,1e-3), 1.)); }` }));
 // final copy with sRGB handled by the renderer output (we render to screen with linear->sRGB in the shader chunk)
 dofScene.children[0].material.toneMapped = false;
+// motion blur for fast camera moves and transitions (camera key: mblur [dx, dy] in pixels, zoomBlur 0..1): 24 taps along the move
+const rtLens = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType });
+const mbU = { src: { value: rtLens.texture }, res: { value: new THREE.Vector2(W, H) }, dir: { value: new THREE.Vector2() }, zoom: { value: 0 } };
+const mbScene = fs(new THREE.ShaderMaterial({ uniforms: mbU, toneMapped: false, vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
+  fragmentShader: `uniform sampler2D src; uniform vec2 res, dir; uniform float zoom; varying vec2 vUv;
+  void main(){ vec3 acc = vec3(0.); float w = 0.;
+    for (int i=0;i<24;i++){ float t = (float(i)/23. - .5); float k = 1. - abs(t)*1.2;
+      vec2 o = dir*t/res + (vUv-.5)*zoom*.12*t; acc += texture2D(src, vUv+o).rgb*k; w += k; }
+    gl_FragColor = linearToOutputTexel(vec4(acc/w, 1.)); }` }));
 
 // ---------- per-frame state ----------
 const tmpV = new THREE.Vector3();
@@ -250,7 +260,9 @@ window.renderFrame = (f) => {
   camera.fov = C.fov; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
   const W_ = worldAt(f); WORLD.state(W_, f);
   placeSun(L, new THREE.Vector3(...(C.shadowAt || C.look)));
-  drawActors([...actorsAt(f, T), ...(fxAt ? fxAt(f, T) : [])], camera);
+  const ACT = actorsAt(f, T);
+  const MK = STORY.MARKS === false ? [] : marksFor(ACT, (k) => (f - k >= 0 ? actorsAt(f - k, T) : []), camera, f);   // automatic cartoon marks (marks.js)
+  drawActors([...ACT, ...(fxAt ? fxAt(f, T) : []), ...MK], camera);
   const FXO = FX3D.update(envAt(f), f, camera);
   sky.position.copy(camera.position);
   for (const c of clouds) c.quaternion.copy(camera.quaternion);
@@ -267,7 +279,12 @@ window.renderFrame = (f) => {
   renderer.setRenderTarget(rtInk); renderer.render(inkScene, fsCam);
   // lens
   dofU.focus.value = D.focus; dofU.cinf.value = D.cinf; dofU.near.value = D.near ?? 1;
-  renderer.setRenderTarget(null); renderer.render(dofScene, fsCam);
+  const mb = C.mblur || [0, 0], zb = C.zoomBlur || 0;
+  if (Math.hypot(mb[0], mb[1]) > 0.5 || zb > 0.01) {
+    renderer.setRenderTarget(rtLens); renderer.render(dofScene, fsCam);
+    mbU.dir.value.set(mb[0] * W / 1080, -mb[1] * H / 1920); mbU.zoom.value = zb;
+    renderer.setRenderTarget(null); renderer.render(mbScene, fsCam);
+  } else { renderer.setRenderTarget(null); renderer.render(dofScene, fsCam); }
   return true;
 };
 window.TOTAL = TOTAL;
