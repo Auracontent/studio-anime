@@ -7,7 +7,7 @@ Tendances : famille « pourquoi ton cerveau te trompe » (inspirée par « The I
 - Charpentier (1891), « De quelques éléments de la sensation de poids », Archives de physiologie normale et pathologique ; réédité/analysé : https://pubmed.ncbi.nlm.nih.gov/10598479/
 - Premières données dès 1886 (nuance : « prouvé » reste juste, on dit 1891 pour l'article de référence) : https://www.pubmed.gov/23033750/
 - Illusion taille-poids, explication par l'attente d'effort : https://en.wikipedia.org/wiki/Size%E2%80%93weight_illusion
-- Charpentier, professeur de physique médicale à Nancy : https://en.wikipedia.org/wiki/Augustin_Charpentier (à revérifier avant tournage : lieu « Nancy »)
+- Charpentier, professeur de physique médicale à Nancy : https://en.wikipedia.org/wiki/Augustin_Charpentier (Nancy vérifié : chaire de physique médicale dès 1878)
 - L'illusion persiste même quand on connaît les poids : consensus de la littérature (Wikipédia ci-dessus).
 - Pas de chiffres inventés : ni nombre de volontaires, ni poids des boules.
 
