@@ -1,0 +1,222 @@
+{
+ "duration": 46.160583,
+ "frames30": 1385,
+ "source": "silence-align (cost 3.13)",
+ "segments": [
+  [
+   0.319083,
+   2.455625
+  ],
+  [
+   2.872625,
+   3.817208
+  ],
+  [
+   4.671292,
+   6.312583
+  ],
+  [
+   6.683042,
+   6.908208
+  ],
+  [
+   7.036167,
+   7.960083
+  ],
+  [
+   8.836625,
+   9.979458
+  ],
+  [
+   10.109917,
+   10.75575
+  ],
+  [
+   11.088042,
+   12.100458
+  ],
+  [
+   13.030708,
+   14.354542
+  ],
+  [
+   14.633042,
+   15.477
+  ],
+  [
+   15.602125,
+   16.195125
+  ],
+  [
+   17.224625,
+   17.984125
+  ],
+  [
+   18.202875,
+   18.826958
+  ],
+  [
+   19.242667,
+   20.238375
+  ],
+  [
+   20.692667,
+   22.648875
+  ],
+  [
+   23.547333,
+   26.211
+  ],
+  [
+   26.940917,
+   27.714458
+  ],
+  [
+   28.174792,
+   28.707375
+  ],
+  [
+   28.920833,
+   29.994042
+  ],
+  [
+   30.935375,
+   32.47675
+  ],
+  [
+   32.785417,
+   34.439375
+  ],
+  [
+   35.346667,
+   38.302042
+  ],
+  [
+   39.244375,
+   39.817375
+  ],
+  [
+   40.133,
+   42.215708
+  ],
+  [
+   42.992833,
+   44.588208
+  ],
+  [
+   44.738667,
+   45.678333
+  ],
+  [
+   46.000917,
+   46.160583
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ces pigeons ont livr\u00e9 cent mille lettres\u2026 attach\u00e9es \u00e0 une plume.",
+   "s": 0.319,
+   "e": 3.817
+  },
+  {
+   "text": "Paris \u00e9tait encercl\u00e9 par l'arm\u00e9e prussienne,",
+   "s": 4.671,
+   "e": 6.313
+  },
+  {
+   "text": "et plus aucun facteur ne passait.",
+   "s": 6.683,
+   "e": 7.96
+  },
+  {
+   "text": "Alors on a lanc\u00e9 des ballons charg\u00e9s de pigeons,",
+   "s": 8.837,
+   "e": 10.756
+  },
+  {
+   "text": "qui devaient rentrer en ville.",
+   "s": 11.088,
+   "e": 12.1
+  },
+  {
+   "text": "Mais un pigeon ne porte presque rien,",
+   "s": 13.031,
+   "e": 14.355
+  },
+  {
+   "text": "et les familles \u00e9crivaient des pages enti\u00e8res.",
+   "s": 14.633,
+   "e": 16.195
+  },
+  {
+   "text": "Un photographe,",
+   "s": 17.225,
+   "e": 17.984
+  },
+  {
+   "text": "Ren\u00e9 Dagron,",
+   "s": 18.203,
+   "e": 18.827
+  },
+  {
+   "text": "a eu une id\u00e9e folle :",
+   "s": 19.243,
+   "e": 20.238
+  },
+  {
+   "text": "photographier les lettres en minuscule.",
+   "s": 20.693,
+   "e": 22.649
+  },
+  {
+   "text": "Des pages enti\u00e8res tenaient sur un film plus l\u00e9ger qu'une plume.",
+   "s": 23.547,
+   "e": 26.211
+  },
+  {
+   "text": "Le pigeon d\u00e9collait,",
+   "s": 26.941,
+   "e": 27.714
+  },
+  {
+   "text": "sous la neige,",
+   "s": 28.175,
+   "e": 28.707
+  },
+  {
+   "text": "avec des faucons qui guettaient.",
+   "s": 28.921,
+   "e": 29.994
+  },
+  {
+   "text": "Sauf que\u2026 sur trois cents oiseaux,",
+   "s": 30.935,
+   "e": 32.477
+  },
+  {
+   "text": "une soixantaine seulement a atteint Paris.",
+   "s": 32.785,
+   "e": 34.439
+  },
+  {
+   "text": "\u00c0 l'arriv\u00e9e, on projetait le film sur un mur, et on recopiait chaque lettre.",
+   "s": 35.347,
+   "e": 38.302
+  },
+  {
+   "text": "Au total,",
+   "s": 39.244,
+   "e": 39.817
+  },
+  {
+   "text": "plus de cent mille messages sont pass\u00e9s par le ciel.",
+   "s": 40.133,
+   "e": 42.216
+  },
+  {
+   "text": "Le courrier le plus l\u00e9ger du monde tenait \u00e0 une plume.",
+   "s": 42.993,
+   "e": 46.161
+  }
+ ]
+}
