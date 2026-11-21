@@ -3,8 +3,11 @@ import * as T from './toon.js';
 import * as P from './paint.js';
 import * as STORY from './episode/story.js';
 import { buildWorld } from './episode/world.js';
+import { createFX3D } from './fx3d.js';
+import { mood } from './moods.js';
 const { TOTAL, shotAt, camAt, dofAt, lightFor, actorsAt, worldAt, fxAt } = STORY;
 const DECK = STORY.DECK ?? 0;
+const envAt = STORY.envAt || (() => null);   // optional: 3D effects per frame (see fx3d.js)
 if (STORY.setupCast) STORY.setupCast(T);
 
 const QS = new URLSearchParams(location.search);
@@ -97,6 +100,7 @@ const world = new THREE.Group(); scene.add(world);
 const ctx = { THREE, T, P, scene, world, camera, M, add, box, tbox, uvScale, texM, toon, grad, waterNd, ndMat, cardNd, rx, NOINK };
 const WORLD = await buildWorld(ctx);
 const clouds = WORLD.clouds || [];
+const FX3D = createFX3D({ ...ctx, H });
 // ---------- cards ----------
 const CW = 1200, CH = 2000, CM = 2.25; // canvas px, card height in metres (design 600x1000 -> 2.25 m)
 const cardGeo = new THREE.PlaneGeometry(CM * 0.6, CM); cardGeo.translate(0, CM / 2 - CM * 0.025, 0);
@@ -210,13 +214,16 @@ function drawActors(list, cam) {
   list.forEach((a, i) => {
     const c = getCard(i);
     c.draw(a.key, a.draw);
-    c.mesh.visible = true; c.mesh.position.set(a.x, a.y, a.z);
-    const s = a.s || 1; c.mesh.scale.set(s * (a.flip ? -1 : 1), s, s);
+    c.mesh.visible = true; c.mesh.position.set(a.x + (a.dx || 0), a.y + (a.dy || 0), a.z);
+    const s = a.s || 1; c.mesh.scale.set(s * (a.sx ?? 1) * (a.flip ? -1 : 1), s * (a.sy ?? 1), s);   // sx / sy: squash and stretch (motion.js hop)
     c.mesh.rotation.set(0, Math.atan2(cam.position.x - a.x, cam.position.z - a.z) + (a.yaw || 0), a.roll || 0);
     c.mat.color.set(a.tint || '#ffffff'); c.mat.opacity = a.alpha ?? 1;
     c.mesh.castShadow = a.shadow !== false;
     c.mesh.renderOrder = a.order || 2;
-    if (a.blob !== false && a.y < (a.ground ?? DECK) + 0.5) { c.blob.visible = true; c.blob.position.set(a.x, (a.ground ?? DECK) + 0.02, a.z); c.blob.scale.set(0.95 * s, 0.6 * s, 1); }
+    if (a.blob !== false && a.y < (a.ground ?? DECK) + 0.5) {   // contact shadow: shrinks when the character is in the air, stretches along a fallen body
+      const air = Math.max(0, a.dy || 0), k = 1 / (1 + air * 0.8), ry = c.mesh.rotation.y, lean = Math.sin(-(a.roll || 0)), sh = lean * 0.95 * s * (a.sy ?? 1);
+      c.blob.visible = true; c.blob.position.set(a.x + (a.dx || 0) + Math.cos(ry) * sh, (a.ground ?? DECK) + 0.02, a.z - Math.sin(ry) * sh);
+      c.blob.rotation.set(-Math.PI / 2, 0, ry); c.blob.scale.set(0.95 * s * k * (1 + 1.6 * Math.abs(lean)), 0.6 * s * k, 1); c.blob.material.opacity = k; }
   });
 }
 
@@ -237,13 +244,14 @@ const swapForNd = (on) => {
 };
 
 window.renderFrame = (f) => {
-  const S = shotAt(f), L = lightFor(S, f), C = camAt(f);
+  const S = shotAt(f), L0 = lightFor(S, f), L = typeof L0 === 'string' ? mood(L0) : L0.mood ? mood(L0.mood, L0) : L0, C = camAt(f);   // lightFor may return a mood name (moods.js)
   applyLight(L, f);
   camera.position.set(...C.pos); camera.up.set(0, 1, 0); camera.lookAt(...C.look); camera.rotateZ(rx(C.roll || 0));
   camera.fov = C.fov; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
   const W_ = worldAt(f); WORLD.state(W_, f);
   placeSun(L, new THREE.Vector3(...(C.shadowAt || C.look)));
-  drawActors([...actorsAt(f, T), ...fxAt(f, T)], camera);
+  drawActors([...actorsAt(f, T), ...(fxAt ? fxAt(f, T) : [])], camera);
+  const FXO = FX3D.update(envAt(f), f, camera);
   sky.position.copy(camera.position);
   for (const c of clouds) c.quaternion.copy(camera.quaternion);
   // pass A: colour
@@ -255,7 +263,7 @@ window.renderFrame = (f) => {
   if (window.DEBUG_ND) { const dm = new THREE.MeshBasicMaterial({ map: rtNd.texture }); const ds = fs(dm); renderer.setRenderTarget(null); renderer.render(ds, fsCam); return true; }
   // ink + grade
   const D = dofAt(f);
-  inkU.px.value = 2.5; inkU.flash.value = window.DEBUG_E ? -1 : (C.flash || 0); inkU.vig.value = L.vig ?? 0.22;
+  inkU.px.value = 2.5; inkU.flash.value = window.DEBUG_E ? -1 : Math.max(C.flash || 0, FXO.flash || 0); inkU.vig.value = L.vig ?? 0.22;
   renderer.setRenderTarget(rtInk); renderer.render(inkScene, fsCam);
   // lens
   dofU.focus.value = D.focus; dofU.cinf.value = D.cinf; dofU.near.value = D.near ?? 1;

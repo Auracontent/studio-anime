@@ -59,3 +59,64 @@ export const frameOn = (at, { headW = 0.30, yaw = 0, fov = 40, frameY = 0.38, s 
 };
 /** Two characters in one medium shot: frames their midpoint with each head ~headW wide. */
 export const frameTwo = (a, b, o = {}) => frameOn([(a[0] + b[0]) / 2, Math.min(a[1] || 0, b[1] || 0), (a[2] + b[2]) / 2], { headW: 0.26, frameY: 0.4, ...o });
+
+// ===================== camera that follows the action =====================
+/** Smoothed target: average of posAt over the last `lag` frames, so the camera trails a moving subject like a camera operator
+ *  (no jerks when the subject starts or stops). posAt(f) -> [x, y, z]. Pure function of f. */
+export const trail = (posAt, f, lag = 8) => {
+  if (lag <= 0) return posAt(f);
+  let s = [0, 0, 0], w = 0;
+  for (let k = 0; k <= lag; k++) { const wk = 1 - k / (lag + 1), p = posAt(f - k); s = s.map((v, i) => v + p[i] * wk); w += wk; }
+  return s.map((v) => v / w);
+};
+/** Follow a moving character with house framing: frameOn() around its trailed position. Use as the camera for a shot where someone
+ *  walks, runs, falls or is carried. o: frameOn options + lag (frames, default 8) + lead (metres ahead along the motion, default 0.6). */
+export const follow = (posAt, f, o = {}) => {
+  const { lag = 8, lead = 0.6, ...fo } = o, p = trail(posAt, f, lag), q2 = trail(posAt, f - 3, lag);
+  const v = [p[0] - q2[0], 0, p[2] - q2[2]], n = Math.hypot(v[0], v[2]) || 1, sp = Math.min(1, Math.hypot(v[0], v[2]) * 10);
+  return frameOn([p[0] + (v[0] / n) * lead * sp, p[1], p[2] + (v[2] / n) * lead * sp], fo);
+};
+/** Tracking shot alongside a moving object (boat, cart, train, falling block): the camera keeps a fixed offset from it and looks at it.
+ *  offset [dx, dy, dz] in metres, lookUp = height of the aimed point above the object. */
+export const track = (posAt, f, offset = [6, 2, 6], { lag = 6, fov = 40, lookUp = 1 } = {}) => {
+  const p = trail(posAt, f, lag); return { pos: [p[0] + offset[0], p[1] + offset[1], p[2] + offset[2]], look: [p[0], p[1] + lookUp, p[2]], fov };
+};
+/** Orbit around a point: deg/s turn speed from frame f0, radius r, height h. Great for a reveal (lighthouse, machine, monument). */
+export const orbit = (center, f, f0, { r = 12, h = 3, speed = 12, start = 0, fov = 40, lookUp = 1.5 } = {}) => {
+  const a = ((start + ((f - f0) / 30) * speed) * Math.PI) / 180;
+  return { pos: [center[0] + r * Math.sin(a), center[1] + h, center[2] + r * Math.cos(a)], look: [center[0], center[1] + lookUp, center[2]], fov };
+};
+/** Camera shake for impacts, thunder, explosions: returns a copy of the camera c, shaken for `dur` frames from f0 (decays). Deterministic. */
+export const shake = (c, f, f0, amp = 0.06, dur = 12) => {
+  const d = f - f0; if (d < 0 || d >= dur) return c; const k = amp * (1 - d / dur) ** 1.5, n = (s) => Math.sin(d * 2.7 + s) * 0.6 + Math.sin(d * 5.3 + s * 2) * 0.4;
+  return { ...c, pos: [c.pos[0] + n(1) * k, c.pos[1] + n(2) * k, c.pos[2] + n(3) * k], look: [c.look[0] + n(4) * k * 1.5, c.look[1] + n(5) * k * 1.5, c.look[2]], roll: (c.roll || 0) + n(6) * k * 40 };
+};
+
+// ===================== character actions (actor-level: add the result to the actor object) =====================
+// An actor in actorsAt() is { key, draw, x, y, z, s, roll, sx, sy, ... }. These return offsets to merge in, so a flat card
+// gets real cartoon physics: anticipation, squash and stretch, overshoot, settle.
+/** Hop / jump from frame f0: { dy, sx, sy }  (crouch 4 frames, take-off stretch, airborne, landing squash). h metres, dur frames in the air. */
+export const hop = (f, f0, h = 0.6, dur = 14) => {
+  const d = f - f0; if (d < 0 || d > dur + 12) return { dy: 0, sx: 1, sy: 1 };
+  if (d < 4) { const k = Math.sin((d / 4) * Math.PI / 2); return { dy: 0, sx: 1 + 0.12 * k, sy: 1 - 0.14 * k }; }            // anticipation
+  if (d < 4 + dur) { const u = (d - 4) / dur, st = Math.max(0, 1 - u * 3); return { dy: 4 * h * u * (1 - u), sx: 1 - 0.08 * st, sy: 1 + 0.12 * st }; }
+  const k = (d - 4 - dur) / 8, sq = k < 1 ? Math.sin(k * Math.PI) : 0; return { dy: 0, sx: 1 + 0.14 * sq, sy: 1 - 0.16 * sq };  // landing squash
+};
+/** Fall over from frame f0 (side: 1 = to the right, -1 = left): { roll, dy, sx, sy } — tips over with overshoot, bounces once. */
+export const fallOver = (f, f0, side = 1, dur = 12) => {
+  const d = f - f0; if (d < 0) return { roll: 0, dy: 0, sx: 1, sy: 1 };
+  const u = Math.min(1, d / dur), a = u * u * 1.45, bounce = d > dur ? Math.exp(-(d - dur) / 4) * Math.sin((d - dur) * 0.9) * 0.08 : 0;
+  return { roll: -side * Math.min(1.45, a + bounce), dy: 0, sx: 1, sy: 1 - (d > dur && d < dur + 4 ? 0.06 : 0) };
+};
+/** Tremble (fear, cold, effort): small fast x offset + roll. amp metres. */
+export const tremble = (f, amp = 0.02, seed = 1) => ({ dx: amp * Math.sin(f * 2.9 + seed) , roll: amp * 1.5 * Math.sin(f * 3.7 + seed * 2) });
+/** Run from frame f0 along a direction: { dist, step, bob, tilt } — step feeds romanFront `step` (legs), with run: true for long strides.
+ *  speed m/s. tilt (deg) leans the body forward; bob lifts the card at each stride. */
+export const run = (f, f0, speed = 3.2, stride = 1.1) => {
+  const t = Math.max(0, f - f0) / 30, ph = (t * speed) / (2 * stride);
+  return { dist: t * speed, step: ph % 1, bob: Math.abs(Math.sin(ph * Math.PI * 2)) * 0.06, tilt: 8 };
+};
+/** Pop in (appear with overshoot) from f0 over n frames: scale factor 0 -> 1.1 -> 1. */
+export const popIn = (f, f0, n = 10) => M.back((f - f0) / n);
+/** Rocking (boat, swaying sign, drunk walk): roll radians and dy metres. */
+export const rock = (f, amp = 0.08, period = 90, seed = 0) => ({ roll: amp * Math.sin((f / period) * Math.PI * 2 + seed), dy: amp * 0.6 * Math.sin((f / period) * Math.PI * 4 + seed) });

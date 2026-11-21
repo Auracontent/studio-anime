@@ -4,7 +4,7 @@
 
 # Cartoon short: idea → script → voiceover → finished MP4
 
-The look: flat 2D bean-head cartoon characters (canvas-drawn "cards" with plum outlines) in a colourful 3D world with black ink outlines, painted textures, depth-of-field and gliding cameras. The output is 1080x1920, 30 fps, exactly as long as the voiceover. The user's voice is unchanged. The music bed and SFX are synthesized and sit at **50 % of the voice level**. Proven on "The Soldier Who Never Left" (19.7 s, 8 shots).
+The look: flat 2D bean-head cartoon characters (canvas-drawn "cards" with plum outlines) in a colourful 3D world with black ink outlines, painted textures, depth-of-field and gliding cameras. The output is 1080x1920, 30 fps, exactly as long as the voiceover. The user's voice is unchanged. The music bed and SFX are synthesized and sit **well under the voice (music −12 dB, SFX −8 dB)**. Proven on "The Soldier Who Never Left" (19.7 s, 8 shots).
 
 ## Rules
 
@@ -12,7 +12,7 @@ The look: flat 2D bean-head cartoon characters (canvas-drawn "cards" with plum o
 - No real, named living people as characters, and no brand mascots or logos.  
 - No captions unless the user asks. Diegetic text (a carved message, a sign) is fine, and it must read correctly (not mirrored).  
 - Never edit or re-time the voice. The picture is timed to it, and every visual reaction lands 0-3 frames before its word.  
-- **Audio levels:** the music bed sits at 50 % of the voice level (−6 dB, gated RMS). SFX sit at 50 % or slightly less, with peaks capped so no hit pokes out over the narration. Always mix with `mix.py`, never by hand. Use no ducking or compression that would change this ratio; only one linear gain plus a peak limiter goes on the whole mix.  
+- **Audio levels:** the music bed sits at −12 dB under the voice (gated RMS, `MUSIC_DB`). SFX sit at −8 dB or less (`SFX_DB`), with peaks capped so no hit pokes out over the narration. Always mix with `mix.py`, never by hand. Use no ducking or compression that would change this ratio; only one linear gain plus a peak limiter goes on the whole mix.  
 - Keep the user informed with a task list. Send a stills contact sheet before the long render.
 
 ## Stage 1: Intake (always first)
@@ -140,7 +140,7 @@ Rewrite the cue table for the story; the synths stay. `audio.py` writes only ste
 
 - Music: a short march-like loop (kick/snare, plucked bass, brass pad). It stops at the twist line, then a low drone continues.  
 - SFX on events (in frames/30): whooshes on big moves, thunk on stamps, rumble+crash on collapses, scrape on metal, ting on reveals, sting on the twist, creaks, snap, splash, snore, leaves, water ambience.  
-- Mix with `python3 mix.py voice.mp3 music.wav sfx.wav`. It sets music to exactly 50 % of the voice's gated RMS (−6 dB) and SFX to 50 % with peaks capped at 0.7× the voice peak. It prints the measured levels: confirm music shows −6.0 dB vs voice and SFX is at or below that.  
+- Mix with `python3 mix.py voice.mp3 music.wav sfx.wav`. It sets music to −12 dB under the voice's gated RMS and SFX to −8 dB with peaks capped at 0.6× the voice peak (`MUSIC_DB`, `SFX_DB` to change). It prints the measured levels: confirm music shows −12.0 dB vs voice and SFX is at or below −8 dB.  
 - Lock picture timing before making sound. Any timing change means re-running audio.py and mix.py.
 
 ### 4.8 Render \+ finish
@@ -164,5 +164,5 @@ Rewrite the cue table for the story; the synths stay. `audio.py` writes only ste
 - `main.js`: renderer, toon materials, world, cards (1200x2000 CanvasTexture planes, origin at soles), passes colour (RT samples 4\) → normal/depth → ink+grade (saturation, gain/lift, vignette, flash) → DOF to screen. It exposes `window.renderFrame(f)` and `window.ready`.  
 - `story.js` exports SHOTS, `shotAt`, `camAt`, `dofAt`, LIGHTS/`lightFor`, `worldAt`, `actorsAt(f, T)`, `fxAt(f, T)`. All are pure functions of the frame.  
 - `render.mjs`: Playwright → `renderFrame(f)` → `toDataURL('image/jpeg', .95)` → `frames/f0000.jpg`.  
-- `mix.py`: gated-RMS level lock (music and SFX at 50 % of the voice). `finish.sh`: linear loudness gain, limiter, encode, QA.  
+- `mix.py`: gated-RMS level lock (music −12 dB, SFX −8 dB under the voice). `finish.sh`: linear loudness gain, limiter, encode, QA.  
 - Characters: the Pen API from mromidev/claude-animated-shorts `templates/bridge/toon.ts`, extended in the same module scope by the cast file.

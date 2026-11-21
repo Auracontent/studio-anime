@@ -63,9 +63,13 @@ jobs:
           prompt: |
             Tu es le réalisateur du studio. Lis CLAUDE.md puis SKILL.md, et fabrique l'épisode `${{ steps.slug.outputs.slug }}`
             à partir de `inbox/${{ steps.slug.outputs.slug }}/` (ou, s'il n'y a pas de dossier inbox, refais la réalisation de
-            `episodes/${{ steps.slug.outputs.slug }}/` existant en gardant sa voix) en suivant les étapes 2 à 9 de CLAUDE.md
-            (setup déjà fait, CHROME=/usr/bin/google-chrome). Le contrôle images fixes est obligatoire : lis la planche et corrige
-            jusqu'à ce qu'elle soit propre, surtout la taille des personnages (frameOn, tête ~30 % de la largeur).
+            `episodes/${{ steps.slug.outputs.slug }}/` existant en gardant sa voix) en suivant les étapes 2 à 10 de CLAUDE.md
+            (setup déjà fait, CHROME=/usr/bin/google-chrome). Applique d'abord la « Règle n°1 : on comprend l'histoire sans le son » :
+            écris PLAN.md (une action VISIBLE par phrase, accroche visuelle dans les 2 premières secondes, un seul héros, enjeu montré,
+            objet clé en gros plan, fin qui reboucle) et utilise les effets, ambiances, caméras et actions du moteur
+            (section « Effets, ambiances, caméra et actions », démo dans episodes/_demo-fx) partout où ils servent l'histoire.
+            Le contrôle images fixes est obligatoire : lis la planche et corrige jusqu'à ce qu'elle soit propre, surtout la taille
+            des personnages (frameOn, tête ~30 % de la largeur), et jusqu'à ce que l'histoire se comprenne en lisant seulement la planche.
             Ne lance PAS le rendu complet. Termine par : git add episodes/${{ steps.slug.outputs.slug }} ;
             git commit -m "Add episode ${{ steps.slug.outputs.slug }}" ; git pull --rebase ; git push.
             Si quelque chose bloque (voix illisible, script absent), écris le problème dans episodes/${{ steps.slug.outputs.slug }}/PROBLEME.md, commite et arrête-toi.
@@ -120,6 +124,7 @@ jobs:
           E=episodes/${{ needs.direct.outputs.slug }}
           T=$(python3 -c "import json;print(json.load(open('$E/meta.json'))['title'])")
           echo "$(ls frames | wc -l) images"; bash tools/finish.sh $E frames "$T" | tee qa.txt
+          [ -f $E/out/QA.md ] && cat $E/out/QA.md >> "$GITHUB_STEP_SUMMARY" || true   # rapport qualité visible sur la page du run
       - name: Déposer sur Hugging Face (dataset soradata/studio-anime, dossier <slug>/)
         env: { HF_TOKEN: "${{ secrets.HF_TOKEN }}", HF_DATASET: "${{ vars.HF_DATASET || 'soradata/studio-anime' }}" }
         run: |
