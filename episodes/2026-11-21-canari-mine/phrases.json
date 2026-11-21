@@ -1,0 +1,216 @@
+{
+ "duration": 45.760583,
+ "frames30": 1373,
+ "source": "silence-align (cost 4.81)",
+ "segments": [
+  [
+   0.33925,
+   1.092708
+  ],
+  [
+   1.319458,
+   3.705042
+  ],
+  [
+   4.284375,
+   4.974542
+  ],
+  [
+   5.437667,
+   7.886792
+  ],
+  [
+   8.392583,
+   9.743417
+  ],
+  [
+   9.99475,
+   10.83075
+  ],
+  [
+   11.189542,
+   11.917708
+  ],
+  [
+   12.777083,
+   13.6965
+  ],
+  [
+   13.991958,
+   14.862833
+  ],
+  [
+   15.085875,
+   15.969833
+  ],
+  [
+   16.21475,
+   17.273833
+  ],
+  [
+   18.076375,
+   19.198
+  ],
+  [
+   19.654708,
+   21.279417
+  ],
+  [
+   22.090333,
+   23.306542
+  ],
+  [
+   23.496292,
+   26.133958
+  ],
+  [
+   26.893375,
+   27.464833
+  ],
+  [
+   27.595875,
+   27.724333
+  ],
+  [
+   27.849917,
+   28.436583
+  ],
+  [
+   28.767083,
+   29.253333
+  ],
+  [
+   29.812542,
+   33.387
+  ],
+  [
+   34.012667,
+   34.714458
+  ],
+  [
+   34.863208,
+   37.068625
+  ],
+  [
+   37.794875,
+   41.303417
+  ],
+  [
+   41.436833,
+   41.581375
+  ],
+  [
+   41.946917,
+   43.28975
+  ],
+  [
+   43.545375,
+   43.727792
+  ],
+  [
+   43.900792,
+   45.255042
+  ],
+  [
+   45.600917,
+   45.760583
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ce petit canari descendait dans la mine pour s'\u00e9vanouir avant tout le monde.",
+   "s": 0.339,
+   "e": 3.705
+  },
+  {
+   "text": "Au fond des galeries,",
+   "s": 4.284,
+   "e": 4.975
+  },
+  {
+   "text": "un gaz invisible se glissait entre les mineurs.",
+   "s": 5.438,
+   "e": 7.887
+  },
+  {
+   "text": "Le monoxyde de carbone endormait les hommes sans qu'ils sentent rien.",
+   "s": 8.393,
+   "e": 11.918
+  },
+  {
+   "text": "Apr\u00e8s une explosion,",
+   "s": 12.777,
+   "e": 13.697
+  },
+  {
+   "text": "un savant \u00e9cossais,",
+   "s": 13.992,
+   "e": 14.863
+  },
+  {
+   "text": "John Haldane,",
+   "s": 15.086,
+   "e": 15.97
+  },
+  {
+   "text": "a eu une id\u00e9e simple.",
+   "s": 16.215,
+   "e": 17.274
+  },
+  {
+   "text": "Un oiseau respire tr\u00e8s vite,",
+   "s": 18.076,
+   "e": 19.198
+  },
+  {
+   "text": "alors le poison l'atteint bien avant nous.",
+   "s": 19.655,
+   "e": 21.279
+  },
+  {
+   "text": "Quand le canari vacillait,",
+   "s": 22.09,
+   "e": 23.307
+  },
+  {
+   "text": "les mineurs l\u00e2chaient leurs pioches et couraient vers la sortie.",
+   "s": 23.496,
+   "e": 26.134
+  },
+  {
+   "text": "Sauf que\u2026 le plus \u00e9tonnant,",
+   "s": 26.893,
+   "e": 28.437
+  },
+  {
+   "text": "c'est la suite.",
+   "s": 28.767,
+   "e": 29.253
+  },
+  {
+   "text": "Ils ont invent\u00e9 une minuscule cage avec une bouteille d'oxyg\u00e8ne.",
+   "s": 29.813,
+   "e": 33.387
+  },
+  {
+   "text": "Un tour de valve,",
+   "s": 34.013,
+   "e": 34.714
+  },
+  {
+   "text": "et le canari se r\u00e9veillait, pr\u00eat \u00e0 repartir.",
+   "s": 34.863,
+   "e": 37.069
+  },
+  {
+   "text": "Cette sentinelle a travaill\u00e9 en Angleterre jusqu'en mille neuf cent quatre-vingt-six.",
+   "s": 37.795,
+   "e": 43.29
+  },
+  {
+   "text": "Le premier \u00e0 tomber dans la mine \u00e9tait toujours le premier qu'on sauvait.",
+   "s": 43.545,
+   "e": 45.761
+  }
+ ]
+}
