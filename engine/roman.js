@@ -169,6 +169,9 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
       p.poly([[hx, hy - 70 * u], [hx + side * 14 * u, hy - 67 * u], [hx + side * 14 * u, hy - 47 * u], [hx, hy - 44 * u]], "#2f56a8", 0); p.poly([[hx + side * 14 * u, hy - 67 * u], [hx + side * 28 * u, hy - 64 * u], [hx + side * 28 * u, hy - 50 * u], [hx + side * 14 * u, hy - 47 * u]], "#ffffff", 0);
       p.poly([[hx + side * 28 * u, hy - 64 * u], [hx + side * 42 * u, hy - 62 * u], [hx + side * 42 * u, hy - 52 * u], [hx + side * 28 * u, hy - 50 * u]], "#d23a32", 0); p.poly([[hx, hy - 70 * u], [hx + side * 42 * u, hy - 62 * u], [hx + side * 42 * u, hy - 52 * u], [hx, hy - 44 * u]], null, 2 * u); break; }
     case "coin": p.ell(hx, hy - 6 * u, 9 * u, 9 * u, "#e9be4a", 2.2 * u); p.ell(hx, hy - 6 * u, 5 * u, 5 * u, null, 1.2 * u); break;
+    case "ballBig": case "ballSmall": case "ballBigB": case "ballSmallB": { // boules d'expérience : grosse rouge / petite bleue (même poids), tenues dans la paume
+      const big = kind.startsWith("ballBig"), r = (big ? 15.5 : 9) * u / 1.7 * 1.7, col = big ? "#e23d32" : "#2f7fd8", cy = hy - r * 0.85;
+      p.ell(hx, cy, r, r, col, 2.6 * u); p.ell(hx - r * 0.35, cy - r * 0.38, r * 0.3, r * 0.2, "#ffffffaa", 0, 0, 360, -30); break; }
     case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
   }
 };
@@ -283,6 +286,10 @@ export const romanFront = (p, key, opts = {}) => {
         p.band([[tcx - 0.62 * T.a, chin + 0.05 * HH], [tcx + 0.62 * T.a, chin + 0.07 * HH]], O.scarf, 0.13 * HH, 2 * u);
         p.band([[tcx + 0.3 * T.a, chin + 0.1 * HH], [tcx + 0.42 * T.a, chin + 0.5 * HH]], O.scarf, 0.1 * HH, 1.6 * u);
         p.band([[tcx + 0.3 * T.a, chin + 0.38 * HH], [tcx + 0.46 * T.a, chin + 0.4 * HH]], "#f3e6c8", 0.03 * HH, 0);
+      }
+      if (O.bowtie) { // nœud papillon
+        const by = chin + 0.1 * HH, bw = 0.34 * T.a;
+        p.poly([[tcx, by], [tcx - bw, by - 0.09 * HH], [tcx - bw, by + 0.09 * HH]], O.bowtie, 2 * u); p.poly([[tcx, by], [tcx + bw, by - 0.09 * HH], [tcx + bw, by + 0.09 * HH]], O.bowtie, 2 * u); p.dot(tcx, by, 4 * u, O.bowtie);
       }
       if (O.coat) { // capote: two rows of buttons, belt, collar
         for (const s of [-1, 1]) for (let i = 0; i < 4; i++) p.dot(tcx + s * 0.2 * T.a, chin + (0.2 + i * 0.17) * HH, 2.6 * u, "#d9a845");
