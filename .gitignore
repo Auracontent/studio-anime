@@ -14,3 +14,4 @@ __pycache__/
 episodes/*/sfx_manual.wav
 episodes/*/events.json
 engine/.ev_*/
+.env
