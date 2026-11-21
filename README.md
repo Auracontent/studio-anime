@@ -55,7 +55,7 @@ fails, the next run retries only that one). Videos published by hand are marked 
 3. Mode **test**: shows exactly what would be sent, publishes nothing.
 4. Mode **publier**: publishes one video now.
 5. Automatic: add the repository **variable** `PUBLISH_ENABLED` = `true` (Settings → Secrets and variables → Actions → *Variables*).
-   The cron then publishes one ready video every day at 18:07 Paris time (production runs daily at 7:17). Remove the variable to pause.
+   Scheduling is done by cron-job.org (Paris time), which calls the GitHub API: `idees.yml` at 10:17 and 22:17 (`{"ref":"main","inputs":{"voix_auto":"true"}}`: script, voice and video follow) and `publier.yml` at 12:07 and 19:07 (`{"ref":"main","inputs":{"mode":"publier"}}`). Token: fine-grained, this repo only, Actions read and write. Disable the cron-job.org jobs to pause.
 Options (variables): `TIKTOK_PRIVACY` (default `PUBLIC_TO_EVERYONE`), `YOUTUBE_VISIBILITY` (default `public`), `PUBLISH_AI_LABEL` (`0` to disable).
 
 ## Getting the Claude token

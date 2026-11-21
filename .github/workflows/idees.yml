@@ -1,13 +1,10 @@
 # Claude cherche un sujet (ou prend le tien), vérifie les faits et écrit le script à enregistrer.
 name: Idée + script
 on:
-  # GitHub schedules are best-effort: runs can start hours late or be dropped. So the script is made the evening before
-  # (22:17 Paris time in winter, 23:17 in summer; cron is UTC), which leaves ~20 h of margin before the 18:07 publication,
-  # with a backup at 10:37 Paris time that does nothing if a script was already added in the last 20 hours.
-  # Cron runs: Claude picks the topic; with GEMINI_API_KEY + brand/voice.json the voice and the video follow on their own.
-  schedule:
-    - cron: '17 21 * * *'   # main run, the evening before
-    - cron: '37 9 * * *'    # backup, skipped if the evening run worked
+  # Lancé de l'extérieur par cron-job.org (heure de Paris), deux fois par jour : 10h17 et 22h17.
+  #   POST https://api.github.com/repos/Auracontent/studio-anime/actions/workflows/idees.yml/dispatches
+  #   body {"ref":"main","inputs":{"voix_auto":"true"}}  -> script, puis voix Gemini, puis la vidéo (video.yml) s'enchaînent.
+  # Plus de « schedule: » GitHub (en retard ou sauté, et doublerait les lancements de cron-job.org).
   workflow_dispatch:
     inputs:
       sujet: { description: "Sujet (laisser vide : Claude choisit le plus viral)", required: false }

@@ -1,10 +1,12 @@
 # Publishes the oldest "ready" video from Hugging Face (soradata/studio-anime) to YouTube + TikTok through Zernio.
-# One video per run. The daily cron only publishes once the repository variable PUBLISH_ENABLED is "true"
+# One video per run, launched twice a day by cron-job.org. A GitHub schedule (none left) would only publish if PUBLISH_ENABLED is "true"
 # (Settings -> Secrets and variables -> Actions -> Variables), so nothing goes out before you have tested it.
 name: Publication
 on:
-  schedule:
-    - cron: '7 17 * * *'   # every day 18:07 Paris time in winter (19:07 in summer): cron is UTC
+  # Launched from cron-job.org (Paris time), twice a day: 12:07 and 19:07.
+  #   POST https://api.github.com/repos/Auracontent/studio-anime/actions/workflows/publier.yml/dispatches
+  #   body {"ref":"main","inputs":{"mode":"publier"}}  -> publishes the oldest ready video (one per run).
+  # To pause publishing, disable those jobs in cron-job.org (PUBLISH_ENABLED only applies to GitHub schedules, none left).
   workflow_dispatch:
     inputs:
       mode:
