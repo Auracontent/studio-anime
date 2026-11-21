@@ -15,6 +15,10 @@ def gated_rms(x, win=0.05, gate_db=-40):
     return float(np.sqrt((act ** 2).mean())) if len(act) else 1e-9
 db = lambda a: 20 * np.log10(max(a, 1e-12))
 v, m, s = (load(p) for p in sys.argv[1:4])
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from voicefix import clean          # Google voices end with ~0.2 s of metadata noise: silence it (timing unchanged)
+v, cut = clean(v, SR, open(sys.argv[1], 'rb').read())
+if cut: print(f'voix : {cut:.2f} s de bruit de fin (métadonnées Google) remplacées par du silence')
 N = len(v); m = np.pad(m, (0, max(0, N - len(m))))[:N]; s = np.pad(s, (0, max(0, N - len(s))))[:N]
 vr, vp = gated_rms(v), np.abs(v).max()
 MUSIC = 10 ** (float(os.environ.get('MUSIC_DB', '-12')) / 20); SFX = 10 ** (float(os.environ.get('SFX_DB', '-8')) / 20)
