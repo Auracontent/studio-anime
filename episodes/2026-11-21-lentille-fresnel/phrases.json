@@ -1,0 +1,284 @@
+{
+ "duration": 57.880583,
+ "frames30": 1736,
+ "source": "silence-align (cost 6.76)",
+ "segments": [
+  [
+   0.286042,
+   1.567542
+  ],
+  [
+   1.739125,
+   3.538042
+  ],
+  [
+   3.772875,
+   5.074458
+  ],
+  [
+   5.64325,
+   5.950417
+  ],
+  [
+   6.13125,
+   8.171625
+  ],
+  [
+   8.666375,
+   10.168708
+  ],
+  [
+   10.6665,
+   11.624292
+  ],
+  [
+   11.889583,
+   12.832417
+  ],
+  [
+   12.986125,
+   15.457125
+  ],
+  [
+   16.075333,
+   16.49675
+  ],
+  [
+   16.886833,
+   20.101208
+  ],
+  [
+   20.277083,
+   21.175917
+  ],
+  [
+   21.788458,
+   22.39625
+  ],
+  [
+   22.611125,
+   23.309125
+  ],
+  [
+   23.481292,
+   24.056375
+  ],
+  [
+   24.214083,
+   25.188833
+  ],
+  [
+   25.789458,
+   27.549958
+  ],
+  [
+   28.032042,
+   29.602667
+  ],
+  [
+   30.143292,
+   33.048125
+  ],
+  [
+   33.255375,
+   34.041875
+  ],
+  [
+   34.580375,
+   35.59375
+  ],
+  [
+   35.991542,
+   37.520625
+  ],
+  [
+   38.080417,
+   39.208292
+  ],
+  [
+   39.454833,
+   43.640375
+  ],
+  [
+   44.261167,
+   45.963
+  ],
+  [
+   46.093208,
+   46.461333
+  ],
+  [
+   46.620875,
+   47.272958
+  ],
+  [
+   48.22525,
+   48.888458
+  ],
+  [
+   49.063458,
+   50.267833
+  ],
+  [
+   50.641917,
+   51.185792
+  ],
+  [
+   51.954125,
+   53.079625
+  ],
+  [
+   53.311167,
+   54.695083
+  ],
+  [
+   55.341542,
+   55.73175
+  ],
+  [
+   56.447083,
+   57.217583
+  ],
+  [
+   57.720917,
+   57.880583
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "En mille huit cent vingt-trois,",
+   "s": 0.286,
+   "e": 1.568
+  },
+  {
+   "text": "un phare fran\u00e7ais a vu plus loin en retirant du verre.",
+   "s": 1.739,
+   "e": 5.074
+  },
+  {
+   "text": "Avant,",
+   "s": 5.643,
+   "e": 5.95
+  },
+  {
+   "text": "on br\u00fblait des lampes devant des miroirs de m\u00e9tal.",
+   "s": 6.131,
+   "e": 8.172
+  },
+  {
+   "text": "La lumi\u00e8re partait dans tous les sens.",
+   "s": 8.666,
+   "e": 10.169
+  },
+  {
+   "text": "Augustin Fresnel,",
+   "s": 10.666,
+   "e": 11.624
+  },
+  {
+   "text": "un ing\u00e9nieur,",
+   "s": 11.89,
+   "e": 12.832
+  },
+  {
+   "text": "veut la concentrer avec une lentille g\u00e9ante.",
+   "s": 12.986,
+   "e": 15.457
+  },
+  {
+   "text": "Sauf que pour porter la lumi\u00e8re \u00e0 des kilom\u00e8tres,",
+   "s": 16.075,
+   "e": 20.101
+  },
+  {
+   "text": "il faudrait un bloc de verre \u00e9pais comme un tonneau.",
+   "s": 20.277,
+   "e": 22.396
+  },
+  {
+   "text": "Trop lourd, trop cher,",
+   "s": 22.611,
+   "e": 23.309
+  },
+  {
+   "text": "et le verre avalerait la lumi\u00e8re.",
+   "s": 23.481,
+   "e": 25.189
+  },
+  {
+   "text": "Alors Fresnel a une id\u00e9e folle :",
+   "s": 25.789,
+   "e": 27.55
+  },
+  {
+   "text": "d\u00e9couper la lentille en anneaux.",
+   "s": 28.032,
+   "e": 29.603
+  },
+  {
+   "text": "Il garde seulement la surface qui courbe la lumi\u00e8re,",
+   "s": 30.143,
+   "e": 33.048
+  },
+  {
+   "text": "et jette tout le verre du milieu.",
+   "s": 33.255,
+   "e": 34.042
+  },
+  {
+   "text": "\u00c7a donne des cercles fins,",
+   "s": 34.58,
+   "e": 35.594
+  },
+  {
+   "text": "embo\u00eet\u00e9s comme les marches d'un escalier.",
+   "s": 35.992,
+   "e": 37.521
+  },
+  {
+   "text": "Au phare de Cordouan,",
+   "s": 38.08,
+   "e": 39.208
+  },
+  {
+   "text": "\u00e0 l'entr\u00e9e de la Gironde, la lentille tourne et lance un faisceau \u00e0 plus de trente kilom\u00e8tres. Pour les marins,",
+   "s": 39.455,
+   "e": 43.64
+  },
+  {
+   "text": "le phare appara\u00eet enfin avant les rochers.",
+   "s": 44.261,
+   "e": 47.273
+  },
+  {
+   "text": "Fresnel meurt en mille huit cent vingt-sept,",
+   "s": 48.225,
+   "e": 50.268
+  },
+  {
+   "text": "\u00e0 trente-neuf ans.",
+   "s": 50.642,
+   "e": 51.186
+  },
+  {
+   "text": "Deux si\u00e8cles plus tard,",
+   "s": 51.954,
+   "e": 53.08
+  },
+  {
+   "text": "ses anneaux \u00e9clairent encore des c\u00f4tes.",
+   "s": 53.311,
+   "e": 54.695
+  },
+  {
+   "text": "Son g\u00e9nie :",
+   "s": 55.342,
+   "e": 55.732
+  },
+  {
+   "text": "enlever du verre.",
+   "s": 56.447,
+   "e": 57.881
+  }
+ ]
+}

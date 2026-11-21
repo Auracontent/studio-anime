@@ -78,6 +78,16 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
     p.poly(body, null, ow);
     p.ell(cx, hc - 0.46 * H.b, 0.95 * H.a, 0.1 * H.b, mul(col, [0.5, 0.52, 0.6]), ow, 0, 180);
     p.ell(cx, hc - 0.94 * H.b, 6 * u, 6 * u, "#e8c45a", 2 * u);
+  } else if (kind === "bonnet") { // wool sailor / keeper cap: floppy dome falling to one side, folded brim
+    const col = O.hatCol || "#c8312c", dk = mul(col, [0.62, 0.55, 0.62]);
+    const dome = ellPts(cx, hc - 0.45 * H.b, 1.02 * H.a, 0.9 * H.b, 180, 360, 0, 48);
+    dome.push([cx + 1.02 * H.a, hc - 0.4 * H.b], [cx - 1.02 * H.a, hc - 0.4 * H.b]);
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.clip(dome, () => { for (let i = -5; i <= 5; i++) p.stroke([[cx + i * 14 * u, hc - 0.45 * H.b], [cx + i * 12 * u, hc - 1.4 * H.b]], 1.6 * u, dk); });
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
+    p.ell(cx + 0.95 * H.a, hc - 1.28 * H.b, 0.28 * H.a, 0.28 * H.a, mul(col, [1.1, 1.0, 1.0]), ow); // pompon / drooping tip
+    const brim = rrect(cx - 1.06 * H.a, hc - 0.86 * H.b, cx + 1.06 * H.a, hc - 0.6 * H.b, 8 * u);
+    p.shadedFill(brim, O.hatBand || "#2b3a5a", "#1a2238", light, H.a, 0.4); p.poly(brim, null, ow);
   } else if (kind === "chauff") {
     const col = O.hatCol || "#26303f";
     const crown = rrect(cx - 0.86 * H.a, hc - 1.38 * H.b, cx + 0.86 * H.a, hc - 0.5 * H.b, 10 * u);
@@ -289,7 +299,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
   else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
