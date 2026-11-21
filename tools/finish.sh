@@ -12,7 +12,7 @@ F="$EP/out/$SAFE.mp4"
 N=$(ls "$FR" | grep -c '^f[0-9]*\.jpg$'); MID=$(printf "f%04d.jpg" $((N / 2)))
 [ -f "$FR/$MID" ] && ffmpeg -v error -y -i "$FR/$MID" -q:v 2 "$EP/out/cover.jpg" || true
 python3 "$TOOLS/run_audio.py" "$EP"                                     # audio.py -> music.wav + sfx.wav
-( cd "$EP" && python3 "$TOOLS/mix.py" voice.wav music.wav sfx.wav )     # -> mix_raw.wav (musique -6 dB, bruitages <= -6 dB)
+( cd "$EP" && python3 "$TOOLS/mix.py" voice.wav music.wav sfx.wav )     # -> mix_raw.wav (musique -12 dB, bruitages <= -8 dB : MUSIC_DB / SFX_DB pour changer)
 # un seul gain linéaire jusqu'à -14 LUFS, puis un limiteur de crête (pas de compression)
 L=$(ffmpeg -nostats -i "$EP/mix_raw.wav" -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1 | awk '{print $2}')
 G=$(python3 -c "print(round(-14-($L),2))")
@@ -27,4 +27,6 @@ echo "--- QA (vide = aucune image noire ou figée)"
 ffmpeg -i "$F" -vf "freezedetect=n=0.001:d=1.5,blackdetect=d=0.3" -an -f null - 2>&1 | grep -E "freeze_start|black_start" || true
 ffmpeg -nostats -i "$F" -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1
 ffmpeg -v error -y -i "$F" -vf "fps=1/3,scale=180:-1,tile=10x2" -frames:v 1 "$EP/out/qa_sheet.jpg"
+echo "--- Contrôle qualité (out/QA.md)"
+python3 "$TOOLS/qa.py" "$EP" "$F" || true
 echo "$F"

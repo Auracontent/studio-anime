@@ -102,5 +102,5 @@ export function buildPhare(ctx) {
     const bk = S.block ?? 0; block.visible = bk > 0.01; block.scale.setScalar(Math.max(0.01, bk)); const ln = S.lens ?? 0; lens.visible = ln > 0.01; lens.scale.setScalar(Math.max(0.01, ln));
     rot.rotation.y = S.drum ?? 0; flames.forEach((m, i) => { const fl3 = S.flame ?? 1; m.scale.set(fl3, 1.5 * fl3 * (1 + 0.15 * Math.sin(f * 0.7 + i * 2)), fl3); });
   }
-  return { DECK, SPOTS, clouds, state };
+  return { DECK, SPOTS, clouds, state, water, beam };
 }

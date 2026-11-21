@@ -156,7 +156,7 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
 export const romanFront = (p, key, opts = {}) => {
   const O = typeof key === "string" ? OUTFITS[key] : key;
   const { expr = "neutral", blink = 0, look = 0, facing = 0, seed = 3, L = "hang", R = O.spear ? "spear" : "hang", tilt = 0, headTilt = 0,
-    bob = 0, nohelmet = false, light = rad(-120), web = false, step = 0 } = opts;
+    bob = 0, nohelmet = false, light = rad(-120), web = false, step = 0, run = false } = opts;
   const lid = lidOf(blink), skin = O.skin ?? SKIN;
   const V2 = CAST.v2 && opts.v2 !== false;
   const H = headBlob(seed, V2 ? 140 : 118, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100;
@@ -174,8 +174,8 @@ export const romanFront = (p, key, opts = {}) => {
   // ---- legs ----
   const dress = !!O.dress;
   for (const side of [-1, 1]) {
-    const up = Math.max(0, Math.sin(Math.PI * 2 * (step + (side > 0 ? 0.5 : 0)))) * 30 * (step ? 1 : 0);
-    const hx = cx + side * 16 * u, fx = cx + side * 22 * u, fy = sole - 4 * u - up;
+    const ph = Math.PI * 2 * (step + (side > 0 ? 0.5 : 0)), up = Math.max(0, Math.sin(ph)) * (run ? 62 : 30) * (step ? 1 : 0);
+    const hx = cx + side * 16 * u, fx = cx + side * 22 * u + (run && step ? Math.cos(ph) * 26 * u : 0), fy = sole - 4 * u - up;   // run: long strides, feet swing forward and back
     p.stroke(curve([hx, hipY], [(hx + fx) / 2 + side * 2 * u, (hipY + fy) / 2], [fx, fy]), (V2 ? 4.2 : 5.8) * u, legCol);
     const sandal = O.helmet ? LEATHER : "#5a3b2a";
     p.stroke([[fx - side * 3 * u, fy], [fx + side * 13 * u, fy + 0.5 * u]], 7.5 * u + 3, INK);
@@ -203,6 +203,11 @@ export const romanFront = (p, key, opts = {}) => {
       case "reach": { const lf = (opts.lift || 0) * 0.62 * HH; return { pts: [s, [X(42), s[1] - 0.12 * HH - lf * 0.6], [X(82), s[1] - 0.5 * HH - lf]], front: false }; }
       case "cheek": return { pts: [s, [X(16), s[1] + 0.05 * HH], [cx + side * (H.a + 2 * u), hc + 0.25 * H.b]], front: false };
       case "thumb": return { pts: [s, [X(20), s[1] + 0.12 * HH], [X(44), s[1] - 0.12 * HH]], front: false, thumb: true };
+      // action poses (story beats you can SEE): carry a heavy thing in front, push, hands on the head (panic), flail (wind-milling, use opts.wv)
+      case "carry": return { pts: [s, [X(10), s[1] + 0.3 * HH], [tcx + side * 0.55 * T.a, s[1] + 0.28 * HH]], front: true };
+      case "push": return { pts: [s, [X(36), s[1] + 0.06 * HH], [X(78), s[1] + 0.02 * HH]], front: false };
+      case "head": return { pts: [s, [X(24), s[1] - 0.28 * HH], [cx + side * (H.a * 0.55), hc - 0.78 * H.b]], front: false };
+      case "flail": { const w = Math.sin((opts.wv || 0) + (side > 0 ? 0 : 2.1)); return { pts: [s, [X(26 + 10 * w), s[1] - 0.18 * HH - 0.1 * w * HH], [X(44 + 24 * w), s[1] - 0.6 * HH + 0.35 * w * HH]], front: false }; }
       default: return { pts: [s, [X(4), s[1] + 0.48 * HH], [X(3), chin + 1.04 * HH]], front: false };
     }
   };
