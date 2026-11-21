@@ -133,9 +133,9 @@ const fsCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1), fsGeo = new THRE
 const fs = (mat) => { const s = new THREE.Scene(); s.add(new THREE.Mesh(fsGeo, mat)); return s; };
 const inkU = { col: { value: rtColor.texture }, nd: { value: rtNd.texture }, res: { value: new THREE.Vector2(W, H) }, px: { value: 1.6 }, fogCol: { value: new THREE.Color() },
   sat: { value: 1.08 }, lift: { value: new THREE.Color(0, 0, 0) }, gain: { value: new THREE.Color(1, 1, 1) }, vig: { value: 0.22 }, flash: { value: 0 },
-  ao: { value: 0.5 }, aoR: { value: 1 }, shTint: { value: new THREE.Color('#5d4a7a') }, shAmt: { value: 0.22 } };
+  ao: { value: 0.5 }, aoR: { value: 1 }, shTint: { value: new THREE.Color('#5d4a7a') }, shAmt: { value: 0.22 }, gam: { value: 1 } };
 const inkScene = fs(new THREE.ShaderMaterial({ uniforms: inkU, vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
-  fragmentShader: `uniform sampler2D col, nd; uniform vec2 res; uniform float px, sat, vig, flash, ao, aoR, shAmt; uniform vec3 fogCol, lift, gain, shTint; varying vec2 vUv;
+  fragmentShader: `uniform sampler2D col, nd; uniform vec2 res; uniform float px, sat, vig, flash, ao, aoR, shAmt, gam; uniform vec3 fogCol, lift, gain, shTint; varying vec2 vUv;
   // screen-space ambient occlusion from the depth buffer: soft darkening in corners, under props, around feet (world only, not the 2D cards)
   float aoAt(vec2 uv){
     vec4 c = texture2D(nd, uv); if (dot(c.rgb,c.rgb) < .01) return 0.; float d = c.a; if (d <= 0.) return 0.;
@@ -170,6 +170,7 @@ const inkScene = fs(new THREE.ShaderMaterial({ uniforms: inkU, vertexShader: `va
     if (flash < -0.5) c = vec3(e);
     float l = dot(c, vec3(.299,.587,.114)); c = mix(vec3(l), c, sat);
     c = c*gain + lift;
+    c = pow(max(c, vec3(0.)), vec3(1./gam));   // shadow lift (moods: gamma > 1 opens dark interiors and nights without burning the lights)
     vec2 q = vUv-.5; c *= 1. - vig*dot(q*vec2(1.,.75), q*vec2(1.,.75))*2.2;
     c = mix(c, vec3(1.), flash);
     gl_FragColor = vec4(c,1.); }` }));
@@ -205,7 +206,7 @@ function applyLight(L, f) {
   sun.color.set(L.sun); sun.intensity = L.sunI;
   scene.fog.color.set(L.fog); scene.fog.near = L.fogNear; scene.fog.far = L.fogFar;
   skyU.top.value.set(L.skyTop); skyU.hor.value.set(L.skyHor); skyU.sunCol.value.set(L.sunDisc || '#000'); skyU.sunSize.value = L.sunSize || 0;
-  inkU.sat.value = L.sat; inkU.gain.value.set(L.gain || '#ffffff'); inkU.lift.value.set(L.lift || '#000000');
+  inkU.sat.value = L.sat; inkU.gain.value.set(L.gain || '#ffffff').multiplyScalar(L.exposure ?? 1); inkU.gam.value = L.gamma ?? 1;   // exposure: brightens the whole picture (interiors, night) inkU.lift.value.set(L.lift || '#000000');
   inkU.ao.value = L.ao ?? 0.7; inkU.aoR.value = L.aoR ?? 1.35; inkU.shTint.value.set(L.shadowTint || '#5d4a7a'); inkU.shAmt.value = L.shadowAmt ?? 0.22;
   if (WORLD.onLight) WORLD.onLight(L, f);
 }

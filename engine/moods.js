@@ -4,6 +4,8 @@
 //   export const lightFor = (S, f) => S.id === 'orage' ? blendMood('soir', 'tempete', ramp(f, S.a, S.a + 20)) : mood(S.light);
 // Every mood is a full light object for main.js (sun, sky, fog, grade, ambient occlusion, tinted shadows).
 // mood(name, over) returns a copy with your overrides; blendMood(a, b, t) mixes two moods smoothly (colours and numbers).
+// exposure (default 1) brightens the whole picture, gamma (default 1) lifts the dark parts only: interiors and night stay readable
+// on a phone (aim for an average brightness >= 60/255; tools/qa.py flags seconds under 45).
 const base = { ao: 0.7, aoR: 1.35, shadowAmt: 0.22, shadowTint: '#5d4a7a', vig: 0.22, shadowExt: 22, sunSize: 0, sunDisc: '#000000', lift: '#000000', gain: '#ffffff' };
 export const MOODS = {
   // warm summer day, sun high: the house default
@@ -20,13 +22,13 @@ export const MOODS = {
     skyTop: '#4a5fb0', skyHor: '#ffb27a', sunDisc: '#fff0c8', sunSize: 0.0035, sat: 1.15, gain: '#fff0e0', vig: 0.26, shadowTint: '#5a4a80' },
   // night: luminous ultramarine, never black; a pale moon key so characters stay readable
   nuit: { ...base, az: 230, el: 38, sky: '#5a6ab8', ground: '#2a2a4a', hemi: 1.2, sun: '#b8c8ff', sunI: 1.6, fog: '#2a3a78', fogNear: 60, fogFar: 600,
-    skyTop: '#141c4a', skyHor: '#3a4a9a', sunDisc: '#eef2ff', sunSize: 0.002, sat: 1.12, gain: '#dfe6ff', lift: '#0a0c1e', vig: 0.32, shadowTint: '#3a3a8a', shadowAmt: 0.3, ao: 0.8 },
+    skyTop: '#141c4a', skyHor: '#3a4a9a', sunDisc: '#eef2ff', sunSize: 0.002, sat: 1.12, gain: '#dfe6ff', lift: '#0a0c1e', vig: 0.32, shadowTint: '#3a3a8a', shadowAmt: 0.3, ao: 0.8, exposure: 1.05, gamma: 1.2 },
   // storm: low dark teal sky, flat cold key, close fog. Pair with envAt: rain, wind, rough sea, lightning
   tempete: { ...base, az: 200, el: 30, sky: '#7a8a9a', ground: '#3a3a40', hemi: 1.25, sun: '#c8d4e0', sunI: 1.3, fog: '#4a5a66', fogNear: 25, fogFar: 300,
-    skyTop: '#1e2a34', skyHor: '#58687a', sat: 0.95, gain: '#e4ecf2', lift: '#0c1016', vig: 0.36, shadowTint: '#2a3a4a', shadowAmt: 0.28, ao: 0.8 },
+    skyTop: '#1e2a34', skyHor: '#58687a', sat: 0.95, gain: '#e4ecf2', lift: '#0c1016', vig: 0.36, shadowTint: '#2a3a4a', shadowAmt: 0.28, ao: 0.8, exposure: 1.05, gamma: 1.15 },
   // interior at night by lamp or fire: warm key from the side, deep blue ambient
   lampe: { ...base, az: 160, el: 22, sky: '#5a5aa0', ground: '#3a2a2a', hemi: 0.95, sun: '#ffbe70', sunI: 2.6, fog: '#2a2440', fogNear: 30, fogFar: 200,
-    skyTop: '#151a3a', skyHor: '#3a3a70', sat: 1.18, gain: '#fff0dc', lift: '#0a0812', vig: 0.34, shadowTint: '#3a2a6a', shadowAmt: 0.3, ao: 0.85 },
+    skyTop: '#151a3a', skyHor: '#3a3a70', sat: 1.18, gain: '#fff0dc', lift: '#120e1a', vig: 0.28, shadowTint: '#3a2a6a', shadowAmt: 0.26, ao: 0.75, exposure: 1.15, gamma: 1.35 },
   // winter / cold: white-blue light, pale sky
   froid: { ...base, az: 150, el: 26, sky: '#d8e4f4', ground: '#9aa4b4', hemi: 1.2, sun: '#e8f0ff', sunI: 2.2, fog: '#d8e2ee', fogNear: 60, fogFar: 600,
     skyTop: '#7a9ad0', skyHor: '#e8eef6', sat: 1.0, gain: '#f2f6ff', vig: 0.22, shadowTint: '#4a5a8a' },

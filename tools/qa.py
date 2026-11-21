@@ -28,7 +28,7 @@ row('Plan de tournage (PLAN.md)', 'OK' if os.path.exists(f'{EP}/PLAN.md') else '
     'une ligne par phrase : action visible, caméra, ambiance, effet')
 story = open(f'{EP}/web/story.js', encoding='utf-8').read() if os.path.exists(f'{EP}/web/story.js') else ''
 if story:
-    fx = sorted(set(re.findall(r'\b(rain|snow|motes|sea|lightning|sparks|embers|smoke|spray|beams)\s*:', story)))
+    fx = sorted(set(re.findall(r'\b(rain|snow|motes|sea|lightning|sparks|embers|smoke|spray|beams)\b\s*(?::|=|\.push)', story))) if 'envAt' in story else []
     acts = sorted(set(re.findall(r'\b(follow|track|orbit|shake|hop|fallOver|run|tremble|rock|popIn|transition)\(', story)))
     poses = sorted(set(re.findall(r"'(carry|push|head|flail|lift|reach|point|wave|up)'", story)))
     moods = sorted(set(re.findall(r"\b(?:mood|blendMood)\(\s*'(\w+)'", story)))
@@ -63,7 +63,7 @@ if VID and os.path.exists(VID):
     hook = float(np.mean(sec[:2])) if len(sec) >= 2 else 0
     row('Mouvement dans les 2 premières s', 'OK' if hook >= 2.5 else 'A REVOIR', f'{hook:.1f}', '≥ 2,5 (une action ou un mouvement fort dès l\'ouverture)')
     lum = [fr[i * FPS][mask].mean() for i in range(len(fr) // FPS)]
-    dark = [i for i, l in enumerate(lum) if l < 45]
+    dark = [i for i, l in enumerate(lum) if l < 45]   # 45/255 = clearly too dark on a phone; aim for >= 60
     row('Secondes trop sombres', 'OK' if not dark else 'A REVOIR', f'{len(dark)}' + (f' (s {", ".join(map(str, dark[:12]))})' if dark else ''), 'luminosité moyenne ≥ 45/255, même la nuit')
 
 # ---------- rapport ----------
