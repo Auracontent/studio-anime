@@ -11,3 +11,4 @@ episodes/*/mix_raw.wav
 episodes/*/subs.ass
 __pycache__/
 *.pyc
+.env
