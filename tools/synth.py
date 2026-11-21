@@ -142,6 +142,50 @@ def boom():
     return (rumble(1.6) * 1.2 + np.pad(crash(1.0), (0, int(1.6 * SR) - int(1.0 * SR))) * 0.6).astype(np.float32)
 
 
+# ---------------- cartoon kit (used by tools/autosfx.py, also usable by hand in audio.py) ----------------
+def pop():                         # something appears: short bright bubble pop
+    d = 0.12; n = int(d * SR); t = np.arange(n) / SR; f = 520 + 900 * np.exp(-t * 40)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 34) * 0.8 + hp_fast(noise(d), 3000) * np.exp(-t * 120) * 0.3).astype(np.float32)
+def boing(d=0.45):                 # jump take-off: springy rising wobble
+    n = int(d * SR); t = np.arange(n) / SR; f = 180 + 260 * (t / d) + 40 * np.sin(2 * np.pi * 14 * t)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 6) * np.minimum(1, t / 0.01) * 0.7).astype(np.float32)
+def thud(f0=70):                   # landing, body on the floor
+    return (thunk(f0, 0.35) * 1.1 + np.pad(lp_fast(noise(0.12), 900) * np.exp(-np.arange(int(0.12 * SR)) / SR * 40), (0, int(0.35 * SR) - int(0.12 * SR))) * 0.5).astype(np.float32)
+def bonk():                        # fall / hit: hollow wood knock + slide down whistle
+    d = 0.6; n = int(d * SR); t = np.arange(n) / SR; f = 900 - 600 * np.minimum(1, t / 0.5)
+    k = np.pad(thunk(190, 0.25), (0, n - int(0.25 * SR))) * 1.0 + np.sin(2 * np.pi * np.cumsum(f) / SR) * 0.25 * np.exp(-t * 3) * (t > 0.08)
+    return k.astype(np.float32)
+def swish(d=0.28):                 # fast whip pan: brighter, shorter whoosh with a pitch sweep
+    n = int(d * SR); t = np.arange(n) / SR; x = noise(d)
+    lo = lp_fast(x, 3500) - lp_fast(x, 600)
+    return (lo * np.sin(np.pi * t / d) ** 3 * 1.2).astype(np.float32)
+def gasp():                        # surprise "!" : rising two-note ding
+    d = 0.32; n = int(d * SR); t = np.arange(n) / SR; f = np.where(t < 0.09, 1046.5, 1568)
+    return (np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 9) * 0.5).astype(np.float32)
+def step_tap():                    # one footstep
+    d = 0.09; n = int(d * SR); t = np.arange(n) / SR
+    return (lp_fast(noise(d), 1400) * np.exp(-t * 60) * 0.8 + np.sin(2 * np.pi * 110 * t) * np.exp(-t * 50) * 0.5).astype(np.float32)
+def thunder(d=2.6):                # crack then long rolling rumble
+    n = int(d * SR); t = np.arange(n) / SR
+    crack = hp_fast(noise(d), 1200) * np.exp(-t * 14) * 1.2
+    roll = lp_fast(noise(d), 160) * (np.minimum(1, t / 0.15) * np.exp(-t * 1.2)) * (1 + 0.5 * np.sin(2 * np.pi * 3.1 * t) * np.sin(2 * np.pi * 0.7 * t)) * 3.0
+    return (crack + roll).astype(np.float32)
+def crackle(d=1.5):                # sparks / fire crackle
+    n = int(d * SR); out = np.zeros(n, np.float32); r = np.random.default_rng(11)
+    for k in r.uniform(0, d, int(d * 28)):
+        i = int(k * SR); b = hp_fast(noise(0.02), 2500) * np.exp(-np.arange(int(0.02 * SR)) / SR * 300) * r.uniform(0.3, 1); out[i:i + len(b)] += b[: n - i]
+    return out
+def rain_loop(d):                  # steady rain bed
+    n = int(d * SR); t = np.arange(n) / SR
+    return (hp_fast(lp_fast(noise(d), 7000), 1500) * 0.35 * np.minimum(1, t / 0.6) * np.minimum(1, (d - t) / 0.6)).astype(np.float32)
+def sea_loop(d, k=0.5):            # waves breaking: slow swells of filtered noise
+    n = int(d * SR); t = np.arange(n) / SR; sw = 0.45 + 0.55 * np.sin(2 * np.pi * (0.12 + 0.08 * k) * t) ** 2
+    return ((lp_fast(noise(d), 500 + 900 * k) * 0.8 + hp_fast(lp_fast(noise(d), 4000), 1500) * 0.25 * k) * sw * np.minimum(1, t / 0.8) * np.minimum(1, (d - t) / 0.8)).astype(np.float32)
+def wind_loop(d, k=0.5):           # gusts
+    n = int(d * SR); t = np.arange(n) / SR; g = 0.5 + 0.5 * np.sin(2 * np.pi * 0.23 * t) * np.sin(2 * np.pi * 0.07 * t + 1)
+    return (lp_fast(noise(d), 700) * g * 0.6 * k * np.minimum(1, t / 0.8) * np.minimum(1, (d - t) / 0.8)).astype(np.float32)
+
+
 def write_stems(prefix=""):
     def w(name, x):
         m = max(np.abs(x).max(), 1e-6); pcm = (np.clip(x / m * 0.9, -1, 1) * 32767).astype(np.int16)

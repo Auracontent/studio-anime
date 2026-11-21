@@ -29,7 +29,7 @@ row('Plan de tournage (PLAN.md)', 'OK' if os.path.exists(f'{EP}/PLAN.md') else '
 story = open(f'{EP}/web/story.js', encoding='utf-8').read() if os.path.exists(f'{EP}/web/story.js') else ''
 if story:
     fx = sorted(set(re.findall(r'\b(rain|snow|motes|sea|lightning|sparks|embers|smoke|spray|beams)\s*:', story)))
-    acts = sorted(set(re.findall(r'\b(follow|track|orbit|shake|hop|fallOver|run|tremble|rock|popIn)\(', story)))
+    acts = sorted(set(re.findall(r'\b(follow|track|orbit|shake|hop|fallOver|run|tremble|rock|popIn|transition)\(', story)))
     poses = sorted(set(re.findall(r"'(carry|push|head|flail|lift|reach|point|wave|up)'", story)))
     moods = sorted(set(re.findall(r"\b(?:mood|blendMood)\(\s*'(\w+)'", story)))
     row('Effets 3D (envAt)', 'OK' if fx else 'INFO', ', '.join(fx) or 'aucun', 'au moins un effet qui sert l\'histoire')

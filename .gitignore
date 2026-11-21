@@ -11,3 +11,6 @@ episodes/*/mix_raw.wav
 episodes/*/subs.ass
 __pycache__/
 *.pyc
+episodes/*/sfx_manual.wav
+episodes/*/events.json
+engine/.ev_*/

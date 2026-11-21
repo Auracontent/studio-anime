@@ -120,3 +120,28 @@ export const run = (f, f0, speed = 3.2, stride = 1.1) => {
 export const popIn = (f, f0, n = 10) => M.back((f - f0) / n);
 /** Rocking (boat, swaying sign, drunk walk): roll radians and dy metres. */
 export const rock = (f, amp = 0.08, period = 90, seed = 0) => ({ roll: amp * Math.sin((f / period) * Math.PI * 2 + seed), dy: amp * 0.6 * Math.sin((f / period) * Math.PI * 4 + seed) });
+
+// ===================== transitions that travel instead of cutting =====================
+// A and B are camera keys ({ pos, look, fov }) of the end of the outgoing shot and the start of the incoming one: they may be in
+// two different places (exterior / interior x = 3000). The swap happens at the middle, hidden by the speed and the motion blur,
+// so the viewer feels one continuous camera move. The returned camera carries mblur: [dx, dy] (pixels) for the motion-blur pass.
+// Use inside camAt:   if (f >= 300 && f < 312) return transition('whip', camA, camB, f, 300, 12);
+const rotY = (v, a) => [v[0] * Math.cos(a) + v[2] * Math.sin(a), v[1], -v[0] * Math.sin(a) + v[2] * Math.cos(a)];
+const aim = (c, yaw, pitch, dist = 10) => {           // turn the camera c by yaw / pitch (radians) around its own position
+  let d = [c.look[0] - c.pos[0], c.look[1] - c.pos[1], c.look[2] - c.pos[2]]; const n = Math.hypot(...d) || 1; d = d.map((x) => x / n);
+  d = rotY(d, yaw); const h = Math.hypot(d[0], d[2]), el = Math.atan2(d[1], h) + pitch, ch = Math.cos(el) / (h || 1);
+  d = [d[0] * ch, Math.sin(el), d[2] * ch]; return { ...c, look: [c.pos[0] + d[0] * dist, c.pos[1] + d[1] * dist, c.pos[2] + d[2] * dist] };
+};
+/** type: 'whip' (fast pan sideways, dir 1 = to the right), 'rise' (tilt up to the sky and come down elsewhere),
+ *  'drop' (dive down past the ground), 'push' (rush forward into the subject). n frames (8-14 look right). */
+export const transition = (type, A, B, f, f0, n = 10, { dir = 1, angle } = {}) => {
+  const t = clamp((f - f0) / n), first = t < 0.5, u = first ? t * 2 : (t - 0.5) * 2;
+  const inK = Math.pow(u, 2.2), outK = 1 - Math.pow(1 - u, 2.2), speed = first ? 2.2 * Math.pow(u, 1.2) : 2.2 * Math.pow(1 - u, 1.2);   // 0 at the ends, max at the swap
+  if (type === 'whip') { const a = (angle ?? 1.25) * dir, c = first ? aim(A, -a * inK, 0) : aim(B, a * (1 - outK), 0); return { ...c, mblur: [dir * 90 * speed, 0], swap: !first }; }
+  if (type === 'rise' || type === 'drop') { const s = type === 'rise' ? 1 : -1, a = 1.2 * s;
+    const c = first ? aim({ ...A, pos: [A.pos[0], A.pos[1] + s * 2 * inK, A.pos[2]] }, 0, a * inK) : aim({ ...B, pos: [B.pos[0], B.pos[1] + s * 2 * (1 - outK), B.pos[2]] }, 0, a * (1 - outK));
+    return { ...c, mblur: [0, -s * 90 * speed], swap: !first }; }
+  if (type === 'push') { const C = first ? A : B, k = first ? inK : 1 - outK, d = [C.look[0] - C.pos[0], C.look[1] - C.pos[1], C.look[2] - C.pos[2]];
+    return { ...C, pos: C.pos.map((v, i) => v + d[i] * 0.55 * k), fov: C.fov * (1 - 0.35 * k), mblur: [0, 0], zoomBlur: 0.9 * speed, swap: !first }; }
+  return first ? A : B;
+};
