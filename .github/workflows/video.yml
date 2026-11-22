@@ -51,11 +51,36 @@ jobs:
       - name: Outils
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu >/dev/null
-          pip install --quiet numpy pillow faster-whisper
+          pip install --quiet numpy pillow faster-whisper && pip install --quiet -U av
           bash tools/setup.sh
           # Télécharger le modèle ICI (réseau libre) : dans l'étape de Claude, le téléchargement échouait et timing.py retombait
           # sur l'alignement par silences, d'où des sous-titres décalés. Ensuite HF_HUB_OFFLINE=1 lit le modèle en cache.
           python3 -c "from faster_whisper import WhisperModel; WhisperModel('small', compute_type='int8'); print('modèle Whisper prêt')"
+      - name: Contrôler la voix (dit-elle bien le script, et rien d'autre ?)
+        if: ${{ steps.slug.outputs.direct == 'true' }}
+        env: { GEMINI_API_KEY: "${{ secrets.GEMINI_API_KEY }}" }
+        run: |
+          S="${{ steps.slug.outputs.slug }}"
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f episodes/$S/PROBLEME.md ]; then   # problème d'un essai précédent : on repart de zéro
+            git rm -q episodes/$S/PROBLEME.md && git commit -qm "Retry $S: remove the previous PROBLEME.md" \
+              && { for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; sleep $((i*5)); done; }
+          fi
+          V=$(ls inbox/$S/voice.* 2>/dev/null | head -1); T=inbox/$S/script.txt
+          [ -n "$V" ] && [ -f "$T" ] || { echo "Pas de voix ou de script dans inbox/$S : contrôle sauté."; exit 0; }
+          set +e; python3 tools/voicecheck.py "$V" "$T"; C=$?; set -e
+          if [ $C -ne 3 ]; then exit 0; fi
+          # Voix ratée (souvent : Gemini a lu la consigne de jeu à voix haute) : on la régénère, deux essais au plus.
+          [ -n "$GEMINI_API_KEY" ] || { echo "::error::La voix ne suit pas le script et GEMINI_API_KEY manque pour la refaire. Réenregistre inbox/$S/voice.wav."; exit 1; }
+          for i in 1 2; do
+            echo "--- nouvelle voix, essai $i"; python3 tools/tts.py "$T" inbox/$S/voice.wav
+            set +e; python3 tools/voicecheck.py inbox/$S/voice.wav "$T"; C=$?; set -e
+            [ $C -ne 3 ] && break
+          done
+          [ $C -ne 3 ] || { echo "::error::Après 2 essais, la voix ne suit toujours pas le script : épisode non réalisé."; exit 1; }
+          [ "$V" != "inbox/$S/voice.wav" ] && git rm -q "$V" || true
+          git add inbox/$S/voice.wav && git commit -m "Regenerate TTS voice for $S (the previous one did not follow the script)" \
+            && { for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; echo "push retry $i"; sleep $((i*5)); done; }
       - name: Claude réalise l'épisode
         if: ${{ steps.slug.outputs.direct == 'true' }}
         uses: anthropics/claude-code-action@v1
