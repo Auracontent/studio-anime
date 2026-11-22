@@ -1,0 +1,186 @@
+{
+ "duration": 51.280583,
+ "frames30": 1538,
+ "source": "silence-align (cost 7.04)",
+ "segments": [
+  [
+   0.260792,
+   2.186667
+  ],
+  [
+   2.352125,
+   4.493625
+  ],
+  [
+   4.919458,
+   6.4875
+  ],
+  [
+   6.9135,
+   8.30575
+  ],
+  [
+   8.668542,
+   9.000833
+  ],
+  [
+   9.165333,
+   9.573
+  ],
+  [
+   9.863667,
+   10.823542
+  ],
+  [
+   11.363792,
+   12.708875
+  ],
+  [
+   13.730292,
+   15.0185
+  ],
+  [
+   15.686833,
+   16.875667
+  ],
+  [
+   17.68325,
+   19.524542
+  ],
+  [
+   20.104042,
+   21.253708
+  ],
+  [
+   21.557125,
+   23.008708
+  ],
+  [
+   23.779292,
+   26.133875
+  ],
+  [
+   26.490375,
+   30.40425
+  ],
+  [
+   31.192667,
+   34.80125
+  ],
+  [
+   35.849917,
+   37.2965
+  ],
+  [
+   38.1065,
+   38.875917
+  ],
+  [
+   39.205292,
+   40.609917
+  ],
+  [
+   41.275708,
+   44.062458
+  ],
+  [
+   44.485625,
+   45.92775
+  ],
+  [
+   46.860708,
+   48.467875
+  ],
+  [
+   49.318958,
+   50.826917
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Il a gagn\u00e9 le Tour de France\u2026 en finissant cinqui\u00e8me.",
+   "s": 0.261,
+   "e": 4.494
+  },
+  {
+   "text": "C'\u00e9tait en 1904.",
+   "s": 4.919,
+   "e": 6.487
+  },
+  {
+   "text": "Henri Cornet avait dix-neuf ans,",
+   "s": 6.913,
+   "e": 9.001
+  },
+  {
+   "text": "et il p\u00e9dalait sur deux pneus crev\u00e9s.",
+   "s": 9.165,
+   "e": 10.824
+  },
+  {
+   "text": "Cette ann\u00e9e-l\u00e0,",
+   "s": 11.364,
+   "e": 12.709
+  },
+  {
+   "text": "des clous et du verre jonchaient la route.",
+   "s": 13.73,
+   "e": 15.018
+  },
+  {
+   "text": "Des supporters bloquaient les coureurs \u00e0 coups de b\u00e2ton,",
+   "s": 15.687,
+   "e": 19.525
+  },
+  {
+   "text": "et les commissaires tiraient en l'air pour les disperser.",
+   "s": 20.104,
+   "e": 23.009
+  },
+  {
+   "text": "Les favoris, eux, sautaient dans un train,",
+   "s": 23.779,
+   "e": 26.134
+  },
+  {
+   "text": "ou dans une voiture, d\u00e8s que personne ne regardait.",
+   "s": 26.49,
+   "e": 30.404
+  },
+  {
+   "text": "Sauf que quelqu'un a fini par regarder.",
+   "s": 31.193,
+   "e": 34.801
+  },
+  {
+   "text": "Quatre mois plus tard,",
+   "s": 35.85,
+   "e": 37.297
+  },
+  {
+   "text": "les quatre premiers sont disqualifi\u00e9s.",
+   "s": 38.106,
+   "e": 40.61
+  },
+  {
+   "text": "Le jeune Cornet passe de la cinqui\u00e8me \u00e0 la premi\u00e8re place,",
+   "s": 41.276,
+   "e": 44.062
+  },
+  {
+   "text": "sans avoir lev\u00e9 les bras sur la ligne.",
+   "s": 44.486,
+   "e": 45.928
+  },
+  {
+   "text": "Le plus jeune vainqueur de l'histoire du Tour,",
+   "s": 46.861,
+   "e": 48.468
+  },
+  {
+   "text": "c'est celui qui est arriv\u00e9 cinqui\u00e8me.",
+   "s": 49.319,
+   "e": 50.827
+  }
+ ]
+}

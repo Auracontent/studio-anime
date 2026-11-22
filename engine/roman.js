@@ -221,6 +221,9 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
     case "ballBig": case "ballSmall": case "ballBigB": case "ballSmallB": { // boules d'expérience : grosse rouge / petite bleue (même poids), tenues dans la paume
       const big = kind.startsWith("ballBig"), r = (big ? 15.5 : 9) * u / 1.7 * 1.7, col = big ? "#e23d32" : "#2f7fd8", cy = hy - r * 0.85;
       p.ell(hx, cy, r, r, col, 2.6 * u); p.ell(hx - r * 0.35, cy - r * 0.38, r * 0.3, r * 0.2, "#ffffffaa", 0, 0, 360, -30); break; }
+    case "stick": { p.stroke([[hx - 4 * u, hy + 20 * u], [hx + side * 6 * u, hy - 62 * u]], 9 * u, "#6a4426"); p.stroke([[hx - 4 * u, hy + 20 * u], [hx + side * 6 * u, hy - 62 * u]], 4 * u, "#9a6a3e"); p.ell(hx + side * 6 * u, hy - 64 * u, 9 * u, 8 * u, "#6a4426", 2.2 * u); break; }   // bâton / gourdin
+    case "pistol": { p.poly([[hx - 8 * u, hy - 14 * u], [hx - 2 * u, hy - 14 * u], [hx + 4 * u, hy + 12 * u], [hx - 8 * u, hy + 12 * u]], "#5a3a22", 2.2 * u);   // crosse
+      p.poly(rrect(hx - 10 * u, hy - 26 * u, hx + 8 * u, hy - 12 * u, 3 * u), "#3a3f48", 2.4 * u); p.poly(rrect(hx + side * 4 * u - 4 * u, hy - 24 * u, hx + side * 36 * u + 4 * u, hy - 15 * u, 2 * u), "#5a606a", 2.2 * u); break; }   // revolver de commissaire
     case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
     case "brush": { p.stroke([[hx - 6 * u, hy + 16 * u], [hx + 2 * u, hy - 40 * u]], 3.6 * u, "#8a5a34"); p.poly([[hx - 1 * u, hy - 38 * u], [hx + 7 * u, hy - 38 * u], [hx + 6 * u, hy - 58 * u], [hx + 2 * u, hy - 62 * u]], "#1b1418", 2 * u); break; }
     case "bomb": { const r = 17 * u, cy = hy - r * 0.8; p.stroke([[hx, cy - r * 0.9], [hx + 3 * u, cy - r * 1.5]], 4 * u, "#e8d8a0"); p.ell(hx, cy - r * 0.95, r * 0.34, r * 0.22, "#5a3a24", 2.2 * u); p.ell(hx, cy, r, r, "#7a4a2e", 2.6 * u);
