@@ -131,5 +131,12 @@ jobs:
           if [ -z "$HF_TOKEN" ]; then echo "Secret HF_TOKEN missing: the video cannot be stored (no Release anymore)."; exit 1; fi
           pip install --quiet "huggingface_hub[hf_xet]"
           python3 tools/hf_upload.py episodes/${{ needs.direct.outputs.slug }}
+      - name: Fermer l'issue du script (la vidéo est prête)
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          S="${{ needs.direct.outputs.slug }}"
+          for n in $(gh issue list --state open --limit 100 --json number,body --jq ".[] | select(.body | contains(\"inbox/$S/\")) | .number"); do
+            gh issue close "$n" --comment "Vidéo prête et déposée sur Hugging Face (dossier \`$S/\`) : elle partira à la prochaine publication. Rapport qualité : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
+          done
       - uses: actions/upload-artifact@v4
         with: { name: "video-${{ needs.direct.outputs.slug }}", path: "episodes/${{ needs.direct.outputs.slug }}/out/", retention-days: 3 }
