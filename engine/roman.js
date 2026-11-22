@@ -141,6 +141,23 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
     p.shadedFill(cone, col, dk, light, H.a, 0.4); p.poly(cone, null, ow);
     p.ell(cx, hc - 0.5 * H.b, 1.14 * H.a, 0.24 * H.b, O.hatBand || "#4a3626", ow);
     for (let i = -4; i <= 4; i++) p.stroke([[cx + i * 0.25 * H.a, hc - 0.4 * H.b], [cx + i * 0.25 * H.a + 3 * u, hc - 0.62 * H.b]], 1.6 * u, "#2a1e16");
+  } else if (kind === "chapeauplume") { // grand chapeau 1900 à large bord, noeud, fleur et grande plume (Pourkoipa original)
+    const col = O.hatCol || "#5a2a6a", dk = mul(col, [0.55, 0.5, 0.62]), ft = O.feather || "#f4efe4";
+    p.ell(cx, hc - 0.52 * H.b, 1.62 * H.a, 0.3 * H.b, col, ow);                                        // large bord
+    const crown = ellPts(cx, hc - 0.62 * H.b, 1.0 * H.a, 0.82 * H.b, 180, 360, 0, 40);
+    p.shadedFill(crown, col, dk, light, H.a, 0.4); p.inkRing(crown, ow * 0.95, thickAngle(light));
+    p.band([[cx - 0.98 * H.a, hc - 0.7 * H.b], [cx + 0.98 * H.a, hc - 0.7 * H.b]], O.hatBand || "#e8c24a", 9 * u, 1.4 * u);
+    const fe = [[cx + 0.5 * H.a, hc - 1.0 * H.b], [cx + 1.1 * H.a, hc - 1.9 * H.b], [cx + 1.75 * H.a, hc - 1.7 * H.b], [cx + 1.5 * H.a, hc - 1.0 * H.b], [cx + 1.0 * H.a, hc - 0.8 * H.b]];
+    p.shadedFill(fe, ft, mul(ft, [0.8, 0.78, 0.86]), light, H.a, 0.4); p.poly(fe, null, ow * 0.9);
+    p.stroke([[cx + 0.6 * H.a, hc - 0.95 * H.b], [cx + 1.5 * H.a, hc - 1.65 * H.b]], 2 * u, mul(ft, [0.6, 0.58, 0.66]));
+    p.ell(cx - 0.55 * H.a, hc - 0.8 * H.b, 0.22 * H.a, 0.2 * H.b, "#e0455a", 2 * u); p.ell(cx - 0.55 * H.a, hc - 0.8 * H.b, 0.08 * H.a, 0.07 * H.b, "#ffd75e", 0);
+  } else if (kind === "toque") { // toque de magistrat : cylindre noir, bandeau d'hermine
+    const col = O.hatCol || "#1d1a24";
+    const crown = rrect(cx - 0.8 * H.a, hc - 1.42 * H.b, cx + 0.8 * H.a, hc - 0.5 * H.b, 8 * u);
+    p.shadedFill(crown, col, mul(col, [0.6, 0.6, 0.7]), light, H.a, 0.4); p.poly(crown, null, ow);
+    p.ell(cx, hc - 1.42 * H.b, 0.8 * H.a, 0.14 * H.b, mul(col, [1.5, 1.5, 1.6]), ow);
+    p.band([[cx - 0.82 * H.a, hc - 0.62 * H.b], [cx + 0.82 * H.a, hc - 0.62 * H.b]], "#f4f1ea", 0.2 * H.b, 1 * u, "round");
+    for (let i = -3; i <= 3; i++) p.dot(cx + i * 0.22 * H.a, hc - 0.62 * H.b, 2.4 * u, "#1d1a24");
   } else if (kind === "chauff") {
     const col = O.hatCol || "#26303f";
     const crown = rrect(cx - 0.86 * H.a, hc - 1.38 * H.b, cx + 0.86 * H.a, hc - 0.5 * H.b, 10 * u);
@@ -372,7 +389,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
   else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);

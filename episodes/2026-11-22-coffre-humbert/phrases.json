@@ -1,0 +1,221 @@
+{
+ "duration": 49.72059,
+ "frames30": 1492,
+ "source": "silence-align (cost 7.92)",
+ "segments": [
+  [
+   0.197188,
+   1.190091
+  ],
+  [
+   1.591451,
+   4.221927
+  ],
+  [
+   5.035193,
+   5.247211
+  ],
+  [
+   5.375828,
+   5.933628
+  ],
+  [
+   6.202086,
+   7.100862
+  ],
+  [
+   7.87059,
+   10.919796
+  ],
+  [
+   11.383061,
+   14.034467
+  ],
+  [
+   14.580612,
+   15.564966
+  ],
+  [
+   15.73415,
+   16.267982
+  ],
+  [
+   16.898458,
+   18.878277
+  ],
+  [
+   19.715193,
+   19.945306
+  ],
+  [
+   20.126054,
+   21.683152
+  ],
+  [
+   22.336599,
+   22.912585
+  ],
+  [
+   23.386984,
+   24.495646
+  ],
+  [
+   25.188209,
+   25.951791
+  ],
+  [
+   26.359887,
+   27.515941
+  ],
+  [
+   27.985238,
+   30.05356
+  ],
+  [
+   30.532812,
+   32.25941
+  ],
+  [
+   32.634036,
+   33.377596
+  ],
+  [
+   34.027619,
+   34.865533
+  ],
+  [
+   35.684875,
+   36.055964
+  ],
+  [
+   36.696939,
+   37.686077
+  ],
+  [
+   38.107166,
+   39.145329
+  ],
+  [
+   39.896508,
+   42.220998
+  ],
+  [
+   42.829592,
+   44.612721
+  ],
+  [
+   45.405193,
+   46.773628
+  ],
+  [
+   47.020884,
+   48.140839
+  ],
+  [
+   48.896553,
+   49.198526
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Pendant vingt ans,",
+   "s": 0.197,
+   "e": 1.19
+  },
+  {
+   "text": "tout Paris a pr\u00eat\u00e9 de l'argent \u00e0 une femme gr\u00e2ce \u00e0 un coffre-fort\u2026 que personne n'avait jamais ouvert.",
+   "s": 1.591,
+   "e": 5.934
+  },
+  {
+   "text": "Th\u00e9r\u00e8se Humbert pr\u00e9tend avoir h\u00e9rit\u00e9 d'un millionnaire am\u00e9ricain.",
+   "s": 6.202,
+   "e": 10.92
+  },
+  {
+   "text": "La fortune dort dans un coffre, scell\u00e9 par la justice.",
+   "s": 11.383,
+   "e": 14.034
+  },
+  {
+   "text": "Les banquiers font la queue pour lui pr\u00eater.",
+   "s": 14.581,
+   "e": 16.268
+  },
+  {
+   "text": "Elle donne des bals et invite les ministres.",
+   "s": 16.898,
+   "e": 18.878
+  },
+  {
+   "text": "D\u00e8s qu'un cr\u00e9ancier s'impatiente,",
+   "s": 19.715,
+   "e": 21.683
+  },
+  {
+   "text": "elle sourit :",
+   "s": 22.337,
+   "e": 22.913
+  },
+  {
+   "text": "\u00ab Patience,",
+   "s": 23.387,
+   "e": 24.496
+  },
+  {
+   "text": "l'h\u00e9ritage arrive.",
+   "s": 25.188,
+   "e": 25.952
+  },
+  {
+   "text": "\u00bb Sauf que\u2026 les dettes grossissent,",
+   "s": 26.36,
+   "e": 27.516
+  },
+  {
+   "text": "et un juge exige enfin l'ouverture du coffre.",
+   "s": 27.985,
+   "e": 30.054
+  },
+  {
+   "text": "Le serrurier force la porte,",
+   "s": 30.533,
+   "e": 32.259
+  },
+  {
+   "text": "devant la presse.",
+   "s": 32.634,
+   "e": 33.378
+  },
+  {
+   "text": "Tout le monde se penche.",
+   "s": 34.028,
+   "e": 34.866
+  },
+  {
+   "text": "Dedans,",
+   "s": 35.685,
+   "e": 36.056
+  },
+  {
+   "text": "il n'y a qu'une brique et une pi\u00e8ce d'un penny.",
+   "s": 36.697,
+   "e": 39.145
+  },
+  {
+   "text": "Les Humbert s'enfuient, mais on les arr\u00eate \u00e0 Madrid.",
+   "s": 39.897,
+   "e": 42.221
+  },
+  {
+   "text": "Th\u00e9r\u00e8se est condamn\u00e9e \u00e0 cinq ans de travaux forc\u00e9s.",
+   "s": 42.83,
+   "e": 44.613
+  },
+  {
+   "text": "La plus grande fortune de Paris tenait dans un coffre\u2026 vide.",
+   "s": 45.405,
+   "e": 49.199
+  }
+ ]
+}
