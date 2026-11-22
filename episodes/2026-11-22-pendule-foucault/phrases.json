@@ -1,0 +1,249 @@
+{
+ "duration": 45.760583,
+ "frames30": 1373,
+ "source": "whisper",
+ "segments": [
+  [
+   0.230333,
+   0.785458
+  ],
+  [
+   0.961292,
+   2.546125
+  ],
+  [
+   2.731417,
+   3.407333
+  ],
+  [
+   3.529833,
+   4.245167
+  ],
+  [
+   4.682583,
+   4.932417
+  ],
+  [
+   5.278708,
+   6.41875
+  ],
+  [
+   6.802417,
+   10.490125
+  ],
+  [
+   10.66525,
+   12.428667
+  ],
+  [
+   12.992333,
+   13.83
+  ],
+  [
+   14.539708,
+   15.148583
+  ],
+  [
+   15.343083,
+   16.187417
+  ],
+  [
+   16.325208,
+   17.574667
+  ],
+  [
+   18.406458,
+   19.14225
+  ],
+  [
+   20.151625,
+   20.954042
+  ],
+  [
+   21.582,
+   22.391375
+  ],
+  [
+   22.512042,
+   23.431792
+  ],
+  [
+   24.350458,
+   25.385042
+  ],
+  [
+   26.093042,
+   27.610542
+  ],
+  [
+   28.358917,
+   29.111042
+  ],
+  [
+   29.280792,
+   29.763833
+  ],
+  [
+   30.51325,
+   32.976125
+  ],
+  [
+   33.712,
+   34.61975
+  ],
+  [
+   34.900375,
+   35.575625
+  ],
+  [
+   36.544875,
+   37.238042
+  ],
+  [
+   37.386792,
+   37.983667
+  ],
+  [
+   38.329542,
+   40.153583
+  ],
+  [
+   41.077083,
+   41.378792
+  ],
+  [
+   41.641458,
+   43.638083
+  ],
+  [
+   44.310042,
+   44.69075
+  ],
+  [
+   44.841458,
+   45.264083
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ce boulet qui se balance sans rien toucher prouve que la Terre tourne.",
+   "s": 0.0,
+   "e": 4.22
+  },
+  {
+   "text": "Paris,",
+   "s": 4.6,
+   "e": 4.92
+  },
+  {
+   "text": "mille huit cent cinquante et un.",
+   "s": 4.92,
+   "e": 7.02
+  },
+  {
+   "text": "L\u00e9on Foucault accroche une boule de vingt-huit kilos au plafond du Panth\u00e9on,",
+   "s": 7.02,
+   "e": 10.26
+  },
+  {
+   "text": "au bout d'un fil de soixante-sept m\u00e8tres.",
+   "s": 10.26,
+   "e": 12.26
+  },
+  {
+   "text": "Il la lance doucement.",
+   "s": 12.92,
+   "e": 13.82
+  },
+  {
+   "text": "Une pointe,",
+   "s": 14.54,
+   "e": 15.24
+  },
+  {
+   "text": "sous la boule,",
+   "s": 15.24,
+   "e": 15.94
+  },
+  {
+   "text": "trace un trait dans le sable.",
+   "s": 15.94,
+   "e": 17.54
+  },
+  {
+   "text": "Le public attend.",
+   "s": 18.34,
+   "e": 19.06
+  },
+  {
+   "text": "Les minutes passent.",
+   "s": 20.1,
+   "e": 20.94
+  },
+  {
+   "text": "Et le trait change de direction.",
+   "s": 21.56,
+   "e": 23.28
+  },
+  {
+   "text": "Personne n'a touch\u00e9 la boule.",
+   "s": 24.16,
+   "e": 25.36
+  },
+  {
+   "text": "Elle balance toujours dans le m\u00eame sens.",
+   "s": 26.04,
+   "e": 27.52
+  },
+  {
+   "text": "C'est le sol qui tourne.",
+   "s": 27.52,
+   "e": 29.76
+  },
+  {
+   "text": "Chaque heure,",
+   "s": 30.34,
+   "e": 31.12
+  },
+  {
+   "text": "le trait d\u00e9vie de onze degr\u00e9s.",
+   "s": 31.46,
+   "e": 33.04
+  },
+  {
+   "text": "En trente-deux heures,",
+   "s": 33.58,
+   "e": 34.56
+  },
+  {
+   "text": "le tour est complet.",
+   "s": 34.92,
+   "e": 35.5
+  },
+  {
+   "text": "Les Parisiens,",
+   "s": 36.56,
+   "e": 37.22
+  },
+  {
+   "text": "bouche b\u00e9e,",
+   "s": 37.5,
+   "e": 38.34
+  },
+  {
+   "text": "sentent la Terre tourner sous leurs pieds.",
+   "s": 38.34,
+   "e": 40.52
+  },
+  {
+   "text": "Alors,",
+   "s": 41.02,
+   "e": 41.22
+  },
+  {
+   "text": "ce boulet qui se balance sans rien toucher\u2026 c'est toi qui bouges.",
+   "s": 41.78,
+   "e": 45.22
+  }
+ ]
+}
