@@ -1,0 +1,241 @@
+{
+ "duration": 42.000583,
+ "frames30": 1260,
+ "source": "whisper",
+ "segments": [
+  [
+   0.252583,
+   1.586375
+  ],
+  [
+   2.079458,
+   2.927292
+  ],
+  [
+   3.497125,
+   3.686292
+  ],
+  [
+   4.912667,
+   5.691833
+  ],
+  [
+   6.042958,
+   8.646708
+  ],
+  [
+   9.049208,
+   10.166042
+  ],
+  [
+   10.381958,
+   11.038417
+  ],
+  [
+   11.304542,
+   12.731417
+  ],
+  [
+   13.47325,
+   13.678625
+  ],
+  [
+   13.862583,
+   14.267917
+  ],
+  [
+   14.6645,
+   15.594583
+  ],
+  [
+   15.818875,
+   16.465625
+  ],
+  [
+   17.142667,
+   19.006792
+  ],
+  [
+   19.758,
+   20.051
+  ],
+  [
+   20.728083,
+   22.319875
+  ],
+  [
+   23.070125,
+   24.213
+  ],
+  [
+   25.106333,
+   25.537375
+  ],
+  [
+   25.76175,
+   26.383
+  ],
+  [
+   26.863458,
+   28.442125
+  ],
+  [
+   29.034375,
+   30.125042
+  ],
+  [
+   31.117208,
+   31.975
+  ],
+  [
+   32.323333,
+   34.0265
+  ],
+  [
+   34.242292,
+   34.599708
+  ],
+  [
+   35.576917,
+   36.632458
+  ],
+  [
+   37.132917,
+   37.295083
+  ],
+  [
+   37.550708,
+   38.933708
+  ],
+  [
+   39.652708,
+   40.293417
+  ],
+  [
+   41.151583,
+   41.475042
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Personne n'a trouv\u00e9 le poids de ce b\u0153uf.",
+   "s": 0.0,
+   "e": 1.54
+  },
+  {
+   "text": "Mais la foule enti\u00e8re,",
+   "s": 1.92,
+   "e": 2.84
+  },
+  {
+   "text": "si.",
+   "s": 3.42,
+   "e": 3.68
+  },
+  {
+   "text": "Dans une foire anglaise,",
+   "s": 4.78,
+   "e": 5.64
+  },
+  {
+   "text": "pr\u00e8s de huit cents visiteurs \u00e9crivent leur estimation sur un billet.",
+   "s": 6.02,
+   "e": 8.66
+  },
+  {
+   "text": "Il y a des bouchers,",
+   "s": 9.3,
+   "e": 10.44
+  },
+  {
+   "text": "des fermiers,",
+   "s": 10.44,
+   "e": 10.92
+  },
+  {
+   "text": "et des gens qui n'ont jamais touch\u00e9 un b\u0153uf.",
+   "s": 10.92,
+   "e": 12.74
+  },
+  {
+   "text": "Un savant,",
+   "s": 13.52,
+   "e": 14.24
+  },
+  {
+   "text": "Francis Galton,",
+   "s": 14.78,
+   "e": 15.44
+  },
+  {
+   "text": "ramasse les billets.",
+   "s": 15.74,
+   "e": 16.44
+  },
+  {
+   "text": "Il est s\u00fbr que la foule va se tromper lourdement.",
+   "s": 17.1,
+   "e": 19.02
+  },
+  {
+   "text": "Sauf que\u2026 il calcule le chiffre du milieu :",
+   "s": 19.6,
+   "e": 22.588
+  },
+  {
+   "text": "mille deux cent sept livres.",
+   "s": 22.588,
+   "e": 24.14
+  },
+  {
+   "text": "Le b\u0153uf,",
+   "s": 24.7,
+   "e": 25.52
+  },
+  {
+   "text": "une fois pr\u00e9par\u00e9,",
+   "s": 25.64,
+   "e": 26.4
+  },
+  {
+   "text": "p\u00e8se mille cent quatre-vingt-dix-huit livres.",
+   "s": 26.82,
+   "e": 28.38
+  },
+  {
+   "text": "Moins d'un pour cent d'\u00e9cart.",
+   "s": 29.04,
+   "e": 30.96
+  },
+  {
+   "text": "Chaque billet se trompait,",
+   "s": 30.96,
+   "e": 31.98
+  },
+  {
+   "text": "mais les erreurs trop fortes et trop faibles s'annulaient.",
+   "s": 32.26,
+   "e": 34.88
+  },
+  {
+   "text": "C'\u00e9tait en mil neuf cent six.",
+   "s": 34.88,
+   "e": 37.36
+  },
+  {
+   "text": "Aucun visiteur n'avait la r\u00e9ponse,",
+   "s": 37.36,
+   "e": 38.82
+  },
+  {
+   "text": "mais tous ensemble,",
+   "s": 39.58,
+   "e": 40.2
+  },
+  {
+   "text": "ils l'avaient.",
+   "s": 40.2,
+   "e": 41.46
+  }
+ ]
+}
