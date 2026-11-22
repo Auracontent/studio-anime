@@ -45,7 +45,9 @@ def whisper_words(path):
     try:
         from faster_whisper import WhisperModel
         m = WhisperModel(WMODEL, compute_type="int8")
-        segs, _ = m.transcribe(path, word_timestamps=True, language=LANG)
+        import numpy as np   # decode with ffmpeg: faster-whisper's own decoder needs a recent PyAV (failed on the runners)
+        pcm = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", "16000", "-f", "f32le", "-"], capture_output=True, check=True).stdout
+        segs, _ = m.transcribe(np.frombuffer(pcm, np.float32), word_timestamps=True, language=LANG)
         return [{"w": w.word.strip(), "s": round(w.start, 3), "e": round(w.end, 3)} for s in segs for w in s.words]
     except Exception as e:
         print("faster-whisper indisponible :", e)

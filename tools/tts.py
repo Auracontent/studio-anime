@@ -3,7 +3,7 @@
 usage : GEMINI_API_KEY=... python3 tools/tts.py inbox/<slug>/script.txt inbox/<slug>/voice.wav [--voice <nom ou voice_...>] [--model gemini-3.8-flash-tts]
 Voix par défaut : la voix de la chaîne (brand/voice.json, créée par tools/voice_design.py), sinon la voix prédéfinie Charon.
 La consigne de jeu (ton, rythme) se met dans episodes/<slug>/style.txt si présent ; sinon un narrateur français dynamique."""
-import base64, json, os, sys, urllib.request, wave
+import base64, json, os, re, sys, urllib.request, wave
 
 args = sys.argv[1:]
 if len(args) < 2: sys.exit(__doc__)
@@ -20,8 +20,14 @@ style_p = os.path.join(os.path.dirname(src), "style.txt")
 if not os.path.exists(style_p): style_p = os.path.join(ROOT, "brand", "style.txt")   # consigne de jeu de la chaîne
 style = open(style_p, encoding="utf-8").read().strip() if os.path.exists(style_p) else (
     "Narrateur français dynamique et complice, comme un ami qui raconte une anecdote incroyable. "
-    "Rythme vif, sourire dans la voix, petites pauses avant les révélations. Lis exactement ce texte :")
-body = {"contents": [{"parts": [{"text": f"{style}\n\n{text}"}]}],
+    "Rythme vif, sourire dans la voix, petites pauses avant les révélations.")
+# Old style files ended with "Lis exactement ce texte :", which glued the note to the text: the model sometimes read the note aloud.
+style = re.sub(r"\s*(lis|lire|dis|read)[^.:\n]*(texte|text)\s*:?\s*$", "", style, flags=re.I).strip()
+# Gemini TTS: notes and transcript in separate, labelled sections; only the transcript is spoken.
+prompt = ("Lis à voix haute UNIQUEMENT le texte de la section TRANSCRIPTION, mot pour mot, en français. "
+          "Ne prononce jamais les notes de jeu ni les titres de section.\n\n"
+          f"### NOTES DE JEU (à appliquer, pas à lire)\n{style}\n\n### TRANSCRIPTION\n{text}\n")
+body = {"contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"responseModalities": ["AUDIO"],
                              "speechConfig": {"voiceConfig": {"voice": voice} if voice.startswith(("voice_", "voicekey_"))
                                           else {"prebuiltVoiceConfig": {"voiceName": voice}}}}}
