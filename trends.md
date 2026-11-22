@@ -7,68 +7,68 @@ ne jamais reprendre un titre, un script, un personnage ou un visuel. Voir CLAUDE
 
 | # | Vues | Vues/jour | Publié | Titre | Chaîne |
 |---|---:|---:|---|---|---|
-| 1 | 35 340 414 | 1 067 916 | 2026-10-19 | [The Ancient Jar That Warned an Empire](https://www.youtube.com/shorts/VS1Z_Q-Klt8) | Ricks Clips |
-| 2 | 30 907 023 | 1 494 653 | 2026-11-01 | [Why Perfect Railroads Don't Work](https://www.youtube.com/shorts/7xS87iActkU) | Ricks Clips |
-| 3 | 18 956 458 | 612 591 | 2026-10-22 | [The Job Nobody Wants in Japan](https://www.youtube.com/shorts/0m6G8pDtzNs) | Ricks Clips |
-| 4 | 16 940 036 | 746 312 | 2026-10-30 | [Why Sailors Carried Storm Oil](https://www.youtube.com/shorts/Mz72MuPgnGY) | Ricks Clips |
-| 5 | 16 656 869 | 397 708 | 2026-10-11 | [Your Brain's Secret Idea Zone](https://www.youtube.com/shorts/PL-Yro2meY4) | Ricks Clips |
-| 6 | 16 212 291 | 435 797 | 2026-10-15 | [The Window That Breaks Japan's Gambling Law](https://www.youtube.com/shorts/eQR3pgMiUF0) | Ricks Clips |
-| 7 | 15 870 204 | 53 283 | 2026-01-28 | [He Was A Genius #shorts #movie](https://www.youtube.com/shorts/LUGcyIwlcto) | Ricks Clips |
-| 8 | 14 039 779 | 485 180 | 2026-10-24 | [What the Grave Bell Really Meant](https://www.youtube.com/shorts/GM9UKnZ6JFw) | Ricks Clips |
-| 9 | 13 165 795 | 838 389 | 2026-11-06 | [This Shape Saved Roller Coasters](https://www.youtube.com/shorts/QlDPMzGmYac) | Ricks Clips |
-| 10 | 11 717 871 | 662 487 | 2026-11-04 | [The Pink Prison Cell Experiment](https://www.youtube.com/shorts/HxqtHI62otM) | Ricks Clips |
-| 11 | 11 173 664 | 1 699 580 | 2026-11-15 | [The Instinct That Makes You Crash](https://www.youtube.com/shorts/aD73kaL_PtY) | Ricks Clips |
-| 12 | 10 497 283 | 329 485 | 2026-10-21 | [The Burglar Who Only Moved Furniture](https://www.youtube.com/shorts/nzbkkEZFM8g) | Ricks Clips |
-| 13 | 10 497 190 | 350 585 | 2026-10-23 | [Why Cashiers Keep Winning The Lottery](https://www.youtube.com/shorts/VKsamN3Fk4U) | Ricks Clips |
-| 14 | 9 995 275 | 294 524 | 2026-10-19 | [Levels of Pirate Cannonballs](https://www.youtube.com/shorts/lnYLIWP2l-I) | Ricks Clips |
-| 15 | 9 938 791 | 384 309 | 2026-10-27 | [Why the Second Draw Always Wins](https://www.youtube.com/shorts/LC8hYwUZ-kU) | Ricks Clips |
-| 16 | 9 696 383 | 44 232 | 2026-04-16 | [The Sword of Lies](https://www.youtube.com/shorts/RVnC1DSfK30) | Ricks Clips |
-| 17 | 9 632 109 | 273 306 | 2026-10-17 | [An Unstoppable Spear vs an Unbreakable Shield](https://www.youtube.com/shorts/PLe2Gu3FDuA) | Ricks Clips |
-| 18 | 9 619 023 | 248 384 | 2026-10-14 | [Why Humans Can't Pick Random Numbers](https://www.youtube.com/shorts/TgyHSIttwdM) | Ricks Clips |
-| 19 | 9 562 334 | 911 232 | 2026-11-11 | [How One Cart Stopped an Entire Army](https://www.youtube.com/shorts/i4hYq1oSXTg) | Ricks Clips |
-| 20 | 7 327 251 | 160 083 | 2026-10-07 | [What If Humans Invented Teleportation?](https://www.youtube.com/shorts/WbRdDyaPuAU) | Ricks Clips |
-| 21 | 7 174 360 | 842 088 | 2026-11-13 | [How Mine Salting Worked](https://www.youtube.com/shorts/TRUkQ1wbV2E) | Ricks Clips |
-| 22 | 7 095 862 | 44 254 | 2026-06-14 | [Everyone Ignores The Sign 😭🤣](https://www.youtube.com/shorts/_pmioleoeAE) | Ricks Clips |
-| 23 | 7 053 947 | 31 348 | 2026-04-10 | [Worst Hiding Spot](https://www.youtube.com/shorts/Ta_XWO7d0ec) | Ricks Clips |
-| 24 | 6 824 263 | 244 271 | 2026-10-25 | [He Could Spot Winning Tickets Just by Looking](https://www.youtube.com/shorts/DEe0iKH4KIw) | Ricks Clips |
-| 25 | 6 821 912 | 178 232 | 2026-10-14 | [The Scientist's Insane Time Test](https://www.youtube.com/shorts/hdhggSABEws) | Ricks Clips |
-| 26 | 6 670 679 | 29 387 | 2026-04-09 | [Happens All The Time 😭🤣](https://www.youtube.com/shorts/_N6b3rkol8E) | Ricks Clips |
-| 27 | 5 726 770 | 241 607 | 2026-10-29 | [How a Mirror Rigged a Horse Race](https://www.youtube.com/shorts/5WMQhPObNqQ) | Ricks Clips |
-| 28 | 5 457 942 | 24 796 | 2026-04-15 | [Did Timmy Notice?](https://www.youtube.com/shorts/mQ0_11anfJQ) | Ricks Clips |
-| 29 | 5 036 535 | 31 490 | 2026-06-15 | [Which One Is It? 😭🤣](https://www.youtube.com/shorts/2NyZQ45DW14) | Ricks Clips |
-| 30 | 4 981 476 | 365 703 | 2026-11-08 | [Why Drivers Started Filming The Road](https://www.youtube.com/shorts/e9NoHjAXYIY) | Ricks Clips |
-| 31 | 4 926 807 | 31 304 | 2026-06-17 | ["Why Didn't I Do That" 🤣😭](https://www.youtube.com/shorts/lePrVTXEoEQ) | Ricks Clips |
-| 32 | 4 678 960 | 30 126 | 2026-06-19 | [Took Me A While 💀](https://www.youtube.com/shorts/TKNdXGrTE8s) | Ricks Clips |
-| 33 | 4 659 924 | 21 690 | 2026-04-21 | [Well That's Interesting](https://www.youtube.com/shorts/vDtu86wD0zI) | Ricks Clips |
-| 34 | 4 586 383 | 32 757 | 2026-07-05 | [The Wishing Well](https://www.youtube.com/shorts/ODJsROQqsFQ) | Ricks Clips |
-| 35 | 4 311 697 | 18 839 | 2026-04-07 | [The Guards Puzzle 😭](https://www.youtube.com/shorts/_m1DPXx4xWs) | Ricks Clips |
-| 36 | 4 307 745 | 31 167 | 2026-07-06 | ["Wanna Hear A Joke?" 😭🤣](https://www.youtube.com/shorts/29uKrdHEg6U) | Ricks Clips |
-| 37 | 4 236 336 | 26 663 | 2026-06-16 | [How Did He Do That 💀](https://www.youtube.com/shorts/3wJFNFKbLeE) | Ricks Clips |
-| 38 | 4 217 381 | 27 582 | 2026-06-22 | [The Final Mission](https://www.youtube.com/shorts/bonHpaGehcQ) | Ricks Clips |
-| 39 | 4 001 968 | 25 470 | 2026-06-17 | [How Does That Work? 😭](https://www.youtube.com/shorts/MAUEdBrSYkk) | Ricks Clips |
-| 40 | 3 974 241 | 17 904 | 2026-04-14 | [The Sword of "Up"](https://www.youtube.com/shorts/6PjRI-WuUgY) | Ricks Clips |
+| 1 | 35 391 633 | 1 053 730 | 2026-10-19 | [The Ancient Jar That Warned an Empire](https://www.youtube.com/shorts/VS1Z_Q-Klt8) | Ricks Clips |
+| 2 | 31 012 717 | 1 464 762 | 2026-11-01 | [Why Perfect Railroads Don't Work](https://www.youtube.com/shorts/7xS87iActkU) | Ricks Clips |
+| 3 | 18 978 237 | 603 656 | 2026-10-22 | [The Job Nobody Wants in Japan](https://www.youtube.com/shorts/0m6G8pDtzNs) | Ricks Clips |
+| 4 | 16 947 111 | 730 716 | 2026-10-30 | [Why Sailors Carried Storm Oil](https://www.youtube.com/shorts/Mz72MuPgnGY) | Ricks Clips |
+| 5 | 16 673 230 | 393 456 | 2026-10-11 | [Your Brain's Secret Idea Zone](https://www.youtube.com/shorts/PL-Yro2meY4) | Ricks Clips |
+| 6 | 16 221 707 | 430 334 | 2026-10-15 | [The Window That Breaks Japan's Gambling Law](https://www.youtube.com/shorts/eQR3pgMiUF0) | Ricks Clips |
+| 7 | 15 870 858 | 53 197 | 2026-01-28 | [He Was A Genius #shorts #movie](https://www.youtube.com/shorts/LUGcyIwlcto) | Ricks Clips |
+| 8 | 14 055 944 | 477 583 | 2026-10-24 | [What the Grave Bell Really Meant](https://www.youtube.com/shorts/GM9UKnZ6JFw) | Ricks Clips |
+| 9 | 13 270 371 | 819 269 | 2026-11-06 | [This Shape Saved Roller Coasters](https://www.youtube.com/shorts/QlDPMzGmYac) | Ricks Clips |
+| 10 | 11 756 980 | 646 633 | 2026-11-04 | [The Pink Prison Cell Experiment](https://www.youtube.com/shorts/HxqtHI62otM) | Ricks Clips |
+| 11 | 11 389 840 | 1 611 351 | 2026-11-15 | [The Instinct That Makes You Crash](https://www.youtube.com/shorts/aD73kaL_PtY) | Ricks Clips |
+| 12 | 10 559 686 | 346 947 | 2026-10-23 | [Why Cashiers Keep Winning The Lottery](https://www.youtube.com/shorts/VKsamN3Fk4U) | Ricks Clips |
+| 13 | 10 543 811 | 325 891 | 2026-10-21 | [The Burglar Who Only Moved Furniture](https://www.youtube.com/shorts/nzbkkEZFM8g) | Ricks Clips |
+| 14 | 10 006 109 | 290 612 | 2026-10-19 | [Levels of Pirate Cannonballs](https://www.youtube.com/shorts/lnYLIWP2l-I) | Ricks Clips |
+| 15 | 9 956 703 | 377 783 | 2026-10-27 | [Why the Second Draw Always Wins](https://www.youtube.com/shorts/LC8hYwUZ-kU) | Ricks Clips |
+| 16 | 9 696 499 | 44 133 | 2026-04-16 | [The Sword of Lies](https://www.youtube.com/shorts/RVnC1DSfK30) | Ricks Clips |
+| 17 | 9 635 275 | 269 616 | 2026-10-17 | [An Unstoppable Spear vs an Unbreakable Shield](https://www.youtube.com/shorts/PLe2Gu3FDuA) | Ricks Clips |
+| 18 | 9 634 919 | 876 860 | 2026-11-11 | [How One Cart Stopped an Entire Army](https://www.youtube.com/shorts/i4hYq1oSXTg) | Ricks Clips |
+| 19 | 9 626 353 | 245 442 | 2026-10-14 | [Why Humans Can't Pick Random Numbers](https://www.youtube.com/shorts/TgyHSIttwdM) | Ricks Clips |
+| 20 | 7 330 428 | 158 442 | 2026-10-07 | [What If Humans Invented Teleportation?](https://www.youtube.com/shorts/WbRdDyaPuAU) | Ricks Clips |
+| 21 | 7 218 389 | 800 810 | 2026-11-13 | [How Mine Salting Worked](https://www.youtube.com/shorts/TRUkQ1wbV2E) | Ricks Clips |
+| 22 | 7 095 937 | 44 119 | 2026-06-14 | [Everyone Ignores The Sign 😭🤣](https://www.youtube.com/shorts/_pmioleoeAE) | Ricks Clips |
+| 23 | 7 054 037 | 31 279 | 2026-04-10 | [Worst Hiding Spot](https://www.youtube.com/shorts/Ta_XWO7d0ec) | Ricks Clips |
+| 24 | 6 835 437 | 240 419 | 2026-10-25 | [He Could Spot Winning Tickets Just by Looking](https://www.youtube.com/shorts/DEe0iKH4KIw) | Ricks Clips |
+| 25 | 6 825 480 | 176 052 | 2026-10-14 | [The Scientist's Insane Time Test](https://www.youtube.com/shorts/hdhggSABEws) | Ricks Clips |
+| 26 | 6 670 795 | 29 323 | 2026-04-09 | [Happens All The Time 😭🤣](https://www.youtube.com/shorts/_N6b3rkol8E) | Ricks Clips |
+| 27 | 5 732 115 | 236 894 | 2026-10-29 | [How a Mirror Rigged a Horse Race](https://www.youtube.com/shorts/5WMQhPObNqQ) | Ricks Clips |
+| 28 | 5 457 980 | 24 740 | 2026-04-15 | [Did Timmy Notice?](https://www.youtube.com/shorts/mQ0_11anfJQ) | Ricks Clips |
+| 29 | 5 036 575 | 31 393 | 2026-06-15 | [Which One Is It? 😭🤣](https://www.youtube.com/shorts/2NyZQ45DW14) | Ricks Clips |
+| 30 | 5 002 957 | 354 423 | 2026-11-08 | [Why Drivers Started Filming The Road](https://www.youtube.com/shorts/e9NoHjAXYIY) | Ricks Clips |
+| 31 | 4 926 848 | 31 206 | 2026-06-17 | ["Why Didn't I Do That" 🤣😭](https://www.youtube.com/shorts/lePrVTXEoEQ) | Ricks Clips |
+| 32 | 4 679 010 | 30 031 | 2026-06-19 | [Took Me A While 💀](https://www.youtube.com/shorts/TKNdXGrTE8s) | Ricks Clips |
+| 33 | 4 659 954 | 21 640 | 2026-04-21 | [Well That's Interesting](https://www.youtube.com/shorts/vDtu86wD0zI) | Ricks Clips |
+| 34 | 4 586 437 | 32 643 | 2026-07-05 | [The Wishing Well](https://www.youtube.com/shorts/ODJsROQqsFQ) | Ricks Clips |
+| 35 | 4 311 892 | 18 799 | 2026-04-07 | [The Guards Puzzle 😭](https://www.youtube.com/shorts/_m1DPXx4xWs) | Ricks Clips |
+| 36 | 4 307 795 | 31 056 | 2026-07-06 | ["Wanna Hear A Joke?" 😭🤣](https://www.youtube.com/shorts/29uKrdHEg6U) | Ricks Clips |
+| 37 | 4 236 362 | 26 581 | 2026-06-16 | [How Did He Do That 💀](https://www.youtube.com/shorts/3wJFNFKbLeE) | Ricks Clips |
+| 38 | 4 217 418 | 27 493 | 2026-06-22 | [The Final Mission](https://www.youtube.com/shorts/bonHpaGehcQ) | Ricks Clips |
+| 39 | 4 002 002 | 25 391 | 2026-06-17 | [How Does That Work? 😭](https://www.youtube.com/shorts/MAUEdBrSYkk) | Ricks Clips |
+| 40 | 3 974 663 | 89 280 | 2026-10-08 | [Would You Upload Your Brain?](https://www.youtube.com/shorts/eSRnuL-fVSE) | Ricks Clips |
 
 ## Ce qui monte en ce moment (60 derniers jours, par vues/jour)
 
 | # | Vues | Vues/jour | Publié | Titre | Chaîne |
 |---|---:|---:|---|---|---|
-| 1 | 11 173 664 | 1 699 580 | 2026-11-15 | [The Instinct That Makes You Crash](https://www.youtube.com/shorts/aD73kaL_PtY) | Ricks Clips |
-| 2 | 30 907 023 | 1 494 653 | 2026-11-01 | [Why Perfect Railroads Don't Work](https://www.youtube.com/shorts/7xS87iActkU) | Ricks Clips |
-| 3 | 35 340 414 | 1 067 916 | 2026-10-19 | [The Ancient Jar That Warned an Empire](https://www.youtube.com/shorts/VS1Z_Q-Klt8) | Ricks Clips |
-| 4 | 9 562 334 | 911 232 | 2026-11-11 | [How One Cart Stopped an Entire Army](https://www.youtube.com/shorts/i4hYq1oSXTg) | Ricks Clips |
-| 5 | 7 174 360 | 842 088 | 2026-11-13 | [How Mine Salting Worked](https://www.youtube.com/shorts/TRUkQ1wbV2E) | Ricks Clips |
-| 6 | 13 165 795 | 838 389 | 2026-11-06 | [This Shape Saved Roller Coasters](https://www.youtube.com/shorts/QlDPMzGmYac) | Ricks Clips |
-| 7 | 16 940 036 | 746 312 | 2026-10-30 | [Why Sailors Carried Storm Oil](https://www.youtube.com/shorts/Mz72MuPgnGY) | Ricks Clips |
-| 8 | 11 717 871 | 662 487 | 2026-11-04 | [The Pink Prison Cell Experiment](https://www.youtube.com/shorts/HxqtHI62otM) | Ricks Clips |
-| 9 | 18 956 458 | 612 591 | 2026-10-22 | [The Job Nobody Wants in Japan](https://www.youtube.com/shorts/0m6G8pDtzNs) | Ricks Clips |
-| 10 | 14 039 779 | 485 180 | 2026-10-24 | [What the Grave Bell Really Meant](https://www.youtube.com/shorts/GM9UKnZ6JFw) | Ricks Clips |
-| 11 | 16 212 291 | 435 797 | 2026-10-15 | [The Window That Breaks Japan's Gambling Law](https://www.youtube.com/shorts/eQR3pgMiUF0) | Ricks Clips |
-| 12 | 834 503 | 431 832 | 2026-11-20 | [The Prisoner Who Tunneled Into a Bank](https://www.youtube.com/shorts/7dGWuCeZ8Ic) | Ricks Clips |
-| 13 | 16 656 869 | 397 708 | 2026-10-11 | [Your Brain's Secret Idea Zone](https://www.youtube.com/shorts/PL-Yro2meY4) | Ricks Clips |
-| 14 | 9 938 791 | 384 309 | 2026-10-27 | [Why the Second Draw Always Wins](https://www.youtube.com/shorts/LC8hYwUZ-kU) | Ricks Clips |
-| 15 | 4 981 476 | 365 703 | 2026-11-08 | [Why Drivers Started Filming The Road](https://www.youtube.com/shorts/e9NoHjAXYIY) | Ricks Clips |
-| 16 | 1 518 192 | 360 526 | 2026-11-17 | [Why Samurai Feared The Flying Thunder](https://www.youtube.com/shorts/R-mWVMM-LAs) | Ricks Clips |
-| 17 | 10 497 190 | 350 585 | 2026-10-23 | [Why Cashiers Keep Winning The Lottery](https://www.youtube.com/shorts/VKsamN3Fk4U) | Ricks Clips |
-| 18 | 10 497 283 | 329 485 | 2026-10-21 | [The Burglar Who Only Moved Furniture](https://www.youtube.com/shorts/nzbkkEZFM8g) | Ricks Clips |
-| 19 | 9 995 275 | 294 524 | 2026-10-19 | [Levels of Pirate Cannonballs](https://www.youtube.com/shorts/lnYLIWP2l-I) | Ricks Clips |
-| 20 | 9 632 109 | 273 306 | 2026-10-17 | [An Unstoppable Spear vs an Unbreakable Shield](https://www.youtube.com/shorts/PLe2Gu3FDuA) | Ricks Clips |
+| 1 | 11 389 840 | 1 611 351 | 2026-11-15 | [The Instinct That Makes You Crash](https://www.youtube.com/shorts/aD73kaL_PtY) | Ricks Clips |
+| 2 | 31 012 717 | 1 464 762 | 2026-11-01 | [Why Perfect Railroads Don't Work](https://www.youtube.com/shorts/7xS87iActkU) | Ricks Clips |
+| 3 | 35 391 633 | 1 053 730 | 2026-10-19 | [The Ancient Jar That Warned an Empire](https://www.youtube.com/shorts/VS1Z_Q-Klt8) | Ricks Clips |
+| 4 | 9 634 919 | 876 860 | 2026-11-11 | [How One Cart Stopped an Entire Army](https://www.youtube.com/shorts/i4hYq1oSXTg) | Ricks Clips |
+| 5 | 13 270 371 | 819 269 | 2026-11-06 | [This Shape Saved Roller Coasters](https://www.youtube.com/shorts/QlDPMzGmYac) | Ricks Clips |
+| 6 | 7 218 389 | 800 810 | 2026-11-13 | [How Mine Salting Worked](https://www.youtube.com/shorts/TRUkQ1wbV2E) | Ricks Clips |
+| 7 | 16 947 111 | 730 716 | 2026-10-30 | [Why Sailors Carried Storm Oil](https://www.youtube.com/shorts/Mz72MuPgnGY) | Ricks Clips |
+| 8 | 11 756 980 | 646 633 | 2026-11-04 | [The Pink Prison Cell Experiment](https://www.youtube.com/shorts/HxqtHI62otM) | Ricks Clips |
+| 9 | 18 978 237 | 603 656 | 2026-10-22 | [The Job Nobody Wants in Japan](https://www.youtube.com/shorts/0m6G8pDtzNs) | Ricks Clips |
+| 10 | 14 055 944 | 477 583 | 2026-10-24 | [What the Grave Bell Really Meant](https://www.youtube.com/shorts/GM9UKnZ6JFw) | Ricks Clips |
+| 11 | 16 221 707 | 430 334 | 2026-10-15 | [The Window That Breaks Japan's Gambling Law](https://www.youtube.com/shorts/eQR3pgMiUF0) | Ricks Clips |
+| 12 | 16 673 230 | 393 456 | 2026-10-11 | [Your Brain's Secret Idea Zone](https://www.youtube.com/shorts/PL-Yro2meY4) | Ricks Clips |
+| 13 | 9 956 703 | 377 783 | 2026-10-27 | [Why the Second Draw Always Wins](https://www.youtube.com/shorts/LC8hYwUZ-kU) | Ricks Clips |
+| 14 | 873 125 | 359 813 | 2026-11-20 | [The Prisoner Who Tunneled Into a Bank](https://www.youtube.com/shorts/7dGWuCeZ8Ic) | Ricks Clips |
+| 15 | 5 002 957 | 354 423 | 2026-11-08 | [Why Drivers Started Filming The Road](https://www.youtube.com/shorts/e9NoHjAXYIY) | Ricks Clips |
+| 16 | 10 559 686 | 346 947 | 2026-10-23 | [Why Cashiers Keep Winning The Lottery](https://www.youtube.com/shorts/VKsamN3Fk4U) | Ricks Clips |
+| 17 | 1 538 938 | 327 073 | 2026-11-17 | [Why Samurai Feared The Flying Thunder](https://www.youtube.com/shorts/R-mWVMM-LAs) | Ricks Clips |
+| 18 | 10 543 811 | 325 891 | 2026-10-21 | [The Burglar Who Only Moved Furniture](https://www.youtube.com/shorts/nzbkkEZFM8g) | Ricks Clips |
+| 19 | 10 006 109 | 290 612 | 2026-10-19 | [Levels of Pirate Cannonballs](https://www.youtube.com/shorts/lnYLIWP2l-I) | Ricks Clips |
+| 20 | 9 635 275 | 269 616 | 2026-10-17 | [An Unstoppable Spear vs an Unbreakable Shield](https://www.youtube.com/shorts/PLe2Gu3FDuA) | Ricks Clips |
