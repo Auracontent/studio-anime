@@ -37,6 +37,10 @@ if story:
     row('Poses d\'action', 'OK' if poses else 'INFO', ', '.join(poses) or 'aucune', 'les personnages FONT quelque chose')
     row('Ambiances (moods.js)', 'OK' if len(moods) >= 2 else 'INFO', ', '.join(moods) or 'LIGHTS maison', 'une ambiance par acte')
 
+if os.path.exists(f'{EP}/phrases.json'):
+    src = json.load(open(f'{EP}/phrases.json')).get('source', '?')
+    row('Calage des sous-titres', 'OK' if src == 'whisper' else 'A REVOIR', src, 'whisper (les silences seuls décalent les sous-titres)')
+
 # ---------- son ----------
 if os.path.exists(f'{EP}/music.wav'):
     mdb = float(os.environ.get('MUSIC_DB', '-12'))   # mix.py sets the music bed exactly at this level under the voice (gated RMS)

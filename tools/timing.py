@@ -134,6 +134,9 @@ if __name__ == "__main__":
         src = "whisper"
     elif script:
         words, phr, cost = align(script, segs); src = f"silence-align (cost {cost:.2f})"
+        print("\n!!! ATTENTION : Whisper indisponible, calage approximatif sur les silences : les sous-titres et les réactions\n"
+              "!!! risquent d'être décalés par rapport à la voix (surtout si elle marque de longues pauses). Installe faster-whisper\n"
+              "!!! (et son modèle) puis relance timing.py. Source enregistrée dans phrases.json : " + src + "\n")
     else:
         print("NO_ASR: no whisper available and no script given. Ask the user for the script text (or install faster-whisper)."); sys.exit(2)
     json.dump(words, open(os.path.join(out, "words.json"), "w"), indent=1)

@@ -124,6 +124,9 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
 2. Créer `episodes/<slug>/` à partir de `inbox/<slug>/` : copier la voix en `voice.wav` (convertir avec ffmpeg si besoin) et `script.txt`.
 3. Timing : `python3 tools/timing.py episodes/<slug>/voice.wav episodes/<slug>/script.txt --out episodes/<slug>`
    (faster-whisper s'il est installé, sinon alignement sur les silences). Vérifier `phrases.json`. TOTAL = round(durée × 30).
+   **`phrases.json` doit dire `"source": "whisper"`.** L'alignement sur les silences (`silence-align`) décale les sous-titres
+   dès que la voix marque des pauses : dans ce cas, n'écris pas l'épisode, mets le message de timing.py dans
+   `episodes/<slug>/PROBLEME.md`, commite et arrête-toi (pas de vidéo vaut mieux qu'une vidéo désynchronisée).
 4. Décor : réutiliser une bibliothèque de `engine/library/` si elle convient, sinon en écrire une nouvelle dans le même style
    (`export function buildXxx(ctx)` qui retourne `{ DECK, clouds, state(S, f), onLight }`). `web/world.js` l'importe depuis `'../library/xxx.js'`.
    **Habillage obligatoire** avec le kit d'objets `engine/library/props.js` (`const K = propKit(ctx, { seed })` dans `web/world.js`) :

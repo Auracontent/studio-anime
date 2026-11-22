@@ -46,14 +46,20 @@ jobs:
           echo "Épisode : $S — $([ $D = true ] && echo 'réalisation par Claude + rendu' || echo 'déjà réalisé : rendu seulement')"
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
+      - uses: actions/cache@v4      # modèle Whisper (~480 Mo) : téléchargé une fois, réutilisé ensuite
+        with: { path: ~/.cache/huggingface, key: whisper-small-v1 }
       - name: Outils
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu >/dev/null
           pip install --quiet numpy pillow faster-whisper
           bash tools/setup.sh
+          # Télécharger le modèle ICI (réseau libre) : dans l'étape de Claude, le téléchargement échouait et timing.py retombait
+          # sur l'alignement par silences, d'où des sous-titres décalés. Ensuite HF_HUB_OFFLINE=1 lit le modèle en cache.
+          python3 -c "from faster_whisper import WhisperModel; WhisperModel('small', compute_type='int8'); print('modèle Whisper prêt')"
       - name: Claude réalise l'épisode
         if: ${{ steps.slug.outputs.direct == 'true' }}
         uses: anthropics/claude-code-action@v1
+        env: { HF_HUB_OFFLINE: "1" }
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # "Idée + script" starts this workflow itself (gh workflow run), so the actor is the github-actions bot.
