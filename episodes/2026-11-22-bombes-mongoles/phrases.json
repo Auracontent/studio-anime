@@ -1,0 +1,242 @@
+{
+ "duration": 59.400583,
+ "frames30": 1782,
+ "source": "silence-align (cost 10.72)",
+ "segments": [
+  [
+   0.298375,
+   2.570583
+  ],
+  [
+   2.892875,
+   4.897667
+  ],
+  [
+   5.458083,
+   7.211708
+  ],
+  [
+   7.725083,
+   9.001583
+  ],
+  [
+   9.900958,
+   11.674833
+  ],
+  [
+   12.374583,
+   13.319208
+  ],
+  [
+   14.302625,
+   16.64425
+  ],
+  [
+   17.095875,
+   18.328417
+  ],
+  [
+   19.512875,
+   23.581917
+  ],
+  [
+   24.418292,
+   25.48175
+  ],
+  [
+   25.781708,
+   26.890875
+  ],
+  [
+   27.030333,
+   28.027875
+  ],
+  [
+   28.8295,
+   29.0345
+  ],
+  [
+   29.369917,
+   30.7285
+  ],
+  [
+   31.636292,
+   31.9805
+  ],
+  [
+   32.635958,
+   33.451875
+  ],
+  [
+   33.924,
+   35.486167
+  ],
+  [
+   35.765542,
+   36.402625
+  ],
+  [
+   37.23925,
+   41.040125
+  ],
+  [
+   41.894625,
+   42.195708
+  ],
+  [
+   42.603958,
+   43.534875
+  ],
+  [
+   43.804042,
+   44.130125
+  ],
+  [
+   44.261458,
+   44.927083
+  ],
+  [
+   45.111125,
+   45.512208
+  ],
+  [
+   46.380792,
+   47.884125
+  ],
+  [
+   48.604125,
+   49.621542
+  ],
+  [
+   50.146625,
+   51.295083
+  ],
+  [
+   52.110042,
+   54.595833
+  ],
+  [
+   55.440917,
+   56.09225
+  ],
+  [
+   56.66975,
+   57.161708
+  ],
+  [
+   57.405958,
+   57.602708
+  ],
+  [
+   58.0685,
+   58.910833
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Le plus c\u00e9l\u00e8bre dessin d'une bombe m\u00e9di\u00e9vale\u2026 a \u00e9t\u00e9 ajout\u00e9 apr\u00e8s coup.",
+   "s": 0.298,
+   "e": 4.898
+  },
+  {
+   "text": "Vers douze cent quatre-vingt-treize,",
+   "s": 5.458,
+   "e": 7.212
+  },
+  {
+   "text": "le samoura\u00ef Suenaga fait peindre ses exploits contre les Mongols.",
+   "s": 7.725,
+   "e": 11.675
+  },
+  {
+   "text": "Mais l'explosion, elle,",
+   "s": 12.375,
+   "e": 13.319
+  },
+  {
+   "text": "n'a \u00e9t\u00e9 rajout\u00e9e que plus de quatre si\u00e8cles plus tard.",
+   "s": 14.303,
+   "e": 16.644
+  },
+  {
+   "text": "Alors,",
+   "s": 17.096,
+   "e": 18.328
+  },
+  {
+   "text": "ces bombes existaient-elles vraiment ?",
+   "s": 19.513,
+   "e": 23.582
+  },
+  {
+   "text": "Sauf que\u2026 en deux mille onze,",
+   "s": 24.418,
+   "e": 25.482
+  },
+  {
+   "text": "des plongeurs fouillent le fond de la mer,",
+   "s": 25.782,
+   "e": 28.028
+  },
+  {
+   "text": "\u00e0 Takashima.",
+   "s": 28.829,
+   "e": 30.729
+  },
+  {
+   "text": "Sous un m\u00e8tre de sable dort un navire mongol,",
+   "s": 31.636,
+   "e": 33.452
+  },
+  {
+   "text": "coul\u00e9 en douze cent quatre-vingt-un.",
+   "s": 33.924,
+   "e": 35.486
+  },
+  {
+   "text": "Dedans,",
+   "s": 35.766,
+   "e": 36.403
+  },
+  {
+   "text": "des boules de c\u00e9ramique, tass\u00e9es entre les pierres et les briques.",
+   "s": 37.239,
+   "e": 41.04
+  },
+  {
+   "text": "Les rayons X les ouvrent sans les casser :",
+   "s": 41.895,
+   "e": 44.13
+  },
+  {
+   "text": "de la poudre noire,",
+   "s": 44.261,
+   "e": 45.512
+  },
+  {
+   "text": "et des \u00e9clats de fer.",
+   "s": 46.381,
+   "e": 47.884
+  },
+  {
+   "text": "Les Mongols lan\u00e7aient bien du tonnerre sur les samoura\u00efs.",
+   "s": 48.604,
+   "e": 51.295
+  },
+  {
+   "text": "Le dessin \u00e9tait faux\u2026 mais la bombe,",
+   "s": 52.11,
+   "e": 54.596
+  },
+  {
+   "text": "elle,",
+   "s": 55.441,
+   "e": 56.092
+  },
+  {
+   "text": "\u00e9tait bien r\u00e9elle.",
+   "s": 56.67,
+   "e": 58.911
+  }
+ ]
+}

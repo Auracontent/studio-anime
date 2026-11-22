@@ -109,6 +109,38 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
     p.ell(cx, hc - 1.12 * H.b, 12 * u, 6 * u, "#d9a845", 2 * u);
     p.ell(cx, hc - 0.34 * H.b, 1.14 * H.a, 0.12 * H.b, mul(col, [0.5, 0.52, 0.62]), ow);       // visière
     p.poly(ellPts(cx, hc - 0.66 * H.b, 0.2 * H.a, 0.26 * H.b, 0, 360, 0, 20), "#d9a845", 2 * u); // plaque
+  } else if (kind === "kabuto") { // casque de samouraï (Pourkoipa original): bol laqué, crête dorée en V, large garde-nuque à lamelles
+    const col = O.hatCol || "#2a2a36", dk = mul(col, [0.55, 0.55, 0.7]), lace = O.hatBand || "#c8402a";
+    for (const s of [-1, 1]) { const fl = [[cx + s * 0.9 * H.a, hc - 0.55 * H.b], [cx + s * 1.55 * H.a, hc - 0.1 * H.b], [cx + s * 1.5 * H.a, hc + 0.55 * H.b], [cx + s * 0.95 * H.a, hc + 0.2 * H.b]]; p.shadedFill(fl, lace, mul(lace, [0.6, 0.55, 0.6]), light, H.a, 0.4); p.poly(fl, null, ow * 0.9); p.stroke([[cx + s * 1.0 * H.a, hc - 0.2 * H.b], [cx + s * 1.5 * H.a, hc + 0.2 * H.b]], 2 * u, "#271925"); }
+    const dome = ellPts(cx, hc - 0.34 * H.b, 1.04 * H.a, 0.82 * H.b, 180, 360, 0, 48);
+    dome.push([cx + 1.04 * H.a, hc - 0.34 * H.b], [cx - 1.04 * H.a, hc - 0.34 * H.b]);
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.clip(dome, () => { for (let i = -4; i <= 4; i++) p.stroke([[cx + i * 0.25 * H.a, hc - 0.34 * H.b], [cx + i * 0.1 * H.a, hc - 1.15 * H.b]], 1.6 * u, mul(col, [1.5, 1.5, 1.6])); p.stroke(ellPts(cx - 24 * u, hc - 0.95 * H.b, 0.3 * H.a, 0.2 * H.b, 200, 300, 0, 16), 4 * u, "#ffffff55"); });
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
+    p.band([[cx - 1.06 * H.a, hc - 0.46 * H.b], [cx + 1.06 * H.a, hc - 0.46 * H.b]], lace, 0.16 * H.b, 1.4 * u);
+    for (const s of [-1, 1]) p.stroke([[cx + s * 0.1 * H.a, hc - 0.8 * H.b], [cx + s * 0.55 * H.a, hc - 1.75 * H.b]], 5 * u, "#d9a845");    // maedate : crête en V
+    p.ell(cx, hc - 0.7 * H.b, 0.14 * H.a, 0.14 * H.a, "#d9a845", 2 * u);
+  } else if (kind === "chonmage") { // chignon de samouraï / peintre : crâne rasé, cheveux noirs sur les côtés, petit chignon en avant
+    const col = O.hair || "#1e1714", dk = mul(col, [0.6, 0.6, 0.7]);
+    const cap = ellPts(cx, hc - 0.28 * H.b, 1.03 * H.a, 0.78 * H.b, 180, 360, 0, 48); cap.push([cx + 1.03 * H.a, hc - 0.2 * H.b], [cx + 0.7 * H.a, hc - 0.55 * H.b], [cx - 0.7 * H.a, hc - 0.55 * H.b], [cx - 1.03 * H.a, hc - 0.2 * H.b]);
+    p.shadedFill(cap, col, dk, light, H.a, 0.4); p.inkRing(cap, ow * 0.95, thickAngle(light));
+    const kn = [[cx - 0.2 * H.a, hc - 0.95 * H.b], [cx + 0.2 * H.a, hc - 0.95 * H.b], [cx + 0.26 * H.a, hc - 1.4 * H.b], [cx - 0.1 * H.a, hc - 1.55 * H.b]];
+    p.shadedFill(kn, col, dk, light, H.a, 0.4); p.poly(kn, null, ow * 0.9); p.band([[cx - 0.22 * H.a, hc - 1.0 * H.b], [cx + 0.22 * H.a, hc - 1.0 * H.b]], O.hatBand || "#e8d6a0", 6 * u, 1 * u);
+  } else if (kind === "divehood") { // cagoule de plongée + masque relevé sur le front (Pourkoipa original)
+    const col = O.hatCol || "#14a8c0", dk = mul(col, [0.55, 0.6, 0.7]);
+    const hood = blobPts(cx, hc - 0.05 * H.b, { ...H, a: H.a * 1.08, b: H.b * 1.1 });
+    p.shadedFill(hood, col, dk, light, H.a, 0.4); p.inkRing(hood, ow, thickAngle(light));
+    const sk = O.skin ?? SKIN, fc = blobPts(cx, hc + 0.12 * H.b, { ...H, a: H.a * 0.8, b: H.b * 0.74 });
+    p.shadedFill(fc, sk, mul(sk, SH_SKIN), light, H.a); p.inkRing(fc, ow * 0.9, thickAngle(light));
+    const mk = rrect(cx - 0.8 * H.a, hc - 0.92 * H.b, cx + 0.8 * H.a, hc - 0.45 * H.b, 16 * u);
+    p.poly(mk, "#2a3340", ow * 0.9); p.poly(rrect(cx - 0.66 * H.a, hc - 0.84 * H.b, cx + 0.66 * H.a, hc - 0.53 * H.b, 12 * u), "#a8e8f4", 2 * u);
+    p.stroke(ellPts(cx - 0.3 * H.a, hc - 0.72 * H.b, 0.2 * H.a, 0.1 * H.b, 180, 300, 0, 10), 3 * u, "#ffffffaa");
+  } else if (kind === "mongol") { // bonnet mongol : calotte pointue rouge sombre, large bord de fourrure
+    const col = O.hatCol || "#a83a2a", dk = mul(col, [0.55, 0.5, 0.55]);
+    const cone = [[cx - 0.98 * H.a, hc - 0.5 * H.b], [cx - 0.55 * H.a, hc - 1.2 * H.b], [cx + 0.05 * H.a, hc - 1.75 * H.b], [cx + 0.6 * H.a, hc - 1.2 * H.b], [cx + 0.98 * H.a, hc - 0.5 * H.b]];
+    p.shadedFill(cone, col, dk, light, H.a, 0.4); p.poly(cone, null, ow);
+    p.ell(cx, hc - 0.5 * H.b, 1.14 * H.a, 0.24 * H.b, O.hatBand || "#4a3626", ow);
+    for (let i = -4; i <= 4; i++) p.stroke([[cx + i * 0.25 * H.a, hc - 0.4 * H.b], [cx + i * 0.25 * H.a + 3 * u, hc - 0.62 * H.b]], 1.6 * u, "#2a1e16");
   } else if (kind === "chauff") {
     const col = O.hatCol || "#26303f";
     const crown = rrect(cx - 0.86 * H.a, hc - 1.38 * H.b, cx + 0.86 * H.a, hc - 0.5 * H.b, 10 * u);
@@ -173,6 +205,9 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
       const big = kind.startsWith("ballBig"), r = (big ? 15.5 : 9) * u / 1.7 * 1.7, col = big ? "#e23d32" : "#2f7fd8", cy = hy - r * 0.85;
       p.ell(hx, cy, r, r, col, 2.6 * u); p.ell(hx - r * 0.35, cy - r * 0.38, r * 0.3, r * 0.2, "#ffffffaa", 0, 0, 360, -30); break; }
     case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
+    case "brush": { p.stroke([[hx - 6 * u, hy + 16 * u], [hx + 2 * u, hy - 40 * u]], 3.6 * u, "#8a5a34"); p.poly([[hx - 1 * u, hy - 38 * u], [hx + 7 * u, hy - 38 * u], [hx + 6 * u, hy - 58 * u], [hx + 2 * u, hy - 62 * u]], "#1b1418", 2 * u); break; }
+    case "bomb": { const r = 17 * u, cy = hy - r * 0.8; p.stroke([[hx, cy - r * 0.9], [hx + 3 * u, cy - r * 1.5]], 4 * u, "#e8d8a0"); p.ell(hx, cy - r * 0.95, r * 0.34, r * 0.22, "#5a3a24", 2.2 * u); p.ell(hx, cy, r, r, "#7a4a2e", 2.6 * u);
+      p.stroke(ellPts(hx, cy, r, r * 0.28, 0, 360, 0, 24), 3 * u, "#c9a060"); p.ell(hx - r * 0.35, cy - r * 0.4, r * 0.28, r * 0.18, "#ffffff88", 0, 0, 360, -30); break; }
   }
 };
 
@@ -271,7 +306,7 @@ export const romanFront = (p, key, opts = {}) => {
       const top = chin - 0.1 * HH, bot = torsoBot - 0.25 * HH, n = 5;
       for (let i = 0; i < n; i++) {
         const y0 = top + (bot - top) * i / n, y1 = top + (bot - top) * (i + 1) / n;
-        const c = old ? (i % 2 ? "#8d8679" : "#9a9384") : (i % 2 ? "#a7b0ba" : "#bcc4cc");
+        const c = O.armorCols ? O.armorCols[i % 2] : old ? (i % 2 ? "#8d8679" : "#9a9384") : (i % 2 ? "#a7b0ba" : "#bcc4cc");
         p.poly([[tcx - 1.5 * T.a, y0], [tcx + 1.5 * T.a, y0 + 3 * u], [tcx + 1.5 * T.a, y1 + 3 * u], [tcx - 1.5 * T.a, y1]], c, 1.8 * u);
       }
       p.band([[tcx - 1.4 * T.a, torsoBot - 0.2 * HH], [tcx + 1.4 * T.a, torsoBot - 0.2 * HH]], LEATHER, 0.08 * HH, 1.5 * u);
@@ -301,7 +336,7 @@ export const romanFront = (p, key, opts = {}) => {
   p.inkRing(tp, ow, thick);
   if (O.armor) for (const s of [-1, 1]) { // shoulder plates
     const sp = ellPts(tcx + s * 0.72 * T.a, chin + 0.1 * HH, 0.42 * T.a, 0.13 * HH, 180, 360, s * 8, 20);
-    p.poly(sp, old ? "#9a9384" : "#c5ccd3", 1.8 * u);
+    p.poly(sp, O.armorCols ? O.armorCols[0] : old ? "#9a9384" : "#c5ccd3", 1.8 * u);
   }
   if (O.moss) {/* reserved */}
   for (const a of arms) if (a.front) drawArm(a);
@@ -337,7 +372,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "pickel") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
   else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
