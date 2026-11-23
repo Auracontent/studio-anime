@@ -1,0 +1,264 @@
+{
+ "duration": 39.360583,
+ "frames30": 1181,
+ "source": "whisper",
+ "segments": [
+  [
+   0.306625,
+   0.827833
+  ],
+  [
+   0.992625,
+   1.787875
+  ],
+  [
+   1.917625,
+   3.245875
+  ],
+  [
+   3.656333,
+   4.106125
+  ],
+  [
+   4.627125,
+   8.078417
+  ],
+  [
+   8.544625,
+   9.42225
+  ],
+  [
+   9.854,
+   11.0365
+  ],
+  [
+   11.264792,
+   12.007875
+  ],
+  [
+   12.671083,
+   13.089625
+  ],
+  [
+   13.304083,
+   14.00425
+  ],
+  [
+   14.255542,
+   14.707708
+  ],
+  [
+   15.194708,
+   17.410667
+  ],
+  [
+   17.797083,
+   19.918833
+  ],
+  [
+   20.134125,
+   21.147833
+  ],
+  [
+   21.71025,
+   23.195042
+  ],
+  [
+   23.476458,
+   26.866792
+  ],
+  [
+   27.797,
+   28.198042
+  ],
+  [
+   28.65275,
+   29.57925
+  ],
+  [
+   29.858625,
+   30.718167
+  ],
+  [
+   30.851708,
+   32.067583
+  ],
+  [
+   32.870875,
+   33.163167
+  ],
+  [
+   33.363417,
+   35.918083
+  ],
+  [
+   36.423292,
+   37.195333
+  ],
+  [
+   37.434417,
+   37.549833
+  ],
+  [
+   37.718625,
+   38.860042
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Tous les matins,",
+   "s": 0.0,
+   "e": 0.82
+  },
+  {
+   "text": "avant tout le monde,",
+   "s": 1.02,
+   "e": 1.74
+  },
+  {
+   "text": "quelqu'un allume les lumi\u00e8res du bureau.",
+   "s": 1.74,
+   "e": 3.16
+  },
+  {
+   "text": "C'est Karim.",
+   "s": 3.16,
+   "e": 4.04
+  },
+  {
+   "text": "Il lance la cafeti\u00e8re,",
+   "s": 4.54,
+   "e": 5.48
+  },
+  {
+   "text": "arrose la plante et d\u00e9bloque l'imprimante.",
+   "s": 5.48,
+   "e": 8.52
+  },
+  {
+   "text": "Personne ne dit merci.",
+   "s": 8.52,
+   "e": 9.36
+  },
+  {
+   "text": "Pire,",
+   "s": 9.82,
+   "e": 10.04
+  },
+  {
+   "text": "on se moque de lui,",
+   "s": 10.32,
+   "e": 11.04
+  },
+  {
+   "text": "parce qu'il arrive trop t\u00f4t.",
+   "s": 11.04,
+   "e": 12.04
+  },
+  {
+   "text": "Un lundi,",
+   "s": 12.62,
+   "e": 13.06
+  },
+  {
+   "text": "Karim est malade.",
+   "s": 13.3,
+   "e": 14.0
+  },
+  {
+   "text": "Il ne vient pas.",
+   "s": 14.26,
+   "e": 14.7
+  },
+  {
+   "text": "Le bureau reste sombre et glac\u00e9.",
+   "s": 15.54,
+   "e": 17.44
+  },
+  {
+   "text": "Le caf\u00e9 est froid,",
+   "s": 17.9,
+   "e": 18.6
+  },
+  {
+   "text": "la plante penche,",
+   "s": 19.0,
+   "e": 19.88
+  },
+  {
+   "text": "l'imprimante grince.",
+   "s": 19.88,
+   "e": 21.06
+  },
+  {
+   "text": "Sauf que L\u00e9a,",
+   "s": 21.7,
+   "e": 22.32
+  },
+  {
+   "text": "la cheffe,",
+   "s": 22.5,
+   "e": 23.0
+  },
+  {
+   "text": "comprend.",
+   "s": 23.0,
+   "e": 23.16
+  },
+  {
+   "text": "Elle repense \u00e0 cette lumi\u00e8re,",
+   "s": 23.74,
+   "e": 24.8
+  },
+  {
+   "text": "allum\u00e9e chaque matin,",
+   "s": 25.24,
+   "e": 26.12
+  },
+  {
+   "text": "depuis des ann\u00e9es.",
+   "s": 26.12,
+   "e": 26.86
+  },
+  {
+   "text": "Le lendemain,",
+   "s": 27.5,
+   "e": 28.22
+  },
+  {
+   "text": "elle arrive \u00e0 six heures,",
+   "s": 28.34,
+   "e": 29.52
+  },
+  {
+   "text": "allume les lumi\u00e8res et pose un caf\u00e9 sur son bureau.",
+   "s": 29.9,
+   "e": 32.04
+  },
+  {
+   "text": "Ce que tu fais en silence,",
+   "s": 33.06,
+   "e": 34.16
+  },
+  {
+   "text": "on ne le voit qu'une fois que tu t'arr\u00eates.",
+   "s": 34.54,
+   "e": 36.44
+  },
+  {
+   "text": "Alors,",
+   "s": 36.44,
+   "e": 36.62
+  },
+  {
+   "text": "aujourd'hui,",
+   "s": 36.62,
+   "e": 37.74
+  },
+  {
+   "text": "allume une lumi\u00e8re pour quelqu'un.",
+   "s": 37.74,
+   "e": 38.9
+  }
+ ]
+}
