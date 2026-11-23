@@ -1,4 +1,7 @@
 {
-  "channels": ["@RicksClips3000"],
-  "max_videos": 300
+  "channels": [
+    "@RicksClips3000"
+  ],
+  "max_videos": 300,
+  "own": "@Pourkoipa"
 }
