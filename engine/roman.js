@@ -463,6 +463,15 @@ export const romanFront = (p, key, opts = {}) => {
     p.dot(bx + sd * 7 * u, by - 14 * u, 3.4 * u, WHITE); p.dot(bx + sd * 7.8 * u, by - 14 * u, 1.8 * u, INK);
     p.arc(bx - sd * 2 * u, by + 6 * u, 7 * u, 9 * u, sd > 0 ? 100 : 260, sd > 0 ? 250 : 410, 2 * u);       // wing
   }
+  if (O.braids) { // nattes (Pourkoipa original) : deux tresses qui pendent de chaque côté de la tête, nœuds de couleur
+    const bc = O.braids, dk = mul(bc, [0.6, 0.6, 0.7]), rib = O.ribbon || "#e8453a";
+    for (const s of [-1, 1]) { const x0 = cx + s * 0.98 * H.a, y0 = hc + 0.1 * H.b, pts = [];
+      for (let i = 0; i <= 5; i++) pts.push([x0 + s * (0.2 + 0.1 * Math.sin(i * 1.3)) * H.a, y0 + i * 0.4 * H.b]);
+      p.stroke(pts, 27 * u, "#271925"); p.stroke(pts, 20 * u, bc);
+      for (let i = 1; i <= 4; i++) { const [bx, by] = pts[i]; p.stroke([[bx - 10 * u, by - 7 * u], [bx + 10 * u, by + 7 * u]], 3 * u, dk); }
+      p.dot(pts[0][0] - s * 6 * u, pts[0][1] - 4 * u, 12 * u, "#271925"); p.dot(pts[0][0] - s * 6 * u, pts[0][1] - 4 * u, 8.5 * u, rib);
+      p.dot(pts[5][0], pts[5][1] + 5 * u, 11 * u, "#271925"); p.dot(pts[5][0], pts[5][1] + 5 * u, 7.5 * u, rib); }
+  }
   // ---- head ----
   const [cpx, cpy] = rotAbout([cx, chin], rad(tilt), [cx, hipY]);
   const Ah = tilt + headTilt;

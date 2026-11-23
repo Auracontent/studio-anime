@@ -29,6 +29,7 @@ export function makeBike(ctx, col = '#d9b020') {
     g.visible = o.vis !== false; g.position.set(x, o.y || 0, z); g.rotation.set(0, o.ry || 0, o.roll || 0);
     const flat = o.flat ? 1 : 0;
     for (const w of wheels) { w.rotation.z = -(o.rot || 0); w.scale.set(1 + 0.12 * flat, 1 - 0.3 * flat, 1); w.position.y = 0.36 - 0.1 * flat; }
+    if (o.bent) { wheels[1].rotation.y = 0.55 * o.bent; wheels[1].scale.set(1 - 0.2 * o.bent, 1 + 0.1 * o.bent, 1); }   // roue avant tordue (voilée)
     crank.rotation.z = -(o.rot || 0) * 0.5;
   } };
 }
