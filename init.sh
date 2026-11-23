@@ -77,7 +77,7 @@ fi
 
 # ---------- 5. Le studio ----------
 bash tools/setup.sh
-python3 -c "import faster_whisper" 2> /dev/null || pip_install faster-whisper || say "⚠️  faster-whisper non installé : timing.py s'alignera sur les silences"
+python3 -c "import faster_whisper" 2> /dev/null || pip_install ".[timing]" || say "⚠️  faster-whisper non installé : timing.py s'alignera sur les silences"
 
 # ---------- 6. Claude Code (facultatif) ----------
 if [ "${SKIP_CLAUDE:-0}" != 1 ]; then

@@ -15,3 +15,7 @@ episodes/*/sfx_manual.wav
 episodes/*/events.json
 engine/.ev_*/
 .env
+
+# pip install . (pyproject.toml)
+build/
+*.egg-info/

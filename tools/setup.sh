@@ -18,7 +18,7 @@ fi
 cat engine/toonbase.js engine/roman.js > engine/toon.js
 # 4. Playwright (pilote du navigateur) + dépendances Python
 [ -d node_modules/playwright ] || npm install --no-audit --no-fund >/dev/null
-python3 -c "import numpy, PIL" 2>/dev/null || pip install --quiet numpy pillow 2>/dev/null || pip install --quiet --break-system-packages numpy pillow
+python3 -c "import numpy, PIL" 2>/dev/null || pip install --quiet . 2>/dev/null || pip install --quiet --break-system-packages .   # versions : pyproject.toml
 # 5. Polices des sous-titres et du branding
 mkdir -p "$HOME/.fonts" && cp assets/fonts/*.ttf "$HOME/.fonts/" && (fc-cache -f >/dev/null 2>&1 || true)
 echo "studio prêt"

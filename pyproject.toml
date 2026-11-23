@@ -1,0 +1,28 @@
+[project]
+name = "studio-anime"
+version = "0.1.0"
+description = "Studio Pourkoipa : outils Python du pipeline (audio, timing, contrôle, upload)"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "numpy==2.5.5",
+    "pillow==13.0.0",
+]
+
+[project.optional-dependencies]
+# Timing des mots (Whisper) et contrôle de la voix
+timing = [
+    "faster-whisper==1.2.1",
+    "av==19.0.2",
+]
+# Envoi des vidéos sur Hugging Face
+upload = [
+    "huggingface_hub[hf_xet]==2.4.0",
+]
+
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# Ce n'est pas un paquet Python : ce fichier sert seulement à fixer les versions des dépendances
+packages = []

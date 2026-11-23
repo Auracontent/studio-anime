@@ -46,7 +46,7 @@ jobs:
       - name: Publish
         if: ${{ steps.mode.outputs.mode != 'off' }}
         run: |
-          pip install --quiet "huggingface_hub[hf_xet]"
+          pip install --quiet ".[upload]"
           A=""; [ -n "${{ github.event.inputs.slug }}" ] && A="--slug ${{ github.event.inputs.slug }}"
           case "${{ steps.mode.outputs.mode }}" in
             comptes) python3 tools/publish.py --list-accounts ;;
