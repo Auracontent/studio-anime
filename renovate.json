@@ -1,13 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
+  "timezone": "Europe/Paris",
+  "schedule": ["before 6am on monday"],
+  "prConcurrentLimit": 3,
   "packageRules": [
     {
-      "description": "Python is pinned on purpose (3.12 in CI, <3.13 for dependencies): never bump it automatically",
-      "matchDepNames": ["python"],
-      "enabled": false
+      "description": "Actions GitHub : une seule PR groupée",
+      "matchManagers": ["github-actions"],
+      "groupName": "actions GitHub"
+    },
+    {
+      "description": "Playwright pilote Chromium pour le rendu : relire la planche avant de fusionner",
+      "matchPackageNames": ["playwright"],
+      "labels": ["rendu"]
     }
   ]
 }
