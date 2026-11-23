@@ -52,10 +52,17 @@ export const q = (x, n = 2) => Math.round(x * 10 ** n) / 10 ** n;
  *  0.24-0.28 = two characters side by side (frameTwo, stand them 0.8-1 m apart), <= 0.10 = wide / establishing only.
  *  yaw: degrees around the character (0 = camera on +z looking -z, 90 = camera on +x). frameY: head height in the frame (0 top, 1 bottom).
  *  s: card scale (1 = 2.25 m tall card; cast v2 head ~0.63 m wide, centre ~1.48 m). Use as a key: { f: 120, ...frameOn([2,0,-36], { headW: 0.26 }) } */
-export const frameOn = (at, { headW = 0.30, yaw = 0, fov = 40, frameY = 0.38, s = 1, aspect = 9 / 16, lift = -0.08 } = {}) => {
-  const HW = 0.63 * s, HC = 1.48 * s + (at[1] || 0), t = Math.tan((fov * Math.PI) / 360);   // cast v2 head: 0.63 m wide, centre 1.48 m
+export const frameOn = (at, { headW = 0.30, yaw = 0, fov = 40, frameY = 0.38, s = 1, aspect = 9 / 16, lift = -0.08, low = 0, dutch = 0, legs = 1, head = 1, sit = false } = {}) => {
+  // legs / head / sit: same values as the outfit (O.legs, O.head) and the actor (sit) so the head stays where it is aimed at
+  const HH = 0.592 * head, HC = (1.48 + HH * (1.08 * legs * (sit ? 0.55 : 1) + 1.32) - 0.592 * 2.4) * s + (at[1] || 0);
+  const HW = 0.63 * s * head, t = Math.tan((fov * Math.PI) / 360);   // cast v2 head: 0.63 m wide, centre 1.48 m
   const d = HW / (headW * 2 * t * aspect), Hv = 2 * d * t, a = (yaw * Math.PI) / 180;
-  return { pos: [at[0] + d * Math.sin(a), HC + lift, at[2] + d * Math.cos(a)], look: [at[0], HC - (0.5 - frameY) * Hv, at[2]], fov };
+  // low: contre-plongée in degrees (camera below the head, looking up: the character looks big, sure of himself, dangerous).
+  // dutch: camera roll in degrees (tension, something is wrong). Both keep the head where frameY puts it.
+  // the camera never goes under the ground (at[1]): a wide low shot is limited to what fits above the floor
+  const e0 = (low * Math.PI) / 180, e = Math.min(e0, Math.asin(Math.min(1, Math.max(0, (HC + lift - (at[1] || 0) - 0.3) / d)))), dh = d * Math.cos(e), up = -d * Math.sin(e);
+  // dist: camera-to-subject distance, to feed dofAt ({ focus: cam.dist }) so the subject stays sharp
+  return { pos: [at[0] + dh * Math.sin(a), HC + lift + up, at[2] + dh * Math.cos(a)], look: [at[0], HC - (0.5 - frameY) * Hv * Math.cos(e), at[2]], fov, roll: dutch, dist: d };
 };
 /** Two characters in one medium shot: frames their midpoint with each head ~headW wide. */
 export const frameTwo = (a, b, o = {}) => frameOn([(a[0] + b[0]) / 2, Math.min(a[1] || 0, b[1] || 0), (a[2] + b[2]) / 2], { headW: 0.26, frameY: 0.4, ...o });
@@ -85,6 +92,42 @@ export const track = (posAt, f, offset = [6, 2, 6], { lag = 6, fov = 40, lookUp 
 export const orbit = (center, f, f0, { r = 12, h = 3, speed = 12, start = 0, fov = 40, lookUp = 1.5 } = {}) => {
   const a = ((start + ((f - f0) / 30) * speed) * Math.PI) / 180;
   return { pos: [center[0] + r * Math.sin(a), center[1] + h, center[2] + r * Math.cos(a)], look: [center[0], center[1] + lookUp, center[2]], fov };
+};
+/** Crane / reveal: ONE continuous move that shows the whole place, from a high wide view down to the characters (or the reverse with
+ *  from/to swapped). Each end is { r, h, yaw, lookUp } around `center` (r metres away, h above it, yaw degrees around it).
+ *  The path bows outwards and the camera turns around the place while it comes down, like a drone: the viewer understands where we are.
+ *  Use for the establishing shot of a new place (5-10 % of the video), or to pull back and show the scale of the problem. */
+export const crane = (center, f, f0, n, { from = { r: 40, h: 26, yaw: -35, lookUp: 0 }, to = { r: 6, h: 1.4, yaw: 10, lookUp: 1.4 }, fov = 42, ease = 'smooth' } = {}) => {
+  const t = M[ease](ramp(f, f0, f0 + n)), L = (k) => lerp(from[k] ?? 0, to[k] ?? 0, t);
+  const r = L('r') * (1 + 0.12 * Math.sin(Math.PI * t)), a = (L('yaw') * Math.PI) / 180, h = lerp(from.h, to.h, M.easeOut(t));
+  return { pos: [center[0] + r * Math.sin(a), (center[1] || 0) + h, center[2] + r * Math.cos(a)], look: [center[0], (center[1] || 0) + L('lookUp'), center[2]], fov };
+};
+/** Foreground object (RicksClips depth trick): a card standing between the camera and the subject, low in a corner of the frame and
+ *  blurred by the depth of field. Returns an actor to add to actorsAt(). draw = a card drawing (e.g. T.fgProp('coin')), side -1 / 1 = left /
+ *  right corner, dist = metres in front of the camera, drop = how low in the frame (0 centre, 1 bottom edge), s = size.
+ *  Pair it with dofAt(f) = { focus: <subject distance>, cinf: 6, near: 1.4 } so it melts into a soft blur. */
+export const fgCard = (cam, draw, { key = 'fg', side = 1, dist = 1.1, drop = 0.55, s = 0.45, spread = 0.38 } = {}) => {
+  // camera basis (works for tilted low-angle cameras too): forward f, right r, up u
+  const d = [cam.look[0] - cam.pos[0], cam.look[1] - cam.pos[1], cam.look[2] - cam.pos[2]], n = Math.hypot(...d) || 1, f = d.map((v) => v / n);
+  let r = [-f[2], 0, f[0]]; const rn = Math.hypot(r[0], r[2]) || 1; r = r.map((v) => v / rn);
+  const u = [r[1] * f[2] - r[2] * f[1], r[2] * f[0] - r[0] * f[2], r[0] * f[1] - r[1] * f[0]], t = Math.tan(((cam.fov || 40) * Math.PI) / 360) * dist, tw = t * (9 / 16);
+  const c = [0, 1, 2].map((i) => cam.pos[i] + f[i] * dist + r[i] * side * spread * 2 * tw - u[i] * drop * t);
+  return { key, draw, x: c[0], y: c[1] - 2.25 * s * 0.5, z: c[2], s, blob: false, shadow: false, marks: false, order: 3 };
+};
+/** Crowd of extras (army, market, spectators): n cards spread over a w x d rectangle centred on `center`, facing the camera.
+ *  Cheap on purpose: the drawing never changes (no blink, no idle redraw); life comes from a small bounce and sway of the card.
+ *  outfits: ids in T.OUTFITS (vary colours); exprs: faces to pick from; cheer: 0-1 jump amount (victory, panic).
+ *  Keep n <= 18 (each card is a texture). Put them BEHIND the hero (z further from the camera). Returns actors to spread in actorsAt(). */
+export const crowd = (T, f, { center = [0, 0, 0], n = 12, w = 8, d = 4, outfits = [], exprs = ['neutral', 'smile', 'grin', 'shock'], seed = 1, s = 0.95, cheer = 0, arms = ['hang', 'hang', 'up', 'wave', 'point'] } = {}) => {
+  const out = [], h = (i, k) => { const x = Math.sin((i + 1) * 12.9898 * (k + 1) + seed * 78.233) * 43758.5453; return x - Math.floor(x); };
+  for (let i = 0; i < n; i++) {
+    const o = outfits[i % Math.max(1, outfits.length)], ex = exprs[Math.floor(h(i, 1) * exprs.length)], L = arms[Math.floor(h(i, 2) * arms.length)], R = arms[Math.floor(h(i, 3) * arms.length)];
+    const opts = { expr: ex, L, R, seed: 2 + (i % 7), facing: h(i, 4) < 0.5 ? -1 : 1, look: (h(i, 5) - 0.5) * 1.2 };
+    const ph = f * (0.18 + 0.08 * h(i, 6)) + i * 1.7, jump = cheer * Math.max(0, Math.sin(ph)) * 0.35;
+    out.push({ key: 'crowd' + seed + '_' + i + o + ex + L + R, draw: (p) => T.romanFront(p, o, opts), x: center[0] + (h(i, 7) - 0.5) * w, y: center[1] || 0, z: center[2] + (h(i, 8) - 0.5) * d,
+      s: s * (0.88 + 0.2 * h(i, 9)), dy: jump + 0.015 * Math.sin(ph), roll: 0.03 * Math.sin(ph * 0.7), marks: false });
+  }
+  return out;
 };
 /** Camera shake for impacts, thunder, explosions: returns a copy of the camera c, shaken for `dur` frames from f0 (decays). Deterministic. */
 export const shake = (c, f, f0, amp = 0.06, dur = 12) => {

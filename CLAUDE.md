@@ -104,11 +104,37 @@ Planche : `node tools/render.mjs episodes/_demo-fx /tmp/demo "30,44,70,125,200,2
 - **Poses d'action** (`engine/roman.js`) : en plus de `point`, `up`, `reach`, `lift`, `wave`... : `carry` (porter devant soi),
   `push` (pousser), `head` (mains sur la tête, panique), `flail` (bras qui moulinent, avec `wv` qui avance), et `run: true` pour de grandes foulées.
 
+## Attitude et espace (ce qui rapproche le plus de la référence)
+Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages, poses, coupe, foule) :
+`node tools/render.mjs episodes/_demo-style /tmp/style "20,45,80,115,145,165,185,205,225,241,257,280"`.
+- **Chaque personnage a une attitude, jamais un visage neutre plus de 2 s.** Visages à attitude : `smug` (sûr de lui, paupières lourdes,
+  un sourcil levé, sourire en coin), `sly` (rusé), `deadpan` (blasé), `proud` (fier : ajoute `headTilt` vers le haut), `suspicious` (méfiant, « ? » auto),
+  `determined`, `scheming` (qui manigance). Le héros a une attitude de base qui le définit (le patron `smug`, le garde `deadpan`, l'inventeur
+  `determined`) et la casse sur les mots forts (`shock`, `laugh`...). C'est ce qui donne de la personnalité, pas le dessin.
+- **Poses à attitude** : `shrug` (bras ouverts, paumes en l'air), `chin` (main sous le menton, il réfléchit), `salute`, `fist` (poing levé),
+  `show` (montre un objet vers la caméra, avec `holdL` / `holdR`), `knuckles`, et `sit: true` (assis sur une caisse dessinée ; `seat: 'stool'` ou `false`).
+- **Costumes riches : 2 à 3 détails par personnage principal** pour une silhouette qu'on reconnaît : `pattern` ('stripes' | 'vstripes' | 'checks' | 'dots',
+  `patternCol`), `lapels`, `buttons`, `belt` (boucle dorée), `sash` (écharpe en diagonale), `medals` (1-4), `epaulettes`, `cuffs`, `plume` (plume au chapeau,
+  `plumeAt`), `pet: 'parrot' | 'pigeon'` (compagnon sur l'épaule, `petCol`, `petSide`). Les figurants restent simples.
+- **Silhouettes contrastées** : `head` (0.85-1.15, grosse tête), `legs` (0.8-1.25), `thin: true` (maigre, membres fins), `stout` (rond), et l'échelle
+  de l'acteur `s` (0.85 petit, 1.1 grand). Un grand maigre à côté d'un petit rond se lit tout de suite. Avec `head` / `legs` / `sit`, passe les mêmes
+  valeurs à `frameOn(..., { head, legs, sit })` pour que le cadrage vise bien la tête.
+- **Contre-plongée et angle penché** : `frameOn(at, { low: 12-22, dutch: 3-6 })`. `low` pour un personnage fort, sûr de lui, menaçant ou un objet
+  imposant (au moins 2 plans par vidéo) ; `dutch` pour la tension ou quand quelque chose cloche. La caméra ne passe jamais sous le sol.
+- **Objet au premier plan, flou** (la profondeur de la référence) : `fgCard(cam, T.fgProp('coin' | 'lantern' | 'letter' | 'leaves' | ...), { side, dist, drop, s })`
+  ajouté dans `actorsAt`, avec `dofAt = { focus: cam.dist, cinf: 6-8, near: 3 }` (`frameOn` renvoie `dist`). 2 à 4 fois par vidéo, sur l'objet de l'histoire.
+- **Montrer tout l'espace en un mouvement** : au moins un plan par vidéo où la caméra révèle le lieu en entier et le relie aux personnages.
+  - `crane(centre, f, f0, n, { from: { r, h, yaw }, to: { r, h, yaw } })` : survol comme un drone, du très large au plus près (ou l'inverse).
+  - **Vue en coupe** (`engine/library/coupe.js`, `buildCoupe(ctx, { at: [5000, 0, 0], layers, rooms, pipes, top })`) : la rue en haut, les couches
+    du sol, et ce qui est caché dessous (coffre, tunnel, mine, cave, égout, métro, catacombes, racines, puits). Idéale dès que l'histoire se passe
+    sous terre, dans un mur, dans une machine. Les personnages se placent dans une salle avec `C.room(i)` (passer `ground: y` à l'acteur).
+- **Foules** : `crowd(T, f, { center, n ≤ 18, w, d, outfits, exprs, cheer })` pour une armée, un marché, des spectateurs : derrière le héros, jamais devant.
+
 ## Structure du dépôt
 ```
 engine/            moteur three.js (main.js piloté par l'épisode, motion.js = caméra + actions, paint.js, roman.js = casting,
                    fx3d.js = effets 3D, moods.js = ambiances, marks.js = signes de dessin animé)
-engine/library/    décors réutilisables : paris.js (rue + faux Paris), rails.js (voie dans les ocres + chantier d'hiver)
+engine/library/    décors réutilisables : paris.js (rue + faux Paris), rails.js (voie dans les ocres + chantier d'hiver), coupe.js (vue en coupe : surface + couches du sol + salles cachées)
 episodes/<slug>/   un épisode : voice.wav, script.txt, words.json, phrases.json, audio.py, web/world.js, web/story.js
 inbox/<slug>/      dépôt de l'utilisateur : voice.wav (ou .mp3) + script.txt (+ sujet.txt facultatif)
 tools/             setup.sh, timing.py, render.mjs, sheet.py, synth.py, mix.py, subs.py, finish.sh, tts.py, qa.py (contrôle qualité),
@@ -145,6 +171,8 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
    puis `python3 tools/sheet.py /tmp/stills episodes/<slug>/stills.jpg 8`. Lire la planche avec Read et corriger :
    caméra dans un décor, personnage coupé au bord, personnage trop petit, image sombre, train ou objet attendu invisible,
    et **le test sans le son** : en lisant seulement la planche, dans l'ordre, comprend-on l'histoire ? L'action de chaque phrase se voit-elle ?
+   Vérifie aussi l'**attitude** : aucun visage neutre qui dure, au moins un plan qui montre tout l'espace (`crane` ou coupe),
+   au moins deux contre-plongées, un objet flou au premier plan sur l'objet de l'histoire.
    Recommencer jusqu'à ce que la planche soit propre. La planche `stills.jpg` est commitée.
 8. `audio.py` (musique + bruitages qui comptent pour l'histoire : sting du pivot, son d'un objet précis ; modèle dans l'épisode des rails ;
    `from synth import *`, `music, sfx = init(DUR)`). **Les bruitages de mouvement sont automatiques** : `tools/events.mjs` lit story.js
