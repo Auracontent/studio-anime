@@ -1,5 +1,5 @@
 // Cartoon marks drawn next to the characters, chosen automatically from what they do (sound-off storytelling):
-//   shock -> "!" burst      squint -> "?"         nervous / pained -> flying sweat drops     stern / stubborn -> anger vein
+//   shock -> "!" burst      squint / suspicious -> "?"       nervous / pained -> flying sweat drops     stern / stubborn -> anger vein
 //   dazed or fallen (roll > 1.2) -> stars turning above the head      moving fast (> 1.6 m/s) -> speed lines behind
 // An actor can force one with  mark: 'bang' | 'question' | 'sweat' | 'anger' | 'stars' | 'speed' | 'heart' | 'note',
 // or switch them off with  marks: false.  Each mark is a card drawn in the house style (plum ink #271925).
@@ -9,7 +9,7 @@ const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
 const back = (t, s = 1.7) => { t = clamp(t) - 1; return t * t * ((s + 1) * t + s) + 1; };
 const q = (x, n = 2) => Math.round(x * 10 ** n) / 10 ** n;
 
-const EXPR_MARK = { shock: 'bang', squint: 'question', nervous: 'sweat', pained: 'sweat', stern: 'anger', stubborn: 'anger', dazed: 'stars' };
+const EXPR_MARK = { shock: 'bang', squint: 'question', suspicious: 'question', nervous: 'sweat', pained: 'sweat', stern: 'anger', stubborn: 'anger', dazed: 'stars' };
 const LIFE = { bang: 40, question: 50, sweat: 1e9, anger: 1e9, stars: 1e9, speed: 1e9, heart: 60, note: 1e9 };
 
 // ---------- drawings (design canvas 600 x 1000, mark centred on (300, 520)) ----------
