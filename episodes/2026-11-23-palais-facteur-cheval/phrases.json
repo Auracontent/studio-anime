@@ -1,0 +1,291 @@
+{
+ "duration": 52.840583,
+ "frames30": 1585,
+ "source": "whisper",
+ "segments": [
+  [
+   0.242958,
+   1.712458
+  ],
+  [
+   1.854208,
+   2.250958
+  ],
+  [
+   2.966875,
+   3.63575
+  ],
+  [
+   3.75725,
+   5.289
+  ],
+  [
+   5.896292,
+   5.99075
+  ],
+  [
+   6.57775,
+   8.26525
+  ],
+  [
+   8.562083,
+   11.194167
+  ],
+  [
+   11.8825,
+   12.6725
+  ],
+  [
+   13.346875,
+   14.12075
+  ],
+  [
+   14.241417,
+   14.831667
+  ],
+  [
+   15.474625,
+   15.962292
+  ],
+  [
+   16.233083,
+   17.601167
+  ],
+  [
+   18.812417,
+   19.479792
+  ],
+  [
+   19.97625,
+   21.034083
+  ],
+  [
+   21.662875,
+   21.897792
+  ],
+  [
+   22.034292,
+   22.368125
+  ],
+  [
+   22.547958,
+   22.950583
+  ],
+  [
+   23.707292,
+   24.437042
+  ],
+  [
+   24.894917,
+   25.334875
+  ],
+  [
+   25.76525,
+   26.574375
+  ],
+  [
+   27.37225,
+   27.987625
+  ],
+  [
+   28.502292,
+   29.069625
+  ],
+  [
+   29.730167,
+   30.970333
+  ],
+  [
+   31.16275,
+   31.529792
+  ],
+  [
+   32.055708,
+   33.02775
+  ],
+  [
+   33.729167,
+   33.949125
+  ],
+  [
+   34.244083,
+   35.518333
+  ],
+  [
+   35.674458,
+   37.167333
+  ],
+  [
+   37.84925,
+   38.755583
+  ],
+  [
+   39.167083,
+   39.574
+  ],
+  [
+   40.295375,
+   41.84375
+  ],
+  [
+   42.567,
+   42.788917
+  ],
+  [
+   42.919833,
+   44.202708
+  ],
+  [
+   44.468875,
+   45.070667
+  ],
+  [
+   45.217667,
+   47.317
+  ],
+  [
+   48.1525,
+   48.353667
+  ],
+  [
+   48.641667,
+   50.035583
+  ],
+  [
+   50.743625,
+   52.232167
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ce facteur a b\u00e2ti un palais entier\u2026 avec la pierre qui l'a fait tr\u00e9bucher.",
+   "s": 0.0,
+   "e": 5.3
+  },
+  {
+   "text": "Un matin de mille huit cent soixante-dix-neuf,",
+   "s": 6.24,
+   "e": 8.62
+  },
+  {
+   "text": "Ferdinand Cheval bute sur une pierre \u00e9trange pendant sa tourn\u00e9e.",
+   "s": 8.62,
+   "e": 11.24
+  },
+  {
+   "text": "Il la ramasse.",
+   "s": 11.94,
+   "e": 13.34
+  },
+  {
+   "text": "Le lendemain,",
+   "s": 13.34,
+   "e": 13.76
+  },
+  {
+   "text": "il en cherche d'autres.",
+   "s": 14.2,
+   "e": 15.56
+  },
+  {
+   "text": "Bient\u00f4t,",
+   "s": 15.56,
+   "e": 15.86
+  },
+  {
+   "text": "ses poches sont pleines de cailloux.",
+   "s": 16.26,
+   "e": 17.6
+  },
+  {
+   "text": "Les voisins rigolent :",
+   "s": 18.68,
+   "e": 19.96
+  },
+  {
+   "text": "le facteur est devenu fou.",
+   "s": 19.96,
+   "e": 21.0
+  },
+  {
+   "text": "Lui continue,",
+   "s": 21.92,
+   "e": 22.86
+  },
+  {
+   "text": "nuit apr\u00e8s nuit,",
+   "s": 23.7,
+   "e": 24.42
+  },
+  {
+   "text": "seul,",
+   "s": 24.8,
+   "e": 25.24
+  },
+  {
+   "text": "une lampe \u00e0 la main.",
+   "s": 25.76,
+   "e": 26.56
+  },
+  {
+   "text": "Il empile,",
+   "s": 26.56,
+   "e": 27.86
+  },
+  {
+   "text": "il colle,",
+   "s": 28.54,
+   "e": 28.9
+  },
+  {
+   "text": "il sculpte des tours,",
+   "s": 29.6,
+   "e": 30.74
+  },
+  {
+   "text": "des grottes et des g\u00e9ants de pierre.",
+   "s": 31.18,
+   "e": 33.08
+  },
+  {
+   "text": "Trente-trois ans plus tard,",
+   "s": 33.08,
+   "e": 35.38
+  },
+  {
+   "text": "le palais est enfin termin\u00e9.",
+   "s": 35.7,
+   "e": 37.22
+  },
+  {
+   "text": "Aucun architecte,",
+   "s": 37.9,
+   "e": 38.82
+  },
+  {
+   "text": "aucun plan,",
+   "s": 39.2,
+   "e": 39.58
+  },
+  {
+   "text": "juste un facteur t\u00eatu.",
+   "s": 40.32,
+   "e": 42.88
+  },
+  {
+   "text": "En mille neuf cent soixante-neuf,",
+   "s": 42.88,
+   "e": 44.48
+  },
+  {
+   "text": "le ministre Andr\u00e9 Malraux le classe monument historique.",
+   "s": 44.48,
+   "e": 47.5
+  },
+  {
+   "text": "Alors la prochaine fois qu'on rit de ton r\u00eave\u2026 regarde bien la pierre qui te fait tr\u00e9bucher.",
+   "s": 48.46,
+   "e": 52.22
+  }
+ ]
+}

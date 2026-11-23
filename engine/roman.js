@@ -229,6 +229,13 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
     case "stick": { p.stroke([[hx - 4 * u, hy + 20 * u], [hx + side * 6 * u, hy - 62 * u]], 9 * u, "#6a4426"); p.stroke([[hx - 4 * u, hy + 20 * u], [hx + side * 6 * u, hy - 62 * u]], 4 * u, "#9a6a3e"); p.ell(hx + side * 6 * u, hy - 64 * u, 9 * u, 8 * u, "#6a4426", 2.2 * u); break; }   // bâton / gourdin
     case "pistol": { p.poly([[hx - 8 * u, hy - 14 * u], [hx - 2 * u, hy - 14 * u], [hx + 4 * u, hy + 12 * u], [hx - 8 * u, hy + 12 * u]], "#5a3a22", 2.2 * u);   // crosse
       p.poly(rrect(hx - 10 * u, hy - 26 * u, hx + 8 * u, hy - 12 * u, 3 * u), "#3a3f48", 2.4 * u); p.poly(rrect(hx + side * 4 * u - 4 * u, hy - 24 * u, hx + side * 36 * u + 4 * u, hy - 15 * u, 2 * u), "#5a606a", 2.2 * u); break; }   // revolver de commissaire
+    case "stone": { // pierre étrange du facteur (Pourkoipa original) : cailloux ocre tout en bosses, reflet clair
+      p.poly([[hx - 20 * u, hy + 8 * u], [hx - 24 * u, hy - 10 * u], [hx - 12 * u, hy - 30 * u], [hx + 2 * u, hy - 24 * u], [hx + 10 * u, hy - 38 * u], [hx + 24 * u, hy - 16 * u], [hx + 22 * u, hy + 8 * u]], "#d9b27a", 2.6 * u);
+      p.stroke([[hx - 10 * u, hy - 14 * u], [hx + 2 * u, hy - 4 * u], [hx + 14 * u, hy - 12 * u]], 1.8 * u, "#9a7448"); p.ell(hx - 8 * u, hy - 22 * u, 5 * u, 3 * u, "#fff2cc", 0, 0, 360, -30); break; }
+    case "lantern": { // lampe à pétrole : anse, verre jaune lumineux, pied noir
+      p.stroke([[hx - 12 * u, hy - 36 * u], [hx, hy - 50 * u], [hx + 12 * u, hy - 36 * u]], 2.6 * u); p.poly(rrect(hx - 15 * u, hy - 38 * u, hx + 15 * u, hy - 32 * u, 2 * u), "#2f3440", 2 * u);
+      p.poly([[hx - 13 * u, hy - 32 * u], [hx + 13 * u, hy - 32 * u], [hx + 16 * u, hy + 4 * u], [hx - 16 * u, hy + 4 * u]], "#ffe27a", 2.4 * u); p.ell(hx, hy - 12 * u, 6 * u, 10 * u, "#fff8d0", 0);
+      p.poly(rrect(hx - 18 * u, hy + 2 * u, hx + 18 * u, hy + 12 * u, 2 * u), "#2f3440", 2 * u); break; }
     case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
     case "brush": { p.stroke([[hx - 6 * u, hy + 16 * u], [hx + 2 * u, hy - 40 * u]], 3.6 * u, "#8a5a34"); p.poly([[hx - 1 * u, hy - 38 * u], [hx + 7 * u, hy - 38 * u], [hx + 6 * u, hy - 58 * u], [hx + 2 * u, hy - 62 * u]], "#1b1418", 2 * u); break; }
     case "bomb": { const r = 17 * u, cy = hy - r * 0.8; p.stroke([[hx, cy - r * 0.9], [hx + 3 * u, cy - r * 1.5]], 4 * u, "#e8d8a0"); p.ell(hx, cy - r * 0.95, r * 0.34, r * 0.22, "#5a3a24", 2.2 * u); p.ell(hx, cy, r, r, "#7a4a2e", 2.6 * u);
@@ -346,6 +353,11 @@ export const romanFront = (p, key, opts = {}) => {
         p.band([[tcx - 0.62 * T.a, chin + 0.05 * HH], [tcx + 0.62 * T.a, chin + 0.07 * HH]], O.scarf, 0.13 * HH, 2 * u);
         p.band([[tcx + 0.3 * T.a, chin + 0.1 * HH], [tcx + 0.42 * T.a, chin + 0.5 * HH]], O.scarf, 0.1 * HH, 1.6 * u);
         p.band([[tcx + 0.3 * T.a, chin + 0.38 * HH], [tcx + 0.46 * T.a, chin + 0.4 * HH]], "#f3e6c8", 0.03 * HH, 0);
+      }
+      if (O.strap) { // sacoche de facteur : bandoulière en cuir + sac sur la hanche
+        p.band([[tcx - 0.7 * T.a, chin + 0.04 * HH], [tcx + 0.9 * T.a, torsoBot - 0.1 * HH]], O.strap, 0.07 * HH, 1.6 * u);
+        p.poly([[tcx + 0.55 * T.a, torsoBot - 0.2 * HH], [tcx + 1.5 * T.a, torsoBot - 0.2 * HH], [tcx + 1.55 * T.a, torsoBot + 0.3 * HH], [tcx + 0.5 * T.a, torsoBot + 0.3 * HH]], O.strap, 2 * u);
+        p.band([[tcx + 0.55 * T.a, torsoBot - 0.05 * HH], [tcx + 1.5 * T.a, torsoBot - 0.05 * HH]], "#e8c45a", 0.04 * HH, 1.2 * u);
       }
       if (O.bowtie) { // nœud papillon
         const by = chin + 0.1 * HH, bw = 0.34 * T.a;
