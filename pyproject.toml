@@ -2,7 +2,7 @@
 name = "studio-anime"
 version = "0.1.0"
 description = "Studio Pourkoipa : outils Python du pipeline (audio, timing, contrôle, upload)"
-requires-python = ">=3.12,<3.14"
+requires-python = ">=3.12"
 dependencies = [
     "numpy==2.5.5",
     "pillow==13.0.0",
