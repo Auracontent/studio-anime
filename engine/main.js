@@ -254,8 +254,48 @@ const swapForNd = (on) => {
   });
 };
 
-window.renderFrame = (f) => {
-  const S = shotAt(f), L0 = lightFor(S, f), L = typeof L0 === 'string' ? mood(L0) : L0.mood ? mood(L0.mood, L0) : L0, C = camAt(f);   // lightFor may return a mood name (moods.js)
+// ---------- loop + mascot (2026-11) ----------
+// LOOP: the last frames glide the camera back to the opening framing and dissolve into frame 0, so when the Short restarts
+// the viewer does not see the seam (more re-watches, higher % watched). Story can opt out with `export const LOOP = false`.
+// MASCOT: Kipa, the Pourkoipa host, pops in from the left for ~1.6 s before the loop with « Pourkoipa ? » (`export const MASCOT = false`).
+const VERTICAL = H > W, LONG = TOTAL > 150;
+const LOOP_ON = STORY.LOOP !== false && VERTICAL && LONG, MASCOT_ON = STORY.MASCOT !== false && VERTICAL && LONG && !!T.mascot;
+const GLIDE = 24, DISS = 10, M0 = TOTAL - 72, M1 = TOTAL - 24;
+const rtOut = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType }), rtFirst = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType });
+const blU = { a: { value: rtOut.texture }, b: { value: rtFirst.texture }, t: { value: 0 } };
+const blScene = fs(new THREE.ShaderMaterial({ uniforms: blU, toneMapped: false, vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
+  fragmentShader: `uniform sampler2D a, b; uniform float t; varying vec2 vUv; void main(){ gl_FragColor = linearToOutputTexel(vec4(mix(texture2D(a, vUv).rgb, texture2D(b, vUv).rgb, t), 1.)); }` }));
+const ovC = document.createElement('canvas'); ovC.width = W; ovC.height = H; const ovG = ovC.getContext('2d');
+const ovT = new THREE.CanvasTexture(ovC); ovT.colorSpace = THREE.SRGBColorSpace;
+const ovScene = fs(new THREE.MeshBasicMaterial({ map: ovT, transparent: true, depthTest: false, toneMapped: false }));
+const sm3 = (t) => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
+const loopCam = (f) => {
+  const C = camAt(f); if (!LOOP_ON || f < TOTAL - GLIDE) return C;
+  const C0 = camAt(0); if (Math.hypot(C.pos[0] - C0.pos[0], C.pos[1] - C0.pos[1], C.pos[2] - C0.pos[2]) > 40) return C;   // other place: dissolve only
+  const k = sm3((f - (TOTAL - GLIDE)) / GLIDE), L = (a, b) => a + (b - a) * k;
+  return { ...C, pos: C.pos.map((v, i) => L(v, C0.pos[i])), look: C.look.map((v, i) => L(v, C0.look[i])), fov: L(C.fov, C0.fov), roll: L(C.roll || 0, C0.roll || 0), mblur: [0, 0], zoomBlur: 0 };
+};
+function drawMascot(f) {
+  ovG.setTransform(1, 0, 0, 1, 0, 0); ovG.clearRect(0, 0, W, H);
+  const d = f - M0, n = M1 - M0, inK = Math.min(1, d / 9), outK = Math.min(1, (M1 - f) / 8);
+  const back = (t) => { t = Math.max(0, Math.min(1, t)) - 1; return t * t * (2.7 * t + 1.7) + 1; };
+  const sc = (H / 1920) * 0.86, wdt = 600 * sc, x = -wdt + (wdt - 40 * W / 1080) * back(inK) * (outK < 1 ? sm3(outK) : 1), y = H * 0.3;
+  ovG.setTransform(sc, 0, 0, sc, x, y);
+  T.mascot(new T.Pen(ovG), { wv: d * 0.55, expr: d < n * 0.55 ? 'grin' : 'proud', look: 0.6 });
+  if (d > 6 && f < M1 - 4) { // speech bubble « Pourkoipa ? »
+    const a = Math.min(1, (d - 6) / 5) * Math.min(1, (M1 - 4 - f) / 4), bw = 470 * W / 1080, bh = 150 * W / 1080, bx = Math.max(24 * W / 1080, x + 300 * sc - bw * 0.3), by = y + 70 * sc - bh;   // above Kipa's head
+    ovG.setTransform(1, 0, 0, 1, 0, 0); ovG.globalAlpha = a; ovG.lineWidth = 9 * W / 1080; ovG.strokeStyle = '#271925'; ovG.fillStyle = '#ffffff';
+    ovG.beginPath(); ovG.roundRect(bx, by, bw, bh, 42 * W / 1080); ovG.moveTo(bx + bw * 0.22, by + bh - 4); ovG.lineTo(bx + bw * 0.3, by + bh + 52 * W / 1080); ovG.lineTo(bx + bw * 0.42, by + bh - 4); ovG.fill(); ovG.stroke();
+    ovG.fillRect(bx + bw * 0.22 + 6, by + bh - 12 * W / 1080, bw * 0.2 - 12, 14 * W / 1080);
+    ovG.font = `900 ${Math.round(68 * W / 1080)}px Montserrat, "DejaVu Sans", sans-serif`; ovG.textBaseline = 'middle';
+    const t1 = 'Pourkoipa ', w1 = ovG.measureText(t1).width, w2 = ovG.measureText('?').width, tx = bx + (bw - w1 - w2) / 2, ty = by + bh / 2 + 4;
+    ovG.fillStyle = '#271925'; ovG.fillText(t1, tx, ty); ovG.lineWidth = 8 * W / 1080; ovG.strokeText('?', tx + w1, ty); ovG.fillStyle = '#ffc72c'; ovG.fillText('?', tx + w1, ty);
+    ovG.globalAlpha = 1;
+  }
+  ovT.needsUpdate = true;
+}
+function drawFrame(f, C, target) {
+  const S = shotAt(f), L0 = lightFor(S, f), L = typeof L0 === 'string' ? mood(L0) : L0.mood ? mood(L0.mood, L0) : L0;   // lightFor may return a mood name (moods.js)
   applyLight(L, f);
   camera.position.set(...C.pos); camera.up.set(0, 1, 0); camera.lookAt(...C.look); camera.rotateZ(rx(C.roll || 0));
   camera.fov = C.fov; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
@@ -273,7 +313,7 @@ window.renderFrame = (f) => {
   const fog = scene.fog; scene.fog = null; const sm = renderer.shadowMap.enabled; renderer.shadowMap.enabled = false; renderer.shadowMap.autoUpdate = false;
   swapForNd(true); renderer.setRenderTarget(rtNd); renderer.setClearColor(0x000000, 0); renderer.clear(); renderer.render(scene, camera); swapForNd(false);
   scene.fog = fog; renderer.shadowMap.enabled = sm; renderer.shadowMap.autoUpdate = true;
-  if (window.DEBUG_ND) { const dm = new THREE.MeshBasicMaterial({ map: rtNd.texture }); const ds = fs(dm); renderer.setRenderTarget(null); renderer.render(ds, fsCam); return true; }
+  if (window.DEBUG_ND) { const dm = new THREE.MeshBasicMaterial({ map: rtNd.texture }); const ds = fs(dm); renderer.setRenderTarget(null); renderer.render(ds, fsCam); return false; }
   // ink + grade
   const D = dofAt(f);
   inkU.px.value = 2.5; inkU.flash.value = window.DEBUG_E ? -1 : Math.max(C.flash || 0, FXO.flash || 0); inkU.vig.value = L.vig ?? 0.22;
@@ -284,8 +324,18 @@ window.renderFrame = (f) => {
   if (Math.hypot(mb[0], mb[1]) > 0.5 || zb > 0.01) {
     renderer.setRenderTarget(rtLens); renderer.render(dofScene, fsCam);
     mbU.dir.value.set(mb[0] * W / 1080, -mb[1] * H / 1920); mbU.zoom.value = zb;
-    renderer.setRenderTarget(null); renderer.render(mbScene, fsCam);
-  } else { renderer.setRenderTarget(null); renderer.render(dofScene, fsCam); }
+    renderer.setRenderTarget(target); renderer.render(mbScene, fsCam);
+  } else { renderer.setRenderTarget(target); renderer.render(dofScene, fsCam); }
+  return true;
+}
+window.renderFrame = (f) => {
+  const diss = LOOP_ON && f >= TOTAL - DISS, mascot = MASCOT_ON && f >= M0 && f < M1;
+  if (!diss && !mascot) { drawFrame(f, loopCam(f), null); return true; }   // same path as before for every other frame
+  if (diss) drawFrame(0, camAt(0), rtFirst);
+  if (!drawFrame(f, loopCam(f), rtOut)) return true;
+  blU.t.value = diss ? sm3((f - (TOTAL - DISS) + 1) / (DISS + 1)) : 0;
+  renderer.setRenderTarget(null); renderer.render(blScene, fsCam);
+  if (mascot) { drawMascot(f); renderer.autoClear = false; renderer.render(ovScene, fsCam); renderer.autoClear = true; }
   return true;
 };
 window.TOTAL = TOTAL;

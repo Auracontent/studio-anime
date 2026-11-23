@@ -30,6 +30,12 @@ jobs:
         run: |
           if [ -z "$YOUTUBE_API_KEY" ]; then echo "No YOUTUBE_API_KEY secret: skipping trends."; exit 0; fi
           python3 tools/trends.py --out trends.md
+      - name: Our own numbers (what works on our channel)
+        if: ${{ steps.guard.outputs.skip != 'true' }}
+        env: { YOUTUBE_API_KEY: "${{ secrets.YOUTUBE_API_KEY }}", YT_CLIENT_ID: "${{ secrets.YT_CLIENT_ID }}", YT_CLIENT_SECRET: "${{ secrets.YT_CLIENT_SECRET }}", YT_REFRESH_TOKEN: "${{ secrets.YT_REFRESH_TOKEN }}" }
+        run: |
+          if [ -z "$YOUTUBE_API_KEY" ]; then echo "No YOUTUBE_API_KEY secret: skipping our stats."; exit 0; fi
+          python3 tools/mystats.py --out stats.md || echo "stats failed: the generator goes on without them"
       - if: ${{ steps.guard.outputs.skip != 'true' }}
         uses: anthropics/claude-code-action@v1
         with:
@@ -37,6 +43,8 @@ jobs:
           claude_args: "--max-turns 60 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
           prompt: |
             Lis CLAUDE.md (sections « Deux formats » et « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
+            0) NOS CHIFFRES. Si stats.md existe, lis-le d'abord et applique la section « Nos chiffres » de CLAUDE.md : il dit ce qui marche
+               sur NOTRE chaîne (il prime sur trends.md). Note dans NOTES.md une ligne « Chiffres : » qui dit ce que tu en as retenu.
             1) FORMAT. Un sujet demandé fixe le format. Sinon, regarde la ligne « Format : » du NOTES.md le plus récent dans inbox/
                (pas de ligne = « Histoire vraie ») et prends l'AUTRE format : « Histoire vraie » <-> « Vie quotidienne ».
             2) SUJET.
@@ -47,7 +55,7 @@ jobs:
                - « Vie quotidienne » : invente une petite histoire du quotidien, émotionnelle, avec une leçon qui parle au spectateur
                  (fiction, jamais présentée comme vraie ; règles de la section « Deux formats »). Ne touche pas à sujets.md.
             3) Applique la section « Diversité des sujets » de CLAUDE.md (sauf si le sujet t'est imposé). Écris un script de 40 à 50 s en français (110 à 130 mots, jamais une date ni du contexte en premier, une action qu'on peut montrer par phrase, fin qui reboucle sur le début) : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (ligne « Format : … », sources pour une histoire vraie, plan visuel phrase par phrase avec l'action visible, l'ambiance et l'effet, l'image d'accroche des 2 premières secondes, le héros, titre proposé).
-            Commite et pousse (git add inbox sujets.md trends.md trends.json ; git commit -m "Add script <slug>" ; git pull --rebase ; git push).
+            Commite et pousse (git add inbox sujets.md trends.md trends.json stats.md stats.json ; git commit -m "Add script <slug>" ; git pull --rebase ; git push).
             Voix automatique pour ce lancement : ${{ (github.event_name == 'schedule' || github.event.inputs.voix_auto == 'true') && 'OUI' || 'NON' }}.
             Si c'est OUI, n'ouvre PAS d'issue : la voix et la vidéo suivent toutes seules.
             Si c'est NON, ouvre une issue avec `gh issue create` : titre « Script : <titre> », corps = le script dans un bloc de code,

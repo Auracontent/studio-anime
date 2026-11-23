@@ -578,3 +578,18 @@ export const fgProp = (kind, o = {}) => (p) => {
   }
   heldProp(p, kind, 300, 640, 1, o.u ?? 5.2, rad(-120));
 };
+
+/** Kipa, the Pourkoipa host (our own design, used by main.js for the end signature): brand-blue hoodie with a yellow « ? »,
+ *  a yellow question-mark curl on the head, curious face, waving. o: { wv (wave phase), expr, look } */
+OUTFITS.kipa = { tunic: "#2563d6", skin: "#e8b48a", hair: "#2b211c", cuffs: "#ffc72c", belt: null };
+export const mascot = (p, o = {}) => {
+  romanFront(p, "kipa", { expr: o.expr || "grin", look: o.look ?? 0.5, L: "hip", R: "wave", wv: o.wv || 0, seed: 3, headTilt: 4 * Math.sin((o.wv || 0) * 0.5) });
+  const H = headBlob(3, 140, 0), hc = headCenter(3), top = hc - H.b, g = p.g;
+  // the « ? » curl on top of the head (thick yellow stroke with plum outline), springs a little with the wave
+  const s = 1 + 0.04 * Math.sin((o.wv || 0) * 1.3), cx = 312, cy = top - 46 * s;
+  const q = [[cx - 34, cy - 10], [cx - 30, cy - 46], [cx, cy - 62], [cx + 32, cy - 50], [cx + 36, cy - 20], [cx + 14, cy + 2], [cx + 2, cy + 18], [cx + 2, cy + 34]];
+  p.stroke(q, 30, "#271925"); p.stroke(q, 19, "#ffc72c"); p.dot(cx + 2, cy + 62, 17, "#271925"); p.dot(cx + 2, cy + 62, 11, "#ffc72c");
+  // « ? » printed on the chest
+  const ty = hc + H.b + 0.42 * 2 * H.b; g.save(); g.font = "900 120px Montserrat, 'DejaVu Sans', sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
+  g.lineWidth = 14; g.strokeStyle = "#271925"; g.strokeText("?", 300, ty); g.fillStyle = "#ffc72c"; g.fillText("?", 300, ty); g.restore();
+};

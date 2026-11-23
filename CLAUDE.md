@@ -130,6 +130,16 @@ Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages,
     sous terre, dans un mur, dans une machine. Les personnages se placent dans une salle avec `C.room(i)` (passer `ground: y` à l'acteur).
 - **Foules** : `crowd(T, f, { center, n ≤ 18, w, d, outfits, exprs, cheer })` pour une armée, un marché, des spectateurs : derrière le héros, jamais devant.
 
+## Fin de vidéo : boucle et mascotte (automatiques, dans `engine/main.js`)
+- **Boucle** : sur les 24 dernières images, la caméra revient seule au cadrage de l'image 0 (si c'est le même lieu, à moins de 40 m),
+  puis les 10 dernières images se fondent dans l'image 0 : quand le Short recommence, on ne voit pas la couture (plus de revisionnages).
+  Aide-la : la dernière phrase et le dernier plan reviennent au lieu et à l'objet du début (règle « la fin reboucle »).
+  Désactiver pour un épisode : `export const LOOP = false` dans `story.js`.
+- **Kipa, la mascotte Pourkoipa** (sweat bleu, « ? » jaune sur la tête et sur la poitrine) entre par la gauche de TOTAL-72 à TOTAL-24
+  avec la bulle « Pourkoipa ? » : la signature de la chaîne, toujours la même, pour qu'on la reconnaisse. Bruitages ajoutés par events.mjs.
+  Garde la zone gauche du cadre (x < 45 %, hauteur 25-70 %) libre d'action importante pendant ces 1,6 s.
+  Désactiver : `export const MASCOT = false`.
+
 ## Structure du dépôt
 ```
 engine/            moteur three.js (main.js piloté par l'épisode, motion.js = caméra + actions, paint.js, roman.js = casting,
@@ -239,6 +249,16 @@ La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regard
 - Varie aussi le **ton** : certaines histoires sont drôles (arnaque, astuce absurde), d'autres impressionnantes (ingénierie, record),
   d'autres surprenantes (psychologie). Et varie l'**ambiance** : jour d'été, intérieur, montagne, mer, nuit seulement si l'histoire l'exige.
 - Écris dans `NOTES.md` une ligne « Diversité : » qui dit la catégorie, l'époque, français/universel, et en quoi c'est différent des 3 derniers.
+
+## Nos chiffres (stats.md, généré par tools/mystats.py : prime sur trends.md)
+- `stats.md` classe NOS vidéos de plus de 48 h (vues, × la médiane de la chaîne, j'aime + commentaires, et si les secrets Analytics
+  sont là : % regardé et abonnés gagnés), avec leur format et leur ligne « Diversité ». C'est la meilleure information qu'on ait :
+  ce que NOTRE public regarde et ce qui le fait s'abonner.
+- Méthode : repère ce que les 3 meilleures ont en commun (catégorie, type d'objet, ton, lieu, format) et ce qui manque aux 3 dernières.
+  Penche le choix du sujet vers ce qui marche (sans refaire le même sujet : autre histoire, même famille), et évite ce qui ne marche pas
+  deux fois de suite. Les abonnés gagnés et le % regardé comptent plus que les vues. Moins de 6 vidéos jugées : signal faible, garde la diversité.
+- Écris dans `NOTES.md` une ligne « Chiffres : » (ex. « les 3 meilleures sont des expériences de science qu'on peut montrer avec un objet :
+  je reste dans cette famille avec un autre objet »).
 
 ## Tendances (trends.md, généré par tools/trends.py depuis l'API YouTube)
 - `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` (titres et chiffres publics uniquement).
