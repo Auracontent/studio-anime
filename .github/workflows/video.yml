@@ -68,18 +68,20 @@ jobs:
           fi
           V=$(ls inbox/$S/voice.* 2>/dev/null | head -1); T=inbox/$S/script.txt
           [ -n "$V" ] && [ -f "$T" ] || { echo "Pas de voix ou de script dans inbox/$S : contrôle sauté."; exit 0; }
-          set +e; python3 tools/voicecheck.py "$V" "$T"; C=$?; set -e
-          if [ $C -ne 3 ]; then exit 0; fi
+          set +e; python3 tools/voicecheck.py "$V" "$T" --json inbox/$S/voicecheck.json; C=$?; set -e
+          if [ $C -ne 3 ]; then
+            git add inbox/$S/voicecheck.json && git commit -qm "Voice check for $S" && { for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; sleep $((i*5)); done; } || true
+            exit 0; fi
           # Voix ratée (souvent : Gemini a lu la consigne de jeu à voix haute) : on la régénère, deux essais au plus.
           [ -n "$GEMINI_API_KEY" ] || { echo "::error::La voix ne suit pas le script et GEMINI_API_KEY manque pour la refaire. Réenregistre inbox/$S/voice.wav."; exit 1; }
           for i in 1 2; do
             echo "--- nouvelle voix, essai $i"; python3 tools/tts.py "$T" inbox/$S/voice.wav
-            set +e; python3 tools/voicecheck.py inbox/$S/voice.wav "$T"; C=$?; set -e
+            set +e; python3 tools/voicecheck.py inbox/$S/voice.wav "$T" --json inbox/$S/voicecheck.json; C=$?; set -e
             [ $C -ne 3 ] && break
           done
           [ $C -ne 3 ] || { echo "::error::Après 2 essais, la voix ne suit toujours pas le script : épisode non réalisé."; exit 1; }
           [ "$V" != "inbox/$S/voice.wav" ] && git rm -q "$V" || true
-          git add inbox/$S/voice.wav && git commit -m "Regenerate TTS voice for $S (the previous one did not follow the script)" \
+          git add inbox/$S/voice.wav inbox/$S/voicecheck.json && git commit -m "Regenerate TTS voice for $S (the previous one did not follow the script)" \
             && { for i in 1 2 3 4 5; do git pull --rebase -q && git push -q && break; echo "push retry $i"; sleep $((i*5)); done; }
       - name: Claude réalise l'épisode
         if: ${{ steps.slug.outputs.direct == 'true' }}

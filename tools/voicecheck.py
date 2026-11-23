@@ -42,5 +42,9 @@ def check(voice, script_text):
 
 if __name__ == '__main__':
     if len(sys.argv) < 3: sys.exit(__doc__)
-    code, _ = check(sys.argv[1], open(sys.argv[2], encoding='utf-8').read())
+    code, heard = check(sys.argv[1], open(sys.argv[2], encoding='utf-8').read())
+    if '--json' in sys.argv:   # result kept next to the voice; qa.py blocks publishing if the voice was bad
+        import json
+        json.dump({'ok': code == 0, 'checked': code != 2, 'summary': 'voix OK' if code == 0 else ('non vérifiée' if code == 2 else 'ne suit pas le script'),
+                   'heard_start': heard[:200]}, open(sys.argv[sys.argv.index('--json') + 1], 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     sys.exit(code)

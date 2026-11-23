@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Contrôle qualité d'un épisode fini : mesure ce qui fait décrocher sur un Short et l'écrit dans out/QA.md.
+Les défauts GRAVES (sous-titres non calés par Whisper, voix qui ne suit pas le script, vidéo de plus de 60 s) sont aussi écrits
+dans out/QA.json ("blocking") : hf_upload.py met alors la vidéo en statut "review" et la publication automatique la saute.
 usage: python3 tools/qa.py episodes/<slug> [video.mp4]
 Ne bloque rien (code de sortie 0) : chaque point est OK, A REVOIR ou INFO, avec le chiffre mesuré et la cible.
 Mesures : durée, nombre de mots, ouverture (date en premier ?), plan de tournage présent, effets / ambiances utilisés,
@@ -10,6 +12,7 @@ import numpy as np
 EP = sys.argv[1].rstrip('/')
 VID = sys.argv[2] if len(sys.argv) > 2 else (sorted(glob.glob(f'{EP}/out/*.mp4')) or [None])[0]
 rows = []
+blocking = []   # grave defects: the video is held back from automatic publishing
 def row(name, ok, value, target, note=''):
     rows.append((name, ok, value, target, note))
 
@@ -40,6 +43,13 @@ if story:
 if os.path.exists(f'{EP}/phrases.json'):
     src = json.load(open(f'{EP}/phrases.json')).get('source', '?')
     row('Calage des sous-titres', 'OK' if src == 'whisper' else 'A REVOIR', src, 'whisper (les silences seuls décalent les sous-titres)')
+    if src != 'whisper': blocking.append('sous-titres calés sur les silences (décalés)')
+slug = os.path.basename(EP)
+vc = next((p for p in (f'{EP}/voicecheck.json', os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(EP))), 'inbox', slug, 'voicecheck.json')) if os.path.exists(p)), None)
+if vc:
+    V = json.load(open(vc))
+    row('Voix = script', 'OK' if V.get('ok') else 'A REVOIR', V.get('summary', ''), 'la voix dit le script, et rien d\'autre')
+    if not V.get('ok'): blocking.append('la voix ne suit pas le script')
 
 # ---------- son ----------
 if os.path.exists(f'{EP}/music.wav'):
@@ -54,6 +64,7 @@ if VID and os.path.exists(VID):
 if VID and os.path.exists(VID):
     dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', VID], capture_output=True, text=True).stdout.strip() or 0)
     row('Durée', 'OK' if 35 <= dur <= 52 else 'A REVOIR', f'{dur:.1f} s', '40-50 s')
+    if dur > 60: blocking.append(f'vidéo trop longue ({dur:.0f} s)')
     W, H, FPS = 72, 128, 10
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', VID, '-vf', f'fps={FPS},scale={W}:{H},format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
     fr = np.frombuffer(raw, np.uint8).reshape(-1, H, W).astype(np.float32)
@@ -75,5 +86,9 @@ os.makedirs(f'{EP}/out', exist_ok=True)
 md = ['# Contrôle qualité', '', '| Point | État | Mesure | Cible |', '| --- | --- | --- | --- |'] + [f'| {n} | {o} | {v} | {t} |' for n, o, v, t, _ in rows]
 bad = [n for n, o, *_ in rows if o == 'A REVOIR']
 md += ['', f'**{len(bad)} point(s) à revoir**' + (' : ' + ', '.join(bad) if bad else '')]
+if blocking: md += ['', '**VIDÉO BLOQUÉE (pas de publication automatique)** : ' + ' ; '.join(blocking),
+                   'Pour la publier quand même après vérification : Actions → Publication → mode « publier », slug = ' + os.path.basename(EP) + '.']
+json.dump({'blocking': blocking, 'points': [{'point': n, 'etat': o, 'mesure': v} for n, o, v, t, _ in rows]},
+          open(f'{EP}/out/QA.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 open(f'{EP}/out/QA.md', 'w', encoding='utf-8').write('\n'.join(md) + '\n')
 print('\n'.join(md))
