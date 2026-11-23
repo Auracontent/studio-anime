@@ -37,10 +37,15 @@ meta.update({
     # "ready" = waiting for tools/publish.py; an episode marked "published" in its meta.json (published by hand) stays published
     "status": "published" if meta.get("status") == "published" else "ready",
 })
+qa = os.path.join(out, "QA.json")    # grave QA defects -> "review": automatic publishing skips it (publish.py --slug still can)
+blocking = json.load(open(qa, encoding="utf-8")).get("blocking", []) if os.path.exists(qa) else []
+if blocking and meta["status"] != "published":
+    meta.update({"status": "review", "review_reasons": blocking})
+    print("VIDÉO BLOQUÉE (statut review) : " + " ; ".join(blocking))
 stage = os.path.join(out, "_hf"); os.makedirs(stage, exist_ok=True)
 for f in os.listdir(stage): os.remove(os.path.join(stage, f))
 json.dump(meta, open(os.path.join(stage, "meta.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-for f in [video, "cover.jpg", "qa_sheet.jpg"]:
+for f in [video, "cover.jpg", "qa_sheet.jpg", "QA.md"]:
     src = os.path.join(out, f)
     if os.path.exists(src): shutil.copy2(src, os.path.join(stage, f))
 

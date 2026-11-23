@@ -159,6 +159,27 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
 10. Commiter l'épisode. **Le rendu complet et la finition ne sont pas faits par toi** : les jobs `render` (en parallèle) et `finish` du workflow s'en chargent.
     La finition lance `tools/qa.py`, qui écrit `out/QA.md` (durée, mots, ouverture, plan, effets, musique, images figées, images sombres).
 
+## Deux formats : « Histoire vraie » et « Vie quotidienne »
+La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regarde le format du dernier script (`NOTES.md`, ligne « Format : »).
+- **Histoire vraie** (le format historique) : un fait réel et surprenant, vérifié, daté, sourcé (voir « Diversité des sujets »).
+- **Vie quotidienne** (nouveau) : une petite histoire **inventée** de la vie de tous les jours, qui touche une émotion que tout le monde connaît
+  (la honte, la fierté, la jalousie, l'injustice, la gentillesse qu'on ne voit pas, l'amitié, le regret, la persévérance) et qui finit
+  sur une leçon qui **parle au spectateur** (« toi »). Lieux de tous les jours : école, bureau, chantier, cuisine, marché, bus, café, famille.
+  - Structure : 1) une situation qu'on reconnaît tout de suite, avec un enjeu (« Tout le monde se moquait de lui parce que… ») ;
+    2) deux ou trois moments qui montent ; 3) le retournement (« Sauf que… ») ; 4) la leçon en une phrase, tournée vers toi,
+    qui renvoie à la première image.
+  - **Deux ou trois personnages, pas plus**, avec des prénoms simples et des rôles clairs (le nouveau, la cheffe, le grand frère...).
+  - **C'est une fiction : ne jamais la présenter comme vraie.** Pas de date, pas de lieu réel précis, pas de « histoire vraie »,
+    pas de faux chiffres ni de fausse étude. Pas de personne réelle. Pas de sujets graves traités à la légère (maladie, deuil, violence,
+    harcèlement grave, suicide) : on reste sur des émotions du quotidien, avec de la bienveillance.
+  - Le titre parle au spectateur et promet une émotion ou une leçon (« Il a aidé tout le monde… sauf lui-même »), sans reprendre
+    les titres ni les histoires d'autres chaînes (règle 100 % original : on prend l'idée d'une émotion, jamais une histoire existante).
+  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), 110-130 mots, une action visible par phrase, fin qui reboucle.
+    Les émotions se jouent à l'image : expressions franches, signes automatiques (sueur, « ! », cœur), lumière qui passe du gris (`froid`, `soir`)
+    au chaud (`dore`) au moment du retournement.
+- Les « Histoire vraie » peuvent elles aussi **parler au spectateur** : la dernière phrase relie le fait à sa vie
+  (« La prochaine fois qu'on te dit que c'est impossible… »).
+
 ## Idées et scripts (workflow `idees.yml`)
 - Formule du script : accroche paradoxale dès la 1re phrase, 2-3 détails qui montent, pivot « Sauf que… » / « En fait… », chute ironique au dernier mot,
   qui renvoie à la première phrase (boucle).
@@ -168,7 +189,7 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
   la date ensuite. Ex. : « Ce phare voit plus loin… parce qu'on lui a enlevé du verre. C'était en 1823. »
 - Écris des phrases **qu'on peut montrer** : un verbe d'action concret par phrase (porter, couler, exploser, couper, courir), pas des idées abstraites.
 - Sujets qui marchent : un fait vrai qui a l'air faux, avec une cause physique qu'on peut montrer, un lieu français reconnaissable si possible.
-- Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (sources, conseils d'enregistrement : voix Riko de Google AI Studio,
+- Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (ligne « Format : Histoire vraie » ou « Format : Vie quotidienne », sources pour une histoire vraie, conseils d'enregistrement : voix Riko de Google AI Studio,
   et un **plan visuel** : pour chaque phrase, l'action qu'on verra, l'ambiance et l'effet ; l'image d'accroche des 2 premières secondes ; le héros).
 
 ## Retouches (workflow `claude.yml`, quand on te mentionne avec @claude)
@@ -177,6 +198,8 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
 - Réponds dans l'issue avec ce que tu as changé et le lien vers les Actions.
 
 ## Diversité des sujets (à vérifier avant de choisir)
+- Cette section s'applique au format **Histoire vraie**. Pour **Vie quotidienne**, varie l'émotion, le lieu (école, bureau, famille...)
+  et les personnages d'un épisode à l'autre.
 - Regarde les 5 derniers épisodes (`episodes/` et `inbox/`, par date) et leur `NOTES.md`/`meta.json` avant de choisir.
 - **Mélange 7/3** : environ 7 vidéos sur 10 = une histoire **française** (lieu, invention, personnage, événement) dans une famille de thèmes
   qui marche ; environ 3 sur 10 = un **phénomène universel** qui marche chez la référence (psychologie, cerveau, physique, probabilités,

@@ -36,14 +36,17 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--max-turns 60 --allowedTools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch"
           prompt: |
-            Lis CLAUDE.md (section « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
-            S'il est vide, ouvre sujets.md : prends le PREMIER sujet non coché (`- [ ] ...`, ligne non vide), puis coche-le
-            (`- [x] ... -> inbox/<slug>`). Si la liste n'a aucun sujet non coché : si trends.md existe,
-            lis-le et applique la section « Tendances » de CLAUDE.md (repérer les familles de thèmes qui font le plus de vues, puis trouver
-            TA propre histoire dans la meilleure famille) ; sinon choisis toi-même le sujet le plus viral. Évite ce qui est déjà dans episodes/
-            (fait vrai, surprenant, visuel, idéalement un lieu ou une invention française).
-            Vérifie les faits sur le web.
-            Applique la section « Diversité des sujets » de CLAUDE.md (sauf si le sujet t'est imposé). Écris un script de 40 à 50 s en français (110 à 130 mots, jamais une date ni du contexte en premier, une action qu'on peut montrer par phrase, fin qui reboucle sur le début) : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (sources, plan visuel phrase par phrase avec l'action visible, l'ambiance et l'effet, l'image d'accroche des 2 premières secondes, le héros, titre proposé).
+            Lis CLAUDE.md (sections « Deux formats » et « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
+            1) FORMAT. Un sujet demandé fixe le format. Sinon, regarde la ligne « Format : » du NOTES.md le plus récent dans inbox/
+               (pas de ligne = « Histoire vraie ») et prends l'AUTRE format : « Histoire vraie » <-> « Vie quotidienne ».
+            2) SUJET.
+               - « Histoire vraie » : s'il n'y a pas de sujet demandé, ouvre sujets.md : prends le PREMIER sujet non coché (`- [ ] ...`,
+                 ligne non vide), puis coche-le (`- [x] ... -> inbox/<slug>`). Si la liste est vide : si trends.md existe, applique la section
+                 « Tendances » de CLAUDE.md ; sinon choisis toi-même le sujet le plus viral. Évite ce qui est déjà dans episodes/.
+                 Vérifie les faits sur le web.
+               - « Vie quotidienne » : invente une petite histoire du quotidien, émotionnelle, avec une leçon qui parle au spectateur
+                 (fiction, jamais présentée comme vraie ; règles de la section « Deux formats »). Ne touche pas à sujets.md.
+            3) Applique la section « Diversité des sujets » de CLAUDE.md (sauf si le sujet t'est imposé). Écris un script de 40 à 50 s en français (110 à 130 mots, jamais une date ni du contexte en premier, une action qu'on peut montrer par phrase, fin qui reboucle sur le début) : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (ligne « Format : … », sources pour une histoire vraie, plan visuel phrase par phrase avec l'action visible, l'ambiance et l'effet, l'image d'accroche des 2 premières secondes, le héros, titre proposé).
             Commite et pousse (git add inbox sujets.md trends.md trends.json ; git commit -m "Add script <slug>" ; git pull --rebase ; git push).
             Voix automatique pour ce lancement : ${{ (github.event_name == 'schedule' || github.event.inputs.voix_auto == 'true') && 'OUI' || 'NON' }}.
             Si c'est OUI, n'ouvre PAS d'issue : la voix et la vidéo suivent toutes seules.

@@ -6,6 +6,8 @@ on:
   # Launched from cron-job.org (Paris time), twice a day: 12:07 and 19:07.
   #   POST https://api.github.com/repos/Auracontent/studio-anime/actions/workflows/publier.yml/dispatches
   #   body {"ref":"main","inputs":{"mode":"publier"}}  -> publishes the oldest ready video (one per run).
+  # Videos with a grave QA defect get status "review" (see out/QA.md on Hugging Face) and are skipped; to publish one anyway
+  # after checking it, run this workflow by hand with mode = publier and slug = <slug>.
   # To pause publishing, disable those jobs in cron-job.org (PUBLISH_ENABLED only applies to GitHub schedules, none left).
   workflow_dispatch:
     inputs:
