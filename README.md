@@ -2,6 +2,40 @@
 
 Animated Shorts factory for the **[@Pourkoipa](https://www.youtube.com/@Pourkoipa)** channel: true, surprising stories in French, featuring 2D bean-headed characters inside a painted 3D world. Drop in a voice track, **Claude directs the video** (shot list, set, camera, sound, subtitles), and GitHub Actions renders it. The MP4 lands on **Hugging Face** (`soradata/studio-anime`), then the **Publication** workflow posts it to YouTube and TikTok.
 
+<p align="center">
+  <img src="docs/img/boucle.gif" width="300" alt="End of an episode: Kipa, the channel host, says « Pourkoipa ? » and the video loops back to its first shot">
+</p>
+<p align="center"><em>The end of an episode: Kipa signs off, the camera glides back to the opening shot and the Short loops seamlessly.</em></p>
+
+## What it makes
+
+Every frame below was rendered by this engine, from episodes in `episodes/`, with no hand drawing:
+
+![Eight episodes: Foucault's pendulum, the canary in the mine, the heated rails, the office lamp, learning to ride a bike, the postman's palace, the Fresnel lens, the fake Paris](docs/img/episodes.jpg)
+
+Two formats alternate: **true stories** (fact-checked, dated, sourced) and **everyday life** (short fictional stories about an emotion everyone knows).
+The engine keeps improving; here is the same character before and after the « attitude » update (faces, costumes, low angles, blurred foreground):
+
+![Before / after the attitude update](docs/img/avant-apres.jpg)
+
+## The pipeline
+
+```mermaid
+flowchart LR
+  A[Our stats + trends<br/>mystats.py, trends.py] --> B[Idea + fact-checked script<br/>Claude, idees.yml]
+  B --> C[Voice<br/>Gemini TTS + voice check]
+  C --> D[Word timing<br/>faster-whisper]
+  D --> E[Direction<br/>Claude writes the shot list,<br/>set, camera, cast]
+  E --> F[Render x8 in parallel<br/>headless three.js]
+  F --> G[Mix, subtitles, QA<br/>finish.sh, qa.py]
+  G --> H[Hugging Face]
+  H --> I[YouTube + TikTok<br/>publier.yml]
+  I -.-> A
+```
+
+Everything runs in GitHub Actions, triggered on a schedule by cron-job.org: one new video a day, no manual step.
+The loop closes on itself: before choosing the next topic, the generator reads how our own videos performed (`stats.md`).
+
 ## Usage (from phone or computer)
 
 **Option A: you already have your voice track**
@@ -101,11 +135,11 @@ Run `clear` in the terminal afterwards.
 | Word timing (faster-whisper in French, aligned to the script) | `tools/timing.py` | Actions |
 | Shot list, set, framing, casting, sound effects, still-frame review | `episodes/<slug>/` | **Claude** (`CLAUDE.md` = director's guide) |
 | Headless Three.js rendering, 8 slices in parallel | `tools/render.mjs` | Actions (matrix) |
-| Synthesized music + sound effects, locked mix (−6 dB below voice), subtitles, −14 LUFS, QA check | `tools/finish.sh` | Actions |
+| Synthesized music + sound effects, locked mix (music −12 dB below the voice), subtitles, −14 LUFS, QA check | `tools/finish.sh` | Actions |
 
 - `engine/`: rendering engine (inked 2D cards inside a 3D world, ink pass, depth of field, color grading), `motion.js` (cameras, `frameOn` = close-up framing scaled to the reference).
-- `engine/library/`: reusable sets (`paris.js`, `rails.js`).
-- `episodes/`: already produced episodes (`2026-11-19-faux-paris`, `2026-11-19-rails-chauffes`).
+- `engine/library/`: reusable sets (`paris.js`, `rails.js`, `coupe.js` cutaway, and more), plus `props.js` (set dressing).
+- `episodes/`: every produced episode (story, shot list `PLAN.md`, still sheet `stills.jpg`); `_demo-fx` and `_demo-style` show the engine's effects.
 - `brand/`: channel logo, banner, and watermark.
 - `SKILL.md` + `example/soldier/`: methodology and example from the original kit.
 
