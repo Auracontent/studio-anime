@@ -85,9 +85,22 @@ else:
     pick = ready[0]
 slug = pick["slug"]; print(f"Publishing {slug}: {pick.get('youtube_title', pick.get('title'))}")
 
+def series_line(m):
+    """« 👉 Une autre histoire de la série … : <title> <link> » + series hashtag (series.json + stats.json), or ("", "")."""
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from series import related, TAGS
+        name, best = related(m.get("slug", ""))
+    except Exception as ex:
+        print(f"series: skipped ({ex})"); return "", ""
+    if not name: return "", ""
+    tag = TAGS.get(name, "")
+    if not best: return "", tag
+    return f"👉 Une autre histoire de la série {name} : {best['title']} https://youtube.com/shorts/{best['id']}", tag
+
 def caption_youtube(m):
-    tags = " ".join(m.get("hashtags", []))
-    return (m.get("description", "") + ("\n\n" + tags if tags else "")).strip()
+    line, stag = series_line(m)
+    tags = " ".join(m.get("hashtags", []) + ([stag] if stag else []))
+    return (m.get("description", "") + ("\n\n" + line if line else "") + ("\n\n" + tags if tags else "")).strip()
 
 YT_ID = os.environ.get("ZERNIO_YOUTUBE_ACCOUNT_ID", "").strip()
 TT_ID = os.environ.get("ZERNIO_TIKTOK_ACCOUNT_ID", "").strip()

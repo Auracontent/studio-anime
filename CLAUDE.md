@@ -150,16 +150,16 @@ Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages,
   Jamais d'« abonne-toi » dans la voix ni au début de la vidéo : ça fait fuir dès les premières secondes.
   Désactiver : `export const MASCOT = false`.
 
-## Les séries (le rendez-vous qui fait revenir et s'abonner)
+## Les séries (pour enchaîner les vidéos, rien à l'écran)
 - Chaque « Histoire vraie » appartient si possible à une des 3 séries de la chaîne, listées dans `series.json` :
   **France insolite** (un lieu, un événement ou un personnage français étonnant), **La science qu'on peut voir**
   (physique, psychologie, nature : un phénomène qu'on montre avec un objet), **Les grandes arnaques** (escroqueries, tricheries,
   règles qui se retournent contre leurs auteurs). Une histoire qui n'entre dans aucune n'a pas de série ; « Vie quotidienne » n'en a jamais.
-- Le numéro s'obtient avec `python3 tools/series.py add <slug> "<série>"` (il inscrit l'épisode dans `series.json` et affiche son numéro),
-  puis `export const SERIES = { name: '<série>', n: <numéro> };` dans `web/story.js`. Le moteur affiche alors le badge
-  « FRANCE INSOLITE #6 » en haut du cadre de l'image 4 à l'image 80 (bruitage ajouté par events.mjs) : garde le haut du cadre
-  (hauteur 8-20 %) libre de l'objet clé pendant ces 2,5 s. Le badge ne remplace pas l'accroche, il s'y ajoute.
-- Le générateur d'idées choisit la série au moment du sujet (ligne « Série : » de `NOTES.md`) et alterne les séries quand c'est possible.
+- **Rien dans la vidéo** : ni badge, ni texte, ni mention dans la voix. La série sert seulement à la publication :
+  `tools/publish.py` ajoute à la description YouTube « 👉 Une autre histoire de la série France insolite : <titre> <lien> »
+  (la vidéo de la même série qui a le plus de vues dans `stats.json`) et le hashtag de la série, pour que le spectateur enchaîne.
+- Le réalisateur inscrit l'épisode avec `python3 tools/series.py add <slug> "<série>"` (série lue dans la ligne « Série : » de `NOTES.md`)
+  et commite `series.json` avec l'épisode. Le générateur d'idées choisit la série au moment du sujet et les alterne quand c'est possible.
 
 ## Structure du dépôt
 ```
@@ -196,7 +196,7 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
    `images | phrase | ce qu'on VOIT se passer (action) | caméra | ambiance | effet 3D | bruitage`. Relis-le avec la règle n°1
    (accroche visuelle à 0-2 s, une action visible par phrase, enjeu montré, un héros, objet clé en gros plan, fin qui reboucle)
    avant d'écrire le code. `PLAN.md` est commité avec l'épisode.
-6. `web/story.js` : exporte `TOTAL, DECK, SHOTS, shotAt, lightFor, camAt, dofAt, worldAt, setupCast, actorsAt, fxAt` (+ `envAt` pour les effets 3D, `SERIES` si l'épisode est dans une série : voir « Les séries »)
+6. `web/story.js` : exporte `TOTAL, DECK, SHOTS, shotAt, lightFor, camAt, dofAt, worldAt, setupCast, actorsAt, fxAt` (+ `envAt` pour les effets 3D)
    (modèle : `episodes/2026-11-19-rails-chauffes/web/story.js`). Imports depuis `'../motion.js'`. Un plan par phrase, cadres avec `frameOn`.
    Les tenues se déclarent dans `setupCast(T)` (`T.OUTFITS.<id> = { tunic, skin, cap, hair, moustache, apron, stout... }`).
 7. **Contrôle images fixes (obligatoire)** : `CHROME=/usr/bin/google-chrome node tools/render.mjs episodes/<slug> /tmp/stills "<milieu de chaque plan>"`

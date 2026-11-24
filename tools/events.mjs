@@ -76,7 +76,6 @@ for (let f = 0; f < N; f++) {
 }
 for (const k of Object.keys(loopState)) loop(k, false, N, 0);
 // Kipa, the end signature drawn by main.js (TOTAL-96 .. TOTAL-24): a pop when he jumps in, a swish when he leaves
-if (S.SERIES && N > 150) { ev.push({ f: 5, t: +(5 / 30).toFixed(3), type: 'pop', k: 0.6 }); ev.sort((a, b) => a.f - b.f); }   // series badge (main.js)
 if (S.MASCOT !== false && N > 150) { for (const [f, type, k] of [[N - 92, 'pop', 0.7], [N - 55, 'pop', 0.5], [N - 30, 'swish', 0.5]]) ev.push({ f, t: +(f / 30).toFixed(3), type, k }); ev.sort((a, b) => a.f - b.f); }
 fs.writeFileSync(path.join(ep, 'events.json'), JSON.stringify({ fps: 30, total: N, events: ev, loops }, null, 1));
 const count = {}; ev.forEach((e) => (count[e.type] = (count[e.type] || 0) + 1));
