@@ -21,6 +21,14 @@ La plupart des gens regardent un Short **sans le son** et décident de rester en
 si on coupe le son, on comprend quand même de quoi on parle, ce qui pose problème et comment ça se résout.
 - **Accroche visuelle de 0 à 2 s.** L'objet clé, le danger ou l'action la plus étonnante est à l'écran dès la première image
   (le phare dans la tempête, le train qui déraille, le pont qui s'effondre). Jamais deux personnages qui sourient devant un mur pour ouvrir.
+  **Mesuré sur nos vidéos (« ont continué de regarder », novembre 2026)** : le boulet de Foucault garde **75 %** des gens ; il s'ouvre sur
+  la boule qui **remplit le cadre et bouge déjà**, en lumière chaude, et la 1re phrase dit le paradoxe en 13 mots. Les vidéos qui s'ouvrent sur
+  **un personnage debout qui ne fait rien** (lumière du bureau, canari) ou sur un petit objet dans un décor froid (pigeons) n'en gardent que **54-55 %** ;
+  celles qui commencent par une date (taxis « En 1914… », faux Paris « Pendant la Première Guerre… ») 60-62 %. Donc, pour l'image 0 :
+  - l'objet ou l'action de l'histoire occupe **au moins la moitié du cadre** (gros plan, `fgCard` ou caméra collée à l'objet) ;
+  - **il bouge dès l'image 0** (balancier, chute, flamme, roue, eau), et la caméra aussi ; pas de plan fixe sur un personnage les bras ballants ;
+  - **lumière chaude et lumineuse** pour ouvrir, même si l'histoire devient sombre ensuite (la nuit et le froid viennent après l'accroche) ;
+  - un personnage peut être là, mais **en réaction franche** (`shock`, `laugh`) et tourné vers l'objet, jamais en premier sujet du cadre.
 - **Une phrase = une action visible.** Pour chaque phrase du script, décide ce qu'on VOIT se passer, pas seulement qui est à l'écran :
   « trop lourd » -> deux ouvriers soulèvent un bloc énorme, tremblent (`tremble`) et tombent (`fallOver`) ;
   « la lumière partait dans tous les sens » -> on voit les rayons faibles se perdre et un bateau qui ne voit rien ;
@@ -223,6 +231,8 @@ La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regard
   qui renvoie à la première phrase (boucle).
   **110 à 130 mots** (la voix Riko lit ~2,6 mots/s : 120 mots ≈ 46 s ; au-delà de 50 s, la vidéo est trop longue), phrases de 8-15 mots,
   nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
+- **La 1re phrase fait 15 mots au plus, au présent, et dit le paradoxe avec l'objet qu'on voit** (« Ce boulet qui se balance sans rien toucher prouve que la Terre tourne. » : 75 % des gens restent).
+  Pour « Vie quotidienne » aussi : l'enjeu dès la 1re phrase (« Tout le monde se moquait de lui parce que… »), pas une description (« Tous les matins, quelqu'un allume… » : 55 %).
 - **La 1re phrase ne commence jamais par une date ni par du contexte** (« En 1823… », « Au XIXe siècle… ») : la surprise d'abord,
   la date ensuite. Ex. : « Ce phare voit plus loin… parce qu'on lui a enlevé du verre. C'était en 1823. »
 - Écris des phrases **qu'on peut montrer** : un verbe d'action concret par phrase (porter, couler, exploser, couper, courir), pas des idées abstraites.
