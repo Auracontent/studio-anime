@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """One-time helper, run on YOUR computer: gets the refresh token that lets tools/mystats.py read the private numbers of the channel
-(% watched, subscribers gained per video) with read-only access (scope yt-analytics.readonly: it can read stats, nothing else).
+(% watched, subscribers gained per video, scope yt-analytics.readonly) and tools/yt_channel.py keep the channel page up to date
+(playlists, comments, description, sections, banner: scope youtube.force-ssl).
 usage : python3 tools/yt_oauth.py <CLIENT_ID> <CLIENT_SECRET>
   1. A browser page opens: sign in with the Google account that owns the channel, choose the channel, accept.
   2. The script prints the refresh token: save it as the GitHub secret YT_REFRESH_TOKEN (with YT_CLIENT_ID and YT_CLIENT_SECRET).
@@ -11,7 +12,7 @@ if len(sys.argv) < 3: sys.exit(__doc__)
 CID, SEC, PORT = sys.argv[1], sys.argv[2], 8765
 REDIR = f"http://127.0.0.1:{PORT}/"
 url = "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode({"client_id": CID, "redirect_uri": REDIR, "response_type": "code",
-      "scope": "https://www.googleapis.com/auth/yt-analytics.readonly", "access_type": "offline", "prompt": "consent"})
+      "scope": "https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/youtube.force-ssl", "access_type": "offline", "prompt": "consent"})
 got = {}
 class H(http.server.BaseHTTPRequestHandler):
     def do_GET(self):

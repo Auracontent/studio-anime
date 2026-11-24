@@ -158,6 +158,10 @@ Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages,
 - **Rien dans la vidéo** : ni badge, ni texte, ni mention dans la voix. La série sert seulement à la publication :
   `tools/publish.py` ajoute à la description YouTube « 👉 Une autre histoire de la série France insolite : <titre> <lien> »
   (la vidéo de la même série qui a le plus de vues dans `stats.json`) et le hashtag de la série, pour que le spectateur enchaîne.
+- **La page de la chaîne s'entretient seule** (`tools/yt_channel.py`, après chaque publication, ou à la demande avec le workflow `chaine`) :
+  playlists « Commence ici » (les 5 plus vues), « Histoires vraies » et une par série, un commentaire « 👉 Une autre histoire de la série… »
+  sous chaque vidéo d'une série, description (`brand/description.txt`), vidéo à la une pour les non-abonnés (la plus vue) et sections de l'accueil.
+  Seuls le lien « Vidéo similaire » sous un Short et l'épinglage d'un commentaire restent manuels (l'API YouTube ne les permet pas).
 - Le réalisateur inscrit l'épisode avec `python3 tools/series.py add <slug> "<série>"` (série lue dans la ligne « Série : » de `NOTES.md`)
   et commite `series.json` avec l'épisode. Le générateur d'idées choisit la série au moment du sujet et les alterne quand c'est possible.
 
