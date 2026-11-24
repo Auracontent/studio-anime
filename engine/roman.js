@@ -259,6 +259,18 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
     case "flag": { p.stroke([[hx, hy + 10 * u], [hx, hy - 70 * u]], 3 * u, "#6b4a2a"); const f = [[hx, hy - 70 * u], [hx + side * 42 * u, hy - 62 * u], [hx, hy - 44 * u]];
       p.poly([[hx, hy - 70 * u], [hx + side * 14 * u, hy - 67 * u], [hx + side * 14 * u, hy - 47 * u], [hx, hy - 44 * u]], "#2f56a8", 0); p.poly([[hx + side * 14 * u, hy - 67 * u], [hx + side * 28 * u, hy - 64 * u], [hx + side * 28 * u, hy - 50 * u], [hx + side * 14 * u, hy - 47 * u]], "#ffffff", 0);
       p.poly([[hx + side * 28 * u, hy - 64 * u], [hx + side * 42 * u, hy - 62 * u], [hx + side * 42 * u, hy - 52 * u], [hx + side * 28 * u, hy - 50 * u]], "#d23a32", 0); p.poly([[hx, hy - 70 * u], [hx + side * 42 * u, hy - 62 * u], [hx + side * 42 * u, hy - 52 * u], [hx, hy - 44 * u]], null, 2 * u); break; }
+    case "petri": { // boîte de Petri tenue de profil/dessus : disque ambre piqué de microbes jaunes, tache de moisissure bleu-vert et cercle clair autour
+      const cy = hy - 14 * u; p.ell(hx, cy, 30 * u, 24 * u, "#d7eef0", 2.6 * u); p.ell(hx, cy, 25 * u, 19 * u, "#e7cf86", 0);
+      for (let i = 0; i < 9; i++) { const a = i * 2.4; p.dot(hx + Math.cos(a) * 17 * u, cy + Math.sin(a) * 12 * u, 2.4 * u, "#d89a18"); }
+      p.ell(hx + 5 * u, cy - 3 * u, 12 * u, 9 * u, "#f6e9b0", 0); p.ell(hx + 5 * u, cy - 3 * u, 6 * u, 4.6 * u, "#58b09a", 1.4 * u); break; }
+    case "flask": { // fiole : ventre rond de liquide vert, long col, bouchon, étiquette
+      p.poly([[hx - 5 * u, hy - 40 * u], [hx + 5 * u, hy - 40 * u], [hx + 6 * u, hy - 22 * u], [hx + 20 * u, hy + 2 * u], [hx - 20 * u, hy + 2 * u], [hx - 6 * u, hy - 22 * u]], "#bfe4ea", 2.8 * u);
+      p.poly([[hx - 17 * u, hy - 8 * u], [hx + 17 * u, hy - 8 * u], [hx + 20 * u, hy + 1 * u], [hx - 20 * u, hy + 1 * u]], "#6fc83a", 0); p.poly(rrect(hx - 7 * u, hy - 46 * u, hx + 7 * u, hy - 38 * u, 2 * u), "#b07a42", 2 * u);
+      p.poly(rrect(hx - 9 * u, hy - 16 * u, hx + 9 * u, hy - 4 * u, 1 * u), "#fffdf2", 1.4 * u); p.dot(hx, hy - 10 * u, 2 * u, "#c8312c"); break; }
+    case "case": { // valise de voyage : corps brun, coins dorés, sangle, poignée
+      p.stroke([[hx - 12 * u, hy - 20 * u], [hx - 12 * u, hy - 30 * u], [hx + 12 * u, hy - 30 * u], [hx + 12 * u, hy - 20 * u]], 4 * u, "#3a2a22");
+      p.poly(rrect(hx - 30 * u, hy - 22 * u, hx + 30 * u, hy + 26 * u, 4 * u), "#a8662e", 2.6 * u); p.stroke([[hx - 30 * u, hy + 2 * u], [hx + 30 * u, hy + 2 * u]], 2.4 * u, "#6a3a1a");
+      for (const sx of [-1, 1]) p.poly(rrect(hx + sx * 26 * u - 4 * u, hy - 22 * u, hx + sx * 26 * u + 4 * u, hy - 14 * u, 1 * u), "#d8a840", 1.4 * u); p.poly(rrect(hx - 5 * u, hy - 4 * u, hx + 5 * u, hy + 8 * u, 1 * u), "#d8a840", 1.4 * u); break; }
     case "coin": p.ell(hx, hy - 6 * u, 9 * u, 9 * u, "#e9be4a", 2.2 * u); p.ell(hx, hy - 6 * u, 5 * u, 5 * u, null, 1.2 * u); break;
     case "ballBig": case "ballSmall": case "ballBigB": case "ballSmallB": { // boules d'expérience : grosse rouge / petite bleue (même poids), tenues dans la paume
       const big = kind.startsWith("ballBig"), r = (big ? 15.5 : 9) * u / 1.7 * 1.7, col = big ? "#e23d32" : "#2f7fd8", cy = hy - r * 0.85;

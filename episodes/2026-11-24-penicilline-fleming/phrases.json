@@ -1,0 +1,203 @@
+{
+ "duration": 42.240583,
+ "frames30": 1267,
+ "source": "whisper",
+ "segments": [
+  [
+   0.28,
+   1.92975
+  ],
+  [
+   2.364042,
+   4.018875
+  ],
+  [
+   4.749,
+   5.479917
+  ],
+  [
+   5.70325,
+   6.677083
+  ],
+  [
+   6.969875,
+   9.461708
+  ],
+  [
+   10.188625,
+   10.913333
+  ],
+  [
+   11.040833,
+   12.578417
+  ],
+  [
+   13.40975,
+   14.201667
+  ],
+  [
+   14.586,
+   16.487625
+  ],
+  [
+   17.300958,
+   17.775333
+  ],
+  [
+   18.134792,
+   19.215625
+  ],
+  [
+   19.397792,
+   20.608
+  ],
+  [
+   21.590125,
+   23.204792
+  ],
+  [
+   23.362542,
+   24.096167
+  ],
+  [
+   24.604583,
+   25.063167
+  ],
+  [
+   25.199625,
+   25.776
+  ],
+  [
+   26.554958,
+   26.646083
+  ],
+  [
+   26.872458,
+   27.39275
+  ],
+  [
+   27.546333,
+   29.515333
+  ],
+  [
+   30.260875,
+   31.210125
+  ],
+  [
+   31.473083,
+   33.194667
+  ],
+  [
+   34.166083,
+   36.281792
+  ],
+  [
+   37.05525,
+   37.337708
+  ],
+  [
+   37.53425,
+   37.706833
+  ],
+  [
+   38.115125,
+   39.479375
+  ],
+  [
+   39.933417,
+   41.72225
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ce savant a oubli\u00e9 de ranger son labo\u2026 et \u00e7a a sauv\u00e9 des millions de vies.",
+   "s": 0.0,
+   "e": 4.02
+  },
+  {
+   "text": "\u00c0 Londres,",
+   "s": 4.84,
+   "e": 5.42
+  },
+  {
+   "text": "en mille neuf cent vingt-huit,",
+   "s": 5.74,
+   "e": 7.1
+  },
+  {
+   "text": "Alexander Fleming cultive des microbes dans des bo\u00eetes.",
+   "s": 7.1,
+   "e": 9.44
+  },
+  {
+   "text": "Un matin d'\u00e9t\u00e9,",
+   "s": 10.1,
+   "e": 11.08
+  },
+  {
+   "text": "il part en vacances sans tout nettoyer.",
+   "s": 11.08,
+   "e": 12.62
+  },
+  {
+   "text": "Quand il revient,",
+   "s": 13.52,
+   "e": 14.18
+  },
+  {
+   "text": "une moisissure a pouss\u00e9 sur l'une des bo\u00eetes.",
+   "s": 14.52,
+   "e": 16.48
+  },
+  {
+   "text": "Autour d'elle,",
+   "s": 17.24,
+   "e": 18.16
+  },
+  {
+   "text": "les microbes ont disparu.",
+   "s": 18.16,
+   "e": 19.18
+  },
+  {
+   "text": "Il reste un grand cercle vide.",
+   "s": 19.4,
+   "e": 20.56
+  },
+  {
+   "text": "Fleming comprend que cette moisissure tue les bact\u00e9ries.",
+   "s": 21.46,
+   "e": 24.1
+  },
+  {
+   "text": "Il l'appelle p\u00e9nicilline.",
+   "s": 24.52,
+   "e": 25.76
+  },
+  {
+   "text": "Sauf que\u2026 personne ne sait en fabriquer assez pour soigner quelqu'un.",
+   "s": 26.6,
+   "e": 30.2
+  },
+  {
+   "text": "Il faudra dix ans et d'autres chercheurs pour en faire un m\u00e9dicament.",
+   "s": 30.2,
+   "e": 33.18
+  },
+  {
+   "text": "Fleming partagera le prix Nobel en mille neuf cent quarante-cinq.",
+   "s": 34.04,
+   "e": 37.42
+  },
+  {
+   "text": "Alors,",
+   "s": 37.42,
+   "e": 37.66
+  },
+  {
+   "text": "quand on te dit de ranger ton bazar\u2026 dis-toi que le d\u00e9sordre a d\u00e9j\u00e0 sauv\u00e9 des vies.",
+   "s": 38.06,
+   "e": 41.72
+  }
+ ]
+}
