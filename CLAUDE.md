@@ -150,6 +150,21 @@ Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages,
   Jamais d'« abonne-toi » dans la voix ni au début de la vidéo : ça fait fuir dès les premières secondes.
   Désactiver : `export const MASCOT = false`.
 
+## Les séries (pour enchaîner les vidéos, rien à l'écran)
+- Chaque « Histoire vraie » appartient si possible à une des 3 séries de la chaîne, listées dans `series.json` :
+  **France insolite** (un lieu, un événement ou un personnage français étonnant), **La science qu'on peut voir**
+  (physique, psychologie, nature : un phénomène qu'on montre avec un objet), **Les grandes arnaques** (escroqueries, tricheries,
+  règles qui se retournent contre leurs auteurs). Une histoire qui n'entre dans aucune n'a pas de série ; « Vie quotidienne » n'en a jamais.
+- **Rien dans la vidéo** : ni badge, ni texte, ni mention dans la voix. La série sert seulement à la publication :
+  `tools/publish.py` ajoute à la description YouTube « 👉 Une autre histoire de la série France insolite : <titre> <lien> »
+  (la vidéo de la même série qui a le plus de vues dans `stats.json`) et le hashtag de la série, pour que le spectateur enchaîne.
+- **La page de la chaîne s'entretient seule** (`tools/yt_channel.py`, après chaque publication, ou à la demande avec le workflow `chaine`) :
+  playlists « Commence ici » (les 5 plus vues), « Histoires vraies » et une par série, un commentaire « 👉 Une autre histoire de la série… »
+  sous chaque vidéo d'une série, description (`brand/description.txt`), vidéo à la une pour les non-abonnés (la plus vue) et sections de l'accueil.
+  Seuls le lien « Vidéo similaire » sous un Short et l'épinglage d'un commentaire restent manuels (l'API YouTube ne les permet pas).
+- Le réalisateur inscrit l'épisode avec `python3 tools/series.py add <slug> "<série>"` (série lue dans la ligne « Série : » de `NOTES.md`)
+  et commite `series.json` avec l'épisode. Le générateur d'idées choisit la série au moment du sujet et les alterne quand c'est possible.
+
 ## Structure du dépôt
 ```
 engine/            moteur three.js (main.js piloté par l'épisode, motion.js = caméra + actions, paint.js, roman.js = casting,
@@ -161,6 +176,7 @@ tools/             setup.sh, timing.py, render.mjs, sheet.py, synth.py, mix.py, 
                    events.mjs + autosfx.py (bruitages automatiques)
 episodes/_demo-fx/ démonstration des effets, ambiances, caméras et actions (pas un épisode publié)
 brand/             logo, bannière, filigrane (make_brand.py)
+series.json        les séries de la chaîne et leurs épisodes (tools/series.py)
 example/soldier/   l'exemple d'origine du kit (ancien format, à lire pour la méthode)
 ```
 Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, images, wav de mixage, mp4) ne sont pas versionnés.
@@ -239,7 +255,7 @@ La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regard
   la date ensuite. Ex. : « Ce phare voit plus loin… parce qu'on lui a enlevé du verre. C'était en 1823. »
 - Écris des phrases **qu'on peut montrer** : un verbe d'action concret par phrase (porter, couler, exploser, couper, courir), pas des idées abstraites.
 - Sujets qui marchent : un fait vrai qui a l'air faux, avec une cause physique qu'on peut montrer, un lieu français reconnaissable si possible.
-- Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (ligne « Format : Histoire vraie » ou « Format : Vie quotidienne », sources pour une histoire vraie, conseils d'enregistrement : voix Riko de Google AI Studio,
+- Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (ligne « Format : Histoire vraie » ou « Format : Vie quotidienne », ligne « Série : France insolite | La science qu'on peut voir | Les grandes arnaques | aucune », sources pour une histoire vraie, conseils d'enregistrement : voix Riko de Google AI Studio,
   et un **plan visuel** : pour chaque phrase, l'action qu'on verra, l'ambiance et l'effet ; l'image d'accroche des 2 premières secondes ; le héros).
 
 ## Retouches (workflow `claude.yml`, quand on te mentionne avec @claude)

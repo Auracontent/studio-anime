@@ -1,0 +1,18 @@
+# Channel page upkeep on demand: playlists, series comments, description, featured video, home sections (+ banner if asked).
+# It also runs by itself after each publication (publier.yml). Needs YT_REFRESH_TOKEN with the scope youtube.force-ssl.
+name: chaine
+on:
+  workflow_dispatch:
+    inputs:
+      banniere: { description: "Envoyer aussi la bannière (brand/Pourkoipa-banniere-2560x1440.jpg)", type: boolean, default: false }
+      test: { description: "Test : montrer ce qui serait fait, sans rien changer", type: boolean, default: false }
+jobs:
+  chaine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Channel upkeep
+        env: { YT_CLIENT_ID: "${{ secrets.YT_CLIENT_ID }}", YT_CLIENT_SECRET: "${{ secrets.YT_CLIENT_SECRET }}", YT_REFRESH_TOKEN: "${{ secrets.YT_REFRESH_TOKEN }}" }
+        run: |
+          A="--setup"; [ "${{ github.event.inputs.banniere }}" = "true" ] && A="$A --banner"; [ "${{ github.event.inputs.test }}" = "true" ] && A="$A --dry-run"
+          python3 tools/yt_channel.py $A
