@@ -1,3 +1,3 @@
-// Channel art (banner + avatar) is shot in the episode-1 set: the ochre railway.
-import { buildRails } from '../library/rails.js';
-export async function buildWorld(ctx) { return buildRails(ctx); }
+// Channel art (banner) is shot in the sunny village set: the road, the fields, Facteur Cheval's palace behind.
+import { buildVillage } from '../library/village.js';
+export async function buildWorld(ctx) { return buildVillage(ctx, { seed: 1879 }); }
