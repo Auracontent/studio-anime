@@ -219,7 +219,11 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
    Tester : `python3 tools/run_audio.py episodes/<slug> && node tools/events.mjs episodes/<slug> && python3 tools/autosfx.py episodes/<slug>
    && (cd episodes/<slug> && python3 ../../tools/mix.py voice.wav music.wav sfx.wav)`.
 9. Écrire `episodes/<slug>/meta.json` : `{ "slug", "total": <images>, "title": "<titre court>", "youtube_title", "description", "hashtags", "tiktok" }`
-   (titre ≤ 45 caractères, un seul mot en majuscules, description courte + « Pourkoipa ? 🤔 », hashtags #pourkoipa + 5-7 pertinents + #shorts).
+   (titre ≤ 45 caractères, un seul mot en majuscules, description courte + « Pourkoipa ? 🤔 », hashtags #pourkoipa + 5-7 pertinents + #shorts),
+   plus `"keywords"` : 8 à 12 mots-clés de recherche **en français**, ce que les gens tapent vraiment pour trouver ce sujet
+   (le nom de la personne ou de l'objet, l'événement, la question : « pénicilline », « alexander fleming », « découverte de la pénicilline »,
+   « invention par accident »), du plus précis au plus large. Jamais de mot-clé hors sujet ou en anglais pour attirer du volume.
+   `tools/publish.py` les envoie en tags YouTube, avant les hashtags et les tags de base de la chaîne.
 10. Commiter l'épisode. **Le rendu complet et la finition ne sont pas faits par toi** : les jobs `render` (en parallèle) et `finish` du workflow s'en chargent.
     La finition lance `tools/qa.py`, qui écrit `out/QA.md` (durée, mots, ouverture, plan, effets, musique, images figées, images sombres).
 
