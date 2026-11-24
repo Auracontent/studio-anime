@@ -1,0 +1,221 @@
+{
+ "duration": 38.160583,
+ "frames30": 1145,
+ "source": "whisper",
+ "segments": [
+  [
+   0.253458,
+   1.541917
+  ],
+  [
+   2.10975,
+   3.481458
+  ],
+  [
+   4.1805,
+   4.454208
+  ],
+  [
+   4.674583,
+   5.044125
+  ],
+  [
+   5.205333,
+   7.156083
+  ],
+  [
+   7.72675,
+   9.874042
+  ],
+  [
+   10.364,
+   12.57425
+  ],
+  [
+   13.2385,
+   13.536417
+  ],
+  [
+   13.663708,
+   15.132167
+  ],
+  [
+   15.779333,
+   18.033333
+  ],
+  [
+   18.694667,
+   19.675833
+  ],
+  [
+   20.23475,
+   21.149292
+  ],
+  [
+   21.711708,
+   23.388375
+  ],
+  [
+   24.036083,
+   24.520375
+  ],
+  [
+   24.692083,
+   25.448333
+  ],
+  [
+   26.271792,
+   27.285417
+  ],
+  [
+   27.629,
+   28.534958
+  ],
+  [
+   29.232917,
+   30.334625
+  ],
+  [
+   30.922708,
+   31.986208
+  ],
+  [
+   32.699458,
+   33.949583
+  ],
+  [
+   34.317333,
+   34.770708
+  ],
+  [
+   35.505917,
+   36.362
+  ],
+  [
+   36.544583,
+   37.713458
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Tout le monde se moquait de son g\u00e2teau,",
+   "s": 0.0,
+   "e": 1.56
+  },
+  {
+   "text": "parce qu'il s'\u00e9tait effondr\u00e9 au milieu.",
+   "s": 1.92,
+   "e": 3.36
+  },
+  {
+   "text": "Malo,",
+   "s": 4.2,
+   "e": 4.46
+  },
+  {
+   "text": "onze ans,",
+   "s": 4.46,
+   "e": 5.02
+  },
+  {
+   "text": "voulait surprendre sa grand-m\u00e8re pour son anniversaire.",
+   "s": 5.26,
+   "e": 7.1
+  },
+  {
+   "text": "Mais en ouvrant le four,",
+   "s": 7.68,
+   "e": 8.52
+  },
+  {
+   "text": "le g\u00e2teau s'est affaiss\u00e9.",
+   "s": 8.8,
+   "e": 9.86
+  },
+  {
+   "text": "Sa cousine Jade a \u00e9clat\u00e9 de rire,",
+   "s": 10.34,
+   "e": 11.78
+  },
+  {
+   "text": "puis tous les autres.",
+   "s": 11.78,
+   "e": 12.5
+  },
+  {
+   "text": "Malo,",
+   "s": 13.2,
+   "e": 13.56
+  },
+  {
+   "text": "rouge de honte,",
+   "s": 13.8,
+   "e": 14.3
+  },
+  {
+   "text": "a voulu jeter le plat.",
+   "s": 14.42,
+   "e": 15.1
+  },
+  {
+   "text": "Sauf que sa grand-m\u00e8re lui a pris le plat des mains.",
+   "s": 15.78,
+   "e": 18.0
+  },
+  {
+   "text": "Elle a go\u00fbt\u00e9 une part,",
+   "s": 18.7,
+   "e": 19.56
+  },
+  {
+   "text": "puis elle a ferm\u00e9 les yeux.",
+   "s": 19.56,
+   "e": 21.14
+  },
+  {
+   "text": "\u00ab Mon premier g\u00e2teau s'est effondr\u00e9 aussi.",
+   "s": 21.14,
+   "e": 23.3
+  },
+  {
+   "text": "Celui-ci est d\u00e9licieux.",
+   "s": 23.3,
+   "e": 25.42
+  },
+  {
+   "text": "\u00bb Jade en a repris deux fois,",
+   "s": 25.42,
+   "e": 27.26
+  },
+  {
+   "text": "et plus personne ne riait.",
+   "s": 27.68,
+   "e": 29.06
+  },
+  {
+   "text": "Il ne restait plus une miette,",
+   "s": 29.06,
+   "e": 30.38
+  },
+  {
+   "text": "et Malo souriait enfin.",
+   "s": 30.96,
+   "e": 31.92
+  },
+  {
+   "text": "La prochaine fois que ton g\u00e2teau s'effondre,",
+   "s": 32.64,
+   "e": 34.32
+  },
+  {
+   "text": "ne le jette pas.",
+   "s": 34.32,
+   "e": 34.74
+  },
+  {
+   "text": "Un g\u00e2teau effondr\u00e9 peut \u00eatre le meilleur de la table.",
+   "s": 35.38,
+   "e": 37.62
+  }
+ ]
+}

@@ -241,6 +241,14 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
     case "paper": case "letter": { const r = [[hx - 20 * u, hy - 34 * u], [hx + 18 * u, hy - 36 * u], [hx + 20 * u, hy + 8 * u], [hx - 18 * u, hy + 10 * u]]; p.poly(r, kind === "letter" ? "#f3e6c8" : "#fbfbf6", 2.4 * u);
       for (let i = 0; i < 5; i++) p.stroke([[hx - 12 * u, hy - 24 * u + i * 7 * u], [hx + 12 * u, hy - 25 * u + i * 7 * u]], 1.4 * u, "#9a8f86"); break; }
     case "ticket": { const r = rrect(hx - 18 * u, hy - 12 * u, hx + 18 * u, hy + 6 * u, 2 * u); p.poly(r, "#ffd75e", 2.2 * u); p.stroke([[hx + 8 * u, hy - 12 * u], [hx + 8 * u, hy + 6 * u]], 1.4 * u, "#b8902a"); break; }
+    case "plat": case "platOk": case "platVide": { // plat à gâteau (Pourkoipa original) : plat bleu, gâteau doré ; plat : creux au milieu, platOk : bien levé, platVide : miettes
+      const w = 30 * u, by = hy + 4 * u; p.poly([[hx - w - 6 * u, by - 6 * u], [hx + w + 6 * u, by - 6 * u], [hx + w, by + 6 * u], [hx - w, by + 6 * u]], "#4a86c8", 2.4 * u);
+      if (kind === "platVide") { for (let i = 0; i < 6; i++) p.dot(hx + (i - 2.5) * 8 * u, by - 9 * u + (i % 2) * 2 * u, 2.4 * u, "#e0b060"); break; }
+      const top = kind === "platOk" ? 30 : 20, cake = [[hx - w + 2 * u, by - 6 * u], [hx - w + 5 * u, by - top * u], [hx + w - 5 * u, by - top * u], [hx + w - 2 * u, by - 6 * u]];
+      if (kind === "plat") cake.splice(2, 0, [hx + 22 * u, by - 20 * u], [hx + 12 * u, by - 18 * u], [hx + 4 * u, by - 7 * u], [hx - 8 * u, by - 9 * u], [hx - 14 * u, by - 18 * u]);
+      p.poly(cake, "#e3a14a", 2.4 * u); p.stroke([[hx - w + 6 * u, by - 12 * u], [hx + w - 6 * u, by - 12 * u]], 2 * u, "#a8641e");
+      if (kind !== "plat") p.ell(hx, by - top * u + 1 * u, 22 * u, 5 * u, "#f6d58a", 1.6 * u); break; }
+    case "fork": { p.stroke([[hx, hy + 14 * u], [hx, hy - 30 * u]], 4 * u, "#c9ced6"); for (const k of [-1, 0, 1]) p.stroke([[hx + k * 5 * u, hy - 30 * u], [hx + k * 5 * u, hy - 44 * u]], 2.4 * u, "#c9ced6"); p.dot(hx, hy - 28 * u, 5 * u, "#e3a14a"); break; }
     case "mug": { const r = rrect(hx - 12 * u, hy - 22 * u, hx + 12 * u, hy + 6 * u, 3 * u); p.poly(r, "#e8e2d6", 2.4 * u); p.arc(hx + side * 13 * u, hy - 8 * u, 6 * u, 7 * u, side > 0 ? 270 : 90, side > 0 ? 450 : 270, 2.4 * u);
       g.save(); g.globalAlpha = 0.6; p.stroke([[hx - 4 * u, hy - 28 * u], [hx - 1 * u, hy - 38 * u], [hx - 5 * u, hy - 46 * u]], 2 * u, "#ffffff"); g.restore(); break; }
     case "mugCold": { const r = rrect(hx - 12 * u, hy - 22 * u, hx + 12 * u, hy + 6 * u, 3 * u); p.poly(r, "#bcd0e6", 2.4 * u); p.arc(hx + side * 13 * u, hy - 8 * u, 6 * u, 7 * u, side > 0 ? 270 : 90, side > 0 ? 450 : 270, 2.4 * u); break; }   // mug de café froid (bleuté, sans vapeur)
@@ -515,6 +523,10 @@ export const romanFront = (p, key, opts = {}) => {
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.helmet && nohelmet) { // bald old head with white side tufts
     for (const s of [-1, 1]) p.ell(cx + s * 0.9 * H.a, hc - 0.1 * H.b, 0.22 * H.a, 0.3 * H.b, "#f4f1ea", 3 * u);
+  }
+  if (O.bun) { // chignon (Pourkoipa original) : petit rond de cheveux au sommet de la tête
+    const bx = cx + 0.1 * H.a * facing, by = hc - 1.12 * H.b, bc = O.bun, bl = ellPts(bx, by, 0.34 * H.a, 0.3 * H.a, 0, 360, 0, 28);
+    p.shadedFill(bl, bc, mul(bc, [0.7, 0.7, 0.78]), light, 0.34 * H.a, 0.4); p.inkRing(bl, ow * 0.9, thick);
   }
   if (O.beard) {
     const bd = blobPts(cx + 6 * u * facing, hc + 0.85 * H.b, { a: 0.62 * H.a, b: 0.75 * H.b, nTop: 2.4, nBot: 1.6, egg: -0.35, asym: 0, rot: 0, noise: 0.02, seed: seed + 4 });
