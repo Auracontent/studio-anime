@@ -260,7 +260,7 @@ const swapForNd = (on) => {
 // MASCOT: Kipa, the Pourkoipa host, pops in from the left for ~1.6 s before the loop with « Pourkoipa ? » (`export const MASCOT = false`).
 const VERTICAL = H > W, LONG = TOTAL > 150;
 const LOOP_ON = STORY.LOOP !== false && VERTICAL && LONG, MASCOT_ON = STORY.MASCOT !== false && VERTICAL && LONG && !!T.mascot;
-const GLIDE = 24, DISS = 10, M0 = TOTAL - 72, M1 = TOTAL - 24;
+const GLIDE = 24, DISS = 10, M0 = TOTAL - 96, M1 = TOTAL - 24;   // Kipa on screen ~2.4 s: « Pourkoipa ? » then « Abonne-toi ! »
 const rtOut = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType }), rtFirst = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType });
 const blU = { a: { value: rtOut.texture }, b: { value: rtFirst.texture }, t: { value: 0 } };
 const blScene = fs(new THREE.ShaderMaterial({ uniforms: blU, toneMapped: false, vertexShader: `varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
@@ -283,13 +283,22 @@ function drawMascot(f) {
   ovG.setTransform(sc, 0, 0, sc, x, y);
   T.mascot(new T.Pen(ovG), { wv: d * 0.55, expr: d < n * 0.55 ? 'grin' : 'proud', look: 0.6 });
   if (d > 6 && f < M1 - 4) { // speech bubble « Pourkoipa ? »
-    const a = Math.min(1, (d - 6) / 5) * Math.min(1, (M1 - 4 - f) / 4), bw = 470 * W / 1080, bh = 150 * W / 1080, bx = Math.max(24 * W / 1080, x + 300 * sc - bw * 0.3), by = y + 70 * sc - bh;   // above Kipa's head
+    const sub = d >= n * 0.45, k = W / 1080;   // second half: the subscribe line (a promise, no voice, does not break the loop)
+    const a = Math.min(1, (d - 6) / 5) * Math.min(1, (M1 - 4 - f) / 4), bw = (sub ? 520 : 470) * k, bh = (sub ? 190 : 150) * k, bx = Math.max(24 * W / 1080, x + 300 * sc - bw * 0.3), by = y + 70 * sc - bh;   // above Kipa's head
     ovG.setTransform(1, 0, 0, 1, 0, 0); ovG.globalAlpha = a; ovG.lineWidth = 9 * W / 1080; ovG.strokeStyle = '#271925'; ovG.fillStyle = '#ffffff';
     ovG.beginPath(); ovG.roundRect(bx, by, bw, bh, 42 * W / 1080); ovG.moveTo(bx + bw * 0.22, by + bh - 4); ovG.lineTo(bx + bw * 0.3, by + bh + 52 * W / 1080); ovG.lineTo(bx + bw * 0.42, by + bh - 4); ovG.fill(); ovG.stroke();
     ovG.fillRect(bx + bw * 0.22 + 6, by + bh - 12 * W / 1080, bw * 0.2 - 12, 14 * W / 1080);
-    ovG.font = `900 ${Math.round(68 * W / 1080)}px Montserrat, "DejaVu Sans", sans-serif`; ovG.textBaseline = 'middle';
-    const t1 = 'Pourkoipa ', w1 = ovG.measureText(t1).width, w2 = ovG.measureText('?').width, tx = bx + (bw - w1 - w2) / 2, ty = by + bh / 2 + 4;
-    ovG.fillStyle = '#271925'; ovG.fillText(t1, tx, ty); ovG.lineWidth = 8 * W / 1080; ovG.strokeText('?', tx + w1, ty); ovG.fillStyle = '#ffc72c'; ovG.fillText('?', tx + w1, ty);
+    ovG.textBaseline = 'middle';
+    if (!sub) {
+      ovG.font = `900 ${Math.round(68 * k)}px Montserrat, "DejaVu Sans", sans-serif`;
+      const t1 = 'Pourkoipa ', w1 = ovG.measureText(t1).width, w2 = ovG.measureText('?').width, tx = bx + (bw - w1 - w2) / 2, ty = by + bh / 2 + 4;
+      ovG.fillStyle = '#271925'; ovG.fillText(t1, tx, ty); ovG.lineWidth = 8 * k; ovG.strokeText('?', tx + w1, ty); ovG.fillStyle = '#ffc72c'; ovG.fillText('?', tx + w1, ty);
+    } else {
+      ovG.textAlign = 'center'; ovG.fillStyle = '#271925';
+      ovG.font = `900 ${Math.round(60 * k)}px Montserrat, "DejaVu Sans", sans-serif`; ovG.fillText('Abonne-toi !', bx + bw / 2, by + bh * 0.37);
+      ovG.font = `700 ${Math.round(34 * k)}px Montserrat, "DejaVu Sans", sans-serif`; ovG.fillStyle = '#2563d6'; ovG.fillText('Une histoire par jour', bx + bw / 2, by + bh * 0.72);
+      ovG.textAlign = 'start';
+    }
     ovG.globalAlpha = 1;
   }
   ovT.needsUpdate = true;
