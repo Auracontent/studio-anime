@@ -1,0 +1,251 @@
+{
+ "duration": 41.880583,
+ "frames30": 1256,
+ "source": "whisper",
+ "segments": [
+  [
+   0.245625,
+   1.112292
+  ],
+  [
+   1.251542,
+   3.0885
+  ],
+  [
+   3.558917,
+   4.74925
+  ],
+  [
+   5.442667,
+   8.69475
+  ],
+  [
+   8.952792,
+   9.863375
+  ],
+  [
+   10.322333,
+   11.347167
+  ],
+  [
+   11.483,
+   12.584042
+  ],
+  [
+   12.723542,
+   13.481792
+  ],
+  [
+   14.182458,
+   16.86325
+  ],
+  [
+   17.425458,
+   18.323125
+  ],
+  [
+   18.528292,
+   18.7945
+  ],
+  [
+   19.466542,
+   19.994125
+  ],
+  [
+   20.799625,
+   21.95275
+  ],
+  [
+   22.123083,
+   22.599417
+  ],
+  [
+   23.254542,
+   24.354042
+  ],
+  [
+   24.57925,
+   25.862292
+  ],
+  [
+   26.290167,
+   28.479375
+  ],
+  [
+   28.6365,
+   29.678125
+  ],
+  [
+   30.334792,
+   30.944125
+  ],
+  [
+   31.083042,
+   32.590458
+  ],
+  [
+   33.281083,
+   34.08375
+  ],
+  [
+   34.821208,
+   35.029708
+  ],
+  [
+   35.186958,
+   35.938667
+  ],
+  [
+   36.63525,
+   37.208708
+  ],
+  [
+   37.599292,
+   37.953417
+  ],
+  [
+   38.583083,
+   39.092458
+  ],
+  [
+   39.709917,
+   40.230208
+  ],
+  [
+   40.735917,
+   41.364542
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Cette ville a pay\u00e9 ses habitants pour tuer les rats\u2026 et elle en a eu encore plus.",
+   "s": 0.0,
+   "e": 4.58
+  },
+  {
+   "text": "\u00c0 Hano\u00ef,",
+   "s": 5.4,
+   "e": 6.08
+  },
+  {
+   "text": "en mille neuf cent deux,",
+   "s": 6.26,
+   "e": 7.34
+  },
+  {
+   "text": "les \u00e9gouts grouillent de rats,",
+   "s": 7.34,
+   "e": 8.7
+  },
+  {
+   "text": "et la peste menace.",
+   "s": 8.7,
+   "e": 9.76
+  },
+  {
+   "text": "Les Fran\u00e7ais offrent un centime par queue de rat rapport\u00e9e.",
+   "s": 10.52,
+   "e": 14.12
+  },
+  {
+   "text": "D\u00e8s le premier jour,",
+   "s": 14.12,
+   "e": 15.0
+  },
+  {
+   "text": "des milliers de queues arrivent.",
+   "s": 15.34,
+   "e": 16.8
+  },
+  {
+   "text": "Les fonctionnaires comptent,",
+   "s": 17.36,
+   "e": 18.36
+  },
+  {
+   "text": "ravis.",
+   "s": 18.62,
+   "e": 18.82
+  },
+  {
+   "text": "Sauf que\u2026 des rats se prom\u00e8nent en ville,",
+   "s": 19.48,
+   "e": 21.82
+  },
+  {
+   "text": "sans queue.",
+   "s": 21.82,
+   "e": 23.22
+  },
+  {
+   "text": "Les chasseurs les coupent,",
+   "s": 23.22,
+   "e": 24.32
+  },
+  {
+   "text": "puis les rel\u00e2chent pour qu'ils fassent des petits.",
+   "s": 24.5,
+   "e": 25.84
+  },
+  {
+   "text": "Des habitants ouvrent m\u00eame des \u00e9levages de rats,",
+   "s": 26.34,
+   "e": 28.46
+  },
+  {
+   "text": "juste \u00e0 c\u00f4t\u00e9 de la ville.",
+   "s": 28.46,
+   "e": 29.52
+  },
+  {
+   "text": "Un seul jour,",
+   "s": 30.2,
+   "e": 30.86
+  },
+  {
+   "text": "plus de vingt mille queues sont compt\u00e9es,",
+   "s": 31.08,
+   "e": 32.64
+  },
+  {
+   "text": "et les rats sont toujours l\u00e0.",
+   "s": 33.24,
+   "e": 34.1
+  },
+  {
+   "text": "La prime est supprim\u00e9e.",
+   "s": 35.08,
+   "e": 35.96
+  },
+  {
+   "text": "Les rats,",
+   "s": 36.62,
+   "e": 36.94
+  },
+  {
+   "text": "eux,",
+   "s": 36.94,
+   "e": 37.16
+  },
+  {
+   "text": "restent.",
+   "s": 37.58,
+   "e": 37.96
+  },
+  {
+   "text": "Alors m\u00e9fie-toi :",
+   "s": 38.52,
+   "e": 39.46
+  },
+  {
+   "text": "paie pour des queues,",
+   "s": 39.46,
+   "e": 40.66
+  },
+  {
+   "text": "et tu auras des rats.",
+   "s": 40.74,
+   "e": 41.36
+  }
+ ]
+}

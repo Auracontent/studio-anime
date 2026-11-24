@@ -1,0 +1,26 @@
+# PLAN.md — « Les rats de Hanoï » (1902, format Histoire vraie)
+Héroïne : **Mai**, chasseuse de rats (casquette turquoise, gilet moutarde). Secondaires : le **fonctionnaire français** (casque colonial crème, moustache, médailles) et le **petit éleveur** (chapeau de paille). Figurants : 3 chasseurs (bleu, violet, vert), un commis, des rats.
+Voix : 41,9 s (1256 images), non modifiée (`phrases.json` : whisper). Décor neuf : `engine/library/hanoi.js` (rue coloniale, étal de la prime avec pile de queues qui grossit, faubourg aux cages, égout en coupe). Nouveautés moteur : casque colonial `colonial`, chapeau de paille `paille`, accessoires tenus `scissors` et `tails`. Les rats sont des cartes dessinées (`ratDraw`).
+Accroche 0-2 s : gros plan sur un rat sans queue qui trotte sur le pavé, le fonctionnaire le montre du doigt (« ? »), une pièce dans l'autre main. Fin = même plan (la fin reboucle sur le rat sans queue).
+Lumière : `jour` -> `lampe` (égout) -> `dore` (les fonctionnaires ravis) -> `jour` (le pivot) -> `lampe` (queues coupées) -> `soir` (la prime supprimée) -> `jour`.
+
+| images | phrase | ce qu'on VOIT se passer | caméra | ambiance | effet 3D | bruitage |
+|---|---|---|---|---|---|---|
+| 0-137 | Cette ville a payé ses habitants pour tuer les rats… et elle en a eu encore plus. | Un rat sans queue passe devant le fonctionnaire qui tient une pièce et pointe ; à 52 une marée de rats déferle, il se prend la tête (étoiles) | gros plan en contre-plongée qui recule, `shake` | `jour` | poussière | couinements, « ! » |
+| 138-220 | À Hanoï, en mille neuf cent deux, | Survol de la rue coloniale : Mai porte un sac de queues, le fonctionnaire, foule ; carte « 1902 » | `crane` du très large au plan moyen (après `rise`) | `jour` | poussière dans la lumière | pop |
+| 221-293 | les égouts grouillent de rats, et la peste menace. | Vue en coupe : la rue au-dessus (le fonctionnaire se bouche le nez), l'égout dessous plein de rats, Mai terrifiée ; carte « PESTE ! » | `crane` en coupe, de la rue vers le tunnel (après `drop`) | `lampe` | fumée d'égout | pop, ting |
+| 294-370 | Les Français offrent un centime | Le fonctionnaire brandit une pièce (`show`), Mai sourit | plan à deux en contre-plongée, pièce floue au premier plan (après `whip`) | `jour` | — | swish |
+| 371-423 | par queue de rat rapportée. | Gros plan : carte « 1 centime = une queue » ; Mai montre un paquet de queues | contre-plongée, gros plan (après `push`) | `jour` | — | ting, pop |
+| 424-520 | Dès le premier jour, des milliers de queues arrivent. | Les chasseurs défilent avec des paquets de queues, posent des sacs, le tas grossit sur l'étal | plan à deux large qui suit l'arrivée (après `whip`) | `jour` -> `dore` | poussière aux sacs | thud |
+| 521-583 | Les fonctionnaires comptent, ravis. | Le fonctionnaire rit en comptant, le tas derrière lui, carte « + 1 » | gros plan en contre-plongée | `dore` | poussière | pop |
+| 584-696 | Sauf que… des rats se promènent en ville, sans queue. | Le fonctionnaire se retourne (« ? »), des rats sans queue passent devant lui ; gros plan sur le rat au moignon | plan à deux incliné (`dutch`) puis travelling au ras du sol | `dore` -> `jour` | — | **sting** |
+| 697-734 | Les chasseurs les coupent, | Dans l'égout, Mai coupe la queue d'un rat posé sur un tonneau (ciseaux, étincelles) : la queue vole | plan à deux, contre-plongée | `lampe` | étincelles | clic, boing |
+| 735-789 | puis les relâchent pour qu'ils fassent des petits. | Le rat saute et file vers les autres ; cœurs, puis des bébés rats apparaissent | travelling au ras du sol qui suit le rat | `lampe` | — | ting, pop |
+| 790-853 | Des habitants ouvrent même des élevages de rats, | Faubourg : cabanes et cages pleines de rats, le petit éleveur nourrit ses rats | `crane` du large au plan serré (après `whip`) | `jour` | — | pop |
+| 854-905 | juste à côté de la ville. | Les rats se multiplient à ses pieds ; le fonctionnaire arrive et reste bouche bée | plan moyen, feuille floue | `jour` | — | gasp |
+| 906-996 | Un seul jour, plus de vingt mille queues sont comptées, | Les chasseurs déversent des sacs, la montagne de queues grimpe ; compteur « 20 000 + » | contre-plongée puis plan à deux (après `whip`) | `jour` | poussière | thud, pop |
+| 997-1051 | et les rats sont toujours là. | La rue est noire de rats, ils grimpent même sur le tas ; fonctionnaire sonné | `crane` qui recule vers le très large | `jour` -> `soir` | — | — |
+| 1052-1098 | La prime est supprimée. | Le fonctionnaire arrache l'affiche « PRIME » et la déchire | contre-plongée, feuille floue | `soir` | — | clic |
+| 1099-1155 | Les rats, eux, restent. | Mai hausse les épaules, le fonctionnaire bras croisés, rats autour de leurs pieds | plan à deux incliné qui avance | `soir` | — | — |
+| 1156-1214 | Alors méfie-toi : paie pour des queues, et tu auras des rats. | Mai nous regarde, queues dans une main, pièce dans l'autre ; les rats envahissent ses pieds ; Kipa entre à gauche | contre-plongée, Mai à droite du cadre | `soir` -> `jour` | — | ting |
+| 1215-1255 | (et tu auras des rats.) | Retour au plan d'ouverture : le rat sans queue devant le fonctionnaire (boucle) | même caméra que l'image 0 (après `whip`) | `jour` | — | — |

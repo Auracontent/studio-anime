@@ -79,6 +79,23 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
     p.arc(cx, hc - 0.28 * H.b, 1.14 * H.a, 0.12 * H.b, 0, 180, 6 * u, mul(col, [0.72, 0.76, 0.86])); // front visor
     p.arc(cx, hc - 0.28 * H.b, 1.14 * H.a + 3 * u, 0.12 * H.b + 3 * u, 0, 180, 1.4 * u);
     p.ell(cx, hc - 0.62 * H.b, 7.5 * u, 7.5 * u, "#d9a845", 2 * u); // grenade badge
+  } else if (kind === "colonial") { // casque colonial (Pourkoipa original) : dôme blanc crème, large bord, bandeau, petit bouton
+    const col = O.hatCol || "#f1e6c8", dk = mul(col, [0.66, 0.62, 0.6]);
+    const dome = ellPts(cx, hc - 0.32 * H.b, 1.08 * H.a, 0.95 * H.b, 180, 360, 0, 48);
+    dome.push([cx + 1.08 * H.a, hc - 0.32 * H.b], [cx - 1.08 * H.a, hc - 0.32 * H.b]);
+    p.ell(cx, hc - 0.3 * H.b, 1.42 * H.a, 0.2 * H.b, dk, ow);                                   // large bord
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.clip(dome, () => { p.stroke(ellPts(cx - 26 * u, hc - 1.0 * H.b, 0.3 * H.a, 0.22 * H.b, 200, 300, 0, 16), 4 * u, "#ffffffaa"); p.band([[cx - 1.2 * H.a, hc - 0.5 * H.b], [cx + 1.2 * H.a, hc - 0.5 * H.b]], O.hatBand || "#8a6a3a", 0.16 * H.b, 0.6 * u); });
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
+    p.ell(cx, hc - 1.27 * H.b, 7 * u, 5 * u, dk, 2 * u);
+  } else if (kind === "paille") { // chapeau de paille à large bord (Pourkoipa original)
+    const col = O.hatCol || "#e0b85a", dk = mul(col, [0.68, 0.6, 0.5]);
+    const dome = ellPts(cx, hc - 0.3 * H.b, 0.9 * H.a, 0.62 * H.b, 180, 360, 0, 48);
+    dome.push([cx + 0.9 * H.a, hc - 0.3 * H.b], [cx - 0.9 * H.a, hc - 0.3 * H.b]);
+    p.ell(cx, hc - 0.3 * H.b, 1.55 * H.a, 0.24 * H.b, dk, ow);
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.clip(dome, () => { for (let i = -4; i <= 4; i++) p.stroke([[cx + i * 0.22 * H.a, hc - 0.3 * H.b], [cx + i * 0.12 * H.a, hc - 0.95 * H.b]], 1.4 * u, dk); p.band([[cx - 1.1 * H.a, hc - 0.44 * H.b], [cx + 1.1 * H.a, hc - 0.44 * H.b]], O.hatBand || "#c8312c", 0.1 * H.b, 0.6 * u); });
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
   } else if (kind === "kepi") {
     const col = O.hatCol || "#2b4a8c", band = O.hatBand || "#c8312c";
     const body = rrect(cx - 0.98 * H.a, hc - 1.5 * H.b, cx + 0.98 * H.a, hc - 0.45 * H.b, 7 * u);
@@ -248,6 +265,8 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
       p.stroke([[hx - 12 * u, hy - 36 * u], [hx, hy - 50 * u], [hx + 12 * u, hy - 36 * u]], 2.6 * u); p.poly(rrect(hx - 15 * u, hy - 38 * u, hx + 15 * u, hy - 32 * u, 2 * u), "#2f3440", 2 * u);
       p.poly([[hx - 13 * u, hy - 32 * u], [hx + 13 * u, hy - 32 * u], [hx + 16 * u, hy + 4 * u], [hx - 16 * u, hy + 4 * u]], "#ffe27a", 2.4 * u); p.ell(hx, hy - 12 * u, 6 * u, 10 * u, "#fff8d0", 0);
       p.poly(rrect(hx - 18 * u, hy + 2 * u, hx + 18 * u, hy + 12 * u, 2 * u), "#2f3440", 2 * u); break; }
+    case "scissors": { p.stroke([[hx - 10 * u, hy - 34 * u], [hx + 4 * u, hy - 2 * u]], 4 * u, "#c9ced6"); p.stroke([[hx + 10 * u, hy - 34 * u], [hx - 4 * u, hy - 2 * u]], 4 * u, "#aab2bc"); p.ell(hx - 6 * u, hy + 2 * u, 7 * u, 7 * u, "#d23a32", 2.4 * u); p.ell(hx + 6 * u, hy + 2 * u, 7 * u, 7 * u, "#d23a32", 2.4 * u); break; }
+    case "tails": { for (const k of [-1, 0, 1]) p.stroke([[hx + k * 7 * u, hy - 14 * u], [hx + k * 11 * u, hy + 6 * u], [hx + k * 5 * u, hy + 26 * u], [hx + k * 12 * u, hy + 40 * u]], 3.6 * u, k ? "#c9a8a4" : "#b08a88"); p.stroke([[hx - 12 * u, hy - 15 * u], [hx + 12 * u, hy - 15 * u]], 4.5 * u, "#8a5a34"); break; }
     case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
     case "brush": { p.stroke([[hx - 6 * u, hy + 16 * u], [hx + 2 * u, hy - 40 * u]], 3.6 * u, "#8a5a34"); p.poly([[hx - 1 * u, hy - 38 * u], [hx + 7 * u, hy - 38 * u], [hx + 6 * u, hy - 58 * u], [hx + 2 * u, hy - 62 * u]], "#1b1418", 2 * u); break; }
     case "bomb": { const r = 17 * u, cy = hy - r * 0.8; p.stroke([[hx, cy - r * 0.9], [hx + 3 * u, cy - r * 1.5]], 4 * u, "#e8d8a0"); p.ell(hx, cy - r * 0.95, r * 0.34, r * 0.22, "#5a3a24", 2.2 * u); p.ell(hx, cy, r, r, "#7a4a2e", 2.6 * u);
@@ -490,7 +509,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque" || O.hat === "colonial" || O.hat === "paille") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
   else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
