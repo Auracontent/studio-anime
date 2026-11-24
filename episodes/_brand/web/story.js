@@ -1,36 +1,40 @@
-// Channel art for "Savètu". f0 = banner (render at SIZE=2560x1440), f1 = avatar close-up (SIZE=1080x1080).
-import { M as E, camFromKeys, idle, blinkAt, q } from '../motion.js';
-export const FPS = 30, TOTAL = 2, DECK = 0;
-export const SHOTS = [{ id: 'banner', a: 0, b: 0, light: 'midi' }, { id: 'logo', a: 1, b: 1, light: 'midi' }];
-export const shotAt = (f) => SHOTS[Math.min(1, f)];
-const LIGHTS = {
-  midi: { az: 160, el: 62, sky: '#c9d8f2', ground: '#b06a3c', hemi: 1.2, sun: '#fff1d6', sunI: 2.8, fog: '#f3d2a6', fogNear: 120, fogFar: 900,
-    skyTop: '#3f86d8', skyHor: '#f6dcb0', sat: 1.16, gain: '#fff6ea', vig: 0.12, shadowExt: 22 },
-};
-export const lightFor = (S) => ({ ...LIGHTS[S.light] });
-const CAMS = {
-  banner: [{ f: 0, pos: [0, 1.15, -2], look: [0, 1.15, -20], fov: 26 }, { f: 1, pos: [0, 1.15, -2], look: [0, 1.15, -20], fov: 26 }],
-  logo: [{ f: 1, pos: [0.1, 1.55, -17.5], look: [0, 1.45, -20], fov: 30 }, { f: 2, pos: [0.1, 1.55, -17.5], look: [0, 1.45, -20], fov: 30 }],
-};
-export const camAt = (f) => camFromKeys(CAMS[shotAt(f).id], f, {});
-export const dofAt = (f) => (shotAt(f).id === 'logo' ? { focus: 2.5, cinf: 18 } : { focus: 18, cinf: 4 });
-export const worldAt = () => ({ buckle: 0, heat: 0, glow: 0 });
+// Channel art for Pourkoipa. f0 = YouTube banner (render at SIZE=2560x1440, then brand/make_brand.py adds the text).
+// Kipa and the heroes of our best videos, in the sunny village set (Facteur Cheval's palace behind them).
+// YouTube shows only the central 1546x423 band on phones: Kipa and the main heroes stand inside it, extras outside.
+import { camFromKeys } from '../motion.js';
+import { mood } from '../moods.js';
+export const FPS = 30, TOTAL = 1, DECK = 0, LOOP = false, MASCOT = false, MARKS = false;
+export const SHOTS = [{ id: 'banner', a: 0, b: 0 }];
+export const shotAt = () => SHOTS[0];
+const JOUR = mood('jour', { exposure: 1.12, el: 48 });
+export const lightFor = () => JOUR;
+// camera 15.5 m from the road, eye height 1.0: the road (y 0) lands at ~y 920 px, heads at ~y 560, inside the safe band (508-931)
+const CAM = [{ f: 0, pos: [0, 1.0, 12.5], look: [0, 1.0, -3], fov: 26 }, { f: 1, pos: [0, 1.0, 12.5], look: [0, 1.0, -3], fov: 26 }];
+export const camAt = (f) => camFromKeys(CAM, f, {});
+export const dofAt = () => ({ focus: 15.5, cinf: 9 });
+export const worldAt = () => ({ pal: 0.12, stone: { vis: false }, barrow: { vis: false }, pile: 0, road: null, signA: 0, signB: 0, win: 0, plaque: 0 });
 export const setupCast = (T) => {
-  T.OUTFITS.savetu = { tunic: '#2f6db5', skin: '#f2c39a', cap: '#e8582a' };
-  T.OUTFITS.poseur = { tunic: '#3f5f8a', skin: '#d9a27a', cap: '#5a4a3a', moustache: '#3b2a20' };
-  T.OUTFITS.chef = { tunic: '#6b4a34', skin: '#efc39a', cap: '#2e2e36', moustache: '#2b211c', stout: true };
-  T.OUTFITS.ouvA = { tunic: '#f07a1a', skin: '#c98b62', cap: '#f4f4f4' };
-  T.OUTFITS.ouvB = { tunic: '#f07a1a', skin: '#f0c49e', cap: '#f2d23a', moustache: '#6b3a1f' };
+  const O = T.OUTFITS;
+  O.foucault = { tunic: '#8a1f3a', coat: true, skin: '#f3d3b4', hat: 'tophat', hatCol: '#2a2230', moustache: '#5a3a26', brows: '#5a3a26', lapels: true };
+  O.mineur = { tunic: '#ff7a1a', skin: '#d9a070', hat: 'minerH', hatCol: '#f2c230', moustache: '#3a2418', brows: '#3a2418' };
+  O.cheval = { tunic: '#2f5aa8', skin: '#e2b088', hat: 'kepi', hatCol: '#26407e', hatBand: '#c8312c', moustache: '#4a2e1c', brows: '#3a2418', strap: '#7a4a28', stout: true };
+  O.therese = { tunic: '#6a2a7a', dress: '#8a2f8a', skin: '#f3cfae', hat: 'chapeauplume', hatCol: '#5a2a6a', hatBand: '#e8c24a', brows: '#3a2418' };
+  O.mai = { tunic: '#e2a62a', skin: '#e2b684', cap: '#14b8c4', hair: '#1a1411', brows: '#1a1411', belt: '#6a3a22', cuffs: '#c8312c' };
+  O.banquier = { tunic: '#d9a020', skin: '#f0c8a0', hat: 'tophat', moustache: '#2a1e1a', brows: '#2a1e1a', stout: true };
+  O.assistant = { tunic: '#18b8d8', skin: '#c9966a', hair: '#2a1e1a', moustache: '#2a1e1a', brows: '#2a1e1a', scarf: '#f4ecd8' };
 };
-const R = (T, who, o, pos) => ({ key: who + JSON.stringify(o), draw: (p) => T.romanFront(p, who, o), x: pos[0], y: pos[1], z: pos[2] });
 const life = (seed, o) => ({ seed, blink: 0, bob: 0, tilt: 0, headTilt: 0, ...o });
-export const actorsAt = (f, T) => {
-  if (shotAt(f).id === 'logo') return [R(T, 'savetu', life(5, { expr: 'shock', L: 'cheek', R: 'cheek' }), [0, 0, -20])];
-  return [
-    R(T, 'poseur', life(31, { expr: 'grin', L: 'wave', R: 'hang', look: 0.3 }), [-4.15, 0, -20.2]),
-    R(T, 'ouvA', life(41, { expr: 'shock', L: 'cheek', R: 'cheek' }), [-3.1, 0, -19.7]),
-    R(T, 'savetu', life(5, { expr: 'laugh', L: 'point', R: 'hip', look: -0.4 }), [3.1, 0, -19.7]),
-    R(T, 'chef', life(32, { expr: 'squint', L: 'hip', R: 'temple', look: -0.3 }), [4.15, 0, -20.2]),
-  ];
-};
+const R = (T, who, o, pos, s = 1) => ({ key: who + JSON.stringify(o), draw: (p) => T.romanFront(p, who, o), x: pos[0], y: pos[1], z: pos[2], s });
+export const actorsAt = (f, T) => [
+  // outside the phone band (seen on computers and TVs)
+  R(T, 'banquier', life(61, { expr: 'shock', L: 'cheek', R: 'cheek' }), [-6.0, 0, -3.4]),
+  R(T, 'therese', life(52, { expr: 'sly', L: 'show', holdL: 'letter', R: 'hip', look: 0.4 }), [-4.7, 0, -3.1]),
+  R(T, 'mai', life(71, { expr: 'proud', L: 'fist', R: 'hip', look: -0.3, headTilt: -4 }), [4.7, 0, -3.1]),
+  R(T, 'assistant', life(81, { expr: 'laugh', L: 'wave', R: 'hang', look: -0.5 }), [6.0, 0, -3.4]),
+  // inside the band: left pair, the promise text in the middle, Kipa and the postman on the right
+  R(T, 'mineur', life(41, { expr: 'shock', L: 'up', R: 'cheek', look: 0.5 }), [-3.1, 0, -3.0]),
+  R(T, 'foucault', life(31, { expr: 'smug', L: 'point', R: 'hip', look: 0.6, headTilt: -3 }), [-2.05, 0, -2.7]),
+  { key: 'kipa', draw: (p) => T.mascot(p, { wv: 0.9, expr: 'grin', look: -0.4 }), x: 2.05, y: 0, z: -2.6, s: 1.0 },
+  R(T, 'cheval', life(21, { expr: 'determined', L: 'carry', holdL: 'tool', R: 'hip', look: -0.5 }), [3.1, 0, -3.0]),
+];
 export const fxAt = () => [];
