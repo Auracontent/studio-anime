@@ -337,8 +337,30 @@ function drawFrame(f, C, target) {
   } else { renderer.setRenderTarget(target); renderer.render(dofScene, fsCam); }
   return true;
 }
+// SERIES: « France insolite #6 » pops in at the top for ~2.5 s (story: `export const SERIES = { name, n }`, number from tools/series.py).
+// Not on frame 0, so the loop dissolve (which blends into frame 0) stays seamless.
+const SER = STORY.SERIES && VERTICAL && LONG ? STORY.SERIES : null, B0 = 4, B1 = 80;
+function drawBadge(f) {
+  ovG.setTransform(1, 0, 0, 1, 0, 0); ovG.clearRect(0, 0, W, H);
+  const k = W / 1080, d = f - B0, inK = Math.min(1, d / 9), outK = Math.min(1, (B1 - f) / 8);
+  const back = (t) => { t = Math.max(0, Math.min(1, t)) - 1; return t * t * (2.7 * t + 1.7) + 1; };
+  const name = SER.name.toUpperCase(), num = `#${SER.n}`;
+  ovG.font = `900 ${Math.round(46 * k)}px Montserrat, "DejaVu Sans", sans-serif`; const wN = ovG.measureText(name + ' ').width;
+  ovG.font = `900 ${Math.round(58 * k)}px Montserrat, "DejaVu Sans", sans-serif`; const wH = ovG.measureText(num).width;
+  const bw = wN + wH + 70 * k, bh = 96 * k, cx = W / 2, cy = H * 0.135 - (1 - sm3(outK)) * 60 * k, sc = back(inK) * sm3(outK);   // pops in, shrinks away (no fade: no see-through shadow)
+  if (sc < 0.02) { ovT.needsUpdate = true; return; }
+  ovG.setTransform(sc, 0, 0, sc, cx * (1 - sc), cy * (1 - sc)); ovG.rotate(-0.025);
+  ovG.lineWidth = 9 * k; ovG.strokeStyle = '#271925'; ovG.fillStyle = '#271925';
+  ovG.beginPath(); ovG.roundRect(cx - bw / 2 + 6 * k, cy - bh / 2 + 9 * k, bw, bh, bh / 2); ovG.fill();   // drop shadow
+  ovG.fillStyle = '#2563d6'; ovG.beginPath(); ovG.roundRect(cx - bw / 2, cy - bh / 2, bw, bh, bh / 2); ovG.fill(); ovG.stroke();
+  ovG.textBaseline = 'middle'; const tx = cx - bw / 2 + 35 * k, ty = cy + 3 * k;
+  ovG.font = `900 ${Math.round(46 * k)}px Montserrat, "DejaVu Sans", sans-serif`; ovG.fillStyle = '#ffffff'; ovG.fillText(name, tx, ty);
+  ovG.font = `900 ${Math.round(58 * k)}px Montserrat, "DejaVu Sans", sans-serif`; ovG.lineWidth = 8 * k; ovG.strokeText(num, tx + wN, ty); ovG.fillStyle = '#ffc72c'; ovG.fillText(num, tx + wN, ty);
+  ovG.globalAlpha = 1; ovG.setTransform(1, 0, 0, 1, 0, 0); ovT.needsUpdate = true;
+}
 window.renderFrame = (f) => {
-  const diss = LOOP_ON && f >= TOTAL - DISS, mascot = MASCOT_ON && f >= M0 && f < M1;
+  const diss = LOOP_ON && f >= TOTAL - DISS, mascot = MASCOT_ON && f >= M0 && f < M1, badge = !!SER && f >= B0 && f < B1;
+  if (badge && !diss && !mascot) { drawFrame(f, loopCam(f), null); drawBadge(f); renderer.autoClear = false; renderer.render(ovScene, fsCam); renderer.autoClear = true; return true; }
   if (!diss && !mascot) { drawFrame(f, loopCam(f), null); return true; }   // same path as before for every other frame
   if (diss) drawFrame(0, camAt(0), rtFirst);
   if (!drawFrame(f, loopCam(f), rtOut)) return true;

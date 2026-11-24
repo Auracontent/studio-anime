@@ -103,7 +103,8 @@ jobs:
             (section « Effets, ambiances, caméra et actions », démo dans episodes/_demo-fx) partout où ils servent l'histoire.
             Le contrôle images fixes est obligatoire : lis la planche et corrige jusqu'à ce qu'elle soit propre, surtout la taille
             des personnages (frameOn, tête ~30 % de la largeur), et jusqu'à ce que l'histoire se comprenne en lisant seulement la planche.
-            Ne lance PAS le rendu complet. Termine par : git add episodes/${{ steps.slug.outputs.slug }} ;
+            Si NOTES.md donne une série (ligne « Série : »), applique la section « Les séries » de CLAUDE.md (tools/series.py + SERIES dans story.js).
+            Ne lance PAS le rendu complet. Termine par : git add episodes/${{ steps.slug.outputs.slug }} series.json ;
             git commit -m "Add episode ${{ steps.slug.outputs.slug }}" ; git pull --rebase ; git push.
             Si quelque chose bloque (voix illisible, script absent), écris le problème dans episodes/${{ steps.slug.outputs.slug }}/PROBLEME.md, commite et arrête-toi.
       - name: Vérifier

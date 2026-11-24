@@ -150,6 +150,17 @@ Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages,
   Jamais d'« abonne-toi » dans la voix ni au début de la vidéo : ça fait fuir dès les premières secondes.
   Désactiver : `export const MASCOT = false`.
 
+## Les séries (le rendez-vous qui fait revenir et s'abonner)
+- Chaque « Histoire vraie » appartient si possible à une des 3 séries de la chaîne, listées dans `series.json` :
+  **France insolite** (un lieu, un événement ou un personnage français étonnant), **La science qu'on peut voir**
+  (physique, psychologie, nature : un phénomène qu'on montre avec un objet), **Les grandes arnaques** (escroqueries, tricheries,
+  règles qui se retournent contre leurs auteurs). Une histoire qui n'entre dans aucune n'a pas de série ; « Vie quotidienne » n'en a jamais.
+- Le numéro s'obtient avec `python3 tools/series.py add <slug> "<série>"` (il inscrit l'épisode dans `series.json` et affiche son numéro),
+  puis `export const SERIES = { name: '<série>', n: <numéro> };` dans `web/story.js`. Le moteur affiche alors le badge
+  « FRANCE INSOLITE #6 » en haut du cadre de l'image 4 à l'image 80 (bruitage ajouté par events.mjs) : garde le haut du cadre
+  (hauteur 8-20 %) libre de l'objet clé pendant ces 2,5 s. Le badge ne remplace pas l'accroche, il s'y ajoute.
+- Le générateur d'idées choisit la série au moment du sujet (ligne « Série : » de `NOTES.md`) et alterne les séries quand c'est possible.
+
 ## Structure du dépôt
 ```
 engine/            moteur three.js (main.js piloté par l'épisode, motion.js = caméra + actions, paint.js, roman.js = casting,
@@ -161,6 +172,7 @@ tools/             setup.sh, timing.py, render.mjs, sheet.py, synth.py, mix.py, 
                    events.mjs + autosfx.py (bruitages automatiques)
 episodes/_demo-fx/ démonstration des effets, ambiances, caméras et actions (pas un épisode publié)
 brand/             logo, bannière, filigrane (make_brand.py)
+series.json        les séries de la chaîne et leurs épisodes (tools/series.py)
 example/soldier/   l'exemple d'origine du kit (ancien format, à lire pour la méthode)
 ```
 Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, images, wav de mixage, mp4) ne sont pas versionnés.
@@ -184,7 +196,7 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
    `images | phrase | ce qu'on VOIT se passer (action) | caméra | ambiance | effet 3D | bruitage`. Relis-le avec la règle n°1
    (accroche visuelle à 0-2 s, une action visible par phrase, enjeu montré, un héros, objet clé en gros plan, fin qui reboucle)
    avant d'écrire le code. `PLAN.md` est commité avec l'épisode.
-6. `web/story.js` : exporte `TOTAL, DECK, SHOTS, shotAt, lightFor, camAt, dofAt, worldAt, setupCast, actorsAt, fxAt` (+ `envAt` pour les effets 3D)
+6. `web/story.js` : exporte `TOTAL, DECK, SHOTS, shotAt, lightFor, camAt, dofAt, worldAt, setupCast, actorsAt, fxAt` (+ `envAt` pour les effets 3D, `SERIES` si l'épisode est dans une série : voir « Les séries »)
    (modèle : `episodes/2026-11-19-rails-chauffes/web/story.js`). Imports depuis `'../motion.js'`. Un plan par phrase, cadres avec `frameOn`.
    Les tenues se déclarent dans `setupCast(T)` (`T.OUTFITS.<id> = { tunic, skin, cap, hair, moustache, apron, stout... }`).
 7. **Contrôle images fixes (obligatoire)** : `CHROME=/usr/bin/google-chrome node tools/render.mjs episodes/<slug> /tmp/stills "<milieu de chaque plan>"`
@@ -239,7 +251,7 @@ La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regard
   la date ensuite. Ex. : « Ce phare voit plus loin… parce qu'on lui a enlevé du verre. C'était en 1823. »
 - Écris des phrases **qu'on peut montrer** : un verbe d'action concret par phrase (porter, couler, exploser, couper, courir), pas des idées abstraites.
 - Sujets qui marchent : un fait vrai qui a l'air faux, avec une cause physique qu'on peut montrer, un lieu français reconnaissable si possible.
-- Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (ligne « Format : Histoire vraie » ou « Format : Vie quotidienne », sources pour une histoire vraie, conseils d'enregistrement : voix Riko de Google AI Studio,
+- Écrire `inbox/<slug>/script.txt` (texte à lire seul) et `inbox/<slug>/NOTES.md` (ligne « Format : Histoire vraie » ou « Format : Vie quotidienne », ligne « Série : France insolite | La science qu'on peut voir | Les grandes arnaques | aucune », sources pour une histoire vraie, conseils d'enregistrement : voix Riko de Google AI Studio,
   et un **plan visuel** : pour chaque phrase, l'action qu'on verra, l'ambiance et l'effet ; l'image d'accroche des 2 premières secondes ; le héros).
 
 ## Retouches (workflow `claude.yml`, quand on te mentionne avec @claude)
