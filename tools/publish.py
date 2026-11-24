@@ -82,7 +82,21 @@ if slug:
 else:
     ready = sorted((m for m in M if m.get("status") == "ready"), key=lambda m: m.get("created_at", ""))
     if not ready: print("Nothing to publish: no video with status 'ready'."); sys.exit(0)
-    pick = ready[0]
+    # Slot by format (Paris time): before 15:00 -> "Histoire vraie" (midday), after -> "Vie quotidienne" (evening).
+    # Format is read from inbox/<slug>/NOTES.md ("Format : ..."). No video of the wanted format: oldest ready one.
+    # PUBLISH_FORMAT=histoire|quotidienne forces the slot; PUBLISH_FORMAT=any turns the routing off.
+    import re
+    from zoneinfo import ZoneInfo
+    def fmt(s):
+        p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "inbox", s, "NOTES.md")
+        f = re.search(r"Format\s*:\s*\**\s*([^\n*]+)", open(p, encoding="utf-8").read()) if os.path.exists(p) else None
+        return "quotidienne" if f and "quotid" in f.group(1).lower() else "histoire"
+    want = os.environ.get("PUBLISH_FORMAT", "").strip().lower()
+    if want not in ("histoire", "quotidienne", "any"):
+        want = "histoire" if datetime.datetime.now(ZoneInfo("Europe/Paris")).hour < 15 else "quotidienne"
+    match = [m for m in ready if want == "any" or fmt(m.get("slug", "")) == want]
+    pick = (match or ready)[0]
+    print(f"Slot: {want} -> {'match' if match else 'no video of this format, oldest ready one'}")
 slug = pick["slug"]; print(f"Publishing {slug}: {pick.get('youtube_title', pick.get('title'))}")
 
 def series_line(m):
