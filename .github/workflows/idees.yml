@@ -1,7 +1,9 @@
 # Claude cherche un sujet (ou prend le tien), vérifie les faits et écrit le script à enregistrer.
 name: Idée + script
 on:
-  # Lancé de l'extérieur par cron-job.org (heure de Paris), deux fois par jour : 10h17 et 22h17.
+  # Lancé de l'extérieur par cron-job.org (heure de Paris), deux fois par jour : 13h17 et 22h17.
+  # Le format dépend de l'heure (pas de l'alternance) : avant 17h -> « Vie quotidienne » (publiée à 18h07 le jour même),
+  # après 17h -> « Histoire vraie » (publiée à 12h17 le lendemain). Un sujet demandé est toujours une « Histoire vraie ».
   #   POST https://api.github.com/repos/Auracontent/studio-anime/actions/workflows/idees.yml/dispatches
   #   body {"ref":"main","inputs":{"voix_auto":"true"}}  -> script, puis voix Gemini, puis la vidéo (video.yml) s'enchaînent.
   # Plus de « schedule: » GitHub (en retard ou sauté, et doublerait les lancements de cron-job.org).
@@ -24,6 +26,13 @@ jobs:
              [ -n "$(git log --since='20 hours ago' --grep='^Add script' --format=%h)" ]; then
             echo "A script was already added in the last 20 hours: nothing to do."; echo "skip=true" >> "$GITHUB_OUTPUT"
           else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Format of this run (Paris time)
+        id: fmt
+        run: |
+          if [ -n "${{ github.event.inputs.sujet }}" ]; then F="Histoire vraie"
+          elif [ "$(TZ=Europe/Paris date +%-H)" -lt 17 ]; then F="Vie quotidienne"
+          else F="Histoire vraie"; fi
+          echo "format=$F" >> "$GITHUB_OUTPUT"; echo "Format: $F"
       - name: Trends from reference channels (YouTube Data API, public metadata only)
         if: ${{ steps.guard.outputs.skip != 'true' }}
         env: { YOUTUBE_API_KEY: "${{ secrets.YOUTUBE_API_KEY }}" }
@@ -45,8 +54,8 @@ jobs:
             Lis CLAUDE.md (sections « Deux formats » et « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
             0) NOS CHIFFRES. Si stats.md existe, lis-le d'abord et applique la section « Nos chiffres » de CLAUDE.md : il dit ce qui marche
                sur NOTRE chaîne (il prime sur trends.md). Note dans NOTES.md une ligne « Chiffres : » qui dit ce que tu en as retenu.
-            1) FORMAT. Un sujet demandé fixe le format. Sinon, regarde la ligne « Format : » du NOTES.md le plus récent dans inbox/
-               (pas de ligne = « Histoire vraie ») et prends l'AUTRE format : « Histoire vraie » <-> « Vie quotidienne ».
+            1) FORMAT : « ${{ steps.fmt.outputs.format }} » (imposé par l'heure du lancement : avant 17h = Vie quotidienne pour la publication
+               de 18h07, après 17h = Histoire vraie pour celle de 12h17 ; ne regarde pas le format du script précédent).
             2) SUJET.
                - « Histoire vraie » : s'il n'y a pas de sujet demandé, ouvre sujets.md : prends le PREMIER sujet non coché (`- [ ] ...`,
                  ligne non vide), puis coche-le (`- [x] ... -> inbox/<slug>`). Si la liste est vide : si trends.md existe, applique la section
