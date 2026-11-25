@@ -84,7 +84,8 @@ si on coupe le son, on comprend quand même de quoi on parle, ce qui pose probl�
   Une vidéo longue ne tient que si **chaque instant** relance : changement de plan toutes les 2-4 s, nouveau lieu ou nouvelle ambiance à chaque acte,
   au moins 3 décors ou zones différentes, et le moteur des relances du script (section « Idées et scripts »). Surveille le % regardé dans `stats.md` :
   s'il tombe sous 35 % sur les vidéos longues, il faut raccourcir.
-- **Son** : musique à **−12 dB** sous la voix et bruitages ≤ −8 dB (toujours via `tools/mix.py`, réglables avec `MUSIC_DB` / `SFX_DB`) :
+- **Son** : **musique rapide et rythmée (110 à 130 BPM)**, jamais une nappe lente sous toute la vidéo ; elle peut ralentir ou se couper
+  une seconde juste avant le Climax, puis repartir plus fort. Musique à **−12 dB** sous la voix et bruitages ≤ −8 dB (toujours via `tools/mix.py`, réglables avec `MUSIC_DB` / `SFX_DB`) :
   la voix doit rester claire sur un haut-parleur de téléphone. Sting sur le pivot (« Sauf que… »), bruitage sur chaque action visible
   (chute, choc, vague, tonnerre, porte), final à ~−14 LUFS.
 - **Sous-titres** : 1-2 mots, Montserrat gras blanc contour prune, centrés à 70 % de la hauteur, chiffres et mots-clés en jaune (`tools/subs.py`).
@@ -258,17 +259,27 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
   qui renvoie à la première phrase (boucle).
   **280 à 380 mots** (la voix Riko lit ~2,6 mots/s : 330 mots ≈ 2 min 07), phrases de 8-15 mots,
   nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
-- **Raconter toute l'histoire, en actes, avec des relances.** Sur 2 minutes, le spectateur part dès qu'il croit connaître la fin. Structure :
-  1) **accroche** (0-5 s) : le paradoxe ou l'enjeu, avec l'objet qu'on voit ;
-  2) **acte 1, le contexte qui pose le problème** (~30 s) : qui, où, pourquoi c'est grave, avec des détails concrets et vrais ;
-  3) **acte 2, les tentatives et les obstacles** (~40 s) : deux ou trois rebondissements, chacun plus fort que le précédent ;
-  4) **acte 3, le pivot « Sauf que… » et la résolution** (~30 s) ;
-  5) **la conséquence inattendue** (~15 s) : ce que ça a changé, jusqu'à aujourd'hui, puis la chute qui reboucle sur la 1re phrase.
+- **Structure HPC : Hook, Progression, Climax** (la mécanique des Shorts qui font des dizaines de millions de vues, du type
+  « on apporte une glacière de neige dans le désert pour faire la première bataille de boules de neige » : un objectif clair et
+  presque impossible, puis on regarde comment il y arrive, étape par étape, jusqu'au moment où ça marche ou ça explose).
+  - **H, le Hook (0-5 s)** : pose un **objectif ou un défi impossible** que le spectateur voit, et qui lui fait se poser des questions tout seul :
+    « Comment il va faire ? », « Ça va marcher ? », « Pourquoi il fait ça ? ». Pas une info, une promesse (« Cet homme doit éclairer
+    toute la mer avec une seule lampe. »). La réponse n'arrive qu'au Climax.
+  - **P, la Progression (le cœur, ~75 % de la vidéo)** : on suit le héros **étape par étape** vers l'objectif, et on **voit** chaque étape
+    (il essaie, ça rate, il change de méthode, ça avance). Chaque étape fait monter l'enjeu ou ajoute un obstacle, et chaque étape
+    finit sur une mini-question (« Sauf que la lampe fondait le verre… »). Le spectateur doit sentir qu'on **avance vers le but** :
+    un chiffre qui monte, un objet qui se construit, une distance qui se réduit. Jamais de pause explicative qui arrête l'action.
+  - **C, le Climax (~15 % de la fin)** : le moment de vérité, le **plus spectaculaire visuellement** de la vidéo (ça marche, ça explose,
+    la foule voit enfin), la réponse au Hook, puis une chute courte qui reboucle sur la 1re image. Rien après le Climax qui traîne.
+  Repères de durée sur 2 min : Hook 5 s, contexte minimum 15 s, Progression 80 s en 3 ou 4 étapes, Climax et chute 20 s.
   **Une relance toutes les 20 à 30 s** : une question laissée ouverte (« Mais personne ne savait encore pourquoi… »), un chiffre choc,
   un « et ce n'est pas le pire » ; jamais de résumé, jamais de phrase de remplissage. Le spectateur doit toujours attendre quelque chose.
   Pas de « tu vas voir », pas d'annonce du plan : on raconte.
 - **La 1re phrase fait 15 mots au plus, au présent, et dit le paradoxe avec l'objet qu'on voit** (« Ce boulet qui se balance sans rien toucher prouve que la Terre tourne. » : 75 % des gens restent).
   Pour « Vie quotidienne » aussi : l'enjeu dès la 1re phrase (« Tout le monde se moquait de lui parce que… »), pas une description (« Tous les matins, quelqu'un allume… » : 55 %).
+  La « Vie quotidienne » suit aussi HPC : le Hook est le défi du héros (« Il a une semaine pour… »), la Progression ses essais, le Climax le retournement.
+- **Rythme : rapide, sans temps mort.** Pas de phrase qui ne fait pas avancer l'histoire, pas de silence dans la voix (consigne de jeu
+  `brand/style.txt`), un plan qui change toutes les 2-4 s, sous-titres mot par mot (déjà automatiques).
 - **La 1re phrase ne commence jamais par une date ni par du contexte** (« En 1823… », « Au XIXe siècle… ») : la surprise d'abord,
   la date ensuite. Ex. : « Ce phare voit plus loin… parce qu'on lui a enlevé du verre. C'était en 1823. »
 - Écris des phrases **qu'on peut montrer** : un verbe d'action concret par phrase (porter, couler, exploser, couper, courir), pas des idées abstraites.
