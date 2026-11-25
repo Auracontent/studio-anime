@@ -120,11 +120,26 @@ YT_ID = os.environ.get("ZERNIO_YOUTUBE_ACCOUNT_ID", "").strip()
 TT_ID = os.environ.get("ZERNIO_TIKTOK_ACCOUNT_ID", "").strip()
 AI = os.environ.get("PUBLISH_AI_LABEL", "1") not in ("0", "false", "no")
 yt_title = (pick.get("youtube_title") or pick.get("title") or slug)[:100]
+# YouTube tags: the episode's search keywords (meta.json "keywords", French phrases people type), then its hashtags,
+# then the channel's base tags. Deduplicated, kept under YouTube's 500-character limit.
+BASE_TAGS = ["pourkoipa", "histoire vraie", "histoires vraies", "incroyable mais vrai", "le saviez-vous",
+             "culture générale", "faits insolites", "dessin animé"]
+def yt_tags(m):
+    out, seen, size = [], set(), 0
+    for t in list(m.get("keywords", [])) + [h.lstrip("#") for h in m.get("hashtags", [])] + BASE_TAGS:
+        t = t.strip()
+        k = t.lower()
+        if not t or k in seen or k == "shorts": continue
+        cost = len(t) + (2 if " " in t else 0) + 1       # YouTube counts quotes around multi-word tags + a comma
+        if size + cost > 480: break
+        out.append(t); seen.add(k); size += cost
+    return out
+
 posts = []
 if YT_ID:
     posts.append(("youtube", {
         "content": caption_youtube(pick),
-        "tags": [h.lstrip("#") for h in pick.get("hashtags", []) if h.lstrip("#") != "shorts"][:15],
+        "tags": yt_tags(pick),
         "platforms": [{"platform": "youtube", "accountId": YT_ID, "platformSpecificData": {
             "title": yt_title, "visibility": os.environ.get("YOUTUBE_VISIBILITY", "public"),
             "madeForKids": False, "categoryId": "27", "containsSyntheticMedia": AI}}],
