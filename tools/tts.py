@@ -20,7 +20,7 @@ style_p = os.path.join(os.path.dirname(src), "style.txt")
 if not os.path.exists(style_p): style_p = os.path.join(ROOT, "brand", "style.txt")   # consigne de jeu de la chaîne
 style = open(style_p, encoding="utf-8").read().strip() if os.path.exists(style_p) else (
     "Narrateur français dynamique et complice, comme un ami qui raconte une anecdote incroyable. "
-    "Rythme vif, sourire dans la voix, petites pauses avant les révélations.")
+    "Rythme vif, sourire dans la voix, enchaîne les phrases sans temps mort, aucune longue pause (une seule micro-pause juste avant la grande révélation).")
 # Old style files ended with "Lis exactement ce texte :", which glued the note to the text: the model sometimes read the note aloud.
 style = re.sub(r"\s*(lis|lire|dis|read)[^.:\n]*(texte|text)\s*:?\s*$", "", style, flags=re.I).strip()
 # Gemini TTS: notes and transcript in separate, labelled sections; only the transcript is spoken.

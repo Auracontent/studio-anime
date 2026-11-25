@@ -54,6 +54,7 @@ jobs:
             Lis CLAUDE.md (sections « Deux formats » et « Idées et scripts ») et SKILL.md. Sujet demandé : « ${{ github.event.inputs.sujet }} ».
             0) NOS CHIFFRES. Si stats.md existe, lis-le d'abord et applique la section « Nos chiffres » de CLAUDE.md : il dit ce qui marche
                sur NOTRE chaîne (il prime sur trends.md). Note dans NOTES.md une ligne « Chiffres : » qui dit ce que tu en as retenu.
+               Si stats.md a une partie « Notre public », applique-la aussi (âge, pays, rétention) et note une ligne « Public : ».
             1) FORMAT : « ${{ steps.fmt.outputs.format }} » (imposé par l'heure du lancement : avant 17h = Vie quotidienne pour la publication
                de 18h07, après 17h = Histoire vraie pour celle de 12h17 ; ne regarde pas le format du script précédent).
             2) SUJET.
@@ -63,8 +64,8 @@ jobs:
                  Vérifie les faits sur le web.
                - « Vie quotidienne » : invente une petite histoire du quotidien, émotionnelle, avec une leçon qui parle au spectateur
                  (fiction, jamais présentée comme vraie ; règles de la section « Deux formats »). Ne touche pas à sujets.md.
-            3) Applique la section « Diversité des sujets » de CLAUDE.md (sauf si le sujet t'est imposé). Écris un script de 1 min 45 à 2 min 30 en français (280 à 380 mots, structure en actes avec relances de la section « Idées et scripts », jamais une date ni du contexte en premier, une action qu'on peut montrer par phrase, fin qui reboucle sur le début) : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (ligne « Format : … », ligne « Série : … » pour une histoire vraie (section « Les séries » de CLAUDE.md : alterne les séries d'un jour à l'autre, « aucune » si rien ne colle), sources pour une histoire vraie, plan visuel phrase par phrase avec l'action visible, l'ambiance et l'effet, l'image d'accroche des 2 premières secondes, le héros, titre proposé).
-            Commite et pousse (git add inbox sujets.md trends.md trends.json stats.md stats.json ; git commit -m "Add script <slug>" ; git pull --rebase ; git push).
+            3) Applique la section « Diversité des sujets » de CLAUDE.md (sauf si le sujet t'est imposé). Choisis la durée qui convient à CETTE histoire (section « Le rédacteur choisit la durée » de CLAUDE.md : entre 45 s et 2 min 30, selon le nombre d'étapes vraiment fortes, et différente des dernières si rien ne justifie la même) et écris le script en français (structure HPC (Hook, Progression, Climax) de la section « Idées et scripts », rythme rapide sans temps mort, jamais une date ni du contexte en premier, une action qu'on peut montrer par phrase, fin qui reboucle sur le début) : inbox/<AAAA-MM-JJ>-<mot-clé>/script.txt et NOTES.md (ligne « Format : … », ligne « Durée : … », ligne « Série : … » pour une histoire vraie (section « Les séries » de CLAUDE.md : alterne les séries d'un jour à l'autre, « aucune » si rien ne colle), sources pour une histoire vraie, plan visuel phrase par phrase avec l'action visible, l'ambiance et l'effet, l'image d'accroche des 2 premières secondes, le héros, titre proposé).
+            Commite et pousse (git add inbox sujets.md trends.md trends.json tendances_auto.json stats.md stats.json ; git commit -m "Add script <slug>" ; git pull --rebase ; git push).
             Voix automatique pour ce lancement : ${{ (github.event_name == 'schedule' || github.event.inputs.voix_auto == 'true') && 'OUI' || 'NON' }}.
             Si c'est OUI, n'ouvre PAS d'issue : la voix et la vidéo suivent toutes seules.
             Si c'est NON, ouvre une issue avec `gh issue create` : titre « Script : <titre> », corps = le script dans un bloc de code,

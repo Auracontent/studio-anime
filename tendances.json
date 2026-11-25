@@ -3,5 +3,42 @@
     "@RicksClips3000"
   ],
   "max_videos": 300,
-  "own": "@Pourkoipa"
+  "own": "@Pourkoipa",
+  "discover": {
+    "days": 90,
+    "max_videos": 100,
+    "exclude": [],
+    "langs": [
+      {
+        "lang": "fr",
+        "region": "FR",
+        "max_channels": 6,
+        "queries": [
+          "histoire vraie",
+          "histoire incroyable mais vraie",
+          "le saviez-vous",
+          "anecdote historique",
+          "faits insolites",
+          "histoire en dessin animé",
+          "invention par accident",
+          "pourquoi"
+        ]
+      },
+      {
+        "lang": "en",
+        "region": "US",
+        "max_channels": 6,
+        "queries": [
+          "true story animation",
+          "crazy true story",
+          "did you know facts",
+          "history facts animated",
+          "invented by accident",
+          "weird history",
+          "animated story shorts",
+          "why is it like this"
+        ]
+      }
+    ]
+  }
 }

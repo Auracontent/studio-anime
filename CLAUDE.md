@@ -79,12 +79,17 @@ si on coupe le son, on comprend quand même de quoi on parle, ce qui pose probl�
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien. Quand quelque chose bouge, **la caméra le suit**
   (`follow`, `track`), tourne autour d'un lieu pour le révéler (`orbit`) et tremble sur les chocs (`shake`). Varie l'échelle :
   au moins un plan large spectaculaire (le lieu, le danger) et au moins un gros plan sur l'objet clé.
-- **Durée** : celle de la voix, **1 min 45 à 2 min 30** (280 à 380 mots), choix de la chaîne depuis le 25/11/2026 : on raconte **toute** l'histoire
-  au lieu d'un résumé. Jamais plus de 2 min 55 (au-delà de 3 min, YouTube ne la traite plus comme un Short). 1080x1920, 30 i/s.
+- **Durée** : celle de la voix, **choisie par le rédacteur pour chaque histoire**, entre **45 s et 2 min 30** (≈ 115 à 390 mots).
+  Il n'y a **pas de durée par défaut** : une histoire simple avec un seul retournement tient en 45 s-1 min ; une histoire avec deux ou trois
+  étapes de Progression en 1 min 10-1 min 40 ; seule une histoire riche (plusieurs rebondissements vrais, un Climax spectaculaire) va jusqu'à 2 min 30.
+  La règle : **on s'arrête quand l'histoire est finie**, jamais de remplissage pour « faire long », jamais de coupe qui la rend incompréhensible.
+  Les durées doivent donc **varier d'une vidéo à l'autre** : si les 3 dernières ont presque la même durée (± 10 s), vérifie que celle-ci
+  en a vraiment besoin. Jamais plus de 2 min 55 (au-delà de 3 min, YouTube ne la traite plus comme un Short). 1080x1920, 30 i/s.
   Une vidéo longue ne tient que si **chaque instant** relance : changement de plan toutes les 2-4 s, nouveau lieu ou nouvelle ambiance à chaque acte,
   au moins 3 décors ou zones différentes, et le moteur des relances du script (section « Idées et scripts »). Surveille le % regardé dans `stats.md` :
-  s'il tombe sous 35 % sur les vidéos longues, il faut raccourcir.
-- **Son** : musique à **−12 dB** sous la voix et bruitages ≤ −8 dB (toujours via `tools/mix.py`, réglables avec `MUSIC_DB` / `SFX_DB`) :
+  compare-le **selon la durée** : si les vidéos de plus de 1 min 30 tombent sous 35 % alors que les courtes tiennent, raccourcis les suivantes.
+- **Son** : **musique rapide et rythmée (110 à 130 BPM)**, jamais une nappe lente sous toute la vidéo ; elle peut ralentir ou se couper
+  une seconde juste avant le Climax, puis repartir plus fort. Musique à **−12 dB** sous la voix et bruitages ≤ −8 dB (toujours via `tools/mix.py`, réglables avec `MUSIC_DB` / `SFX_DB`) :
   la voix doit rester claire sur un haut-parleur de téléphone. Sting sur le pivot (« Sauf que… »), bruitage sur chaque action visible
   (chute, choc, vague, tonnerre, porte), final à ~−14 LUFS.
 - **Sous-titres** : 1-2 mots, Montserrat gras blanc contour prune, centrés à 70 % de la hauteur, chiffres et mots-clés en jaune (`tools/subs.py`).
@@ -247,7 +252,7 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
     harcèlement grave, suicide) : on reste sur des émotions du quotidien, avec de la bienveillance.
   - Le titre parle au spectateur et promet une émotion ou une leçon (« Il a aidé tout le monde… sauf lui-même »), sans reprendre
     les titres ni les histoires d'autres chaînes (règle 100 % original : on prend l'idée d'une émotion, jamais une histoire existante).
-  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), 280-380 mots, une action visible par phrase, fin qui reboucle.
+  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), durée choisie selon l'histoire, une action visible par phrase, fin qui reboucle.
     Les émotions se jouent à l'image : expressions franches, signes automatiques (sueur, « ! », cœur), lumière qui passe du gris (`froid`, `soir`)
     au chaud (`dore`) au moment du retournement.
 - Les « Histoire vraie » peuvent elles aussi **parler au spectateur** : la dernière phrase relie le fait à sa vie
@@ -256,19 +261,33 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
 ## Idées et scripts (workflow `idees.yml`)
 - Formule du script : accroche paradoxale dès la 1re phrase, 2-3 détails qui montent, pivot « Sauf que… » / « En fait… », chute ironique au dernier mot,
   qui renvoie à la première phrase (boucle).
-  **280 à 380 mots** (la voix Riko lit ~2,6 mots/s : 330 mots ≈ 2 min 07), phrases de 8-15 mots,
+  **Longueur choisie selon l'histoire** (la voix lit ~2,6 mots/s : 120 mots ≈ 46 s, 200 mots ≈ 1 min 17, 330 mots ≈ 2 min 07), phrases de 8-15 mots,
   nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
-- **Raconter toute l'histoire, en actes, avec des relances.** Sur 2 minutes, le spectateur part dès qu'il croit connaître la fin. Structure :
-  1) **accroche** (0-5 s) : le paradoxe ou l'enjeu, avec l'objet qu'on voit ;
-  2) **acte 1, le contexte qui pose le problème** (~30 s) : qui, où, pourquoi c'est grave, avec des détails concrets et vrais ;
-  3) **acte 2, les tentatives et les obstacles** (~40 s) : deux ou trois rebondissements, chacun plus fort que le précédent ;
-  4) **acte 3, le pivot « Sauf que… » et la résolution** (~30 s) ;
-  5) **la conséquence inattendue** (~15 s) : ce que ça a changé, jusqu'à aujourd'hui, puis la chute qui reboucle sur la 1re phrase.
+- **Structure HPC : Hook, Progression, Climax** (la mécanique des Shorts qui font des dizaines de millions de vues, du type
+  « on apporte une glacière de neige dans le désert pour faire la première bataille de boules de neige » : un objectif clair et
+  presque impossible, puis on regarde comment il y arrive, étape par étape, jusqu'au moment où ça marche ou ça explose).
+  - **H, le Hook (0-5 s)** : pose un **objectif ou un défi impossible** que le spectateur voit, et qui lui fait se poser des questions tout seul :
+    « Comment il va faire ? », « Ça va marcher ? », « Pourquoi il fait ça ? ». Pas une info, une promesse (« Cet homme doit éclairer
+    toute la mer avec une seule lampe. »). La réponse n'arrive qu'au Climax.
+  - **P, la Progression (le cœur, ~75 % de la vidéo)** : on suit le héros **étape par étape** vers l'objectif, et on **voit** chaque étape
+    (il essaie, ça rate, il change de méthode, ça avance). Chaque étape fait monter l'enjeu ou ajoute un obstacle, et chaque étape
+    finit sur une mini-question (« Sauf que la lampe fondait le verre… »). Le spectateur doit sentir qu'on **avance vers le but** :
+    un chiffre qui monte, un objet qui se construit, une distance qui se réduit. Jamais de pause explicative qui arrête l'action.
+  - **C, le Climax (~15 % de la fin)** : le moment de vérité, le **plus spectaculaire visuellement** de la vidéo (ça marche, ça explose,
+    la foule voit enfin), la réponse au Hook, puis une chute courte qui reboucle sur la 1re image. Rien après le Climax qui traîne.
+  Proportions, quelle que soit la durée : Hook ≈ 5 s, contexte le strict minimum, Progression ≈ 70-75 % (1 étape par tranche de 20-25 s),
+  Climax et chute ≈ 15 %. **C'est le nombre d'étapes vraies et intéressantes qui fixe la durée**, pas l'inverse.
+- **Le rédacteur choisit la durée** avant d'écrire : il liste les étapes vraiment fortes de l'histoire (sources à l'appui), en déduit la durée
+  (une seule étape → ~50 s ; deux → ~1 min 10 ; trois → ~1 min 35 ; quatre et plus → jusqu'à 2 min 30), regarde la durée des 3 dernières
+  vidéos pour ne pas toujours faire pareil, et écrit dans `NOTES.md` une ligne « Durée : <secondes visées> s, parce que <nombre d'étapes et raison> ».
   **Une relance toutes les 20 à 30 s** : une question laissée ouverte (« Mais personne ne savait encore pourquoi… »), un chiffre choc,
   un « et ce n'est pas le pire » ; jamais de résumé, jamais de phrase de remplissage. Le spectateur doit toujours attendre quelque chose.
   Pas de « tu vas voir », pas d'annonce du plan : on raconte.
 - **La 1re phrase fait 15 mots au plus, au présent, et dit le paradoxe avec l'objet qu'on voit** (« Ce boulet qui se balance sans rien toucher prouve que la Terre tourne. » : 75 % des gens restent).
   Pour « Vie quotidienne » aussi : l'enjeu dès la 1re phrase (« Tout le monde se moquait de lui parce que… »), pas une description (« Tous les matins, quelqu'un allume… » : 55 %).
+  La « Vie quotidienne » suit aussi HPC : le Hook est le défi du héros (« Il a une semaine pour… »), la Progression ses essais, le Climax le retournement.
+- **Rythme : rapide, sans temps mort.** Pas de phrase qui ne fait pas avancer l'histoire, pas de silence dans la voix (consigne de jeu
+  `brand/style.txt`), un plan qui change toutes les 2-4 s, sous-titres mot par mot (déjà automatiques).
 - **La 1re phrase ne commence jamais par une date ni par du contexte** (« En 1823… », « Au XIXe siècle… ») : la surprise d'abord,
   la date ensuite. Ex. : « Ce phare voit plus loin… parce qu'on lui a enlevé du verre. C'était en 1823. »
 - Écris des phrases **qu'on peut montrer** : un verbe d'action concret par phrase (porter, couler, exploser, couper, courir), pas des idées abstraites.
@@ -305,9 +324,18 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
   deux fois de suite. Les abonnés gagnés et le % regardé comptent plus que les vues. Moins de 6 vidéos jugées : signal faible, garde la diversité.
 - Écris dans `NOTES.md` une ligne « Chiffres : » (ex. « les 3 meilleures sont des expériences de science qu'on peut montrer avec un objet :
   je reste dans cette famille avec un autre objet »).
+- **Notre public** (partie de `stats.md`, si les secrets Analytics sont là) : âge et genre, pays, sources de trafic, et la **rétention**
+  à 10/25/50/75/95 % des 10 dernières vidéos. Sers-t'en :
+  - **âge** : adapte les références et le vocabulaire à la tranche la plus forte (13-24 ans : rythme, humour, objets du quotidien ;
+    35 ans et + : histoire, patrimoine, nostalgie), sans jamais rien de déplacé pour un jeune public ;
+  - **pays** : si la Belgique, la Suisse, le Québec ou l'Afrique francophone pèsent, évite ce qui ne parle qu'aux Français (SNCF, départements) ou explique-le ;
+  - **rétention** : repère où les vidéos perdent le plus (chute entre 10 % et 25 % = acte 1 trop lent ; entre 50 % et 75 % = l'acte 2 tourne en rond)
+    et corrige ce moment-là dans le script. Une ligne « Public : » dans `NOTES.md` dit ce que tu en as retenu.
 
 ## Tendances (trends.md, généré par tools/trends.py depuis l'API YouTube)
-- `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` (titres et chiffres publics uniquement).
+- `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` **et des chaînes similaires trouvées automatiquement**
+  (recherche YouTube en français sur les requêtes de `tendances.json` → `discover`, 90 derniers jours, Shorts les plus vus ; liste dans
+  `tendances_auto.json`), avec la durée de chaque vidéo (titres et chiffres publics uniquement).
   Il sert à savoir **quels thèmes** marchent, pas quoi copier.
 - Méthode : regroupe les titres du haut du classement en **familles** (ex. « paradoxe d'ingénierie », « objet antique qui a changé l'histoire »,
   « métier insolite », « astuce de marins / de soldats », « pourquoi les choses sont comme ça »), repère la famille la plus forte,
