@@ -79,7 +79,11 @@ si on coupe le son, on comprend quand même de quoi on parle, ce qui pose probl�
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien. Quand quelque chose bouge, **la caméra le suit**
   (`follow`, `track`), tourne autour d'un lieu pour le révéler (`orbit`) et tremble sur les chocs (`shake`). Varie l'échelle :
   au moins un plan large spectaculaire (le lieu, le danger) et au moins un gros plan sur l'objet clé.
-- **Durée** : celle de la voix, **40 à 50 s** (110 à 130 mots). Au-delà, le pourcentage de vidéo regardé chute. 1080x1920, 30 i/s.
+- **Durée** : celle de la voix, **1 min 45 à 2 min 30** (280 à 380 mots), choix de la chaîne depuis le 25/11/2026 : on raconte **toute** l'histoire
+  au lieu d'un résumé. Jamais plus de 2 min 55 (au-delà de 3 min, YouTube ne la traite plus comme un Short). 1080x1920, 30 i/s.
+  Une vidéo longue ne tient que si **chaque instant** relance : changement de plan toutes les 2-4 s, nouveau lieu ou nouvelle ambiance à chaque acte,
+  au moins 3 décors ou zones différentes, et le moteur des relances du script (section « Idées et scripts »). Surveille le % regardé dans `stats.md` :
+  s'il tombe sous 35 % sur les vidéos longues, il faut raccourcir.
 - **Son** : musique à **−12 dB** sous la voix et bruitages ≤ −8 dB (toujours via `tools/mix.py`, réglables avec `MUSIC_DB` / `SFX_DB`) :
   la voix doit rester claire sur un haut-parleur de téléphone. Sting sur le pivot (« Sauf que… »), bruitage sur chaque action visible
   (chute, choc, vague, tonnerre, porte), final à ~−14 LUFS.
@@ -242,7 +246,7 @@ La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regard
     harcèlement grave, suicide) : on reste sur des émotions du quotidien, avec de la bienveillance.
   - Le titre parle au spectateur et promet une émotion ou une leçon (« Il a aidé tout le monde… sauf lui-même »), sans reprendre
     les titres ni les histoires d'autres chaînes (règle 100 % original : on prend l'idée d'une émotion, jamais une histoire existante).
-  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), 110-130 mots, une action visible par phrase, fin qui reboucle.
+  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), 280-380 mots, une action visible par phrase, fin qui reboucle.
     Les émotions se jouent à l'image : expressions franches, signes automatiques (sueur, « ! », cœur), lumière qui passe du gris (`froid`, `soir`)
     au chaud (`dore`) au moment du retournement.
 - Les « Histoire vraie » peuvent elles aussi **parler au spectateur** : la dernière phrase relie le fait à sa vie
@@ -251,8 +255,17 @@ La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regard
 ## Idées et scripts (workflow `idees.yml`)
 - Formule du script : accroche paradoxale dès la 1re phrase, 2-3 détails qui montent, pivot « Sauf que… » / « En fait… », chute ironique au dernier mot,
   qui renvoie à la première phrase (boucle).
-  **110 à 130 mots** (la voix Riko lit ~2,6 mots/s : 120 mots ≈ 46 s ; au-delà de 50 s, la vidéo est trop longue), phrases de 8-15 mots,
+  **280 à 380 mots** (la voix Riko lit ~2,6 mots/s : 330 mots ≈ 2 min 07), phrases de 8-15 mots,
   nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
+- **Raconter toute l'histoire, en actes, avec des relances.** Sur 2 minutes, le spectateur part dès qu'il croit connaître la fin. Structure :
+  1) **accroche** (0-5 s) : le paradoxe ou l'enjeu, avec l'objet qu'on voit ;
+  2) **acte 1, le contexte qui pose le problème** (~30 s) : qui, où, pourquoi c'est grave, avec des détails concrets et vrais ;
+  3) **acte 2, les tentatives et les obstacles** (~40 s) : deux ou trois rebondissements, chacun plus fort que le précédent ;
+  4) **acte 3, le pivot « Sauf que… » et la résolution** (~30 s) ;
+  5) **la conséquence inattendue** (~15 s) : ce que ça a changé, jusqu'à aujourd'hui, puis la chute qui reboucle sur la 1re phrase.
+  **Une relance toutes les 20 à 30 s** : une question laissée ouverte (« Mais personne ne savait encore pourquoi… »), un chiffre choc,
+  un « et ce n'est pas le pire » ; jamais de résumé, jamais de phrase de remplissage. Le spectateur doit toujours attendre quelque chose.
+  Pas de « tu vas voir », pas d'annonce du plan : on raconte.
 - **La 1re phrase fait 15 mots au plus, au présent, et dit le paradoxe avec l'objet qu'on voit** (« Ce boulet qui se balance sans rien toucher prouve que la Terre tourne. » : 75 % des gens restent).
   Pour « Vie quotidienne » aussi : l'enjeu dès la 1re phrase (« Tout le monde se moquait de lui parce que… »), pas une description (« Tous les matins, quelqu'un allume… » : 55 %).
 - **La 1re phrase ne commence jamais par une date ni par du contexte** (« En 1823… », « Au XIXe siècle… ») : la surprise d'abord,
