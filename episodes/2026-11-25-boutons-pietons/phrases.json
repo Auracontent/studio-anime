@@ -1,0 +1,664 @@
+{
+ "duration": 122.120583,
+ "frames30": 3664,
+ "source": "whisper",
+ "segments": [
+  [
+   0.215792,
+   0.782125
+  ],
+  [
+   0.96875,
+   2.364542
+  ],
+  [
+   2.934125,
+   4.478417
+  ],
+  [
+   5.094458,
+   6.529792
+  ],
+  [
+   6.768208,
+   7.660625
+  ],
+  [
+   8.070208,
+   9.482
+  ],
+  [
+   9.668583,
+   9.763875
+  ],
+  [
+   10.205583,
+   11.005958
+  ],
+  [
+   11.541833,
+   11.90325
+  ],
+  [
+   12.389125,
+   12.8225
+  ],
+  [
+   13.395,
+   13.832167
+  ],
+  [
+   14.34425,
+   14.517333
+  ],
+  [
+   14.642083,
+   15.095958
+  ],
+  [
+   15.974667,
+   17.043167
+  ],
+  [
+   17.526458,
+   18.201625
+  ],
+  [
+   18.834125,
+   19.832208
+  ],
+  [
+   20.926917,
+   22.115958
+  ],
+  [
+   22.8915,
+   24.442333
+  ],
+  [
+   25.20025,
+   26.257125
+  ],
+  [
+   26.635458,
+   28.331833
+  ],
+  [
+   28.997083,
+   33.249792
+  ],
+  [
+   33.671125,
+   34.789333
+  ],
+  [
+   35.207167,
+   36.665208
+  ],
+  [
+   37.294708,
+   38.535042
+  ],
+  [
+   38.798375,
+   39.801333
+  ],
+  [
+   40.608667,
+   41.260208
+  ],
+  [
+   41.931458,
+   42.659042
+  ],
+  [
+   43.257458,
+   43.613125
+  ],
+  [
+   44.177083,
+   45.255208
+  ],
+  [
+   45.899,
+   46.271625
+  ],
+  [
+   46.682958,
+   47.905
+  ],
+  [
+   48.24225,
+   48.925708
+  ],
+  [
+   49.331167,
+   50.3045
+  ],
+  [
+   50.714042,
+   51.435125
+  ],
+  [
+   51.994292,
+   53.7525
+  ],
+  [
+   54.428417,
+   55.527458
+  ],
+  [
+   56.11,
+   56.83325
+  ],
+  [
+   57.085375,
+   58.399042
+  ],
+  [
+   59.131292,
+   59.730333
+  ],
+  [
+   60.225292,
+   62.38975
+  ],
+  [
+   62.771917,
+   64.575458
+  ],
+  [
+   65.197,
+   67.266417
+  ],
+  [
+   67.9365,
+   69.089417
+  ],
+  [
+   69.637042,
+   69.882083
+  ],
+  [
+   70.041792,
+   72.134167
+  ],
+  [
+   72.9765,
+   73.282917
+  ],
+  [
+   73.937,
+   74.824167
+  ],
+  [
+   75.100958,
+   76.095667
+  ],
+  [
+   76.3165,
+   77.492833
+  ],
+  [
+   77.668458,
+   80.508
+  ],
+  [
+   81.113,
+   81.856958
+  ],
+  [
+   82.23075,
+   83.776583
+  ],
+  [
+   83.908875,
+   86.436667
+  ],
+  [
+   87.152292,
+   88.662292
+  ],
+  [
+   89.145875,
+   89.325125
+  ],
+  [
+   89.4465,
+   90.728542
+  ],
+  [
+   91.5615,
+   92.6075
+  ],
+  [
+   92.732542,
+   93.953042
+  ],
+  [
+   94.516167,
+   96.105792
+  ],
+  [
+   96.408458,
+   97.958
+  ],
+  [
+   98.936667,
+   99.880042
+  ],
+  [
+   100.168375,
+   101.917458
+  ],
+  [
+   102.414042,
+   103.322958
+  ],
+  [
+   103.800667,
+   104.377083
+  ],
+  [
+   104.743292,
+   107.173
+  ],
+  [
+   107.830167,
+   108.084708
+  ],
+  [
+   108.487792,
+   108.977
+  ],
+  [
+   109.174792,
+   110.196875
+  ],
+  [
+   111.032792,
+   112.083
+  ],
+  [
+   112.281208,
+   113.57625
+  ],
+  [
+   113.906042,
+   114.868875
+  ],
+  [
+   115.520917,
+   116.823792
+  ],
+  [
+   117.752458,
+   119.10725
+  ],
+  [
+   119.917042,
+   120.377708
+  ],
+  [
+   120.894667,
+   121.507667
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ce bouton que tu \u00e9crases avant de traverser ne fait peut-\u00eatre rien du tout.",
+   "s": 0.0,
+   "e": 4.5
+  },
+  {
+   "text": "Imagine un carrefour de New York,",
+   "s": 4.92,
+   "e": 6.44
+  },
+  {
+   "text": "en pleine heure de pointe.",
+   "s": 6.44,
+   "e": 7.72
+  },
+  {
+   "text": "Une femme press\u00e9e arrive devant le feu.",
+   "s": 8.1,
+   "e": 9.48
+  },
+  {
+   "text": "Elle appuie sur le bouton.",
+   "s": 10.18,
+   "e": 11.02
+  },
+  {
+   "text": "Une fois,",
+   "s": 11.52,
+   "e": 11.82
+  },
+  {
+   "text": "deux fois,",
+   "s": 12.44,
+   "e": 12.8
+  },
+  {
+   "text": "trois fois.",
+   "s": 13.38,
+   "e": 13.82
+  },
+  {
+   "text": "Elle tape du pied.",
+   "s": 14.4,
+   "e": 15.06
+  },
+  {
+   "text": "Puis le bonhomme passe au vert.",
+   "s": 15.68,
+   "e": 17.56
+  },
+  {
+   "text": "Elle traverse,",
+   "s": 17.56,
+   "e": 18.08
+  },
+  {
+   "text": "persuad\u00e9e d'avoir gagn\u00e9.",
+   "s": 18.7,
+   "e": 19.86
+  },
+  {
+   "text": "Sauf qu'elle n'a rien gagn\u00e9 du tout.",
+   "s": 20.68,
+   "e": 22.1
+  },
+  {
+   "text": "Le feu allait passer au vert de toute fa\u00e7on.",
+   "s": 22.78,
+   "e": 24.4
+  },
+  {
+   "text": "Pour comprendre,",
+   "s": 25.38,
+   "e": 26.14
+  },
+  {
+   "text": "il faut regarder ce que la ville a fait de ses boutons.",
+   "s": 26.64,
+   "e": 28.34
+  },
+  {
+   "text": "\u00c0 New York,",
+   "s": 28.34,
+   "e": 29.52
+  },
+  {
+   "text": "des milliers de boutons ont \u00e9t\u00e9 pos\u00e9s pour que les pi\u00e9tons commandent eux-m\u00eames le feu.",
+   "s": 29.64,
+   "e": 33.26
+  },
+  {
+   "text": "Au d\u00e9but,",
+   "s": 33.88,
+   "e": 34.14
+  },
+  {
+   "text": "ils marchaient vraiment.",
+   "s": 34.26,
+   "e": 34.76
+  },
+  {
+   "text": "Puis sont arriv\u00e9s les cycles minut\u00e9s.",
+   "s": 35.36,
+   "e": 36.68
+  },
+  {
+   "text": "Le feu change \u00e0 heure fixe,",
+   "s": 37.28,
+   "e": 38.74
+  },
+  {
+   "text": "que quelqu'un appuie ou non.",
+   "s": 38.74,
+   "e": 39.8
+  },
+  {
+   "text": "Alors,",
+   "s": 40.52,
+   "e": 40.7
+  },
+  {
+   "text": "que fait la ville ?",
+   "s": 40.7,
+   "e": 41.96
+  },
+  {
+   "text": "Elle les d\u00e9branche.",
+   "s": 41.96,
+   "e": 42.6
+  },
+  {
+   "text": "Un par un.",
+   "s": 43.18,
+   "e": 43.62
+  },
+  {
+   "text": "Mais elle ne les enl\u00e8ve pas.",
+   "s": 44.36,
+   "e": 45.24
+  },
+  {
+   "text": "Pourquoi ?",
+   "s": 46.1,
+   "e": 46.82
+  },
+  {
+   "text": "Parce qu'arracher un bouton,",
+   "s": 46.82,
+   "e": 47.88
+  },
+  {
+   "text": "reboucher le trou,",
+   "s": 48.3,
+   "e": 48.88
+  },
+  {
+   "text": "remettre la rue en \u00e9tat,",
+   "s": 49.32,
+   "e": 50.3
+  },
+  {
+   "text": "tout cela co\u00fbtait cher,",
+   "s": 50.72,
+   "e": 51.32
+  },
+  {
+   "text": "multipli\u00e9 par des milliers de carrefours.",
+   "s": 51.98,
+   "e": 53.68
+  },
+  {
+   "text": "Alors on les a laiss\u00e9s l\u00e0,",
+   "s": 54.48,
+   "e": 55.52
+  },
+  {
+   "text": "bien en place,",
+   "s": 56.04,
+   "e": 56.72
+  },
+  {
+   "text": "avec leur petite plaque m\u00e9tallique.",
+   "s": 57.02,
+   "e": 58.32
+  },
+  {
+   "text": "R\u00e9sultat :",
+   "s": 59.32,
+   "e": 60.26
+  },
+  {
+   "text": "en deux mille quatre,",
+   "s": 60.26,
+   "e": 60.96
+  },
+  {
+   "text": "sur trois mille deux cent cinquante boutons,",
+   "s": 60.96,
+   "e": 62.36
+  },
+  {
+   "text": "moins de sept cent cinquante fonctionnaient encore.",
+   "s": 62.7,
+   "e": 64.46
+  },
+  {
+   "text": "Tous les autres attendaient dans la rue qu'on les presse pour rien.",
+   "s": 65.3,
+   "e": 67.22
+  },
+  {
+   "text": "Et ce n'est pas le plus \u00e9tonnant.",
+   "s": 67.88,
+   "e": 69.1
+  },
+  {
+   "text": "Tu penses s\u00fbrement qu'une fois qu'on sait \u00e7a,",
+   "s": 69.9,
+   "e": 71.28
+  },
+  {
+   "text": "on arr\u00eate d'appuyer.",
+   "s": 71.42,
+   "e": 72.84
+  },
+  {
+   "text": "Pas du tout.",
+   "s": 72.84,
+   "e": 73.3
+  },
+  {
+   "text": "Une chercheuse,",
+   "s": 74.1,
+   "e": 74.8
+  },
+  {
+   "text": "Tal Oron-Gilad,",
+   "s": 74.8,
+   "e": 76.38
+  },
+  {
+   "text": "de l'universit\u00e9 Ben-Gourion,",
+   "s": 76.38,
+   "e": 77.44
+  },
+  {
+   "text": "en Isra\u00ebl,",
+   "s": 77.44,
+   "e": 78.18
+  },
+  {
+   "text": "a observ\u00e9 des pi\u00e9tons \u00e0 des passages prot\u00e9g\u00e9s.",
+   "s": 78.56,
+   "e": 80.46
+  },
+  {
+   "text": "Son constat :",
+   "s": 81.02,
+   "e": 82.12
+  },
+  {
+   "text": "ceux qui appuient sur le bouton attendent plus souvent le feu vert avant de traverser.",
+   "s": 82.12,
+   "e": 86.46
+  },
+  {
+   "text": "Le bouton ne change rien au feu.",
+   "s": 87.08,
+   "e": 88.9
+  },
+  {
+   "text": "Mais il change quelque chose en toi.",
+   "s": 88.9,
+   "e": 90.66
+  },
+  {
+   "text": "Les psychologues appellent cela l'illusion de contr\u00f4le.",
+   "s": 91.48,
+   "e": 93.82
+  },
+  {
+   "text": "Quand on a le sentiment d'agir,",
+   "s": 94.36,
+   "e": 95.96
+  },
+  {
+   "text": "l'attente devient plus facile \u00e0 supporter.",
+   "s": 95.96,
+   "e": 97.84
+  },
+  {
+   "text": "Attention pourtant :",
+   "s": 98.8,
+   "e": 100.12
+  },
+  {
+   "text": "ne va pas croire que tous les boutons mentent.",
+   "s": 100.12,
+   "e": 101.92
+  },
+  {
+   "text": "Beaucoup marchent vraiment,",
+   "s": 102.38,
+   "e": 103.22
+  },
+  {
+   "text": "surtout la nuit,",
+   "s": 103.68,
+   "e": 104.32
+  },
+  {
+   "text": "ou aux carrefours qui ne passent au vert que si quelqu'un le demande.",
+   "s": 104.58,
+   "e": 107.02
+  },
+  {
+   "text": "L\u00e0,",
+   "s": 107.8,
+   "e": 108.04
+  },
+  {
+   "text": "appuyer sert \u00e0 quelque chose.",
+   "s": 108.56,
+   "e": 110.16
+  },
+  {
+   "text": "Alors la prochaine fois que tu es plant\u00e9 devant un feu rouge,",
+   "s": 110.96,
+   "e": 113.5
+  },
+  {
+   "text": "le doigt sur le bouton,",
+   "s": 113.92,
+   "e": 114.86
+  },
+  {
+   "text": "souviens-toi de cette femme press\u00e9e.",
+   "s": 114.86,
+   "e": 116.86
+  },
+  {
+   "text": "Le bouton n'a peut-\u00eatre rien fait du tout.",
+   "s": 117.62,
+   "e": 119.12
+  },
+  {
+   "text": "Mais toi,",
+   "s": 119.8,
+   "e": 120.28
+  },
+  {
+   "text": "tu as attendu.",
+   "s": 120.88,
+   "e": 121.52
+  }
+ ]
+}

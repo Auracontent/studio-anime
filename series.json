@@ -1,5 +1,23 @@
 {
-  "France insolite": ["2026-11-19-faux-paris", "2026-11-19-taxis-marne", "2026-11-21-pigeons-microfilm", "2026-11-22-pendule-foucault", "2026-11-23-palais-facteur-cheval"],
-  "La science qu'on peut voir": ["2026-11-19-rails-chauffes", "2026-11-20-corde-ringelmann", "2026-11-21-canari-mine", "2026-11-21-illusion-poids", "2026-11-21-lentille-fresnel", "2026-11-22-boeuf-galton"],
-  "Les grandes arnaques": ["2026-11-22-coffre-humbert", "2026-11-22-tour-1904", "2026-11-24-rats-hanoi"]
+  "France insolite": [
+    "2026-11-19-faux-paris",
+    "2026-11-19-taxis-marne",
+    "2026-11-21-pigeons-microfilm",
+    "2026-11-22-pendule-foucault",
+    "2026-11-23-palais-facteur-cheval"
+  ],
+  "La science qu'on peut voir": [
+    "2026-11-19-rails-chauffes",
+    "2026-11-20-corde-ringelmann",
+    "2026-11-21-canari-mine",
+    "2026-11-21-illusion-poids",
+    "2026-11-21-lentille-fresnel",
+    "2026-11-22-boeuf-galton",
+    "2026-11-25-boutons-pietons"
+  ],
+  "Les grandes arnaques": [
+    "2026-11-22-coffre-humbert",
+    "2026-11-22-tour-1904",
+    "2026-11-24-rats-hanoi"
+  ]
 }
