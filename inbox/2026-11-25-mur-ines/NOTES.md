@@ -2,7 +2,7 @@
 
 Format : Vie quotidienne
 Série : aucune
-Durée : 65 s, parce que trois étapes (on se moque, la nuit de tempête, la reconnaissance), ~165 mots ; plus long que le gâteau (~45 s) pour varier, le Climax (la tempête) demande de la place.
+Durée : 75 s, parce que trois étapes (on se moque, la nuit de tempête, la reconnaissance), ~195 mots ; plus long que le gâteau (~45 s) pour varier, le Climax (la tempête) demande de la place.
 Chiffres : le boulet de Foucault (75 % de rétention) s'ouvre sur un objet en mouvement plein cadre, lumière chaude ; les ouvertures « personnage debout qui ne fait rien » (bureau, canari) tombent à 54-55 %. J'ouvre donc sur les briques qui volent et le mur qui monte, plein cadre, en plein soleil, avec l'enjeu dès la 1re phrase (« Tout le monde se moquait… »). Les « Vie quotidienne » récentes (bureau 1792 vues/45 h, vélo 1828/26 h) tiennent bien ; je reste sur l'émotion forte, avec un Climax spectaculaire (tempête).
 Public : stats d'audience indisponibles (secrets Analytics absents) ; vocabulaire simple, chantier = objets du quotidien, rien qui ne parle qu'aux Français.
 Diversité : vie quotidienne (chantier), émotion = patience / fierté face à la moquerie (et un peu d'injustice) ; les 3 dernières VQ : bureau (gratitude), école (persévérance), cuisine (honte). Autre lieu (chantier en plein air, tempête de nuit), héroïne adolescente, ton tendre puis spectaculaire. Fiction : ni date ni lieu réel, rien de présenté comme vrai. Décor neuf : `engine/library/chantier.js` (mur de briques en construction, échafaudage, bétonnière, brouette, bâche) ; la ville d'hiver des rails n'est pas réutilisée.
