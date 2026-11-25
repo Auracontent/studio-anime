@@ -9,7 +9,7 @@ Liste vide : Claude choisit lui-même le sujet le plus viral.
      Déjà faits ou en cours : effet cobra (= rats de Hanoï, 2026-11-24), boutons piétons placebo (lancé le 25/11).
      Liste vide : retour au choix normal (tendances, nos chiffres, tous les thèmes). -->
 - [x] Science : Fleming part en vacances sans ranger son labo ; à son retour (1928), une moisissure a tué les bactéries d'une boîte : la pénicilline. -> inbox/2026-11-24-penicilline-fleming
-- [ ] Science : une barre chocolatée fond dans la poche de l'ingénieur Percy Spencer près d'un magnétron de radar : l'idée du four à micro-ondes.
+- [x] Science : une barre chocolatée fond dans la poche de l'ingénieur Percy Spencer près d'un magnétron de radar : l'idée du four à micro-ondes. -> inbox/2026-11-25-micro-ondes
 - [ ] Le faux immeuble du 145 rue La Fayette à Paris : une façade haussmannienne sans appartements, qui cache une ventilation du RER (et les autres façades-décors qui cachent des transformateurs ou des aérations).
 - [ ] Science : le chien de George de Mestral revient de balade couvert de bardanes ; il les observe au microscope et invente le Velcro.
 - [ ] L'armée fantôme de 1944 : des artistes et des ingénieurs du son américains trompent l'armée allemande en France avec des chars gonflables et des bruitages diffusés par haut-parleurs.
