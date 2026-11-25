@@ -17,3 +17,13 @@ Liste vide : Claude choisit lui-même le sujet le plus viral.
 - [ ] Science : Phineas Gage reçoit une barre de fer à travers le crâne (1848) et survit ; son caractère aurait changé (récit en partie exagéré par la suite : rester prudent).
 - [ ] Science : Ignace Semmelweis demande aux médecins de se laver les mains ; on se moque de lui, alors qu'il avait raison.
 - [ ] Science : une partie des cendres de Clyde Tombaugh, découvreur de Pluton, est partie vers Pluton à bord de la sonde New Horizons.
+<!-- Pistes de l'assistant YouTube Studio (25/11/2026), après la série science. Faits à vérifier un par un avant d'écrire.
+     Déjà faites ou en cours : effet cobra (= rats de Hanoï, 2026-11-24), boutons piétons placebo (lancé le 25/11). -->
+- [ ] Le faux immeuble du 145 rue La Fayette à Paris : une façade haussmannienne sans appartements, qui cache une ventilation du RER (et les autres façades-décors qui cachent des transformateurs ou des aérations).
+- [ ] L'armée fantôme de 1944 : des artistes et des ingénieurs du son américains trompent l'armée allemande en France avec des chars gonflables et des bruitages diffusés par haut-parleurs.
+- [ ] Le papier bulle a été inventé en 1957 pour être un papier peint en relief ; personne n'en voulait, jusqu'à ce qu'on l'utilise pour emballer.
+- [ ] Les dauphins et otaries de la marine américaine, entraînés à repérer les mines et les plongeurs dans les ports.
+- [ ] Pourquoi une salle qui applaudit finit par taper en rythme toute seule (synchronisation spontanée, étude de physiciens publiée en 2000).
+- [ ] L'effet du trajet retour : pourquoi le retour paraît plus court que l'aller alors que la distance est la même.
+- [ ] Une musique d'ambiance plus lente fait marcher les clients moins vite et acheter plus (étude en supermarché, années 1980).
+- [ ] La couleur de l'emballage change le goût qu'on croit sentir (frites, chips, boissons) : seulement si une étude solide le confirme, sinon passer.
