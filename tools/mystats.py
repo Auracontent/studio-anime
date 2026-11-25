@@ -59,6 +59,47 @@ if cid and csec and rtok:
     except Exception as e:   # never block the idea generator on analytics
         print(f"Analytics API unavailable ({e}): public numbers only")
 
+# ---------- audience (Analytics API, optional): who watches, from where, how they find us, where they drop off ----------
+aud = []
+if ana:
+    def report(**q):
+        q = {"ids": "channel==MINE", "startDate": (NOW - datetime.timedelta(days=28)).date().isoformat(), "endDate": NOW.date().isoformat(), **q}
+        req = urllib.request.Request("https://youtubeanalytics.googleapis.com/v2/reports?" + urllib.parse.urlencode(q), headers={"Authorization": f"Bearer {at}"})
+        with urllib.request.urlopen(req, timeout=60) as r: rep = json.load(r)
+        return [c["name"] for c in rep.get("columnHeaders", [])], rep.get("rows", [])
+    def part(title, fn):
+        try: aud.extend(["", f"**{title}**", ""] + fn())
+        except Exception as e: print(f"audience « {title} » skipped: {e}")
+    AGE = {"age13-17": "13-17 ans", "age18-24": "18-24 ans", "age25-34": "25-34 ans", "age35-44": "35-44 ans",
+           "age45-54": "45-54 ans", "age55-64": "55-64 ans", "age65-": "65 ans et +"}
+    def ages():
+        _, rows = report(dimensions="ageGroup,gender", metrics="viewerPercentage")
+        a, g = {}, {}
+        for age, gender, pct in rows: a[age] = a.get(age, 0) + pct; g[gender] = g.get(gender, 0) + pct
+        return [" · ".join(f"{AGE.get(k, k)} {v:.0f} %" for k, v in sorted(a.items())),
+                " · ".join(f"{ {'male': 'hommes', 'female': 'femmes'}.get(k, k)} {v:.0f} %" for k, v in sorted(g.items(), key=lambda x: -x[1]))]
+    def countries():
+        _, rows = report(dimensions="country", metrics="views", sort="-views", maxResults=8)
+        tot = sum(r[1] for r in rows) or 1
+        return [" · ".join(f"{c} {100 * v / tot:.0f} %" for c, v in rows)]
+    def sources():
+        _, rows = report(dimensions="insightTrafficSourceType", metrics="views", sort="-views")
+        tot = sum(r[1] for r in rows) or 1
+        return [" · ".join(f"{s} {100 * v / tot:.0f} %" for s, v in rows[:6])]
+    def retention():   # share of viewers still watching at 10 %, 25 %, 50 %, 75 %, 95 % of each recent video
+        out = ["| Vidéo | 10 % | 25 % | 50 % | 75 % | 95 % |", "|---|---:|---:|---:|---:|---:|"]
+        for v in [x for x in vids if x["age_h"] >= 24][:10]:
+            _, rows = report(dimensions="elapsedVideoTimeRatio", metrics="audienceWatchRatio", filters=f"video=={v['id']}",
+                             startDate=v["published"])
+            curve = {round(r[0], 2): r[1] for r in rows}
+            pick = lambda t: min(curve.items(), key=lambda kv: abs(kv[0] - t))[1] if curve else None
+            out.append(f"| {v['title'][:50]} | " + " | ".join(f"{100 * pick(t):.0f} %" if curve else "–" for t in (0.1, 0.25, 0.5, 0.75, 0.95)) + " |")
+        return out
+    part("Âge et genre des spectateurs (28 derniers jours)", ages)
+    part("Pays (28 derniers jours)", countries)
+    part("Comment ils nous trouvent (28 derniers jours)", sources)
+    part("Rétention : part des spectateurs encore là à chaque moment de la vidéo (10 dernières vidéos)", retention)
+
 # ---------- match each video to its episode: format + diversity line ----------
 norm = lambda s: re.sub(r"[^a-z0-9]+", " ", unicodedata.normalize("NFKD", s.lower()).encode("ascii", "ignore").decode()).strip()
 eps = {}
@@ -101,6 +142,7 @@ for fmt in ("Histoire vraie", "Vie quotidienne"):
     g = [v for v in old if v["format"] == fmt]
     if g: L += ["", f"**{fmt}** : {len(g)} vidéos, médiane {int(statistics.median(x['views'] for x in g))} vues" +
                 (f", {round(statistics.mean(x.get('avg_pct', 0) for x in g), 1)} % regardé en moyenne, {sum(x.get('subs', 0) for x in g)} abonnés gagnés" if ana else "")]
+if aud: L += ["", "## Notre public", *aud]
 open(OUT, "w", encoding="utf-8").write("\n".join(L) + "\n")
 json.dump({"date": NOW.isoformat(), "subs": subs, "median": med, "analytics": ana, "videos": vids}, open(os.path.splitext(OUT)[0] + ".json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print(f"wrote {OUT}: {len(vids)} videos, median {int(med)} views, analytics={'yes' if ana else 'no'}")

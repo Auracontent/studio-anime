@@ -305,9 +305,18 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
   deux fois de suite. Les abonnés gagnés et le % regardé comptent plus que les vues. Moins de 6 vidéos jugées : signal faible, garde la diversité.
 - Écris dans `NOTES.md` une ligne « Chiffres : » (ex. « les 3 meilleures sont des expériences de science qu'on peut montrer avec un objet :
   je reste dans cette famille avec un autre objet »).
+- **Notre public** (partie de `stats.md`, si les secrets Analytics sont là) : âge et genre, pays, sources de trafic, et la **rétention**
+  à 10/25/50/75/95 % des 10 dernières vidéos. Sers-t'en :
+  - **âge** : adapte les références et le vocabulaire à la tranche la plus forte (13-24 ans : rythme, humour, objets du quotidien ;
+    35 ans et + : histoire, patrimoine, nostalgie), sans jamais rien de déplacé pour un jeune public ;
+  - **pays** : si la Belgique, la Suisse, le Québec ou l'Afrique francophone pèsent, évite ce qui ne parle qu'aux Français (SNCF, départements) ou explique-le ;
+  - **rétention** : repère où les vidéos perdent le plus (chute entre 10 % et 25 % = acte 1 trop lent ; entre 50 % et 75 % = l'acte 2 tourne en rond)
+    et corrige ce moment-là dans le script. Une ligne « Public : » dans `NOTES.md` dit ce que tu en as retenu.
 
 ## Tendances (trends.md, généré par tools/trends.py depuis l'API YouTube)
-- `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` (titres et chiffres publics uniquement).
+- `trends.md` liste les vidéos les plus vues des chaînes de `tendances.json` **et des chaînes similaires trouvées automatiquement**
+  (recherche YouTube en français sur les requêtes de `tendances.json` → `discover`, 90 derniers jours, Shorts les plus vus ; liste dans
+  `tendances_auto.json`), avec la durée de chaque vidéo (titres et chiffres publics uniquement).
   Il sert à savoir **quels thèmes** marchent, pas quoi copier.
 - Méthode : regroupe les titres du haut du classement en **familles** (ex. « paradoxe d'ingénierie », « objet antique qui a changé l'histoire »,
   « métier insolite », « astuce de marins / de soldats », « pourquoi les choses sont comme ça »), repère la famille la plus forte,

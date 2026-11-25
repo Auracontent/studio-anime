@@ -3,5 +3,21 @@
     "@RicksClips3000"
   ],
   "max_videos": 300,
-  "own": "@Pourkoipa"
+  "own": "@Pourkoipa",
+  "discover": {
+    "queries": [
+      "histoire vraie",
+      "histoire incroyable mais vraie",
+      "le saviez-vous",
+      "anecdote historique",
+      "faits insolites",
+      "histoire en dessin animé",
+      "invention par accident",
+      "pourquoi"
+    ],
+    "days": 90,
+    "max_channels": 8,
+    "max_videos": 100,
+    "exclude": []
+  }
 }
