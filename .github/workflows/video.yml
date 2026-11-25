@@ -9,7 +9,7 @@ on:
       redirect: { description: "Refaire aussi la réalisation d'un épisode existant (sinon : automatique)", type: boolean, default: false }
 permissions: { contents: write, issues: write, id-token: write, actions: read }
 concurrency: { group: "video-${{ github.event.inputs.slug || github.sha }}", cancel-in-progress: false }
-env: { CHROME: /usr/bin/google-chrome, CHUNKS: 8 }
+env: { CHROME: /usr/bin/google-chrome, CHUNKS: 12 }
 
 jobs:
   direct:
@@ -116,11 +116,11 @@ jobs:
           echo "OK : $(python3 -c "import json;print(json.load(open('$E/meta.json'))['total'])") images"
 
   render:
-    name: Rendu ${{ matrix.part }}/8
+    name: Rendu ${{ matrix.part }}/12
     needs: direct
     runs-on: ubuntu-latest
     timeout-minutes: 120
-    strategy: { fail-fast: true, matrix: { part: [0, 1, 2, 3, 4, 5, 6, 7] } }
+    strategy: { fail-fast: true, matrix: { part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] } }
     steps:
       - uses: actions/checkout@v4
         with: { ref: "${{ github.ref_name }}" }
