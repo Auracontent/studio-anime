@@ -1,0 +1,237 @@
+{
+ "duration": 52.210583,
+ "frames30": 1566,
+ "source": "whisper",
+ "segments": [
+  [
+   0.0,
+   1.707333
+  ],
+  [
+   2.715792,
+   3.68225
+  ],
+  [
+   4.83,
+   6.096833
+  ],
+  [
+   6.217875,
+   7.079667
+  ],
+  [
+   7.359958,
+   8.37925
+  ],
+  [
+   8.534125,
+   9.4285
+  ],
+  [
+   9.721458,
+   11.379875
+  ],
+  [
+   12.130708,
+   13.395958
+  ],
+  [
+   13.848458,
+   14.778667
+  ],
+  [
+   15.650917,
+   16.297375
+  ],
+  [
+   16.513917,
+   17.621875
+  ],
+  [
+   18.479625,
+   19.00975
+  ],
+  [
+   19.601708,
+   20.257042
+  ],
+  [
+   20.949375,
+   21.43025
+  ],
+  [
+   22.515125,
+   24.685917
+  ],
+  [
+   25.603375,
+   26.243083
+  ],
+  [
+   27.115167,
+   29.923
+  ],
+  [
+   30.707042,
+   32.014792
+  ],
+  [
+   33.092458,
+   33.49325
+  ],
+  [
+   33.744125,
+   34.950417
+  ],
+  [
+   35.486458,
+   38.822458
+  ],
+  [
+   39.23925,
+   39.503333
+  ],
+  [
+   39.628042,
+   40.822375
+  ],
+  [
+   41.782625,
+   44.577083
+  ],
+  [
+   45.6085,
+   46.097542
+  ],
+  [
+   46.230958,
+   48.0875
+  ],
+  [
+   48.835833,
+   51.74025
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Une barre de chocolat fond dans sa poche\u2026 et rien ne la chauffait.",
+   "s": 0.0,
+   "e": 4.76
+  },
+  {
+   "text": "En mille neuf cent quarante-cinq,",
+   "s": 4.76,
+   "e": 6.22
+  },
+  {
+   "text": "Percy Spencer,",
+   "s": 6.22,
+   "e": 6.82
+  },
+  {
+   "text": "ing\u00e9nieur am\u00e9ricain,",
+   "s": 7.36,
+   "e": 8.14
+  },
+  {
+   "text": "travaille sur des radars,",
+   "s": 8.54,
+   "e": 9.44
+  },
+  {
+   "text": "juste \u00e0 c\u00f4t\u00e9 d'un magn\u00e9tron en marche.",
+   "s": 9.7,
+   "e": 11.32
+  },
+  {
+   "text": "Il sent sa poche chaude,",
+   "s": 12.2,
+   "e": 13.34
+  },
+  {
+   "text": "et le chocolat qui coule.",
+   "s": 13.34,
+   "e": 14.74
+  },
+  {
+   "text": "Intrigu\u00e9,",
+   "s": 15.64,
+   "e": 16.0
+  },
+  {
+   "text": "il apporte des grains de ma\u00efs.",
+   "s": 16.5,
+   "e": 17.54
+  },
+  {
+   "text": "Ils \u00e9clatent partout dans le labo :",
+   "s": 18.1,
+   "e": 20.88
+  },
+  {
+   "text": "du popcorn.",
+   "s": 20.88,
+   "e": 21.22
+  },
+  {
+   "text": "Le lendemain,",
+   "s": 22.38,
+   "e": 22.94
+  },
+  {
+   "text": "on raconte qu'il essaie avec un \u0153uf.",
+   "s": 23.18,
+   "e": 25.4
+  },
+  {
+   "text": "Il explose.",
+   "s": 25.4,
+   "e": 26.2
+  },
+  {
+   "text": "Spencer comprend que les ondes du radar cuisent la nourriture.",
+   "s": 27.1,
+   "e": 29.88
+  },
+  {
+   "text": "Il construit une bo\u00eete pour les enfermer.",
+   "s": 30.4,
+   "e": 32.04
+  },
+  {
+   "text": "Sauf que\u2026 cette machine n'a rien d'une cuisine.",
+   "s": 32.78,
+   "e": 34.76
+  },
+  {
+   "text": "Les premiers fours font presque deux m\u00e8tres,",
+   "s": 35.58,
+   "e": 37.46
+  },
+  {
+   "text": "p\u00e8sent plus de trois cents kilos,",
+   "s": 37.6,
+   "e": 38.74
+  },
+  {
+   "text": "et co\u00fbtent des milliers de dollars.",
+   "s": 38.74,
+   "e": 40.68
+  },
+  {
+   "text": "Il faudra vingt ans pour en faire un mod\u00e8le qui tient sur un comptoir.",
+   "s": 41.78,
+   "e": 44.52
+  },
+  {
+   "text": "Alors,",
+   "s": 45.46,
+   "e": 45.76
+  },
+  {
+   "text": "la prochaine fois que ton plat tourne derri\u00e8re la vitre\u2026 dis-toi qu'il y a eu d'abord un chocolat qui fondait dans une poche.",
+   "s": 46.14,
+   "e": 51.7
+  }
+ ]
+}

@@ -279,6 +279,24 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
     case "notebook": { p.poly(rrect(hx - 16 * u, hy - 34 * u, hx + 16 * u, hy + 8 * u, 2 * u), "#f08a2e", 2.4 * u); p.poly(rrect(hx - 12 * u, hy - 30 * u, hx + 14 * u, hy + 4 * u, 1 * u), "#fffaf0", 1.4 * u);
       for (let i = 0; i < 4; i++) p.stroke([[hx - 8 * u, hy - 24 * u + i * 7 * u], [hx + 10 * u, hy - 24 * u + i * 7 * u]], 1.3 * u, "#8a98b0"); for (let i = 0; i < 4; i++) p.dot(hx - 16 * u, hy - 26 * u + i * 9 * u, 2 * u, "#3a3f48"); break; }
     case "wire": { p.stroke([[hx, hy - 40 * u], [hx + 6 * u, hy - 20 * u], [hx - 4 * u, hy], [hx + 3 * u, hy + 18 * u]], 5 * u, "#2a2e36"); p.stroke([[hx + 3 * u, hy + 18 * u], [hx + 2 * u, hy + 28 * u]], 4 * u, "#e08a3a"); p.dot(hx + 2 * u, hy + 30 * u, 2.4 * u, "#ffd23a"); break; }
+    case "choc": { // barre de chocolat qui fond (Pourkoipa original) : carrés bruns, papier doré déchiré, coulures
+      p.poly(rrect(hx - 26 * u, hy - 34 * u, hx + 26 * u, hy - 4 * u, 3 * u), "#6a3a1e", 2.6 * u);
+      for (const k of [-1, 0, 1]) { p.stroke([[hx + k * 17 * u, hy - 34 * u], [hx + k * 17 * u, hy - 4 * u]], 1.6 * u, "#4a2412"); } p.stroke([[hx - 26 * u, hy - 19 * u], [hx + 26 * u, hy - 19 * u]], 1.6 * u, "#4a2412");
+      p.poly([[hx - 26 * u, hy - 4 * u], [hx + 26 * u, hy - 4 * u], [hx + 22 * u, hy + 8 * u], [hx + 8 * u, hy + 4 * u], [hx - 6 * u, hy + 10 * u], [hx - 22 * u, hy + 6 * u]], "#e2b640", 2 * u);
+      for (const [dx, ln] of [[-18, 20], [-2, 32], [14, 24]]) { p.stroke([[hx + dx * u, hy - 6 * u], [hx + dx * u, hy + ln * u]], 6 * u, "#4a2412"); p.dot(hx + dx * u, hy + ln * u + 2 * u, 5.6 * u, "#4a2412"); p.stroke([[hx + dx * u, hy - 6 * u], [hx + dx * u, hy + ln * u]], 3.4 * u, "#8a5230"); p.dot(hx + dx * u, hy + ln * u + 2 * u, 3.2 * u, "#8a5230"); }
+      p.ell(hx - 10 * u, hy - 28 * u, 8 * u, 3 * u, "#ffffff66", 0); break; }
+    case "corn": { // épi de maïs : grains jaunes, feuilles vertes
+      p.poly([[hx, hy - 52 * u], [hx + 13 * u, hy - 36 * u], [hx + 12 * u, hy - 2 * u], [hx, hy + 6 * u], [hx - 12 * u, hy - 2 * u], [hx - 13 * u, hy - 36 * u]], "#f6c82a", 2.6 * u);
+      for (let i = 0; i < 6; i++) { p.stroke([[hx - 12 * u, hy - 42 * u + i * 8 * u], [hx + 12 * u, hy - 42 * u + i * 8 * u]], 1.2 * u, "#c8941a"); } p.stroke([[hx, hy - 52 * u], [hx, hy + 6 * u]], 1.2 * u, "#c8941a");
+      p.poly([[hx - 2 * u, hy + 8 * u], [hx - 22 * u, hy - 24 * u], [hx - 12 * u, hy - 6 * u]], "#5e9e3e", 2.2 * u); p.poly([[hx + 2 * u, hy + 8 * u], [hx + 22 * u, hy - 24 * u], [hx + 12 * u, hy - 6 * u]], "#6fae45", 2.2 * u); break; }
+    case "egg": { p.poly([[hx, hy - 36 * u], [hx + 14 * u, hy - 22 * u], [hx + 16 * u, hy - 6 * u], [hx + 8 * u, hy + 4 * u], [hx - 8 * u, hy + 4 * u], [hx - 16 * u, hy - 6 * u], [hx - 14 * u, hy - 22 * u]], "#fbf3e0", 2.6 * u); p.ell(hx - 5 * u, hy - 22 * u, 4 * u, 6 * u, "#ffffff", 0); break; }
+    case "popbowl": { // bol de popcorn
+      for (const [dx, dy] of [[-16, -26], [0, -34], [15, -27], [-6, -22], [8, -20], [-22, -18], [22, -18]]) p.dot(hx + dx * u, hy + dy * u, 8 * u, "#fff3c4", 2 * u);
+      p.dot(hx - 4 * u, hy - 30 * u, 3 * u, "#f6c82a"); p.dot(hx + 12 * u, hy - 24 * u, 3 * u, "#f6c82a");
+      p.poly([[hx - 28 * u, hy - 14 * u], [hx + 28 * u, hy - 14 * u], [hx + 20 * u, hy + 8 * u], [hx - 20 * u, hy + 8 * u]], "#d23a32", 2.6 * u); p.stroke([[hx - 14 * u, hy - 14 * u], [hx - 10 * u, hy + 8 * u]], 3 * u, "#fff2c0"); p.stroke([[hx + 4 * u, hy - 14 * u], [hx + 2 * u, hy + 8 * u]], 3 * u, "#fff2c0"); p.stroke([[hx + 20 * u, hy - 14 * u], [hx + 14 * u, hy + 8 * u]], 3 * u, "#fff2c0"); break; }
+    case "plan": { // plan bleu : feuille bleue avec boîte et ondes
+      p.poly(rrect(hx - 24 * u, hy - 40 * u, hx + 24 * u, hy + 6 * u, 2 * u), "#2f6fb8", 2.4 * u); p.poly(rrect(hx - 14 * u, hy - 30 * u, hx + 14 * u, hy - 8 * u, 1 * u), "#ffffff", 1.8 * u);
+      p.stroke([[hx - 22 * u, hy - 20 * u], [hx - 16 * u, hy - 26 * u], [hx - 10 * u, hy - 14 * u], [hx - 4 * u, hy - 24 * u]], 1.8 * u, "#ffffff"); break; }
     case "coin": p.ell(hx, hy - 6 * u, 9 * u, 9 * u, "#e9be4a", 2.2 * u); p.ell(hx, hy - 6 * u, 5 * u, 5 * u, null, 1.2 * u); break;
     case "ballBig": case "ballSmall": case "ballBigB": case "ballSmallB": { // boules d'expérience : grosse rouge / petite bleue (même poids), tenues dans la paume
       const big = kind.startsWith("ballBig"), r = (big ? 15.5 : 9) * u / 1.7 * 1.7, col = big ? "#e23d32" : "#2f7fd8", cy = hy - r * 0.85;
