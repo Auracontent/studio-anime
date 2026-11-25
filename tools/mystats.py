@@ -38,7 +38,9 @@ for i in range(0, len(ids), 50):
     for v in api("videos", part="snippet,statistics,contentDetails", id=",".join(ids[i:i + 50])).get("items", []):
         st, pub = v["statistics"], datetime.datetime.fromisoformat(v["snippet"]["publishedAt"].replace("Z", "+00:00"))
         vids.append({"id": v["id"], "title": v["snippet"]["title"], "published": pub.date().isoformat(), "age_h": round((NOW - pub).total_seconds() / 3600, 1),
-                     "views": int(st.get("viewCount", 0)), "likes": int(st.get("likeCount", 0)), "comments": int(st.get("commentCount", 0))})
+                     "views": int(st.get("viewCount", 0)), "likes": int(st.get("likeCount", 0)), "comments": int(st.get("commentCount", 0)),
+                     "dur": (lambda m: sum(int(x or 0) * k for x, k in zip(m.groups(), (3600, 60, 1))) if m else 0)(
+                         re.fullmatch(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", v.get("contentDetails", {}).get("duration", "")))})
 
 # ---------- private numbers (Analytics API, optional): retention and subscribers gained per video ----------
 ana = False
@@ -129,8 +131,8 @@ old.sort(key=lambda v: (v.get("subs", 0), v["views"]), reverse=True) if ana else
 
 def row(v):
     extra = f" | {v.get('avg_pct', '–')} % | {v.get('subs', '–')}" if ana else ""
-    return f"| {v['title'][:60]} | {v['format']} | {v['views']} | {v['x_median'] or '–'}× | {v['eng_pct']} %{extra} | {v['diversite'][:70]} |"
-head = "| Vidéo | Format | Vues | × médiane | J'aime+comm. |" + (" % regardé | Abonnés gagnés |" if ana else "") + " Diversité (NOTES.md) |"
+    return f"| {v['title'][:60]} | {v['format']} | {v.get('dur', 0)} s | {v['views']} | {v['x_median'] or '–'}× | {v['eng_pct']} %{extra} | {v['diversite'][:70]} |"
+head = "| Vidéo | Format | Durée | Vues | × médiane | J'aime+comm. |" + (" % regardé | Abonnés gagnés |" if ana else "") + " Diversité (NOTES.md) |"
 sep = "|" + "---|" * (head.count("|") - 1)
 L = [f"# Nos chiffres (@{OWN.lstrip('@')}) — {NOW.date().isoformat()}", "",
      f"{subs} abonnés, {len(vids)} vidéos, médiane {int(med)} vues (vidéos de plus de 48 h)." +

@@ -79,11 +79,15 @@ si on coupe le son, on comprend quand même de quoi on parle, ce qui pose probl�
   Les plans au ras du sol et les travellings le long d'un objet marchent très bien. Quand quelque chose bouge, **la caméra le suit**
   (`follow`, `track`), tourne autour d'un lieu pour le révéler (`orbit`) et tremble sur les chocs (`shake`). Varie l'échelle :
   au moins un plan large spectaculaire (le lieu, le danger) et au moins un gros plan sur l'objet clé.
-- **Durée** : celle de la voix, **1 min 45 à 2 min 30** (280 à 380 mots), choix de la chaîne depuis le 25/11/2026 : on raconte **toute** l'histoire
-  au lieu d'un résumé. Jamais plus de 2 min 55 (au-delà de 3 min, YouTube ne la traite plus comme un Short). 1080x1920, 30 i/s.
+- **Durée** : celle de la voix, **choisie par le rédacteur pour chaque histoire**, entre **45 s et 2 min 30** (≈ 115 à 390 mots).
+  Il n'y a **pas de durée par défaut** : une histoire simple avec un seul retournement tient en 45 s-1 min ; une histoire avec deux ou trois
+  étapes de Progression en 1 min 10-1 min 40 ; seule une histoire riche (plusieurs rebondissements vrais, un Climax spectaculaire) va jusqu'à 2 min 30.
+  La règle : **on s'arrête quand l'histoire est finie**, jamais de remplissage pour « faire long », jamais de coupe qui la rend incompréhensible.
+  Les durées doivent donc **varier d'une vidéo à l'autre** : si les 3 dernières ont presque la même durée (± 10 s), vérifie que celle-ci
+  en a vraiment besoin. Jamais plus de 2 min 55 (au-delà de 3 min, YouTube ne la traite plus comme un Short). 1080x1920, 30 i/s.
   Une vidéo longue ne tient que si **chaque instant** relance : changement de plan toutes les 2-4 s, nouveau lieu ou nouvelle ambiance à chaque acte,
   au moins 3 décors ou zones différentes, et le moteur des relances du script (section « Idées et scripts »). Surveille le % regardé dans `stats.md` :
-  s'il tombe sous 35 % sur les vidéos longues, il faut raccourcir.
+  compare-le **selon la durée** : si les vidéos de plus de 1 min 30 tombent sous 35 % alors que les courtes tiennent, raccourcis les suivantes.
 - **Son** : **musique rapide et rythmée (110 à 130 BPM)**, jamais une nappe lente sous toute la vidéo ; elle peut ralentir ou se couper
   une seconde juste avant le Climax, puis repartir plus fort. Musique à **−12 dB** sous la voix et bruitages ≤ −8 dB (toujours via `tools/mix.py`, réglables avec `MUSIC_DB` / `SFX_DB`) :
   la voix doit rester claire sur un haut-parleur de téléphone. Sting sur le pivot (« Sauf que… »), bruitage sur chaque action visible
@@ -248,7 +252,7 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
     harcèlement grave, suicide) : on reste sur des émotions du quotidien, avec de la bienveillance.
   - Le titre parle au spectateur et promet une émotion ou une leçon (« Il a aidé tout le monde… sauf lui-même »), sans reprendre
     les titres ni les histoires d'autres chaînes (règle 100 % original : on prend l'idée d'une émotion, jamais une histoire existante).
-  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), 280-380 mots, une action visible par phrase, fin qui reboucle.
+  - Tout le reste ne change pas : règle n°1 (on comprend sans le son), durée choisie selon l'histoire, une action visible par phrase, fin qui reboucle.
     Les émotions se jouent à l'image : expressions franches, signes automatiques (sueur, « ! », cœur), lumière qui passe du gris (`froid`, `soir`)
     au chaud (`dore`) au moment du retournement.
 - Les « Histoire vraie » peuvent elles aussi **parler au spectateur** : la dernière phrase relie le fait à sa vie
@@ -257,7 +261,7 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
 ## Idées et scripts (workflow `idees.yml`)
 - Formule du script : accroche paradoxale dès la 1re phrase, 2-3 détails qui montent, pivot « Sauf que… » / « En fait… », chute ironique au dernier mot,
   qui renvoie à la première phrase (boucle).
-  **280 à 380 mots** (la voix Riko lit ~2,6 mots/s : 330 mots ≈ 2 min 07), phrases de 8-15 mots,
+  **Longueur choisie selon l'histoire** (la voix lit ~2,6 mots/s : 120 mots ≈ 46 s, 200 mots ≈ 1 min 17, 330 mots ≈ 2 min 07), phrases de 8-15 mots,
   nombres écrits en lettres, aucun texte qui décrit ce qu'on voit déjà.
 - **Structure HPC : Hook, Progression, Climax** (la mécanique des Shorts qui font des dizaines de millions de vues, du type
   « on apporte une glacière de neige dans le désert pour faire la première bataille de boules de neige » : un objectif clair et
@@ -271,7 +275,11 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
     un chiffre qui monte, un objet qui se construit, une distance qui se réduit. Jamais de pause explicative qui arrête l'action.
   - **C, le Climax (~15 % de la fin)** : le moment de vérité, le **plus spectaculaire visuellement** de la vidéo (ça marche, ça explose,
     la foule voit enfin), la réponse au Hook, puis une chute courte qui reboucle sur la 1re image. Rien après le Climax qui traîne.
-  Repères de durée sur 2 min : Hook 5 s, contexte minimum 15 s, Progression 80 s en 3 ou 4 étapes, Climax et chute 20 s.
+  Proportions, quelle que soit la durée : Hook ≈ 5 s, contexte le strict minimum, Progression ≈ 70-75 % (1 étape par tranche de 20-25 s),
+  Climax et chute ≈ 15 %. **C'est le nombre d'étapes vraies et intéressantes qui fixe la durée**, pas l'inverse.
+- **Le rédacteur choisit la durée** avant d'écrire : il liste les étapes vraiment fortes de l'histoire (sources à l'appui), en déduit la durée
+  (une seule étape → ~50 s ; deux → ~1 min 10 ; trois → ~1 min 35 ; quatre et plus → jusqu'à 2 min 30), regarde la durée des 3 dernières
+  vidéos pour ne pas toujours faire pareil, et écrit dans `NOTES.md` une ligne « Durée : <secondes visées> s, parce que <nombre d'étapes et raison> ».
   **Une relance toutes les 20 à 30 s** : une question laissée ouverte (« Mais personne ne savait encore pourquoi… »), un chiffre choc,
   un « et ce n'est pas le pire » ; jamais de résumé, jamais de phrase de remplissage. Le spectateur doit toujours attendre quelque chose.
   Pas de « tu vas voir », pas d'annonce du plan : on raconte.

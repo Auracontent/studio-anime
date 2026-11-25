@@ -20,7 +20,7 @@ def row(name, ok, value, target, note=''):
 script = open(f'{EP}/script.txt', encoding='utf-8').read().strip() if os.path.exists(f'{EP}/script.txt') else ''
 words = len(re.findall(r"[\wÀ-ÿ'’-]+", script))
 if script:
-    row('Longueur du script', 'OK' if 260 <= words <= 400 else 'A REVOIR', f'{words} mots', '280-380 mots (1 min 45-2 min 30)')
+    row('Longueur du script', 'OK' if 105 <= words <= 400 else 'A REVOIR', f'{words} mots', '115-390 mots selon l\'histoire (45 s-2 min 30)')
     first = re.split(r'(?<=[.!?…])\s', script)[0]
     date_first = bool(re.match(r"^\s*(en|le|au|dans les|vers)?\s*(l'an\s+)?(mille|deux mille|\d{3,4}|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)", first, re.I))
     row('Ouverture', 'A REVOIR' if date_first else 'OK', f'« {first[:70]}{"…" if len(first) > 70 else ""} »',
@@ -63,7 +63,7 @@ if VID and os.path.exists(VID):
 # ---------- image ----------
 if VID and os.path.exists(VID):
     dur = float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', VID], capture_output=True, text=True).stdout.strip() or 0)
-    row('Durée', 'OK' if 100 <= dur <= 155 else 'A REVOIR', f'{dur:.1f} s', '1 min 45-2 min 30')
+    row('Durée', 'OK' if 40 <= dur <= 155 else 'A REVOIR', f'{dur:.1f} s', '45 s-2 min 30 selon l\'histoire')
     if dur > 178: blocking.append(f'vidéo trop longue ({dur:.0f} s) : au-delà de 3 min ce n\'est plus un Short')
     W, H, FPS = 72, 128, 10
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', VID, '-vf', f'fps={FPS},scale={W}:{H},format=gray', '-f', 'rawvideo', '-'], capture_output=True).stdout
