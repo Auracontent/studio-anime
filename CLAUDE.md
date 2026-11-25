@@ -232,7 +232,8 @@ Les fichiers générés (`engine/lib/`, `engine/toonbase.js`, `engine/toon.js`, 
     La finition lance `tools/qa.py`, qui écrit `out/QA.md` (durée, mots, ouverture, plan, effets, musique, images figées, images sombres).
 
 ## Deux formats : « Histoire vraie » et « Vie quotidienne »
-La chaîne alterne deux formats. **Jamais deux fois de suite le même** : regarde le format du dernier script (`NOTES.md`, ligne « Format : »).
+La chaîne publie un format par créneau : **Histoire vraie à 12h17**, **Vie quotidienne à 18h07**. Le format d'un script est fixé
+par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> Histoire vraie), et `tools/publish.py` choisit la vidéo selon le créneau.
 - **Histoire vraie** (le format historique) : un fait réel et surprenant, vérifié, daté, sourcé (voir « Diversité des sujets »).
 - **Vie quotidienne** (nouveau) : une petite histoire **inventée** de la vie de tous les jours, qui touche une émotion que tout le monde connaît
   (la honte, la fierté, la jalousie, l'injustice, la gentillesse qu'on ne voit pas, l'amitié, le regret, la persévérance) et qui finit
