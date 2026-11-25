@@ -1,0 +1,394 @@
+{
+ "duration": 59.990583,
+ "frames30": 1800,
+ "source": "whisper",
+ "segments": [
+  [
+   0.0,
+   3.351792
+  ],
+  [
+   3.809333,
+   4.38975
+  ],
+  [
+   4.925875,
+   5.53125
+  ],
+  [
+   5.865083,
+   6.820625
+  ],
+  [
+   7.467792,
+   8.306042
+  ],
+  [
+   8.452333,
+   9.759708
+  ],
+  [
+   10.42475,
+   13.812833
+  ],
+  [
+   14.196458,
+   14.8505
+  ],
+  [
+   15.7485,
+   16.352125
+  ],
+  [
+   16.662167,
+   17.240125
+  ],
+  [
+   17.658333,
+   18.179667
+  ],
+  [
+   18.712542,
+   20.535167
+  ],
+  [
+   21.442458,
+   22.730542
+  ],
+  [
+   23.33175,
+   24.016042
+  ],
+  [
+   24.680583,
+   25.379375
+  ],
+  [
+   26.054375,
+   26.8755
+  ],
+  [
+   27.005625,
+   27.955375
+  ],
+  [
+   29.008625,
+   29.546625
+  ],
+  [
+   29.922458,
+   30.70225
+  ],
+  [
+   30.843292,
+   31.114917
+  ],
+  [
+   31.242667,
+   32.253708
+  ],
+  [
+   32.953875,
+   34.075042
+  ],
+  [
+   34.414208,
+   37.038042
+  ],
+  [
+   38.072083,
+   39.738375
+  ],
+  [
+   40.122792,
+   41.670542
+  ],
+  [
+   42.576583,
+   43.803667
+  ],
+  [
+   44.77775,
+   45.238792
+  ],
+  [
+   45.951833,
+   46.981125
+  ],
+  [
+   47.925417,
+   48.787333
+  ],
+  [
+   49.338583,
+   50.351375
+  ],
+  [
+   51.127708,
+   51.949333
+  ],
+  [
+   52.960333,
+   54.915125
+  ],
+  [
+   55.2765,
+   56.938958
+  ],
+  [
+   57.672375,
+   58.301167
+  ],
+  [
+   58.997875,
+   59.436667
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Tout le chantier riait de son mur,",
+   "s": 0.0,
+   "e": 1.56
+  },
+  {
+   "text": "parce qu'In\u00e8s posait chaque brique \u00e0 la main,",
+   "s": 1.56,
+   "e": 3.36
+  },
+  {
+   "text": "une par une.",
+   "s": 3.68,
+   "e": 4.38
+  },
+  {
+   "text": "Elle a seize ans,",
+   "s": 4.82,
+   "e": 5.52
+  },
+  {
+   "text": "et c'est sa premi\u00e8re semaine.",
+   "s": 5.52,
+   "e": 6.74
+  },
+  {
+   "text": "Son chef,",
+   "s": 7.42,
+   "e": 7.82
+  },
+  {
+   "text": "Victor,",
+   "s": 7.82,
+   "e": 8.16
+  },
+  {
+   "text": "soupire en regardant sa montre.",
+   "s": 8.16,
+   "e": 9.68
+  },
+  {
+   "text": "Le mur de Paco,",
+   "s": 10.32,
+   "e": 11.08
+  },
+  {
+   "text": "lui,",
+   "s": 11.08,
+   "e": 11.3
+  },
+  {
+   "text": "monte \u00e0 toute vitesse.",
+   "s": 11.3,
+   "e": 12.1
+  },
+  {
+   "text": "Il tape,",
+   "s": 12.54,
+   "e": 12.86
+  },
+  {
+   "text": "il plaisante,",
+   "s": 13.1,
+   "e": 13.66
+  },
+  {
+   "text": "il ne v\u00e9rifie rien.",
+   "s": 14.06,
+   "e": 14.84
+  },
+  {
+   "text": "In\u00e8s,",
+   "s": 15.66,
+   "e": 16.06
+  },
+  {
+   "text": "elle,",
+   "s": 16.14,
+   "e": 16.32
+  },
+  {
+   "text": "tend un fil,",
+   "s": 16.64,
+   "e": 17.1
+  },
+  {
+   "text": "pose un niveau,",
+   "s": 17.64,
+   "e": 18.14
+  },
+  {
+   "text": "et recommence si une brique penche d'un doigt.",
+   "s": 18.14,
+   "e": 20.56
+  },
+  {
+   "text": "Le soir,",
+   "s": 21.38,
+   "e": 21.7
+  },
+  {
+   "text": "Paco a fini trois m\u00e8tres.",
+   "s": 21.86,
+   "e": 22.76
+  },
+  {
+   "text": "In\u00e8s,",
+   "s": 23.28,
+   "e": 23.58
+  },
+  {
+   "text": "un seul.",
+   "s": 23.62,
+   "e": 23.92
+  },
+  {
+   "text": "Tout le monde se moque d'elle.",
+   "s": 24.64,
+   "e": 25.3
+  },
+  {
+   "text": "Elle a les mains en sang,",
+   "s": 25.3,
+   "e": 26.72
+  },
+  {
+   "text": "mais elle ne change rien.",
+   "s": 27.02,
+   "e": 27.94
+  },
+  {
+   "text": "Puis,",
+   "s": 28.82,
+   "e": 29.12
+  },
+  {
+   "text": "la nuit,",
+   "s": 29.2,
+   "e": 29.5
+  },
+  {
+   "text": "le vent se l\u00e8ve,",
+   "s": 29.94,
+   "e": 30.64
+  },
+  {
+   "text": "et la pluie tombe en rafales.",
+   "s": 30.64,
+   "e": 32.92
+  },
+  {
+   "text": "Le mur de Paco tremble.",
+   "s": 32.92,
+   "e": 33.94
+  },
+  {
+   "text": "Une brique glisse,",
+   "s": 34.34,
+   "e": 35.18
+  },
+  {
+   "text": "puis dix,",
+   "s": 35.36,
+   "e": 35.9
+  },
+  {
+   "text": "puis tout s'\u00e9croule dans la boue.",
+   "s": 35.9,
+   "e": 37.24
+  },
+  {
+   "text": "Sauf que celui d'In\u00e8s reste debout,",
+   "s": 37.84,
+   "e": 39.72
+  },
+  {
+   "text": "droit comme un fil,",
+   "s": 40.08,
+   "e": 40.94
+  },
+  {
+   "text": "sous la temp\u00eate.",
+   "s": 40.94,
+   "e": 41.62
+  },
+  {
+   "text": "Au matin,",
+   "s": 42.48,
+   "e": 42.84
+  },
+  {
+   "text": "Victor pose la main dessus.",
+   "s": 42.98,
+   "e": 43.8
+  },
+  {
+   "text": "Il ne dit rien.",
+   "s": 44.74,
+   "e": 45.26
+  },
+  {
+   "text": "Il lui tend les cl\u00e9s du chantier.",
+   "s": 45.88,
+   "e": 46.98
+  },
+  {
+   "text": "Paco ramasse ses briques,",
+   "s": 47.74,
+   "e": 48.78
+  },
+  {
+   "text": "et pour la premi\u00e8re fois,",
+   "s": 48.78,
+   "e": 49.98
+  },
+  {
+   "text": "il demande :",
+   "s": 50.0,
+   "e": 50.64
+  },
+  {
+   "text": "\u00ab Montre-moi comment tu fais.",
+   "s": 50.64,
+   "e": 51.92
+  },
+  {
+   "text": "\u00bb Ce que tu fais lentement et bien aujourd'hui tiendra encore quand la temp\u00eate viendra.",
+   "s": 51.92,
+   "e": 56.98
+  },
+  {
+   "text": "Alors,",
+   "s": 57.42,
+   "e": 57.78
+  },
+  {
+   "text": "ne te presse pas :",
+   "s": 57.78,
+   "e": 58.627
+  },
+  {
+   "text": "pose ta brique.",
+   "s": 58.627,
+   "e": 59.42
+  }
+ ]
+}
