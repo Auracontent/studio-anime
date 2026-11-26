@@ -1,0 +1,327 @@
+{
+ "duration": 58.160583,
+ "frames30": 1745,
+ "source": "whisper",
+ "segments": [
+  [
+   0.0,
+   1.689708
+  ],
+  [
+   2.344625,
+   3.086542
+  ],
+  [
+   3.724625,
+   5.356125
+  ],
+  [
+   6.08125,
+   6.588542
+  ],
+  [
+   6.824,
+   7.6275
+  ],
+  [
+   7.986625,
+   8.575667
+  ],
+  [
+   9.289208,
+   9.397083
+  ],
+  [
+   9.530917,
+   10.793208
+  ],
+  [
+   11.605125,
+   11.848875
+  ],
+  [
+   12.195542,
+   12.781
+  ],
+  [
+   13.807,
+   14.645375
+  ],
+  [
+   15.692583,
+   17.747708
+  ],
+  [
+   18.363083,
+   18.930333
+  ],
+  [
+   19.112625,
+   19.773375
+  ],
+  [
+   20.393042,
+   23.071667
+  ],
+  [
+   23.592333,
+   24.449917
+  ],
+  [
+   24.627,
+   26.171417
+  ],
+  [
+   26.588917,
+   27.072792
+  ],
+  [
+   28.103,
+   29.29125
+  ],
+  [
+   30.091542,
+   30.679542
+  ],
+  [
+   30.8345,
+   32.862
+  ],
+  [
+   33.098625,
+   33.517833
+  ],
+  [
+   34.278,
+   35.475667
+  ],
+  [
+   35.970583,
+   36.749167
+  ],
+  [
+   37.520708,
+   37.653125
+  ],
+  [
+   37.81125,
+   38.519667
+  ],
+  [
+   38.811167,
+   39.490167
+  ],
+  [
+   40.455333,
+   43.823125
+  ],
+  [
+   44.800917,
+   45.637958
+  ],
+  [
+   46.829125,
+   47.854417
+  ],
+  [
+   48.513042,
+   49.242458
+  ],
+  [
+   50.218375,
+   51.059792
+  ],
+  [
+   51.247792,
+   52.068458
+  ],
+  [
+   52.909458,
+   53.288333
+  ],
+  [
+   54.297042,
+   55.497458
+  ],
+  [
+   56.322542,
+   56.476542
+  ],
+  [
+   56.702417,
+   57.653958
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Cet aimant tombe au ralenti dans ce tube\u2026 et rien ne le touche.",
+   "s": 0.0,
+   "e": 3.06
+  },
+  {
+   "text": "Dans un tube en plastique,",
+   "s": 3.92,
+   "e": 4.76
+  },
+  {
+   "text": "il tombe d'un coup.",
+   "s": 4.8,
+   "e": 5.32
+  },
+  {
+   "text": "Dans le cuivre,",
+   "s": 6.04,
+   "e": 6.54
+  },
+  {
+   "text": "il flotte presque,",
+   "s": 6.86,
+   "e": 7.5
+  },
+  {
+   "text": "comme dans du miel.",
+   "s": 7.9,
+   "e": 8.46
+  },
+  {
+   "text": "Pourtant,",
+   "s": 9.42,
+   "e": 9.72
+  },
+  {
+   "text": "le cuivre n'attire pas les aimants.",
+   "s": 9.78,
+   "e": 10.8
+  },
+  {
+   "text": "Essaie,",
+   "s": 10.8,
+   "e": 12.16
+  },
+  {
+   "text": "il ne se passe rien.",
+   "s": 12.16,
+   "e": 12.74
+  },
+  {
+   "text": "Alors qui le retient ?",
+   "s": 13.74,
+   "e": 15.94
+  },
+  {
+   "text": "Un Parisien a trouv\u00e9 en mille huit cent cinquante-cinq.",
+   "s": 15.94,
+   "e": 18.28
+  },
+  {
+   "text": "L\u00e9on Foucault,",
+   "s": 18.28,
+   "e": 18.94
+  },
+  {
+   "text": "celui du pendule.",
+   "s": 19.12,
+   "e": 19.72
+  },
+  {
+   "text": "Il fait tourner un disque de cuivre entre les p\u00f4les d'un aimant.",
+   "s": 20.58,
+   "e": 23.08
+  },
+  {
+   "text": "D\u00e8s que l'aimant agit,",
+   "s": 23.7,
+   "e": 24.44
+  },
+  {
+   "text": "le disque devient dur \u00e0 tourner\u2026 et il chauffe.",
+   "s": 24.66,
+   "e": 27.1
+  },
+  {
+   "text": "Sauf que rien ne frotte le disque.",
+   "s": 27.8,
+   "e": 29.3
+  },
+  {
+   "text": "En fait,",
+   "s": 30.04,
+   "e": 30.62
+  },
+  {
+   "text": "un aimant qui bouge fait na\u00eetre de petits courants dans le cuivre.",
+   "s": 30.84,
+   "e": 33.54
+  },
+  {
+   "text": "Ces courants fabriquent un autre aimant,",
+   "s": 34.18,
+   "e": 35.54
+  },
+  {
+   "text": "qui repousse le premier.",
+   "s": 35.54,
+   "e": 36.7
+  },
+  {
+   "text": "Plus l'aimant va vite,",
+   "s": 37.78,
+   "e": 38.42
+  },
+  {
+   "text": "plus le frein est fort.",
+   "s": 38.84,
+   "e": 39.44
+  },
+  {
+   "text": "Aujourd'hui,",
+   "s": 39.44,
+   "e": 41.16
+  },
+  {
+   "text": "ces freins invisibles ralentissent des montagnes russes et certains trains,",
+   "s": 41.16,
+   "e": 44.52
+  },
+  {
+   "text": "sans aucun frottement.",
+   "s": 44.52,
+   "e": 45.64
+  },
+  {
+   "text": "Pas d'usure,",
+   "s": 46.76,
+   "e": 47.52
+  },
+  {
+   "text": "pas de bruit,",
+   "s": 47.52,
+   "e": 47.86
+  },
+  {
+   "text": "juste de la physique.",
+   "s": 48.36,
+   "e": 49.12
+  },
+  {
+   "text": "Et dans le tube,",
+   "s": 50.46,
+   "e": 50.94
+  },
+  {
+   "text": "l'aimant ressort enfin,",
+   "s": 50.94,
+   "e": 52.04
+  },
+  {
+   "text": "tout doucement.",
+   "s": 52.8,
+   "e": 53.32
+  },
+  {
+   "text": "Il tombait au ralenti\u2026 et personne ne l'avait touch\u00e9.",
+   "s": 53.32,
+   "e": 57.68
+  }
+ ]
+}

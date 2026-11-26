@@ -249,6 +249,10 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
       p.poly(cake, "#e3a14a", 2.4 * u); p.stroke([[hx - w + 6 * u, by - 12 * u], [hx + w - 6 * u, by - 12 * u]], 2 * u, "#a8641e");
       if (kind !== "plat") p.ell(hx, by - top * u + 1 * u, 22 * u, 5 * u, "#f6d58a", 1.6 * u); break; }
     case "fork": { p.stroke([[hx, hy + 14 * u], [hx, hy - 30 * u]], 4 * u, "#c9ced6"); for (const k of [-1, 0, 1]) p.stroke([[hx + k * 5 * u, hy - 30 * u], [hx + k * 5 * u, hy - 44 * u]], 2.4 * u, "#c9ced6"); p.dot(hx, hy - 28 * u, 5 * u, "#e3a14a"); break; }
+    case "magnet": { // aimant en fer à cheval (Pourkoipa original) : U rouge, bouts argentés, ouvert vers l'avant
+      const path = [[hx + side * 30 * u, hy - 15 * u], [hx, hy - 15 * u], [hx - side * 12 * u, hy - 8 * u], [hx - side * 14 * u, hy], [hx - side * 12 * u, hy + 8 * u], [hx, hy + 15 * u], [hx + side * 30 * u, hy + 15 * u]];
+      p.stroke(path, 15 * u, "#271925"); p.stroke(path, 9 * u, "#e23d32");
+      for (const k of [-1, 1]) { const tip = [[hx + side * 20 * u, hy + k * 15 * u], [hx + side * 31 * u, hy + k * 15 * u]]; p.stroke(tip, 15 * u, "#271925"); p.stroke(tip, 9 * u, "#d8dee6"); } break; }
     case "mug": { const r = rrect(hx - 12 * u, hy - 22 * u, hx + 12 * u, hy + 6 * u, 3 * u); p.poly(r, "#e8e2d6", 2.4 * u); p.arc(hx + side * 13 * u, hy - 8 * u, 6 * u, 7 * u, side > 0 ? 270 : 90, side > 0 ? 450 : 270, 2.4 * u);
       g.save(); g.globalAlpha = 0.6; p.stroke([[hx - 4 * u, hy - 28 * u], [hx - 1 * u, hy - 38 * u], [hx - 5 * u, hy - 46 * u]], 2 * u, "#ffffff"); g.restore(); break; }
     case "mugCold": { const r = rrect(hx - 12 * u, hy - 22 * u, hx + 12 * u, hy + 6 * u, 3 * u); p.poly(r, "#bcd0e6", 2.4 * u); p.arc(hx + side * 13 * u, hy - 8 * u, 6 * u, 7 * u, side > 0 ? 270 : 90, side > 0 ? 450 : 270, 2.4 * u); break; }   // mug de café froid (bleuté, sans vapeur)
