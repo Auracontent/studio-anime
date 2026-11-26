@@ -1,18 +1,18 @@
 # Nos chiffres (@Pourkoipa) — 2026-11-26
 
-75 abonnés, 18 vidéos, médiane 1695 vues (vidéos de plus de 48 h). Rétention et abonnés par vidéo indisponibles (secrets YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN absents).
+75 abonnés, 18 vidéos, médiane 1697 vues (vidéos de plus de 48 h). Rétention et abonnés par vidéo indisponibles (secrets YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN absents).
 
 Classement par vues (le haut = ce qu'il faut refaire, sous un autre angle ; le bas = ce qu'il faut éviter) :
 
 | Vidéo | Format | Durée | Vues | × médiane | J'aime+comm. | Diversité (NOTES.md) |
 |---|---|---|---|---|---|---|
-| Ce boulet ne bouge pas… c'est la Terre qui tourne 🌍 | Histoire vraie | 46 s | 9524 | 5.62× | 3.0 % | physique/science, 1851, français (Paris, Panthéon, Foucault). Différen |
+| Ce boulet ne bouge pas… c'est la Terre qui tourne 🌍 | Histoire vraie | 46 s | 9524 | 5.61× | 3.0 % | physique/science, 1851, français (Paris, Panthéon, Foucault). Différen |
 | Pourquoi la SNCF CHAUFFE ses rails en hiver ? 🔥 | Histoire vraie | 55 s | 2345 | 1.38× | 2.2 % |  |
 | Ce canari s'évanouissait exprès pour sauver les mineurs 🐤 | Histoire vraie | 46 s | 2125 | 1.25× | 2.2 % | métier insolite / science, fin XIXe-XXe, universel (Grande-Bretagne) ; |
 | Il allumait la lumière chaque matin… personne ne l'a vu 💡 | Vie quotidienne | 40 s | 1803 | 1.06× | 3.6 % | vie quotidienne (bureau), émotion = gratitude/gentillesse invisible ;  |
 | Le faux Paris qui a détourné les bombes allemandes 💣 #ww1 #s | Histoire vraie | 61 s | 1796 | 1.06× | 2.4 % |  |
 | Les TAXIS qui ont sauvé Paris en 1914 🚕 | Histoire vraie | 69 s | 1750 | 1.03× | 2.8 % |  |
-| Ce facteur a bâti un PALAIS avec des cailloux 🏰 | Histoire vraie | 53 s | 1695 | 1.0× | 4.4 % | métier insolite / art naïf, 1879-1912, français (Drôme). Différent des |
+| Ce facteur a bâti un PALAIS avec des cailloux 🏰 | Histoire vraie | 53 s | 1697 | 1.0× | 4.4 % | métier insolite / art naïf, 1879-1912, français (Drôme). Différent des |
 | Ces pigeons ont livré 100 000 lettres à Paris 🕊️ | Histoire vraie | 47 s | 1588 | 0.94× | 2.1 % | communication / invention (microfilm), hiver 1870-1871, français (sièg |
 | Deux boules, un seul poids : ta main te ment 🤯 | Histoire vraie | 46 s | 1300 | 0.77× | 3.3 % | psychologie / perception, 1891 (Nancy), **universel** avec chercheur f |
 | Ce phare a vu plus loin avec MOINS de verre 💡 | Histoire vraie | 58 s | 1294 | 0.76× | 2.9 % | ingénierie/optique + mer, 1823, français (invention + lieu) ; diffère  |
@@ -22,12 +22,12 @@ Classement par vues (le haut = ce qu'il faut refaire, sous un autre angle ; le b
 
 Trop récentes pour juger (moins de 48 h) :
 
-- Tout le monde riait de son mur… jusqu'à la tempête 🧱 : 1914 vues en 8.0 h
-- Ce bouton piéton ne fait RIEN… et tu appuies quand même 🚦 : 1247 vues en 13.5 h
-- Il a oublié de ranger son labo… et ça a sauvé des millions de vies 🧫 : 1511 vues en 13.8 h
-- Ils ont payé pour tuer les rats… il y en a eu PLUS 🐀 : 1272 vues en 34.1 h
-- Elle est tombée dix fois… puis plus jamais 🚲 : 2134 vues en 37.8 h
+- Tout le monde riait de son mur… jusqu'à la tempête 🧱 : 1915 vues en 8.0 h
+- Ce bouton piéton ne fait RIEN… et tu appuies quand même 🚦 : 1246 vues en 13.6 h
+- Il a oublié de ranger son labo… et ça a sauvé des millions de vies 🧫 : 1518 vues en 13.9 h
+- Ils ont payé pour tuer les rats… il y en a eu PLUS 🐀 : 1272 vues en 34.2 h
+- Elle est tombée dix fois… puis plus jamais 🚲 : 2172 vues en 37.9 h
 
-**Histoire vraie** : 12 vidéos, médiane 1641 vues
+**Histoire vraie** : 12 vidéos, médiane 1642 vues
 
 **Vie quotidienne** : 1 vidéos, médiane 1803 vues
