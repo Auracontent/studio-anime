@@ -2,7 +2,7 @@
 
 Format : Vie quotidienne
 Série : aucune
-Durée : 55 s, ~150 mots, parce que trois étapes courtes (le refus, l'essai de la pomme coupée qui ne suffit pas, la pluie et la bâche) ; plus courte que roue-amir (62 s) et mur-ines (75 s), un seul retournement net.
+Durée : 68 s, ~177 mots, parce que trois étapes courtes (le refus, l'essai de la pomme coupée qui ne suffit pas, la pluie et la bâche) ; proche de roue-amir (62 s) et mur-ines (75 s), un seul retournement net.
 Chiffres : le boulet de Foucault (75 %) s'ouvre sur un objet plein cadre qui bouge en lumière chaude ; les ouvertures « personnage debout qui ne fait rien » tombent à 54-55 %. J'ouvre sur une cagette de pommes qui bascule et roule plein cadre en lumière chaude, avec l'enjeu dès la 1re phrase (12 mots). Les Vie quotidienne tiennent bien (≈ 1,8-2,2k vues) : je garde défi + retournement.
 Public : stats d'audience indisponibles (secrets Analytics absents) ; vocabulaire simple, marché = lieu universel, rien qui ne parle qu'aux Français.
 Diversité : vie quotidienne (marché), émotion = accueil du nouveau / préjugé -> générosité ; les dernières VQ : bureau (gratitude), école (persévérance), cuisine (honte), chantier (patience), descente (jalousie, roue-amir). Autre lieu (marché en plein air, pluie), autre émotion. Fiction : ni date ni lieu réel, rien de présenté comme vrai ; pas de sujet grave. Décor : marché (étals, parasols, bâches) ; réutiliser/écrire `engine/library/marche.js`.
