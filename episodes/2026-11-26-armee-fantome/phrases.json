@@ -1,0 +1,355 @@
+{
+ "duration": 66.410583,
+ "frames30": 1992,
+ "source": "whisper",
+ "segments": [
+  [
+   0.0,
+   1.840042
+  ],
+  [
+   2.563333,
+   3.743083
+  ],
+  [
+   4.086333,
+   7.309417
+  ],
+  [
+   7.815208,
+   8.331375
+  ],
+  [
+   8.92225,
+   9.679458
+  ],
+  [
+   9.845583,
+   12.092667
+  ],
+  [
+   12.488375,
+   12.74175
+  ],
+  [
+   13.007083,
+   13.278917
+  ],
+  [
+   13.641375,
+   16.433583
+  ],
+  [
+   17.315333,
+   19.191833
+  ],
+  [
+   19.804125,
+   20.439958
+  ],
+  [
+   20.7995,
+   21.44925
+  ],
+  [
+   22.028458,
+   23.415792
+  ],
+  [
+   24.102792,
+   25.857292
+  ],
+  [
+   26.260625,
+   28.29775
+  ],
+  [
+   28.652375,
+   29.638542
+  ],
+  [
+   30.105375,
+   31.699625
+  ],
+  [
+   32.342583,
+   34.181625
+  ],
+  [
+   34.339917,
+   35.563417
+  ],
+  [
+   36.236917,
+   39.528333
+  ],
+  [
+   39.681917,
+   39.773292
+  ],
+  [
+   40.3735,
+   40.960458
+  ],
+  [
+   41.518375,
+   42.654167
+  ],
+  [
+   42.939208,
+   43.99125
+  ],
+  [
+   44.600042,
+   46.033
+  ],
+  [
+   46.479,
+   48.329167
+  ],
+  [
+   49.00825,
+   50.163792
+  ],
+  [
+   50.557208,
+   51.687875
+  ],
+  [
+   52.258458,
+   52.865333
+  ],
+  [
+   53.203792,
+   55.016792
+  ],
+  [
+   55.418375,
+   55.863333
+  ],
+  [
+   56.235542,
+   56.487583
+  ],
+  [
+   56.625917,
+   57.331583
+  ],
+  [
+   57.805125,
+   57.914333
+  ],
+  [
+   58.132542,
+   59.174167
+  ],
+  [
+   59.713458,
+   60.713417
+  ],
+  [
+   61.462292,
+   63.089583
+  ],
+  [
+   63.958333,
+   64.544667
+  ],
+  [
+   65.000375,
+   65.816667
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "Ces soldats soul\u00e8vent un char d'assaut \u00e0 bout de bras\u2026 parce qu'il est gonfl\u00e9 \u00e0 l'air.",
+   "s": 0.0,
+   "e": 4.42
+  },
+  {
+   "text": "En mille neuf cent quarante-quatre,",
+   "s": 4.42,
+   "e": 5.644
+  },
+  {
+   "text": "l'arm\u00e9e am\u00e9ricaine doit tromper les Allemands.",
+   "s": 5.644,
+   "e": 7.24
+  },
+  {
+   "text": "Sa solution :",
+   "s": 7.78,
+   "e": 8.553
+  },
+  {
+   "text": "onze cents hommes,",
+   "s": 8.553,
+   "e": 9.64
+  },
+  {
+   "text": "dont des peintres,",
+   "s": 9.8,
+   "e": 10.5
+  },
+  {
+   "text": "des d\u00e9corateurs et des ing\u00e9nieurs du son.",
+   "s": 10.58,
+   "e": 12.08
+  },
+  {
+   "text": "La nuit,",
+   "s": 12.88,
+   "e": 13.24
+  },
+  {
+   "text": "ils gonflent des chars,",
+   "s": 13.7,
+   "e": 14.56
+  },
+  {
+   "text": "des camions et des canons en caoutchouc.",
+   "s": 14.8,
+   "e": 16.44
+  },
+  {
+   "text": "De loin,",
+   "s": 17.24,
+   "e": 17.6
+  },
+  {
+   "text": "tout ressemble \u00e0 une vraie division pr\u00eate \u00e0 attaquer.",
+   "s": 17.6,
+   "e": 19.16
+  },
+  {
+   "text": "Mais de pr\u00e8s,",
+   "s": 19.76,
+   "e": 20.4
+  },
+  {
+   "text": "\u00e7a ne trompe personne.",
+   "s": 20.78,
+   "e": 21.44
+  },
+  {
+   "text": "Alors il faut aussi du bruit.",
+   "s": 22.1,
+   "e": 23.4
+  },
+  {
+   "text": "Des camions portent d'\u00e9normes haut-parleurs.",
+   "s": 24.04,
+   "e": 26.22
+  },
+  {
+   "text": "Ils diffusent des chenilles et des moteurs enregistr\u00e9s,",
+   "s": 26.22,
+   "e": 28.28
+  },
+  {
+   "text": "audibles \u00e0 des kilom\u00e8tres.",
+   "s": 28.28,
+   "e": 29.6
+  },
+  {
+   "text": "Sauf que l'ennemi \u00e9coute aussi la radio.",
+   "s": 30.14,
+   "e": 31.66
+  },
+  {
+   "text": "Alors des op\u00e9rateurs envoient de faux messages,",
+   "s": 32.32,
+   "e": 34.1
+  },
+  {
+   "text": "avec le style de vraies unit\u00e9s.",
+   "s": 34.1,
+   "e": 35.58
+  },
+  {
+   "text": "Et les soldats cousent de faux insignes et se prom\u00e8nent dans les villages pour qu'on les remarque.",
+   "s": 36.18,
+   "e": 39.52
+  },
+  {
+   "text": "Ce n'est pas un jeu :",
+   "s": 40.22,
+   "e": 41.44
+  },
+  {
+   "text": "ils font vingt et une missions,",
+   "s": 41.44,
+   "e": 42.6
+  },
+  {
+   "text": "de la Normandie jusqu'au Rhin.",
+   "s": 42.94,
+   "e": 43.98
+  },
+  {
+   "text": "En mars mille neuf cent quarante-cinq,",
+   "s": 44.88,
+   "e": 46.38
+  },
+  {
+   "text": "ils jouent une arm\u00e9e enti\u00e8re pr\u00e8s du fleuve.",
+   "s": 46.38,
+   "e": 48.3
+  },
+  {
+   "text": "Les Allemands regardent ce faux camp et d\u00e9placent leurs troupes face \u00e0 lui.",
+   "s": 49.04,
+   "e": 51.66
+  },
+  {
+   "text": "Pendant ce temps,",
+   "s": 52.34,
+   "e": 52.84
+  },
+  {
+   "text": "la vraie arm\u00e9e am\u00e9ricaine traverse le Rhin,",
+   "s": 53.22,
+   "e": 55.04
+  },
+  {
+   "text": "ailleurs,",
+   "s": 55.42,
+   "e": 55.92
+  },
+  {
+   "text": "avec peu de r\u00e9sistance.",
+   "s": 56.24,
+   "e": 57.2
+  },
+  {
+   "text": "Les chars \u00e9taient en caoutchouc,",
+   "s": 58.08,
+   "e": 59.26
+  },
+  {
+   "text": "l'arm\u00e9e n'existait pas,",
+   "s": 59.26,
+   "e": 60.7
+  },
+  {
+   "text": "et l'ennemi a bien regard\u00e9 au mauvais endroit.",
+   "s": 61.4,
+   "e": 63.98
+  },
+  {
+   "text": "Et le char,",
+   "s": 63.98,
+   "e": 64.3
+  },
+  {
+   "text": "lui,",
+   "s": 64.38,
+   "e": 64.48
+  },
+  {
+   "text": "se d\u00e9gonfle doucement.",
+   "s": 65.04,
+   "e": 65.82
+  }
+ ]
+}
