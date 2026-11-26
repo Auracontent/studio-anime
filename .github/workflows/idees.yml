@@ -4,6 +4,8 @@ on:
   # Lancé de l'extérieur par cron-job.org (heure de Paris), deux fois par jour : 13h17 et 22h17.
   # Le format dépend de l'heure (pas de l'alternance) : avant 17h -> « Vie quotidienne » (publiée à 18h07 le jour même),
   # après 17h -> « Histoire vraie » (publiée à 12h17 le lendemain). Un sujet demandé est toujours une « Histoire vraie ».
+  # Lancement à la main : le choix « format » force l'un ou l'autre quelle que soit l'heure (« auto » garde la règle de l'heure ;
+  # cron-job.org n'envoie pas ce champ, donc ses lancements restent sur « auto »).
   #   POST https://api.github.com/repos/Auracontent/studio-anime/actions/workflows/idees.yml/dispatches
   #   body {"ref":"main","inputs":{"voix_auto":"true"}}  -> script, puis voix Gemini, puis la vidéo (video.yml) s'enchaînent.
   # Plus de « schedule: » GitHub (en retard ou sauté, et doublerait les lancements de cron-job.org).
@@ -11,6 +13,11 @@ on:
     inputs:
       sujet: { description: "Sujet (laisser vide : Claude choisit le plus viral)", required: false }
       voix_auto: { description: "Générer la voix avec Gemini TTS et lancer la vidéo directement", type: boolean, default: false }
+      format:
+        description: "Format (auto : selon l'heure, avant 17h = Vie quotidienne, après = Histoire vraie)"
+        type: choice
+        options: ["auto", "Histoire vraie", "Vie quotidienne"]
+        default: "auto"
 permissions: { contents: write, issues: write, id-token: write, actions: write }
 jobs:
   script:
@@ -29,7 +36,9 @@ jobs:
       - name: Format of this run (Paris time)
         id: fmt
         run: |
+          FORCE="${{ github.event.inputs.format }}"
           if [ -n "${{ github.event.inputs.sujet }}" ]; then F="Histoire vraie"
+          elif [ "$FORCE" = "Histoire vraie" ] || [ "$FORCE" = "Vie quotidienne" ]; then F="$FORCE"
           elif [ "$(TZ=Europe/Paris date +%-H)" -lt 17 ]; then F="Vie quotidienne"
           else F="Histoire vraie"; fi
           echo "format=$F" >> "$GITHUB_OUTPUT"; echo "Format: $F"
