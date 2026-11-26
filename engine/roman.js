@@ -322,6 +322,11 @@ const heldProp = (p, kind, hx, hy, side, u, light) => {
     case "keys": { p.arc(hx, hy - 24 * u, 12 * u, 12 * u, 0, 360, 3 * u); for (const k of [-1, 0, 1]) { p.stroke([[hx + k * 8 * u, hy - 14 * u], [hx + k * 12 * u, hy + 12 * u]], 4 * u, "#d8a840"); p.poly(rrect(hx + k * 12 * u - 4 * u, hy + 6 * u, hx + k * 12 * u + 7 * u, hy + 12 * u, 1 * u), "#d8a840", 1.6 * u); } break; }   // trousseau de clés
     case "watch": { p.stroke([[hx, hy - 30 * u], [hx + side * 8 * u, hy - 46 * u]], 2.4 * u, "#8a8f98"); p.ell(hx, hy - 12 * u, 17 * u, 17 * u, "#d8a840", 2.8 * u); p.ell(hx, hy - 12 * u, 12 * u, 12 * u, "#fffdf2", 1.6 * u); p.stroke([[hx, hy - 12 * u], [hx, hy - 21 * u]], 1.8 * u); p.stroke([[hx, hy - 12 * u], [hx + 6 * u, hy - 8 * u]], 1.8 * u); break; }   // montre à gousset
     case "glove": { p.poly([[hx - 22 * u, hy + 10 * u], [hx - 24 * u, hy - 14 * u], [hx - 14 * u, hy - 34 * u], [hx - 6 * u, hy - 30 * u], [hx, hy - 44 * u], [hx + 8 * u, hy - 38 * u], [hx + 14 * u, hy - 28 * u], [hx + 24 * u, hy - 14 * u], [hx + 22 * u, hy + 10 * u]], "#d8b070", 2.8 * u); p.ell(hx - 6 * u, hy - 8 * u, 9 * u, 6 * u, "#c8312c", 0); p.ell(hx + 10 * u, hy - 18 * u, 5 * u, 4 * u, "#c8312c", 0); p.stroke([[hx - 16 * u, hy + 2 * u], [hx + 16 * u, hy + 2 * u]], 2 * u, "#8a6a3a"); break; }   // gant de maçon taché de sang
+    case "needle": { // aiguille + fil jaune qui pend (Pourkoipa original)
+      p.stroke([[hx - 6 * u, hy + 22 * u], [hx + 6 * u, hy - 46 * u]], 3.4 * u, "#271925"); p.stroke([[hx - 6 * u, hy + 22 * u], [hx + 6 * u, hy - 46 * u]], 1.8 * u, "#e4e8ee");
+      p.stroke([[hx + 5 * u, hy - 40 * u], [hx + 20 * u, hy - 18 * u], [hx + 6 * u, hy + 4 * u], [hx + 22 * u, hy + 26 * u], [hx + 10 * u, hy + 42 * u]], 3.2 * u, "#271925"); p.stroke([[hx + 5 * u, hy - 40 * u], [hx + 20 * u, hy - 18 * u], [hx + 6 * u, hy + 4 * u], [hx + 22 * u, hy + 26 * u], [hx + 10 * u, hy + 42 * u]], 1.7 * u, "#ffd52e"); break; }
+    case "ray": { p.poly([[hx - 14 * u, hy + 6 * u], [hx, hy - 52 * u], [hx + 14 * u, hy + 6 * u]], "#ffb81c", 2.6 * u); p.stroke([[hx, hy - 40 * u], [hx, hy - 2 * u]], 1.4 * u, "#e08a10"); break; }
+    case "plaster": { p.stroke([[hx, hy + 14 * u], [hx, hy - 36 * u]], 12 * u, "#271925"); p.stroke([[hx, hy + 14 * u], [hx, hy - 36 * u]], 8 * u, "#e8b48a"); for (const k of [-24, -14, -4]) p.poly(rrect(hx - 7 * u, hy + k * u - 4 * u, hx + 7 * u, hy + k * u + 4 * u, 1 * u), "#f4d6b0", 1.6 * u); p.dot(hx, hy - 14 * u, 2 * u, "#e23d32"); break; }
     case "tool": { p.stroke([[hx, hy + 18 * u], [hx, hy - 30 * u]], 4.5 * u, "#7a5434"); p.poly(rrect(hx - 14 * u, hy - 40 * u, hx + 14 * u, hy - 28 * u, 2 * u), "#9aa3ad", 2.2 * u); break; }
     case "brush": { p.stroke([[hx - 6 * u, hy + 16 * u], [hx + 2 * u, hy - 40 * u]], 3.6 * u, "#8a5a34"); p.poly([[hx - 1 * u, hy - 38 * u], [hx + 7 * u, hy - 38 * u], [hx + 6 * u, hy - 58 * u], [hx + 2 * u, hy - 62 * u]], "#1b1418", 2 * u); break; }
     case "bomb": { const r = 17 * u, cy = hy - r * 0.8; p.stroke([[hx, cy - r * 0.9], [hx + 3 * u, cy - r * 1.5]], 4 * u, "#e8d8a0"); p.ell(hx, cy - r * 0.95, r * 0.34, r * 0.22, "#5a3a24", 2.2 * u); p.ell(hx, cy, r, r, "#7a4a2e", 2.6 * u);
@@ -351,6 +356,17 @@ export const romanFront = (p, key, opts = {}) => {
   if (O.cape) {
     const cp = [[cx - 0.48 * W, chin + 0.08 * HH], [cx + 0.48 * W, chin + 0.08 * HH], [cx + 0.62 * W, sole - 0.55 * HH], [cx + 0.2 * W, sole - 0.45 * HH], [cx - 0.2 * W, sole - 0.5 * HH], [cx - 0.62 * W, sole - 0.55 * HH]];
     p.gradFill(cp, O.cape, mul(O.cape, [0.6, 0.6, 0.7]), light); p.inkRing(cp, ow * 0.8, thick);
+  }
+  // ---- costume de soleil (Pourkoipa original) : O.sun = nombre de rayons ; opts.sunDroop 0..1 (rayons de travers, un pend), opts.sunWave (phase : les rayons ondulent) ----
+  if (O.sun) {
+    const n = O.sun, dr = opts.sunDroop || 0, wv = opts.sunWave || 0, h0 = (i, k) => { const x = Math.sin((i + 1) * 12.9898 * (k + 1)) * 43758.5453; return x - Math.floor(x); };
+    for (let i = 0; i < n; i++) {
+      let a = -Math.PI / 2 + (i / n) * Math.PI * 2 + (h0(i, 1) - 0.5) * 0.9 * dr + (wv ? 0.16 * Math.sin(wv + i * 1.3) : 0), len = H.a * (2.55 + 0.18 * (i % 2)) + (wv ? 0.12 * H.a * Math.sin(wv * 1.3 + i) : 0), hang = dr > 0.5 && i === 2;
+      if (hang) { a = Math.PI * 0.62; len *= 0.95; }
+      const r0 = H.a * 1.0, w = 0.26, p0 = [cx + Math.cos(a - w) * r0, hc + Math.sin(a - w) * r0 * 1.02], p1 = [cx + Math.cos(a + w) * r0, hc + Math.sin(a + w) * r0 * 1.02], tip = [cx + Math.cos(a) * len, hc + Math.sin(a) * len * 1.02];
+      p.poly([p0, tip, p1], i % 2 ? "#ffb81c" : "#ffd52e", 2.8 * u);
+    }
+    p.ell(cx, hc, H.a * 1.18, H.b * 1.18, "#ffd52e", 3 * u);
   }
   // ---- legs ----
   const dress = !!O.dress;

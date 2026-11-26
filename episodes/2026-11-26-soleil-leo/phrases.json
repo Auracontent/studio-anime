@@ -1,0 +1,333 @@
+{
+ "duration": 55.210583,
+ "frames30": 1656,
+ "source": "whisper",
+ "segments": [
+  [
+   0.0,
+   0.961083
+  ],
+  [
+   1.113958,
+   2.23875
+  ],
+  [
+   2.814833,
+   3.484333
+  ],
+  [
+   4.177875,
+   6.6295
+  ],
+  [
+   7.545583,
+   8.329375
+  ],
+  [
+   8.663417,
+   9.361833
+  ],
+  [
+   9.897333,
+   10.583333
+  ],
+  [
+   10.758958,
+   11.662958
+  ],
+  [
+   12.48625,
+   14.263417
+  ],
+  [
+   14.586542,
+   15.69225
+  ],
+  [
+   16.645292,
+   17.606333
+  ],
+  [
+   18.39825,
+   19.151333
+  ],
+  [
+   19.287583,
+   20.024417
+  ],
+  [
+   20.160208,
+   21.354458
+  ],
+  [
+   22.207208,
+   23.109125
+  ],
+  [
+   23.402458,
+   24.245125
+  ],
+  [
+   24.3725,
+   25.163083
+  ],
+  [
+   26.131708,
+   26.712792
+  ],
+  [
+   26.98875,
+   27.6635
+  ],
+  [
+   28.357125,
+   29.93675
+  ],
+  [
+   30.060958,
+   30.241417
+  ],
+  [
+   30.364292,
+   31.199583
+  ],
+  [
+   32.120625,
+   33.656125
+  ],
+  [
+   34.725083,
+   35.266833
+  ],
+  [
+   35.398375,
+   37.026583
+  ],
+  [
+   37.457125,
+   38.04175
+  ],
+  [
+   38.221583,
+   40.121583
+  ],
+  [
+   40.7765,
+   41.694083
+  ],
+  [
+   42.371333,
+   44.441208
+  ],
+  [
+   45.282958,
+   46.760208
+  ],
+  [
+   46.916083,
+   47.897208
+  ],
+  [
+   48.453375,
+   48.547458
+  ],
+  [
+   49.124833,
+   50.2355
+  ],
+  [
+   50.56,
+   52.155417
+  ],
+  [
+   53.138708,
+   53.981708
+  ],
+  [
+   54.393333,
+   54.838708
+  ]
+ ],
+ "phrases": [
+  {
+   "text": "L\u00e9o a une nuit pour coudre un costume de soleil.",
+   "s": 0.0,
+   "e": 2.26
+  },
+  {
+   "text": "Il ne sait pas coudre.",
+   "s": 2.64,
+   "e": 3.42
+  },
+  {
+   "text": "Demain,",
+   "s": 4.16,
+   "e": 4.46
+  },
+  {
+   "text": "sa petite s\u0153ur Lila joue le soleil \u00e0 la f\u00eate de l'\u00e9cole.",
+   "s": 4.58,
+   "e": 7.52
+  },
+  {
+   "text": "Il pique l'aiguille,",
+   "s": 7.52,
+   "e": 8.3
+  },
+  {
+   "text": "et il se pique le doigt.",
+   "s": 8.3,
+   "e": 9.36
+  },
+  {
+   "text": "Il tire le fil,",
+   "s": 9.82,
+   "e": 10.42
+  },
+  {
+   "text": "et le tissu se d\u00e9chire.",
+   "s": 10.42,
+   "e": 11.58
+  },
+  {
+   "text": "\u00c0 minuit,",
+   "s": 12.44,
+   "e": 12.82
+  },
+  {
+   "text": "les rayons jaunes sont tout de travers,",
+   "s": 12.92,
+   "e": 14.54
+  },
+  {
+   "text": "et l'un d'eux tombe par terre.",
+   "s": 14.54,
+   "e": 15.62
+  },
+  {
+   "text": "L\u00e9o veut tout abandonner.",
+   "s": 16.58,
+   "e": 17.6
+  },
+  {
+   "text": "Mais sur le lit,",
+   "s": 18.34,
+   "e": 18.84
+  },
+  {
+   "text": "Lila dort,",
+   "s": 19.36,
+   "e": 19.84
+  },
+  {
+   "text": "sa peluche serr\u00e9e contre elle.",
+   "s": 19.84,
+   "e": 21.3
+  },
+  {
+   "text": "Alors il reprend l'aiguille,",
+   "s": 21.98,
+   "e": 23.36
+  },
+  {
+   "text": "un point apr\u00e8s l'autre,",
+   "s": 23.36,
+   "e": 24.27
+  },
+  {
+   "text": "jusqu'au lever du jour.",
+   "s": 24.27,
+   "e": 25.06
+  },
+  {
+   "text": "Sur la sc\u00e8ne,",
+   "s": 25.82,
+   "e": 26.64
+  },
+  {
+   "text": "Lila entre.",
+   "s": 27.04,
+   "e": 27.6
+  },
+  {
+   "text": "Le costume penche,",
+   "s": 28.32,
+   "e": 29.38
+  },
+  {
+   "text": "un rayon pend,",
+   "s": 29.54,
+   "e": 30.16
+  },
+  {
+   "text": "et les enfants rigolent.",
+   "s": 30.16,
+   "e": 31.24
+  },
+  {
+   "text": "Au fond de la salle,",
+   "s": 32.02,
+   "e": 32.72
+  },
+  {
+   "text": "L\u00e9o serre les poings.",
+   "s": 32.94,
+   "e": 34.62
+  },
+  {
+   "text": "Sauf que Lila l\u00e8ve les bras et tourne sur elle-m\u00eame.",
+   "s": 34.62,
+   "e": 37.44
+  },
+  {
+   "text": "Tous les rayons ondulent,",
+   "s": 37.44,
+   "e": 38.6
+  },
+  {
+   "text": "comme un vrai soleil qui danse.",
+   "s": 38.6,
+   "e": 40.1
+  },
+  {
+   "text": "La salle applaudit debout.",
+   "s": 40.68,
+   "e": 41.64
+  },
+  {
+   "text": "Lila crie :",
+   "s": 42.3,
+   "e": 43.01
+  },
+  {
+   "text": "\u00ab C'est mon grand fr\u00e8re qui l'a cousu !",
+   "s": 43.01,
+   "e": 44.84
+  },
+  {
+   "text": "\u00bb L\u00e9o rougit et sourit,",
+   "s": 44.84,
+   "e": 46.66
+  },
+  {
+   "text": "le doigt couvert de pansements.",
+   "s": 46.92,
+   "e": 48.9
+  },
+  {
+   "text": "Ce qu'on fait de travers pour quelqu'un vaut mieux que le parfait qu'on n'ose pas commencer.",
+   "s": 48.9,
+   "e": 52.1
+  },
+  {
+   "text": "La prochaine fois que tu h\u00e9sites,",
+   "s": 52.78,
+   "e": 54.0
+  },
+  {
+   "text": "prends l'aiguille.",
+   "s": 54.36,
+   "e": 54.82
+  }
+ ]
+}
