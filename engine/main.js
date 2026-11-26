@@ -257,9 +257,10 @@ const swapForNd = (on) => {
 // ---------- loop + mascot (2026-11) ----------
 // LOOP: the last frames glide the camera back to the opening framing and dissolve into frame 0, so when the Short restarts
 // the viewer does not see the seam (more re-watches, higher % watched). Story can opt out with `export const LOOP = false`.
-// MASCOT: Kipa, the Pourkoipa host, pops in from the left for ~1.6 s before the loop with « Pourkoipa ? » (`export const MASCOT = false`).
+// MASCOT: Kipa end card (« Pourkoipa ? » / « Abonne-toi ! »). OFF by default since 2026-11-26 (no info, no real call to action);
+// a story can still opt in with `export const MASCOT = true`.
 const VERTICAL = H > W, LONG = TOTAL > 150;
-const LOOP_ON = STORY.LOOP !== false && VERTICAL && LONG, MASCOT_ON = STORY.MASCOT !== false && VERTICAL && LONG && !!T.mascot;
+const LOOP_ON = STORY.LOOP !== false && VERTICAL && LONG, MASCOT_ON = STORY.MASCOT === true && VERTICAL && LONG && !!T.mascot;
 const GLIDE = 24, DISS = 10, M0 = TOTAL - 96, M1 = TOTAL - 24;   // Kipa on screen ~2.4 s: « Pourkoipa ? » then « Abonne-toi ! »
 const rtOut = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType }), rtFirst = new THREE.WebGLRenderTarget(W, H, { type: THREE.HalfFloatType });
 const blU = { a: { value: rtOut.texture }, b: { value: rtFirst.texture }, t: { value: 0 } };

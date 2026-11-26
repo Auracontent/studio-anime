@@ -147,17 +147,14 @@ Démo et planche : `episodes/_demo-style/web/story.js` (avant / après, visages,
     sous terre, dans un mur, dans une machine. Les personnages se placent dans une salle avec `C.room(i)` (passer `ground: y` à l'acteur).
 - **Foules** : `crowd(T, f, { center, n ≤ 18, w, d, outfits, exprs, cheer })` pour une armée, un marché, des spectateurs : derrière le héros, jamais devant.
 
-## Fin de vidéo : boucle et mascotte (automatiques, dans `engine/main.js`)
+## Fin de vidéo : boucle (automatique, dans `engine/main.js`)
 - **Boucle** : sur les 24 dernières images, la caméra revient seule au cadrage de l'image 0 (si c'est le même lieu, à moins de 40 m),
   puis les 10 dernières images se fondent dans l'image 0 : quand le Short recommence, on ne voit pas la couture (plus de revisionnages).
   Aide-la : la dernière phrase et le dernier plan reviennent au lieu et à l'objet du début (règle « la fin reboucle »).
   Désactiver pour un épisode : `export const LOOP = false` dans `story.js`.
-- **Kipa, la mascotte Pourkoipa** (sweat bleu, « ? » jaune sur la tête et sur la poitrine) entre par la gauche de TOTAL-96 à TOTAL-24
-  avec la bulle « Pourkoipa ? », puis « Abonne-toi ! Une histoire par jour » (la promesse qui donne une raison de s'abonner) :
-  la signature de la chaîne, toujours la même, pour qu'on la reconnaisse. Bruitages ajoutés par events.mjs.
-  Garde la zone gauche du cadre (x < 45 %, hauteur 25-70 %) libre d'action importante pendant ces 2,4 s.
-  Jamais d'« abonne-toi » dans la voix ni au début de la vidéo : ça fait fuir dès les premières secondes.
-  Désactiver : `export const MASCOT = false`.
+- **Plus de mascotte de fin** (supprimée le 26/11/2026) : Kipa et sa bulle « Abonne-toi ! Une histoire par jour » n'apportaient
+  aucune information ni vraie raison de s'abonner, et allongeaient la fin. La vidéo se termine sur la boucle, rien d'autre.
+  Jamais d'« abonne-toi » dans la voix ni à l'écran. (Le code reste dans `engine/main.js`, désactivé : ne pas le réactiver.)
 
 ## Les séries (pour enchaîner les vidéos, rien à l'écran)
 - Chaque « Histoire vraie » appartient si possible à une des 3 séries de la chaîne, listées dans `series.json` :
