@@ -10,6 +10,16 @@ FACE.proud = { eye: ["happy", "happy"], brow: [-4, -5], mouth: "smile" };
 FACE.suspicious = { eye: ["slit", "dot"], brow: [5, -1], browR: [-4, -6], mouth: "frown" };
 FACE.determined = { eye: ["heavy", "heavy"], brow: [5, -2], mouth: "flat" };
 FACE.scheming = { eye: ["heavy", "heavy"], brow: [5, -1], mouth: "grin" };
+// Cast-library expressions (2026-11, Pourkoipa): readable at phone size, built only from existing eye / mouth kinds.
+// brow values: negative = raised, positive = lowered towards the nose; browR = right-hand brow when different.
+FACE.skeptical = { eye: ["slit", "dot"], brow: [4, -5], browR: [-2, -6], mouth: "flat" };       // « mouais » : one brow up, flat mouth
+FACE.awe = { eye: ["shock", "shock"], brow: [-6, -6], mouth: "o" };                              // wonder: big eyes, brows high, round mouth
+FACE.worried = { eye: ["small", "small"], brow: [-3, -3], mouth: "frown" };                     // inner brows up, small eyes
+FACE.embarrassed = { eye: ["lid", "lid"], brow: [-2, -2], mouth: "smile" };                      // sheepish smile (gets the blush)
+FACE.excited = { eye: ["happy", "happy"], brow: [-5, -5], mouth: "grin" };                       // thrilled, ready to explain
+FACE.thinking = { eye: ["heavy", "dot"], brow: [3, -4], browR: [-1, -5], mouth: "dash" };         // chin-on-hand look
+FACE.fedup = { eye: ["lid", "lid"], brow: [2, 2], mouth: "frown" };                              // eye-roll energy
+FACE.eureka = { eye: ["shock", "happy"], brow: [-6, -6], mouth: "grin" };                        // the lightbulb moment
 
 // ---------------- Roman-era cast (our own designs), built on the Pen / blob / face helpers above ----------------
 const STEEL = "#aeb6bf", BRASS = "#d9a845", LEATHER = "#7a4a2a";
@@ -65,6 +75,9 @@ const cobweb = (p, cx, cy, r, u) => {
   for (let k = 1; k <= 4; k++) { const rr = r * k / 4.3, pts = []; for (let i = 0; i < 7; i++) { const a = -Math.PI * (0.05 + 0.9 * i / 6); pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); } p.stroke(pts, 1 * u, "#f2f2f2"); }
   g.restore();
 };
+
+// Cast-library headgear added 2026-11 (dispatch list used by romanFront)
+const NEW_HATS = ["beret", "toquechef", "gavroche", "bobble"];
 
 /** WWI / 1900s headgear (Pourkoipa originals): adrian = poilu helmet, kepi, chauff = driver's peaked cap */
 const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
@@ -193,6 +206,41 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
     p.ell(cx, hc - 1.38 * H.b, 1.12 * H.a, 0.2 * H.b, mul(col, [1.15, 1.15, 1.2]), ow); // flared top
     p.ell(cx, hc - 0.5 * H.b, 0.9 * H.a, 0.12 * H.b, "#0e1016", ow, 0, 180); // visor
     p.ell(cx, hc - 0.9 * H.b, 6 * u, 6 * u, "#d9a845", 2 * u); // badge
+  } else if (kind === "beret") { // béret basque : galette plate décalée, petite queue sur le dessus (Pourkoipa original)
+    const col = O.hatCol || "#2a3f7a", dk = mul(col, [0.6, 0.62, 0.74]);
+    const disc = ellPts(cx + 0.12 * H.a, hc - 0.78 * H.b, 1.22 * H.a, 0.5 * H.b, 0, 360, 0, 48);
+    p.shadedFill(disc, col, dk, light, H.a, 0.4);
+    p.clip(disc, () => p.stroke(ellPts(cx - 0.3 * H.a, hc - 0.95 * H.b, 0.5 * H.a, 0.18 * H.b, 190, 320, 0, 16), 4 * u, "#ffffff55"));
+    p.inkRing(disc, ow * 0.95, thickAngle(light));
+    p.band([[cx - 0.98 * H.a, hc - 0.55 * H.b], [cx + 1.02 * H.a, hc - 0.6 * H.b]], dk, 7 * u, 1.4 * u, "round"); // headband
+    p.dot(cx + 0.14 * H.a, hc - 1.3 * H.b, 5 * u, dk); p.dot(cx + 0.14 * H.a, hc - 1.3 * H.b, 3.4 * u, col);  // stalk
+  } else if (kind === "toquechef") { // toque de cuisinier : haut bouffant blanc plissé, bandeau (Pourkoipa original)
+    const col = O.hatCol || "#fbf8f0", dk = mul(col, [0.82, 0.84, 0.92]);
+    const puff = ellPts(cx, hc - 1.12 * H.b, 0.98 * H.a, 0.66 * H.b, 0, 360, 0, 48);
+    p.shadedFill(puff, col, dk, light, H.a, 0.4);
+    p.clip(puff, () => { for (let i = -4; i <= 4; i++) p.stroke([[cx + i * 12 * u, hc - 0.62 * H.b], [cx + i * 14 * u, hc - 1.7 * H.b]], 1.6 * u, dk); });
+    p.inkRing(puff, ow * 0.95, thickAngle(light));
+    const band = rrect(cx - 0.84 * H.a, hc - 0.78 * H.b, cx + 0.84 * H.a, hc - 0.46 * H.b, 6 * u);
+    p.shadedFill(band, col, dk, light, H.a, 0.4); p.poly(band, null, ow);
+  } else if (kind === "gavroche") { // casquette plate « gavroche » : bombée, petite visière, bouton (Pourkoipa original)
+    const col = O.hatCol || "#6b5a48", dk = mul(col, [0.62, 0.6, 0.66]);
+    const dome = ellPts(cx - 0.05 * H.a, hc - 0.58 * H.b, 1.14 * H.a, 0.56 * H.b, 180, 360, 0, 48);
+    dome.push([cx + 1.1 * H.a, hc - 0.55 * H.b], [cx - 1.18 * H.a, hc - 0.55 * H.b]);
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.clip(dome, () => { for (let i = -5; i <= 5; i++) p.stroke([[cx + i * 12 * u, hc - 0.55 * H.b], [cx + i * 10 * u, hc - 1.2 * H.b]], 1.3 * u, dk); });
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
+    p.ell(cx + 0.4 * H.a, hc - 0.52 * H.b, 0.82 * H.a, 0.1 * H.b, dk, ow, 0, 180);   // short peak
+    p.dot(cx - 0.05 * H.a, hc - 1.12 * H.b, 3.4 * u, dk);
+  } else if (kind === "bobble") { // bonnet d'hiver à pompon : bas, revers épais, gros pompon (Pourkoipa original)
+    const col = O.hatCol || "#d23a32", dk = mul(col, [0.62, 0.56, 0.62]);
+    const dome = ellPts(cx, hc - 0.46 * H.b, 1.04 * H.a, 0.82 * H.b, 180, 360, 0, 48);
+    dome.push([cx + 1.04 * H.a, hc - 0.42 * H.b], [cx - 1.04 * H.a, hc - 0.42 * H.b]);
+    p.shadedFill(dome, col, dk, light, H.a, 0.4);
+    p.inkRing(dome, ow * 0.95, thickAngle(light));
+    const cuff = rrect(cx - 1.08 * H.a, hc - 0.7 * H.b, cx + 1.08 * H.a, hc - 0.38 * H.b, 8 * u);
+    p.shadedFill(cuff, O.hatBand || "#f4f1ea", "#cfc8bb", light, H.a, 0.4); p.poly(cuff, null, ow);
+    p.clip(cuff, () => { for (let i = -6; i <= 6; i++) p.stroke([[cx + i * 11 * u, hc - 0.7 * H.b], [cx + i * 11 * u, hc - 0.38 * H.b]], 1.4 * u, "#b8b0a2"); });
+    p.ell(cx, hc - 1.34 * H.b, 0.3 * H.a, 0.3 * H.a, O.hatBand || "#f4f1ea", ow);          // pompon
   }
 };
 
@@ -223,7 +271,7 @@ const faceV2 = (p, cx, cy, W, expr, facing, look, lid, brim, skin, moustache, st
     else taper(p, [x - side * 10 * u, by + dI * 1.4 * u], [x + side * 10 * u, by + dO * 1.4 * u], 6.4 * u, 3 * u);
   }
   const mx = cx + 7 * u * facing, my = cy + 25 * u;
-  if (["smile", "grin", "laugh", "smile_closed", "relief", "lick"].includes(expr)) for (const s of [-1, 1]) {
+  if (["smile", "grin", "laugh", "smile_closed", "relief", "lick", "embarrassed", "excited", "eureka"].includes(expr)) for (const s of [-1, 1]) {
     const g = p.g; g.save(); g.globalAlpha = 0.35; p.ell(fx + s * 27 * u, cy + 12 * u, 7.5 * u, 4.5 * u, BLUSH, 0); g.restore();
   }
   if (F.mouth === "smirkSide") { const s = facing || 1, k = u * 1.3;   // flat on one side, curled up on the other: the know-it-all smile
@@ -581,7 +629,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "hardhat" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque" || O.hat === "colonial" || O.hat === "paille") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "hardhat" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque" || O.hat === "colonial" || O.hat === "paille" || NEW_HATS.includes(O.hat)) headgear(p, O.hat, O, H, cx, hc, light, ow, u);
   else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
@@ -697,3 +745,17 @@ export const mascot = (p, o = {}) => {
   const ty = hc + H.b + 0.42 * 2 * H.b; g.save(); g.font = "900 120px Montserrat, 'DejaVu Sans', sans-serif"; g.textAlign = "center"; g.textBaseline = "middle";
   g.lineWidth = 14; g.strokeStyle = "#271925"; g.strokeText("?", 300, ty); g.fillStyle = "#ffc72c"; g.fillText("?", 300, ty); g.restore();
 };
+
+// ---------------- Cast library: six story archetypes (Pourkoipa originals, optional presets) ----------------
+// Use by key in an episode (`T.romanFront(p, 'arcCurieuse', {...})`) or copy and recolour in setupCast.
+// Rule kept from CLAUDE.md: one vivid dominant colour per character, varied skin tones, no white faces.
+Object.assign(OUTFITS, {
+  arcCurieuse:  { tunic: "#18a8b8", skin: "#c98b62", hair: "#2b1a14", bun: "#2b1a14", glasses: "#2b3a5a", scarf: "#ffc72c", cuffs: "#ffc72c", belt: "#3a2a22" },          // the curious one
+  arcSceptique: { tunic: "#e07a2a", skin: "#f1c9a4", hat: "gavroche", hatCol: "#4a4a52", moustache: "#3a2a20", thin: true, pattern: "stripes", patternCol: "#b85a1a", belt: "#3a2a22" }, // the skeptic
+  arcEnthousiaste: { tunic: "#ffc72c", skin: "#8a5a3a", hair: "#1e1714", lapels: "#e08a10", cuffs: "#d23a32", belt: "#3a2a22", head: 1.06 },                                    // the enthusiast
+  arcMaladroit: { tunic: "#6aae3a", skin: "#f5c9a0", hat: "bobble", hatCol: "#d23a32", hatBand: "#f4f1ea", thin: true, legs: 1.1, glasses: "#3a2a22", pattern: "dots", patternCol: "#4d8a2a" }, // the clumsy one
+  arcExpert:    { tunic: "#f4f1ea", skin: "#e8b48a", hair: "#9aa0a8", beard: "#aeb4bc", brows: "#aeb4bc", glasses: "#3a2a22", stout: true, lapels: "#cfd4da", buttons: "#8a8f98", belt: null }, // the expert / lab coat
+  arcAntagoniste: { tunic: "#4a2a6a", skin: "#d9a87a", hair: "#14101a", moustache: "#14101a", thin: true, legs: 1.1, pattern: "checks", patternCol: "#3a1f56", lapels: "#1e1030", sash: "#d23a32", buttons: "#f0c419" }, // the antagonist
+  arcChef:      { tunic: "#fbf8f0", skin: "#a87050", hat: "toquechef", moustache: "#2b1a14", stout: true, apron: "#2563d6", buttons: "#8a8f98" },
+  arcParisien:  { tunic: "#2a3f7a", skin: "#f1c9a4", hat: "beret", hatCol: "#c8312c", scarf: "#f4f1ea", moustache: "#3a2a20", pattern: "stripes", patternCol: "#e8e2d6" },
+});
