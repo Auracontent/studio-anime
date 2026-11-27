@@ -341,3 +341,12 @@ par l'heure de son lancement (`idees.yml` : 13h17 -> Vie quotidienne, 22h17 -> H
   Si le phénomène est le même que dans une vidéo de la référence (ex. la dilatation des rails), l'histoire doit être différente :
   autre lieu, autre époque, autre angle, script écrit à partir de tes propres sources.
 - Dans `NOTES.md`, indique la famille de thèmes choisie et les vidéos de la référence qui l'ont inspirée, pour que l'humain vérifie l'originalité.
+
+## Bibliothèque de casting (ajout 2026-11-27)
+- **Archétypes optionnels** dans `engine/roman.js` (`OUTFITS.arc*`) : `arcCurieuse`, `arcSceptique`, `arcEnthousiaste`, `arcMaladroit`, `arcExpert`,
+  `arcAntagoniste`, `arcChef`, `arcParisien`. Ce sont des **points de départ** : la règle « nouveau casting à chaque épisode » reste la règle ; copie et recolore
+  un archétype dans `setupCast` plutôt que de le réutiliser tel quel.
+- **Nouvelles expressions** : `skeptical`, `awe`, `worried`, `embarrassed`, `excited`, `thinking`, `fedup`, `eureka`.
+- **Nouvelles coiffes** (`O.hat`) : `beret`, `toquechef`, `gavroche`, `bobble`.
+- Planche de test : `node tools/render.mjs episodes/_demo-cast /tmp/cast "10,50,90,130,170,210,250,290,330,370,410"` (après `cat engine/toonbase.js engine/roman.js > engine/toon.js`).
+  **À regarder avant tout usage** : ces ajouts ont été écrits sans pouvoir rendre d'image.
