@@ -184,6 +184,12 @@ const headgear = (p, kind, O, H, cx, hc, light, ow, u) => {
     p.ell(cx, hc - 1.42 * H.b, 0.8 * H.a, 0.14 * H.b, mul(col, [1.5, 1.5, 1.6]), ow);
     p.band([[cx - 0.82 * H.a, hc - 0.62 * H.b], [cx + 0.82 * H.a, hc - 0.62 * H.b]], "#f4f1ea", 0.2 * H.b, 1 * u, "round");
     for (let i = -3; i <= 3; i++) p.dot(cx + i * 0.22 * H.a, hc - 0.62 * H.b, 2.4 * u, "#1d1a24");
+  } else if (kind === "bicorne") { // bicorne (Pourkoipa original) : large croissant noir porté en bataille, cocarde tricolore
+    const col = O.hatCol || "#1d1a24";
+    const cr = [[cx - 1.75 * H.a, hc - 0.95 * H.b], [cx - 1.0 * H.a, hc - 1.55 * H.b], [cx, hc - 1.3 * H.b], [cx + 1.0 * H.a, hc - 1.55 * H.b], [cx + 1.75 * H.a, hc - 0.95 * H.b], [cx + 1.0 * H.a, hc - 0.62 * H.b], [cx, hc - 0.78 * H.b], [cx - 1.0 * H.a, hc - 0.62 * H.b]];
+    p.shadedFill(cr, col, mul(col, [0.6, 0.6, 0.7]), light, H.a, 0.4); p.poly(cr, null, ow);
+    p.band([[cx - 1.5 * H.a, hc - 0.9 * H.b], [cx, hc - 0.8 * H.b], [cx + 1.5 * H.a, hc - 0.9 * H.b]], "#d9a845", 0.06 * H.b, 1 * u, "round");
+    p.ell(cx + 0.2 * H.a, hc - 1.0 * H.b, 0.22 * H.a, 0.2 * H.b, "#e0455a", 2 * u); p.ell(cx + 0.2 * H.a, hc - 1.0 * H.b, 0.12 * H.a, 0.1 * H.b, "#f4f1ea", 0); p.ell(cx + 0.2 * H.a, hc - 1.0 * H.b, 0.05 * H.a, 0.05 * H.b, "#2b5fb8", 0);
   } else if (kind === "chauff") {
     const col = O.hatCol || "#26303f";
     const crown = rrect(cx - 0.86 * H.a, hc - 1.38 * H.b, cx + 0.86 * H.a, hc - 0.5 * H.b, 10 * u);
@@ -581,7 +587,7 @@ export const romanFront = (p, key, opts = {}) => {
     p.band([[cx - H.a * 1.05, bandY], [cx + H.a * 1.05, bandY]], old ? "#a88a4a" : BRASS, 7 * u, 1.8 * u, "round");
     p.poly(rrect(cx - 4 * u, bandY - 0.55 * H.b, cx + 4 * u, bandY - 3 * u, 2 * u), old ? "#a88a4a" : BRASS, 1.5 * u);
     cheeks(p, H, cx, hc, light, ow, old, u);
-  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "hardhat" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque" || O.hat === "colonial" || O.hat === "paille") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
+  } else if (O.hat === "adrian" || O.hat === "kepi" || O.hat === "chauff" || O.hat === "bonnet" || O.hat === "minerH" || O.hat === "hardhat" || O.hat === "pickel" || O.hat === "kabuto" || O.hat === "chonmage" || O.hat === "divehood" || O.hat === "mongol" || O.hat === "chapeauplume" || O.hat === "toque" || O.hat === "bicorne" || O.hat === "colonial" || O.hat === "paille") headgear(p, O.hat, O, H, cx, hc, light, ow, u);
   else if (O.hat === "tophat") hatOn(p, { hat: "tophat", jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.cap) hatOn(p, { hat: "cap", cap: O.cap, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
   else if (O.hair) hatOn(p, { hat: "hair", hair: O.hair, jacket: O.tunic }, hp, H, cx, hc, light, seed, facing, false);
